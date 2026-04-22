@@ -98,6 +98,7 @@
     <script src="miscParser.js"></script>
     <script src="shinyPetsParser.js"></script>
     <script src="starSignsParser.js"></script>
+    <script src="killsLeftToAdvanceParser.js"></script>
     <script src="UIbreakdowns.js"></script>
     <script>
         const optimizer = new FarmingOptimizer(); // main optimizer instance that holds state and logic
@@ -149,31 +150,46 @@
         }
 
         function calculateEvolutionTotal() {
-            const breakdowns = window.getFarmingBreakdowns();
-            const evolutionBreakdown = breakdowns["Evolution"] || [];
+            const state = window.farmingState;
             
-            // Get Land Ranks value (index 0)
-            const landRanksItem = evolutionBreakdown[0];
-            const landRanksValue = landRanksItem ? parseFloat(landRanksItem.value.replace(/[×+%]/g, '')) : 1;
+            // 1. Land Ranks - multiply all Evolution upgrades
+            const landRanksTotal = state.landRank.upgrades
+                .filter(u => u.group === "Evolution")
+                .reduce((prod, u) => prod * u.getBonus(true), 1);
             
-            // Get Market value (index 1)
-            const marketItem = evolutionBreakdown[1];
-            const marketValue = marketItem ? parseFloat(marketItem.value.replace(/[×+%]/g, '')) : 1;
+            // 2. Market - Day × Night × Exotic
+            const marketDay = state.market.day
+                .filter(u => u.group === "Evolution")
+                .reduce((prod, u) => prod * u.getBonus(), 1);
             
-            // Get SummonerWinBonus value (index 2)
-            const summonerWinBonusItem = evolutionBreakdown[2];
-            const summonerWinBonusValue = summonerWinBonusItem ? parseFloat(summonerWinBonusItem.value.replace(/[×+%]/g, '')) : 1;
+            const marketNight = state.market.night
+                .filter(u => u.group === "Evolution")
+                .reduce((prod, u) => prod * u.getBonus(), 1);
             
-            // Get Hole Lamp Bonus value (index 3)
-            const holeLampBonusItem = evolutionBreakdown[3];
-            const holeLampBonusValue = holeLampBonusItem ? parseFloat(holeLampBonusItem.value.replace(/[×+%]/g, '')) : 1;
+            const exoticMultipliers = state.market.exotic
+                .filter(u => u.group === "Evolution" && u.isMultiplier)
+                .reduce((prod, u) => prod * u.getBonus(), 1);
             
-            // Get Sushi Bonus value (index 4)
-            const sushiBonusItem = evolutionBreakdown[4];
-            const sushiBonusValue = sushiBonusItem ? parseFloat(sushiBonusItem.value.replace(/[×+%]/g, '')) : 1;
+            const exoticAdditives = 1 + state.market.exotic
+                .filter(u => u.group === "Evolution" && !u.isMultiplier)
+                .reduce((sum, u) => sum + u.getBonus(), 0) / 100;
             
-            // Multiply and format
-            const total = landRanksValue * marketValue * summonerWinBonusValue * holeLampBonusValue * sushiBonusValue;
+            const marketTotal = marketDay * marketNight * exoticMultipliers * exoticAdditives;
+            
+            // 3. SummonerWinBonus
+            const summonerWinBonusTotal = window.getWinBonus(10, true);
+            
+            // 4. Hole Lamp Bonus
+            const holeLampBonusTotal = window.getLampBonus(true);
+            
+            // 5. Sushi Bonus
+            const sushiBonusTotal = window.getSushiBonus(true);
+            
+            // 6. Croppius Mapper Bubble (with KLA multiplier)
+            const croppiusMapperTotal = (window.calculateBubbleBonus(state.alchemy.croppiusMapperBubblebonus, 5, 70) * window.calculateKillsLeftToAdvance()) / 100 + 1;
+            
+            // Multiply all with full precision, then format for display
+            const total = landRanksTotal * marketTotal * summonerWinBonusTotal * holeLampBonusTotal * sushiBonusTotal * croppiusMapperTotal;
 
             return total.toExponential(4);
         }

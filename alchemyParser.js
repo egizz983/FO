@@ -22,18 +22,18 @@ window.parseCauldronData = function(data, state = window.farmingState) {
     }
 
     // === Alchemy Bubbles ===
-    // Crop Chapter (CauldronInfo[0]["29"])
+    // Crop Chapter (CauldronInfo[0]["29"]) - store raw level
     const powerCauldron = cauldronInfo[0];
     if (powerCauldron && typeof powerCauldron === "object") {
         const level = Number(powerCauldron["29"]) || 0;
-        state.alchemy.cropChapterBubblebonus = (12 * level) / (level + 50);
+        state.alchemy.cropChapterBubblebonus = level;
     }
 
-    // Croppius Mapper (CauldronInfo[3]["25"])
+    // Croppius Mapper (CauldronInfo[3]["25"]) - store raw level
     const kazamCauldron = cauldronInfo[3];
     if (kazamCauldron && typeof kazamCauldron === "object") {
         const level = Number(kazamCauldron["25"]) || 0;
-        state.alchemy.croppiusMapperBubblebonus = (5 * level) / (level + 70);
+        state.alchemy.croppiusMapperBubblebonus = level;
     }
 
     // === Vials (CauldronInfo[4]) ===

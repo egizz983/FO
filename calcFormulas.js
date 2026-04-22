@@ -133,45 +133,35 @@ window.calculateBubbleBonus = function(level, x1, x2, percentFromMax = 100) {
 
     // Apply % from Maximum Bonus (this is what the wiki's second input does)
     const finalBonus = rawBonus * (percentFromMax / 100);
-
-    return Number(finalBonus.toFixed(2));
+    return finalBonus;
 }
 
-
-
-
-/**
-Summoning Winner bonus multi Formula
- */
-/*
-function calculateRegularSummnerBonusMilti(){
-  return (Emperor_Showdown + Endless_summoning+Artefact+Merit+ Spectre_Stars_Achievement+Regalis_My_Beloved_Achievement +Godshard_Set_Bonus )   *  King_Of_All_Winners * Pristine Charm
-}
-
-
-
-
-
-/**
-Summoning Winner bonus multi Formula
- */
-
- //(Emperor_Showdown + Endless_summoning+Artefact+Merit+ Spectre_Stars_Achievement+Regalis_My_Beloved_Achievement +Godshard_Set_Bonus )   *  King_Of_All_Winners * Pristine Charm
-
-/**
- * 
- * Library max bonus multi 
- *  */
-
- //(Artefacts + Endless summon ) * Gemshop * Pristine Charm
-/**
- * 
- * */
-
-
-
-
-window.calculateAllFarmingMultipliers = function() {
+//Kills Left To Advance formula 
+window.calculateKillsLeftToAdvance = function() {
+    let totalCompletedSlots = 0;
+    const state = window.farmingState;
+    
+    // Loop through all 10 characters (0-9)
+    for (let characterIndex = 0; characterIndex < 10; characterIndex++) {
+        const characterKey = `character_${characterIndex}`;
+        const characterData = state.killsLeftToAdvance[characterKey];
+        
+        // If character data exists and is an array
+        if (Array.isArray(characterData)) {
+            // Check indices 251 through 263 (13 slots)
+            for (let s = 0; s < 13; s++) {
+                const index = 251 + s;
+                const entry = characterData[index];
+                
+                // Check if entry exists, is an array, and first element is < 1 (completed)
+                if (Array.isArray(entry) && entry[0] < 1) {
+                    totalCompletedSlots++;
+                }
+            }
+        }
+    }
+    
+    return totalCompletedSlots;
 };
 
 

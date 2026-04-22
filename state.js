@@ -203,8 +203,8 @@ window.farmingState = {
         godshardSetBonus: 0,   // 15 (15% bonus) if OptLacc[379] contains "GODSHARD_SET", else 0
         votingBonus29: 0,   // +% Crop Evolution Chance  "VOTING_BONUS_29"
         zenitmarketLampLevel: 0,   // Spelunk[45][2]
-        sushiBonus: 0   // Sushi[5][35] - Sushi multi bonus
-        
+        sushiBonus: 0,   // Sushi[5][35] - Sushi multi bonus
+        tometotalpoints: 0   // Total points 
     },
 
     // ======================
@@ -254,6 +254,24 @@ window.farmingState = {
         ricecakoradeBonus: 0,   // CauldronInfo[4]["64"]  → +{2%/level} Farming Speed
         flavorgilBonus: 0,   // CauldronInfo[4]["66"]  → +{7%/level} Crop Evolution chance
         countLevel13: 0   // Total number of vials that are level 13 or higher
+    },
+
+    // ======================
+    // Kills Left To Advance (KLA)
+    // ======================
+    killsLeftToAdvance: {
+        // Arrays for each farming character (0-9)
+        // Each array contains progression/evolution data parsed from KLA_0 through KLA_9
+        character_0: [],   // KLA_0
+        character_1: [],   // KLA_1
+        character_2: [],   // KLA_2
+        character_3: [],   // KLA_3
+        character_4: [],   // KLA_4
+        character_5: [],   // KLA_5
+        character_6: [],   // KLA_6
+        character_7: [],   // KLA_7
+        character_8: [],   // KLA_8
+        character_9: []    // KLA_9
     },
 
     // ====================== ====================== ======================

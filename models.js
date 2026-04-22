@@ -31,6 +31,7 @@ class FarmingOptimizer {
         parseMiscBonusesData(data, this.state); // various misc bonuses (Taffy Disc, Crystal Sneeking, Merit Shop OG, Monument Wisdom, Wisdom Bonus Level, Crop Evo Stamp, Sac Harvest)
         parseShinyPetsData(data, this.state); // shiny pet levels for infinite star and meal bonus calculations
         parseStarSignsData(data, this.state); // star sign positions for infinite star activation
+        parseKillsLeftToAdvanceData(data, this.state); // kills left to advance (KLA_0 through KLA_9) progression data
     }
 
     // Reset all caches and reinitialize calculations
@@ -45,13 +46,15 @@ class FarmingOptimizer {
             window.getWinBonus(10);
         }
         
+        // Run all calculations
+        this.calculateAll();
+        
         console.log("ℹ️ recalculateAll: Caches reset and calculations reinitialized");
     }
 
     // Placeholder
     calculateAll() {
-        // calculateAllFarmingMultipliers();   // will be called here once updated
-        console.log("ℹ️ calculateAll called (currently does nothing - add your calc function)");
+       
     }
 
     renderAll() {

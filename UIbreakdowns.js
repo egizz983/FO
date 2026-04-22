@@ -95,6 +95,24 @@ window.getFarmingBreakdowns = function() {
                     }
                 ]
             },
+            {
+                label: "Alchemy",
+                value: "×[placeholder]",
+                children: [
+                    {
+                        label: "Crop Chapter Bubble",
+                        value: "×" + (window.calculateBubbleBonus(farmingState.alchemy.cropChapterBubblebonus, 12, 50) ).toFixed(2)
+                    },
+                    {
+                        label: "Croppius Mapper Bubble",
+                        value: "×" + ((window.calculateBubbleBonus(farmingState.alchemy.croppiusMapperBubblebonus, 5, 70) * window.calculateKillsLeftToAdvance()) / 100 + 1).toFixed(2)
+                    },
+                    {
+                        label: "Vials(Flavorgil)",
+                        value: "×[placeholder]"
+                    }
+                ]
+            },
             { label: "SummonerWinBonus", value: "×" + window.getWinBonus(10, true).toFixed(2) },
             { label: "Hole Lamp Bonus", value: "×" + window.getLampBonus(true).toFixed(2) },
             { label: "Sushi Bonus", value: "×" + window.getSushiBonus(true).toFixed(2) },
