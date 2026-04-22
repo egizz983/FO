@@ -164,8 +164,16 @@
             const summonerWinBonusItem = evolutionBreakdown[2];
             const summonerWinBonusValue = summonerWinBonusItem ? parseFloat(summonerWinBonusItem.value.replace(/[×+%]/g, '')) : 1;
             
+            // Get Hole Lamp Bonus value (index 3)
+            const holeLampBonusItem = evolutionBreakdown[3];
+            const holeLampBonusValue = holeLampBonusItem ? parseFloat(holeLampBonusItem.value.replace(/[×+%]/g, '')) : 1;
+            
+            // Get Sushi Bonus value (index 4)
+            const sushiBonusItem = evolutionBreakdown[4];
+            const sushiBonusValue = sushiBonusItem ? parseFloat(sushiBonusItem.value.replace(/[×+%]/g, '')) : 1;
+            
             // Multiply and format
-            const total = landRanksValue * marketValue * summonerWinBonusValue;
+            const total = landRanksValue * marketValue * summonerWinBonusValue * holeLampBonusValue * sushiBonusValue;
 
             return total.toExponential(4);
         }

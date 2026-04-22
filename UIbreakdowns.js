@@ -96,6 +96,8 @@ window.getFarmingBreakdowns = function() {
                 ]
             },
             { label: "SummonerWinBonus", value: "×" + window.getWinBonus(10, true).toFixed(2) },
+            { label: "Hole Lamp Bonus", value: "×" + window.getLampBonus(true).toFixed(2) },
+            { label: "Sushi Bonus", value: "×" + window.getSushiBonus(true).toFixed(2) },
             { label: "Meal", value: "86042.55" },
             { label: "Final Multiplier", value: "×62.8" }
         ],

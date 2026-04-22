@@ -328,37 +328,41 @@ window.resetWinBonusCache = function() {
 }
 
 
-//========================Summoning evo return formula======================================
-
-//(1 + m._customBlock_Summoning("WinBonus", 10, 0) / 100) *
-// // SummoningWinBonus(10) returns below then 
-// (3.5 × 
-//   SummWinBonus[10] ×  // probably base bonus from normal bonus win 
-//   (1 + Ninja("PristineBon", 8, 0) / 100) ×  // Pristine charm
-//   (1 + (10 × GemItemsPurchased[11]) / 100) ×  // gemshop
-//   (1 + (
-//     Sailing("ArtifactBonus", 32, 0) + // sailing artefact bonus
-//     min(10, Tasks[2][5][4]) + // merit shop
-//     AchieveStatus(379) + // achjievement bonus
-//     AchieveStatus(373) + // achievement bonus
-//     WinBonus(31, 0) + // endless win bonus
-//     Thingies("EmperorBon", 8, 0) + // emperor bonus 
-//     GetSetBonus("GODSHARD_SET", "Bonus", 0, 0) // got shard set bonus
-//   ) / 100))
 
 
 //=======================Holes Lamp bonus return formula=======================================
 
+/**
+ * Get Lamp Bonus from Holes Magic Lamp
+ * Formula: 20 × Holes[21][8] × (1 + ZenithMarketBonus/100)
+ * ZenithMarketBonus = zenitmarketLampLevel (from Spelunk[45][2])
+ */
+window.getLampBonus = function(isMulti = false) {
+    const evoMajigerLamp = window.farmingState?.miscBonuses?.evoMajigerLamp || 0;
+    const zenitmarketLampLevel = window.farmingState?.miscBonuses?.zenitmarketLampLevel || 0;
+    const zenithMarketBonus = Math.floor(1 * zenitmarketLampLevel);
+    
+    const result = 20 * evoMajigerLamp * (1 + zenithMarketBonus / 100);
+    
+    return isMulti ? result / 100 + 1 : result;
+};
 
-//Holes Lamp bonus(2) returns 20 * lamp level * (1+ ZenithMarketLevel/100))
-//(20 × Holes[21][8] × (1 + ZenithMarketBonus/100))
+
+
 
 
 //=======================Sushi multi return formula=======================================
 
-
-//Sushi multi tier36 . 
-//1 + m._customBlock_SushiStuff("RoG_BonusQTY", 35, 0) / 100) // Check if sushi unlocked then returns Customlist Research[37][35] (100) / 100 + 1 = 2  
+/**
+ * Get Sushi Bonus
+ * Returns 100 (or 2x as multiplier) if Sushi[5][35] is unlocked
+ */
+window.getSushiBonus = function(isMulti = false) {
+    const sushiBonus = window.farmingState?.miscBonuses?.sushiBonus || 0;
+    const base = sushiBonus > -1 ? 100 : 0;
+    
+    return isMulti ? base / 100 + 1 : base;
+};  
 
 //===================Alchemy bubble and vial multi each other and adds to other multi ===========================================
 

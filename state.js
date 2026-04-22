@@ -176,7 +176,8 @@ window.farmingState = {
 
         // holes
         evoMonumentWisdom: 0,   // × Farming Crop Evo Chance (multiplicative, scales with waves) Holes[15][24]
-        evoMajigerLamp: 0,   // +% Next Crop Chance (additive) Holes[21][7] points invested
+        evoMajigerLamp: 0,   // +% Next Crop Chance (additive) Holes[21][8] points invested
+
         wisdomBonusLevel: 0,   // Wisdom Bonus level → Holes[15][29] (multiplier calculated later)
         //stamp
         evoCropEvoStamp: 0,   // +% Crop Evolution Chance (additive, scales with stamp level) StampLv[1][47]
@@ -201,6 +202,8 @@ window.farmingState = {
         // Set / Special Bonuses (simple string or flag checks)
         godshardSetBonus: 0,   // 15 (15% bonus) if OptLacc[379] contains "GODSHARD_SET", else 0
         votingBonus29: 0,   // +% Crop Evolution Chance  "VOTING_BONUS_29"
+        zenitmarketLampLevel: 0,   // Spelunk[45][2]
+        sushiBonus: 0   // Sushi[5][35] - Sushi multi bonus
         
     },
 

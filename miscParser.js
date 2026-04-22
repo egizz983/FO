@@ -45,6 +45,8 @@ window.parseMiscBonusesData = function(data, state = window.farmingState) {
     let Arcane       = parseJsonField("Arcane");
     let ArcadeUpg    = parseJsonField("ArcadeUpg");
     let lv0_0        = parseJsonField("Lv0_0");
+    let spelunk      = parseJsonField("Spelunk");
+    let sushi        = parseJsonField("Sushi");
 
     
     state.miscBonuses.ogTaffyDisc            = safeGet(ninja, 107, 11) === 1 ? 1.5 : 1.0; // sneaking Taffy Disc OG chance
@@ -61,7 +63,9 @@ window.parseMiscBonusesData = function(data, state = window.farmingState) {
     state.miscBonuses.evoSkillMastery200     = totalFarmingLevels >= 200 ? 1.15 : 1.0;
 
     state.miscBonuses.evoSkullShop           = safeGet(optLacc, 229); //Skull Shop evo
-    state.miscBonuses.evoMajigerLamp         = safeGet(holes, 21, 7); // lamp evo holes
+    state.miscBonuses.evoMajigerLamp         = safeGet(holes, 21, 8); // lamp evo holes
+    state.miscBonuses.zenitmarketLampLevel   = safeGet(spelunk, 45, 2); // Zenit Market Lamp Level
+    state.miscBonuses.sushiBonus             = safeGet(sushi, 5, 35); // Sushi[5][35] bonus
     
     // Bettah Stickahs Zuperbits
     const gamingStr = (state.playerData.Gaming && state.playerData.Gaming[12]) || "";
