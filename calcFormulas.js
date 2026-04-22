@@ -170,7 +170,71 @@ function calculateTomeScorePer2000() {
     return Math.floor(Math.max(0, (tomeScore - 5000) / 2000));
 } 
 
+/**
+ * Cleaned-up version of x._customBlock_ArbitraryCode5Inputs
+ */
+function ArbitraryCode5Inputs(type, x1, x2, level) {
+    // The last two parameters (a, s) from the original are unused placeholders
 
+    x1 = Number(x1) || 0;
+    x2 = Number(x2) || 0;
+    level = Number(level) || 0;
+
+    switch (type) {
+        case "add":
+            return x2 !== 0
+                ? (((x1 + x2) / x2 + 0.5 * (level - 1)) / (x1 / x2)) * level * x1
+                : x1 * level;
+
+        case "addLower":
+            return x1 + x2 * (level + 1);
+
+        case "addDECAY":
+            return level < 50001
+                ? x1 * level
+                : x1 * Math.min(50000, level) +
+                      ((level - 50000) / (level - 50000 + 150000)) * x1 * 50000;
+
+        case "decay":
+            return (x1 * level) / (level + x2);
+
+        case "decayLower":
+            return (x1 * (level + 1)) / (level + 1 + x2) - (x1 * level) / (level + x2);
+
+        case "decayMulti":
+            return 1 + (x1 * level) / (level + x2);
+
+        case "decayMultiLower":
+            return (x1 * (level + 1)) / (level + 1 + x2) - (x1 * level) / (level + x2);
+
+        case "bigBase":
+            return x1 + x2 * level;
+
+        case "bigBaseLower":
+            return x2;
+
+        case "intervalAdd":
+            return x1 + Math.floor(level / x2);
+
+        case "intervalAddLower":
+            return Math.max(Math.floor((level + 1) / x2), 0) - Math.max(Math.floor(level / x2), 0);
+
+        case "reduce":
+            return x1 - x2 * level;
+
+        case "reduceLower":
+            return x1 - x2 * (level + 1);
+
+        case "PtsSpentOnGuildBonus":
+            return (
+                (((x1 + x2) / x2 + 0.5 * (level - 1)) / (x1 / x2)) * level * x1 - x2 * level
+            );
+
+        default:
+            console.warn(`Unknown formula type: ${type}`);
+            return 0;
+    }
+}
 
 //misc functions
 
@@ -215,7 +279,7 @@ function calculateCombined(evoGmoLevel, superGmoLevel, cropCount200, cropCount10
 
 
 
-
+//Summoner win bonus
 window.getWinBonus = function(t, isMulti = false) {
     // Make sure the container exists
     if (!window.farmingState) window.farmingState = {};
@@ -323,10 +387,6 @@ window.resetWinBonusCache = function() {
 }
 
 
-
-
-//=======================Holes Lamp bonus return formula=======================================
-
 /**
  * Get Lamp Bonus from Holes Magic Lamp
  * Formula: 20 × Holes[21][8] × (1 + ZenithMarketBonus/100)
@@ -343,11 +403,6 @@ window.getLampBonus = function(isMulti = false) {
 };
 
 
-
-
-
-//=======================Sushi multi return formula=======================================
-
 /**
  * Get Sushi Bonus
  * Returns 100 (or 2x as multiplier) if Sushi[5][35] is unlocked
@@ -359,11 +414,101 @@ window.getSushiBonus = function(isMulti = false) {
     return isMulti ? base / 100 + 1 : base;
 };  
 
-//===================Alchemy bubble and vial multi each other and adds to other multi ===========================================
+
+// _customBlock_CauldronStats = function (e, t, i, s) 
+// CauldronBonus" == e
+// "VialBonus" == e
+
+// Vials base bonus function
+window.getVialBonus = function(i, level) {
+    let customlist = window.AlchemyDescription[4][0 | i];
+
+    let riftBonus = 0;
+    if (34 < c.asNumber(window.farmingState.miscBonuses.riftlevel)) {
+        riftBonus = 2 * countLevel13;
+    }
+
+    const totalBonus = riftBonus + window.getVaultUpgBonus(42,window.farmingState.miscBonuses.vaultOvertuneLevel); 
+    const dnzz = totalBonus / 100;
+    const merit = m._customBlock_Summoning2("MeritocBonusz", 20, 0) / 100; // need to update this 
+
+    var arbitraryResult = ArbitraryCode5Inputs(
+        "" + string(customlist[3]),
+        c.asNumber(customlist[1]),
+        c.asNumber(customlist[2]),
+        c.asNumber(level)
+    );
+
+    if (window.farmingState.lab.my1stChemistrySet) {
+        return 2 * (1 + dnzz) * (1 + merit) * arbitraryResult;
+    } else {
+        return (1 + dnzz) * (1 + merit) * arbitraryResult;
+    }
+};
+
+// VaultUpgbonus
+window.getVaultUpgBonus = function (t, level) {
+
+  const mult = c.asNumber(window.UpgradeVault[0 | t]?.[5]);
+
+  // Simple upgrades that only do level × multiplier (no extra bonus)
+  const simpleUpgrades = new Set([
+    1, 6, 7, 8, 9, 13, 32, 33, 36, 40, 42, 43, 44, 49, 51, 52, 53, 57, 61,
+    64, 70, 73, 74, 76, 79, 85, 86, 88, 89, 999,
+  ]);
+
+  if (simpleUpgrades.has(t)) {
+    return level * mult;
+  }
+
+  let bonusId = 0;
+  let bonuslevel = 0;
+  if (t < 32) {
+    bonusId = 32;
+    bonuslevel = window.farmingState.miscBonuses.vaultMasteryLevel;
+  } else if (t < 61) {
+    bonusId = 61;
+    bonuslevel = window.farmingState.miscBonuses.vaultMastery2Level;
+  } else if (t < 89) {
+    bonusId = 89;
+    bonuslevel = window.farmingState.miscBonuses.vaultMasteryIIILevel;
+  } else {
+    return 0;
+  }
+
+  const bonus = window.getVaultUpgBonus(bonusId, bonuslevel);
+
+  // Special case: upgrade 0
+  if (t === 0) {
+    const extra =
+      Math.max(0, level - 25) +
+      (Math.max(0, level - 50) + Math.max(0, level - 100));
+
+    return (level * mult + extra) * (1 + bonus / 100);
+  }
+
+  // Special case: upgrade 60
+  if (t === 60) {
+    const extra =
+      Math.max(0, level - 25) +
+      (Math.max(0, level - 50) +
+        (2 * Math.max(0, level - 100) +
+          (3 * Math.max(0, level - 200) +
+            (5 * Math.max(0, level - 300) +
+              (7 * Math.max(0, level - 400) +
+                10 * Math.max(0, level - 450))))));
+
+    const tierBonus = 1 + Math.floor(level / 25) / 5;
+
+    return (level * mult + extra) * tierBonus * (1 + bonus / 100);
+  }
+
+  return level * mult * (1 + bonus / 100);
+};
 
 
 
-// Next goes 3 multi alchemy bubble * alchemy bubble * vial multi
+
 
 //====================Card multi return formula ==========================================
 
@@ -419,14 +564,6 @@ window.getSushiBonus = function(isMulti = false) {
 //==============================================================
 
 
-//=====================Vial multi return formula=========================================
-
-//Vault bonus formula , where t = upgrade index
-// c.asNumber(a.engine.getGameAttribute("UpgVault")[Math.round(t)]) * 
-// c.asNumber(a.engine.getGameAttribute("CustomLists").h.UpgradeVault[0 | t][5]) * 
-// (1 + m._customBlock_Summoning("VaultUpgBonus", 89, 0) / 100)
-//UpgVault[78] * 8 * (1 + (UpgVault[89] *1)/100)
-//==============================================================
 
 
 

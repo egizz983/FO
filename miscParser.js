@@ -47,6 +47,7 @@ window.parseMiscBonusesData = function(data, state = window.farmingState) {
     let lv0_0        = parseJsonField("Lv0_0");
     let spelunk      = parseJsonField("Spelunk");
     let sushi        = parseJsonField("Sushi");
+    let rift         = parseJsonField("Rift");
 
     
     state.miscBonuses.ogTaffyDisc            = safeGet(ninja, 107, 11) === 1 ? 1.5 : 1.0; // sneaking Taffy Disc OG chance
@@ -86,6 +87,9 @@ window.parseMiscBonusesData = function(data, state = window.farmingState) {
 
     state.miscBonuses.godshardSetBonus       = String(optLacc[379] || "").includes("GODSHARD_SET") ? 15 : 0; //Godshard SetBonus (15% if set equipped, 0% otherwise) -  OptLacc[379]
     state.miscBonuses.evoButton              = safeGet(optLacc, 594); //Evolution Button (raw hold press count)
+    state.miscBonuses.vaultMasteryLevel      = safeGet(upgVault, 32); //Vault Mastery (raw level) 1.65× multiplier to vault upgrades
+    state.miscBonuses.vaultMastery2Level     = safeGet(upgVault, 61); //Vault Mastery II (raw level) 2.00× multiplier to green highlight vault upgrades
+    state.miscBonuses.vaultMasteryIIILevel   = safeGet(upgVault, 89); //Vault Mastery III (raw level) tier bonus for upgrades 61-89
     state.miscBonuses.vaultOvertuneLevel     = safeGet(upgVault, 42); //Vault Overtune (raw level) multi to vial bonus
 
 
@@ -113,9 +117,11 @@ window.parseMiscBonusesData = function(data, state = window.farmingState) {
     // SAILING BONUSES
     // ======================
     state.sailing.winzLanternLevel = safeGet(sailing, 3, 32); // Winz Lantern artifact level
+    
     // ======================
-    // LEVELS
+    // RIFT
     // ======================
+    state.miscBonuses.riftlevel = safeGet(rift, 0); // Rift level Rift[0]
     state.levels.farming   = safeGet(lv0_0, 16); //Farming level Lv0_0[16]
     state.levels.summoning = safeGet(lv0_0, 18); //Summoning level Lv0_0[18]
 

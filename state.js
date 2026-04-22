@@ -188,6 +188,9 @@ window.farmingState = {
         evoButton: 0,   // Evolution Button  press count → OptLacc[594] (+0.25× per level multiplicative, calculated later)
 
         // Vault / Alchemy related (raw levels only)
+        vaultMasteryLevel: 0,   // Vault Mastery raw level → UpgVault[32] (1.65× multiplier to highlighted vault upgrades)
+        vaultMastery2Level: 0,   // Vault Mastery II raw level → UpgVault[61] (2.00× multiplier to green highlight vault upgrades)
+        vaultMasteryIIILevel: 0,   // Vault Mastery III raw level → UpgVault[89] (tier bonus for upgrades 61-89)
         vaultOvertuneLevel: 0,   // Vault Overtune raw level → UpgVault[42] (+0.10 per level, max 3)
         croppiusEvolviusBonus: 0,   // Croppius Evolvius raw level → UpgVault[78]
 
@@ -204,7 +207,8 @@ window.farmingState = {
         votingBonus29: 0,   // +% Crop Evolution Chance  "VOTING_BONUS_29"
         zenitmarketLampLevel: 0,   // Spelunk[45][2]
         sushiBonus: 0,   // Sushi[5][35] - Sushi multi bonus
-        tometotalpoints: 0   // Total points 
+        tometotalpoints: 0,   // Total points 
+        riftlevel: 0   // Rift[0] - Rift level
     },
 
     // ======================
