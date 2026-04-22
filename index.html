@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Farming Optimizer - Legends of IdleOn</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- HEADER -->
+    <header>
+        <div class="header-content">
+            <div class="load-section">
+                <h2>Load Character Data</h2>
+                <div class="paste-area">
+                    <input type="text" id="json-paste" placeholder="Paste full JSON content here...">
+                    <button onclick="loadJsonData()">LOAD</button>
+                </div>
+
+                <!-- Manual Inputs Section  -->
+                <div class="manual-inputs">
+                    <h3>Manual Inputs</h3>
+                    
+                    <!-- Talent Section -->
+                    <div class="section talent-section">
+                        <h4>Talent</h4>
+                        <div class="input-group">
+                            <label for="talent-dank-ranks">Dank Ranks </label>
+                            <input type="number" id="talent-dank-ranks" value="0" min="0">
+                        </div>
+                        <div class="input-group">
+                            <label for="talent-mass-irrigation">Mass Irrigation </label>
+                            <input type="number" id="talent-mass-irrigation" value="0" min="0">
+                        </div>
+                        <div class="input-group">
+                            <label for="talent-agri-appreciation">Agricultural Appreciation </label>
+                            <input type="number" id="talent-agri-appreciation" value="0" min="0">
+                        </div>
+                    </div>
+
+                    <!-- Lab Section -->
+                    <div class="section lab-section">
+                        <h4>Lab</h4>
+                        <div class="lab-items-group">
+                            <h5>Lab Items (Active?)</h5>
+                            <div class="lab-checkboxes">
+                                <label>
+                                    <input type="checkbox" id="lab-chemistry-set">
+                                    My 1st Chemistry Set
+                                </label>
+                                <label>
+                                    <input type="checkbox" id="lab-stamp-book">
+                                    Certified Stamp Book
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="title-section">
+                <h1>Farming Optimizer</h1>
+                <p>Legends of IdleOn</p>
+            </div>
+        </div>
+        
+        <div class="header-divider"></div>
+    </header>
+
+    <main>
+        <div class="farming-bonuses-panel">
+            <div class="panel-top">
+                <h2>Farming Bonuses</h2>
+                <div class="farming-level-top">
+                    Farming Level <span id="farming-level-value" class="level-value">0</span>
+                    Summonings Level <span id="summoning-level-value" class="level-value">0</span>
+                </div>
+            </div>
+
+            <div class="green-line"></div>
+
+            <div class="bonuses-columns" id="bonuses-columns">
+                <!-- Populated by JS -->
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        Legends of IdleOn Farming Optimizer v2.0
+    </footer>
+    <script src="models.js"></script>
+    <script src="state.js"></script>
+    <script src="calcFormulas.js"></script>
+    <script src="farmingParser.js"></script>
+    <script src="alchemyParser.js"></script>
+    <script src="achievementsParser.js"></script>
+    <script src="miscParser.js"></script>
+    <script src="shinyPetsParser.js"></script>
+    <script src="starSignsParser.js"></script>
+    <script src="UIbreakdowns.js"></script>
+    <script>
+        const optimizer = new FarmingOptimizer(); // main optimizer instance that holds state and logic
+        // Data
+        const farmingBonuses = [
+            { name: "Evolution",     totalLabel: "Total Evolution chance", totalValue: "245%" },
+            { name: "Overgrowth",    totalLabel: "Total Overgrowth",      totalValue: "320%" },
+            { name: "Crop Value",    totalLabel: "Max Crop Value",        totalValue: "185%" },
+            { name: "Growth Speed",  totalLabel: "Total Growth Speed",    totalValue: "420%" },
+            { name: "Soil EXP",      totalLabel: "Total EXP Multiplier",  totalValue: "280%" }
+        ];
+
+
+        function renderTree(container, nodes) {
+            nodes.forEach(node => {
+                const item = document.createElement('div');
+
+                if (node.children && node.children.length > 0) {
+                    // Parent (expandable)
+                    item.innerHTML = `
+                        <div class="tree-header">
+                            <span><span class="arrow">▶</span> ${node.label}</span>
+                            <span>${node.value}</span>
+                        </div>
+                    `;
+                    const header = item.querySelector('.tree-header');
+                    const childrenDiv = document.createElement('div');
+                    childrenDiv.className = 'tree-children';
+
+                    header.addEventListener('click', () => {
+                        const isExpanded = childrenDiv.classList.contains('expanded');
+                        childrenDiv.classList.toggle('expanded', !isExpanded);
+                        header.classList.toggle('expanded', !isExpanded);
+                    });
+
+                    renderTree(childrenDiv, node.children);   // recursive
+                    item.appendChild(childrenDiv);
+                } else {
+                    // Leaf node (no children)
+                    item.innerHTML = `
+                        <div class="sub-breakdown">
+                            <span>${node.label}</span>
+                            <span class="value">${node.value}</span>
+                        </div>
+                    `;
+                }
+                container.appendChild(item);
+            });
+        }
+
+        function calculateEvolutionTotal() {
+            const breakdowns = window.getFarmingBreakdowns();
+            const evolutionBreakdown = breakdowns["Evolution"] || [];
+            
+            // Get Land Ranks value (index 0)
+            const landRanksItem = evolutionBreakdown[0];
+            const landRanksValue = landRanksItem ? parseFloat(landRanksItem.value.replace(/[×+%]/g, '')) : 1;
+            
+            // Get Market value (index 1)
+            const marketItem = evolutionBreakdown[1];
+            const marketValue = marketItem ? parseFloat(marketItem.value.replace(/[×+%]/g, '')) : 1;
+            
+            // Multiply and format
+            const total = landRanksValue * marketValue;
+
+            return total.toExponential(4);
+        }
+
+        function renderFarmingBonuses() {
+            const container = document.getElementById('bonuses-columns');
+            
+            // Calculate Evolution total dynamically
+            const evolutionTotal = calculateEvolutionTotal();
+            
+            const bonusesWithCalculated = farmingBonuses.map(bonus => 
+                bonus.name === "Evolution" 
+                    ? { ...bonus, totalValue: evolutionTotal }
+                    : bonus
+            );
+            
+            container.innerHTML = bonusesWithCalculated.map(bonus => `
+                <div class="bonus-column">
+                    <div class="column-header">${bonus.name}</div>
+                    <div class="stats-box">
+                        <div class="total-row">
+                            <span class="sub-name">${bonus.totalLabel}:</span>
+                            <span class="sub-value">${bonus.totalValue}</span>
+                        </div>
+                        <div class="breakdown" id="breakdown-${bonus.name.toLowerCase().replace(/[^a-z0-9]/g, '-')}"></div>
+                    </div>
+                </div>
+            `).join('');
+
+            
+            const breakdowns = window.getFarmingBreakdowns();
+            farmingBonuses.forEach(bonus => {
+                const breakdownContainer = document.getElementById(`breakdown-${bonus.name.toLowerCase().replace(/[^a-z0-9]/g, '-')}`);
+                if (!breakdownContainer) return;
+
+                const treeData = breakdowns[bonus.name] || [];
+                renderTree(breakdownContainer, treeData);
+            });
+        }
+
+        function updateFarmingLevelDisplay() {
+            const farmingEl   = document.getElementById('farming-level-value');
+            const summoningEl = document.getElementById('summoning-level-value');
+
+            if (farmingEl)   farmingEl.textContent   = window.farmingState.levels.farming   || 0;
+            if (summoningEl) summoningEl.textContent = window.farmingState.levels.summoning || 0;
+        }
+
+        window.loadJsonData = function() {
+            const input = document.getElementById('json-paste').value.trim();
+            if (!input) {
+                alert('Please paste your JSON data first!');
+                return;
+            }
+
+            try {
+                const match = input.match(/\{[\s\S]*\}/);
+                if (!match) throw new Error("No JSON object found");
+
+                const success = optimizer.loadPlayerData(match[0]);
+
+                if (success) {
+                    debugFarmingVariables();
+
+                    alert('✅ JSON loaded successfully!');
+                    
+                }
+            } catch (e) {
+                console.error(e);
+                alert('Invalid JSON!\n\n' + e.message);
+            }
+        };
+
+
+        function setupManualInputs() {
+            // Talents
+            const dankInput = document.getElementById('talent-dank-ranks');
+            if (dankInput) dankInput.addEventListener('input', () => {
+                window.farmingState.talents.dankRanks = parseFloat(dankInput.value) || 0;
+            });
+
+            const massInput = document.getElementById('talent-mass-irrigation');
+            if (massInput) massInput.addEventListener('input', () => {
+                window.farmingState.talents.massIrrigation = parseFloat(massInput.value) || 0;
+            });
+
+            const appInput = document.getElementById('talent-agri-appreciation');
+            if (appInput) appInput.addEventListener('input', () => {
+                window.farmingState.talents.agriculturalAppreciation = parseFloat(appInput.value) || 0;
+            });
+
+            // Lab checkboxes
+            const chemCheck = document.getElementById('lab-chemistry-set');
+            if (chemCheck) chemCheck.addEventListener('change', () => {
+                window.farmingState.lab.my1stChemistrySet = chemCheck.checked ? 1 : 0;
+            });
+
+            const stampCheck = document.getElementById('lab-stamp-book');
+            if (stampCheck) stampCheck.addEventListener('change', () => {
+                window.farmingState.lab.certifiedStampBook = stampCheck.checked ? 1 : 0;
+            });
+        }
+
+        // Initialize
+        window.onload = function() {
+            renderFarmingBonuses();
+            setupManualInputs();
+        };
+    </script>
+</body>
+</html>

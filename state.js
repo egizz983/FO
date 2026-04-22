@@ -1,0 +1,267 @@
+// Updated farmingVariables.js - restructured into centralized window.farmingState object
+// All original detailed comments preserved exactly as they appeared in the source file.
+// All array definitions (LandRankUpgrade, MarketUpgrade, ExoticMarketUpgrade) are copied verbatim.
+// All variable values and structures are unchanged.
+
+window.farmingState = {
+    playerData: {},           // Full JSON (kept for future steps)
+
+    // ======================
+    // Talents
+    // ======================
+    talents: {
+        //Talents level manual input 
+        dankRanks: 0,      // × ALL Land Rank Database bonuses (multiplicative to Evo, Overgrowth, Production, Soil EXP, etc.)
+        massIrrigation: 0,      // × Crop Evo chance (scales with talent points, multiplicative)
+        agriculturalAppreciation: 0 // +% Land Rank EXP (account-wide, additive, scales with talent points)
+    },
+
+    // ======================
+    // Lab manual input
+    // ======================
+    lab: {
+        my1stChemistrySet: 0, // check if active  , doubles vial bonus 
+        certifiedStampBook: 0, // check if active doubles stamp bonus
+        mealBlackDiamondRhinestone: 1.0,   // Black Diamond Rhinestone (LAB[14][16] + LAB[14][17]) 
+    },
+
+    // ======================
+    // Achievements
+    // ======================
+    achievements: {
+        // 1.01× multipliers (Regalis & Spectre Stars)
+        regalisMyBeloved: 0,   // AchieveReg[373] → 1.01× (unlocked = 1) 	1.01x larger Winners Bonuses from Summoning
+        spectreStars: 0,   // AchieveReg[374] → 1.01× (unlocked = 1) 1.01x larger Winners Bonuses from Summoning
+        farmingEvoLilOvergrowth: 0,   // AchieveReg[355] → 1.05× Crop Evolution chance
+        farmingOgBigTimeLandOwner: 0   // AchieveReg[365] → 1.15× Overgrowth chance 
+    },
+
+    // ======================
+    // GMO CROP COUNTS
+    // ======================
+    gmoCropCounts: {
+        "200": 0,     // crops with 200+ → used by Evolution GMO
+        "1000": 0,    // crops with 1000+ → used by Speed GMO
+        "2500": 0,    //  crops with 2500+ → EXP GMO
+        "10000": 0,   // crops with 10000+ → used by Value GMO
+        "100000": 0    // crops with 100000+ → used by Super GMO
+    },
+
+    // ======================
+    // LAND RANK SUMMARY STATS
+    // ======================
+    landRank: {
+        stats: {
+            totalSum:  0,     // landRank_totalLandRankSum
+            average:   0,      // landRank_averageLandRank
+            first:     0      // FarmRank[0][0] → rank of first plot (used for evolution boost calculations per rank
+        },
+        upgrades: [
+            new LandRankUpgrade({ id: 0,  unlock: 1,    group: "Evolution",  name: "Evolution Boost",       base: 250,   perRank: true,  multi: false, currentLevel: 0, desc: "Increases next crop chance by +% per rank of the land plot" }),
+            new LandRankUpgrade({ id: 1,  unlock: 5,    group: "Production", name: "Production Boost",      base: 5,     perRank: true,  multi: false, currentLevel: 0, desc: "Boosts value of crops harvested by +% per rank of the land plot" }),
+            new LandRankUpgrade({ id: 2,  unlock: 20,   group: "SoilExp",    name: "Soil Exp Boost",        base: 25,    perRank: true,  multi: false, currentLevel: 0, desc: "Each land gains +% extra Rank EXP per rank of the previous land" }),
+            new LandRankUpgrade({ id: 3,  unlock: 30,   group: "Evolution",  name: "Evolution Megaboost",   base: 600,   perRank: false, multi: true,  currentLevel: 0, desc: "Increases next crop chance by +% multiplicatively!" }),
+            new LandRankUpgrade({ id: 4,  unlock: 60,   group: "Seed",       name: "Seed of Stealth",       base: 2,     perRank: false, multi: false, currentLevel: 0, desc: "Increases the Stealth of all Ninja Twins by +% per Farming Level" }),
+            new LandRankUpgrade({ id: 5,  unlock: 80,   group: "FarmExp",    name: "Farmtastic Boost",      base: 90,    perRank: false, multi: false, currentLevel: 0, desc: "Increases Farming Skill EXP gained by +%" }),
+            new LandRankUpgrade({ id: 6,  unlock: 125,  group: "SoilExp",    name: "Soil Exp Megaboost",    base: 200,   perRank: false, multi: false, currentLevel: 0, desc: "All plots of land gain +% more Rank EXP" }),
+            new LandRankUpgrade({ id: 7,  unlock: 180,  group: "Overgrowth", name: "Overgrowth Boost",       base: 120,   perRank: false, multi: false, currentLevel: 0, desc: "Increases chance for Overgrowth by +%" }),
+            new LandRankUpgrade({ id: 8,  unlock: 250,  group: "Production", name: "Production Megaboost",  base: 100,   perRank: false, multi: false, currentLevel: 0, desc: "Increases the amount of crops harvested by +%" }),
+            new LandRankUpgrade({ id: 9,  unlock: 400,  group: "Seed",       name: "Seed of Loot",          base: 10,    perRank: false, multi: false, currentLevel: 0, desc: "Increases the Drop Rarity of all characters by +%" }),
+            new LandRankUpgrade({ id: 10, unlock: 500,  group: "Evolution",  name: "Evolution Superboost",  base: 3000,  perRank: false, multi: true,  currentLevel: 0, desc: "Increases next crop chance by +% multiplicatively!" }),
+            new LandRankUpgrade({ id: 11, unlock: 600,  group: "Overgrowth", name: "Overgrowth Megaboost",  base: 340,   perRank: false, multi: false, currentLevel: 0, desc: "Increases chance for Overgrowth by +%" }),
+            new LandRankUpgrade({ id: 12, unlock: 700,  group: "FarmExp",    name: "Farmtastic Megaboost",  base: 110,   perRank: false, multi: false, currentLevel: 0, desc: "Increases Farming Skill EXP gained by +%" }),
+            new LandRankUpgrade({ id: 13, unlock: 900,  group: "SoilExp",    name: "Soil Exp Superboost",   base: 520,   perRank: false, multi: false, currentLevel: 0, desc: "All plots of land gain +% more Rank EXP" }),
+            new LandRankUpgrade({ id: 14, unlock: 1200, group: "Seed",       name: "Seed of Damage",        base: 20,    perRank: false, multi: false, currentLevel: 0, desc: "Gives a +% Total Damage bonus to all characters" }),
+            new LandRankUpgrade({ id: 15, unlock: 1300, group: "Evolution",  name: "Evolution Ultraboost",  base: 40000, perRank: false, multi: true,  currentLevel: 0, desc: "Increases next crop chance by +% multiplicatively!" }),
+            new LandRankUpgrade({ id: 16, unlock: 1500, group: "FarmExp",    name: "Farmtastic Superboost", base: 220,   perRank: false, multi: false, currentLevel: 0, desc: "Increases Farming Skill EXP gained by +%" }),
+            new LandRankUpgrade({ id: 17, unlock: 1750, group: "Production", name: "Production Superboost", base: 600,   perRank: false, multi: false, currentLevel: 0, desc: "Increases the amount of crops harvested by +%" }),
+            new LandRankUpgrade({ id: 18, unlock: 2000, group: "Overgrowth", name: "Overgrowth Superboost", base: 1500,  perRank: false, multi: false, currentLevel: 0, desc: "Increases chance for Overgrowth by +%" }),
+            new LandRankUpgrade({ id: 19, unlock: 3500, group: "Seed",       name: "Seed of Stats",         base: 5,     perRank: false, multi: false, currentLevel: 0, desc: "Gives a +% All Stat bonus to your characters" })
+        ]
+    },
+
+    // ======================
+    // DAY MARKET UPGRADES 
+    // ======================
+    market: {
+        day: [
+            new MarketUpgrade({ index: 2,  name: "Land Plots",          calcType: "linear",     param: 1,     isMultiplier: false, unit: "plots",   currentLevel: 0, perLevel: false, description: "You get (1/Lvl) extra plots of land to plant crops in.", group: "Misc" }),
+            new MarketUpgrade({ index: 3,  name: "Stronger Vines",      calcType: "linear",     param: 0.02,  isMultiplier: false, unit: "%",       currentLevel: 0, perLevel: false, description: "+(2%/Lvl) chance for +1 crop when fully grown.", group: "Production" }),
+            new MarketUpgrade({ index: 4,  name: "Nutritious Soil",     calcType: "linear",     param: 0.01,  isMultiplier: false, unit: "%",       currentLevel: 0, perLevel: false, description: "+(1%/Lvl) growth speed for all land.", group: "GrowthSpeed" }),
+            new MarketUpgrade({ index: 5,  name: "Smarter Seeds",       calcType: "linear",     param: 0.03,  isMultiplier: false, unit: "%",       currentLevel: 0, perLevel: false, description: "+(3%/Lvl) farming EXP gain from all sources.", group: "FarmExp" }),
+            new MarketUpgrade({ index: 6,  name: "Biology Boost",       calcType: "linear",     param: 0.15,  isMultiplier: true, unit: "%",       currentLevel: 0, perLevel: false, description: "+(15%/Lvl) chance of crop evolution, or 'next crop' chance.", group: "Evolution" }),
+            new MarketUpgrade({ index: 7,  name: "Product Doubler",     calcType: "linear",     param: 0.03,  isMultiplier: false, unit: "%",       currentLevel: 0, perLevel: false, description: "+(3%/Lvl) chance for crops to be worth 2x when collected.", group: "Production" }),
+            new MarketUpgrade({ index: 8,  name: "More Beenz",          calcType: "linear",     param: 0.02,  isMultiplier: false, unit: "%",       currentLevel: 0, perLevel: false, description: "+(2%/Lvl) magic beans gained when trading in crops.", group: "Misc" }),
+            new MarketUpgrade({ index: 9,  name: "Rank Boost",          calcType: "linear",     param: 0.03,  isMultiplier: false, unit: "%",       currentLevel: 0, perLevel: false, description: "Plots earn +(3%/Lvl) more Rank XP when a crop is collected.", group: "SoilExp" })
+        ],
+
+        // ======================
+        // NIGHT MARKET UPGRADES
+        // ======================
+        night: [
+            new MarketUpgrade({ index: 10, name: "Overgrowth",          calcType: "unlock",     param: 0,     isMultiplier: false, unit: "",        currentLevel: 0, perLevel: false, description: "Unlocks Overgrowth (OG). Each OG doubles crop value ~ EXP.", group: "Overgrowth" }),
+            new MarketUpgrade({ index: 11, name: "Evolution GMO",       calcType: "linear",     param: 0.8, isMultiplier: true,  unit: "x",       currentLevel: 0, perLevel: true,  description: "(0.008x/Lvl) crop evolution chance per crop you have 200 of.", group: "Evolution" }),
+            new MarketUpgrade({ index: 12, name: "Speed GMO",           calcType: "linear",     param: 0.3, isMultiplier: false, unit: "%",       currentLevel: 0, perLevel: true,  description: "+(0.3%/Lvl) growth speed per crop you have 1000 of.", group: "GrowthSpeed" }),
+            new MarketUpgrade({ index: 13, name: "OG Fertilizer",       calcType: "linear",     param: 1,  isMultiplier: true,  unit: "x",       currentLevel: 0, perLevel: false, description: "(0.01x/Lvl) higher chance for Overgrowth to occur.", group: "Overgrowth" }),
+            new MarketUpgrade({ index: 14, name: "EXP GMO",             calcType: "linear",     param: 1,  isMultiplier: true,  unit: "x",       currentLevel: 0, perLevel: true,  description: "+(1%/Lvl) farming EXP gain per crop you have 2500 of.", group: "FarmExp" }),
+            new MarketUpgrade({ index: 15, name: "Land Rank",           calcType: "unlock",     param: 0,     isMultiplier: false, unit: "",        currentLevel: 0, perLevel: false, description: "Each plot now gets Rank Xp when a crop is collected.", group: "SoilExp" }),
+            new MarketUpgrade({ index: 16, name: "Value GMO",           calcType: "linear",     param: 0.02,isMultiplier: false, unit: "%",       currentLevel: 0, perLevel: true,  description: "+(0.02%/Lvl) crop value per crop you have 10000 of.", group: "Production" }),
+            new MarketUpgrade({ index: 17, name: "Super GMO",           calcType: "linear",     param: 0.5, isMultiplier: false, unit: "%",       currentLevel: 0, perLevel: true,  description: "+(0.5%/Lvl) all 'GMO' bonuses per crop you have 100K.", group: "Misc" })
+        ],
+
+        // ======================
+        // EXOTIC MARKET UPGRADES 
+        // ======================
+        exotic: [
+            new ExoticMarketUpgrade({ index: 20, name: "Sproutluck I",        calcType: "diminishing", base: 500,  isMultiplier: true,  unit: "x",  currentLevel: 0, perLevel: false, description: "x crop evolution chance", group: "Evolution" }),
+            new ExoticMarketUpgrade({ index: 21, name: "Sproutluck II",       calcType: "diminishing", base: 600,  isMultiplier: true,  unit: "x",  currentLevel: 0, perLevel: false, description: "x crop evolution chance", group: "Evolution" }),
+            new ExoticMarketUpgrade({ index: 22, name: "Sproutluck III",      calcType: "diminishing", base: 700,  isMultiplier: true,  unit: "x",  currentLevel: 0, perLevel: false, description: "x crop evolution chance", group: "Evolution" }),
+            new ExoticMarketUpgrade({ index: 23, name: "Sproutluck IV",       calcType: "diminishing", base: 800,  isMultiplier: true,  unit: "x",  currentLevel: 0, perLevel: false, description: "x crop evolution chance", group: "Evolution" }),
+            new ExoticMarketUpgrade({ index: 24, name: "Geneology I",         calcType: "diminishing", base: 6,    isMultiplier: false, unit: "%",  currentLevel: 0, perLevel: true,  description: "% crop evolution chance per Farming LV above 50", group: "Evolution" }),
+            new ExoticMarketUpgrade({ index: 25, name: "Geneology II",        calcType: "diminishing", base: 12,   isMultiplier: false, unit: "%",  currentLevel: 0, perLevel: true,  description: "% crop evolution chance per Farming LV above 100", group: "Evolution" }),
+            new ExoticMarketUpgrade({ index: 26, name: "Geneology III",       calcType: "diminishing", base: 20,   isMultiplier: false, unit: "%",  currentLevel: 0, perLevel: true,  description: "% crop evolution chance per Farming LV above 150", group: "Evolution" }),
+            new ExoticMarketUpgrade({ index: 27, name: "Geneology IV",        calcType: "diminishing", base: 28,   isMultiplier: false, unit: "%",  currentLevel: 0, perLevel: true,  description: "% crop evolution chance per Farming LV above 200", group: "Evolution" }),
+            new ExoticMarketUpgrade({ index: 28, name: "Geneology V",         calcType: "diminishing", base: 50,   isMultiplier: false, unit: "%",  currentLevel: 0, perLevel: true,  description: "% crop evolution chance per Farming LV above 250", group: "Evolution" }),
+            new ExoticMarketUpgrade({ index: 29, name: "Stableroot I",        calcType: "diminishing", base: 350,  isMultiplier: false, unit: "%",  currentLevel: 0, perLevel: false, description: "% Land Rank EXP gain for all plots", group: "SoilExp" }),
+            new ExoticMarketUpgrade({ index: 30, name: "Stableroot II",       calcType: "diminishing", base: 250,  isMultiplier: false, unit: "%",  currentLevel: 0, perLevel: false, description: "% Land Rank EXP gain for all plots", group: "SoilExp" }),
+            new ExoticMarketUpgrade({ index: 31, name: "Stableroot III",      calcType: "diminishing", base: 400,  isMultiplier: false, unit: "%",  currentLevel: 0, perLevel: false, description: "% Land Rank EXP gain for all plots", group: "SoilExp" }),
+            new ExoticMarketUpgrade({ index: 32, name: "Vigouroot I",         calcType: "diminishing", base: 100,  isMultiplier: true,  unit: "x",  currentLevel: 0, perLevel: false, description: "x Land Rank EXP gain for all plots", group: "SoilExp" }),
+            new ExoticMarketUpgrade({ index: 33, name: "Vigouroot II",        calcType: "diminishing", base: 130,  isMultiplier: true,  unit: "x",  currentLevel: 0, perLevel: false, description: "x Land Rank EXP gain for all plots", group: "SoilExp" }),
+            new ExoticMarketUpgrade({ index: 34, name: "Plump Database",      calcType: "diminishing", base: 60,   isMultiplier: false, unit: "%",  currentLevel: 0, perLevel: false, description: "% higher bonuses from the Land Rank Database", group: "LandRank" }),
+            new ExoticMarketUpgrade({ index: 43, name: "Stalk Value I",       calcType: "diminishing", base: 50,   isMultiplier: false, unit: "%",  currentLevel: 0, perLevel: false, description: "% higher Crop Value max cap", group: "Production Cap" }),
+            new ExoticMarketUpgrade({ index: 44, name: "Stalk Value II",      calcType: "diminishing", base: 70,   isMultiplier: false, unit: "%",  currentLevel: 0, perLevel: false, description: "% higher Crop Value max cap", group: "Production Cap" }),
+            new ExoticMarketUpgrade({ index: 45, name: "Stalk Value III",     calcType: "diminishing", base: 120,  isMultiplier: false, unit: "%",  currentLevel: 0, perLevel: false, description: "% higher Crop Value max cap", group: "Production Cap" }),
+            new ExoticMarketUpgrade({ index: 46, name: "Evergrow I",          calcType: "diminishing", base: 100,  isMultiplier: true,  unit: "x",  currentLevel: 0, perLevel: false, description: "x Overgrowth Chance for all crops", group: "Overgrowth" }),
+            new ExoticMarketUpgrade({ index: 47, name: "Evergrow II",         calcType: "diminishing", base: 150,  isMultiplier: true,  unit: "x",  currentLevel: 0, perLevel: false, description: "x Overgrowth Chance for all crops", group: "Overgrowth" }),
+            new ExoticMarketUpgrade({ index: 48, name: "Double Petal I",      calcType: "diminishing", base: 50,   isMultiplier: false, unit: "%",  currentLevel: 0, perLevel: false, description: "% chance for crops to be worth 2x when harvested", group: "Production" }),
+            new ExoticMarketUpgrade({ index: 49, name: "Double Petal II",     calcType: "diminishing", base: 70,   isMultiplier: false, unit: "%",  currentLevel: 0, perLevel: false, description: "% chance for crops to be worth 2x when harvested", group: "Production" }),
+            new ExoticMarketUpgrade({ index: 50, name: "Gogogrow",            calcType: "diminishing", base: 50,   isMultiplier: false, unit: "%",  currentLevel: 0, perLevel: false, description: "% Growth Speed for all land plots", group: "GrowthSpeed" }),
+            new ExoticMarketUpgrade({ index: 51, name: "Bountiful I",         calcType: "diminishing", base: 50,   isMultiplier: false, unit: "%",  currentLevel: 0, perLevel: false, description: "% chance for +1 crop when fully grown", group: "Production" }),
+            new ExoticMarketUpgrade({ index: 52, name: "Bountiful II",        calcType: "diminishing", base: 60,   isMultiplier: false, unit: "%",  currentLevel: 0, perLevel: false, description: "% chance for +1 crop when fully grown", group: "Production" }),
+            new ExoticMarketUpgrade({ index: 53, name: "Bountiful III",       calcType: "diminishing", base: 70,   isMultiplier: false, unit: "%",  currentLevel: 0, perLevel: false, description: "% chance for +1 crop when fully grown", group: "Production" })
+        ]
+    },
+
+    summoning: {
+        // Emperor bonus  to calculate regular battle bonus from emperor 
+        emperorBonusKills: 0,   // OptLacc[369] kill count
+        vicarOfTheEmperorLevel: 0,   // Vicar of the Emperor //Arcane[48] 
+        emperorBonusesArcadeLevel: 0,   // Emperor Bonuses ( arcade )// ArcadeUpg[51]level max 100 +1 (101) if super 
+        kingOfAllWinnersPurchases: 0,   // GemItemsPurchased[11] purchase count
+        endlessSummoningWaves: 0,   // OptLacc[319] wave count
+        // regular summoning battles
+        meal_bonuses: 0,
+        farming_speed: 1.0,
+        crop_evo: 0,
+        winner_bonuses: 1.0
+    },
+
+    // ======================
+    // MISC FARMING BONUSES (Ninja, TaskZZ2, Holes, StampLv, Grimoire, Lv0_1, OptLacc, Gaming, Research, LAB, Sailing, GemItemsPurchased, UpgVault)
+    // ======================
+    miscBonuses: {
+        // meritshop
+        ogMeritShop: 0,     // +2% Overgrowth Chance per level (additive) TaskZZ2[5][2] 
+
+
+        // holes
+        evoMonumentWisdom: 0,   // × Farming Crop Evo Chance (multiplicative, scales with waves) Holes[15][24]
+        evoMajigerLamp: 0,   // +% Next Crop Chance (additive) Holes[21][7] points invested
+        wisdomBonusLevel: 0,   // Wisdom Bonus level → Holes[15][29] (multiplier calculated later)
+        //stamp
+        evoCropEvoStamp: 0,   // +% Crop Evolution Chance (additive, scales with stamp level) StampLv[1][47]
+        //other
+        evoSacrificeHarvest: 0,   // +0.05× per talent level (multiplicative) Grimoire[14]
+        evoSkillMastery200: 1.0, // 1.15× (multiplicative at 200 total Farming levels) Lv0_1[16] > 200 ? 1.15 : 1
+        evoSkullShop: 0,   // × Crop Evolution Chance (multiplicative) OptLacc[229] 
+        evoButton: 0,   // Evolution Button  press count → OptLacc[594] (+0.25× per level multiplicative, calculated later)
+
+        // Vault / Alchemy related (raw levels only)
+        vaultOvertuneLevel: 0,   // Vault Overtune raw level → UpgVault[42] (+0.10 per level, max 3)
+        croppiusEvolviusBonus: 0,   // Croppius Evolvius raw level → UpgVault[78]
+
+        // Stickers
+        bettahStickahsZuperbits: 1.0,   // 1.20× higher bonuses from all Farming Stickers (multiplicative) Gaming[12] contains "管"
+        evoStickers: 0,     // +% or × Crop Evolution Chance from all Farming Stickers (sporrious Stalk sticker) Research[9][4] 
+
+        // Ninja Crystal Bonuses (simple 0/1 → multiplier)
+        crystalSneeking: 1.0,   // 1.30× (multiplicative) Ninja[107][8]
+        ogTaffyDisc: 1.0,   // 1.50× Higher Overgrowth Chance (multiplicative, Taffy Disc Pristine Charm) Ninja[107][11]
+
+        // Set / Special Bonuses (simple string or flag checks)
+        godshardSetBonus: 1.0,   // 1.15× if OptLacc[379] contains "GODSHARD_SET"
+        votingBonus29: 0,   // +% Crop Evolution Chance  "VOTING_BONUS_29"
+        
+    },
+
+    // ======================
+    // SHINY PETS (Breeding array) - Infinite Stars + Meal Bonus
+    // ======================
+    shinyPets: {
+        // Final variables for later calculations (used in formulas file)
+        infiniteStars: 0,   // Total infinite stars (+2 per level per pet)
+        mealBonus: 0   // Total meal bonus % (+1% per level from Red Mushroom + Sheepie)
+    },
+
+    // ======================
+    // LEVELS
+    // ======================
+    levels: {
+        farming: 0, // Farming level Lv0_0[16] (for Geneology exotic bonuses, etc.)
+        summoning: 0 // Summoning level Lv0_0[18] (for Nyanborgir bonus scaling)
+    },
+
+    // ======================
+    // STAR SIGNS (StarSg) - Special Infinite Star Activation
+    // ======================
+    starSigns: {
+        // Final variables (1 = active / enabled for farming bonuses, 0 = inactive)
+        seraphCosmos: 0,   // Seraph_Cosmos active flag 1.10× Crop Evolution Chance per 20 summoning level
+        ogSignalais: 0,   // O.G._Signalais active flag // 15% og chance
+        cropiovoMinor: 0   // Cropiovo_Minor active flag // +3% evo per farming level 
+    },
+
+    // ======================
+    // Meals
+    // ======================
+    meals: {
+        evoBillJackPepper: 0,          // +5% Crop Evolution Chance (additive, no scaling) Meals[0][62]
+        evoNyanborgir: 0              // +9% base (doubles at Summoning Lv 50, triples at 100, etc. — multiplicative scaling) Meals[0][66]
+    },
+
+    // ======================
+    // Alchemy Bubbles + Vials
+    // ======================
+    alchemy: {
+        // Alchemy Bubbles
+        cropChapterBubblebonus: 0,   // CauldronInfo[0]["29"]  → Crop Chapter x1=12 x2=50
+        croppiusMapperBubblebonus: 0,   // CauldronInfo[3]["25"]  → Croppius Mapper x1=5 x2=70
+
+        // Vials
+        ricecakoradeBonus: 0,   // CauldronInfo[4]["64"]  → +{2%/level} Farming Speed
+        flavorgilBonus: 0,   // CauldronInfo[4]["66"]  → +{7%/level} Crop Evolution chance
+        countLevel13: 0   // Total number of vials that are level 13 or higher
+    },
+
+    // ====================== ====================== ======================
+    // Multi Variables
+    // ====================== ====================== ======================
+    multi: {
+        emperorSummoningWinnerBonus: 1.0, // Calculated in CaclFormulas based on Emperor Bonuses, Arcade , AC vicar 
+        vialMultiplier: 1.0 // Calculated in CalcFormulas based on all vial levels and bonuses
+    }
+};
+
+// ======================
+// DYNAMIC DEBUG HELPER 
+// ======================
+// Updated to work with the new farmingState structure while preserving original intent and console output style
+
+window.debugFarmingVariables = function() {
+
+    console.log("%c🔍 VARIABLES DUMP (farmingState structure)", "color:#0f0; font-size:15px; font-weight:bold;");
+    console.log(`📊 farmingState contains all farming-related data in nested format. Total top-level keys: ${Object.keys(window.farmingState).length}`);
+
+    console.dir(window.farmingState, { depth: null });
+
+};
