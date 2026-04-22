@@ -95,7 +95,7 @@ window.getFarmingBreakdowns = function() {
                     }
                 ]
             },
-            { label: "Vial", value: "5.805" },
+            { label: "SummonerWinBonus", value: "×" + window.getWinBonus(10, true).toFixed(2) },
             { label: "Meal", value: "86042.55" },
             { label: "Final Multiplier", value: "×62.8" }
         ],

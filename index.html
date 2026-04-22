@@ -88,6 +88,7 @@
     <footer>
         Legends of IdleOn Farming Optimizer v2.0
     </footer>
+    <script src="CustomList.js"></script>
     <script src="models.js"></script>
     <script src="state.js"></script>
     <script src="calcFormulas.js"></script>
@@ -159,8 +160,12 @@
             const marketItem = evolutionBreakdown[1];
             const marketValue = marketItem ? parseFloat(marketItem.value.replace(/[×+%]/g, '')) : 1;
             
+            // Get SummonerWinBonus value (index 2)
+            const summonerWinBonusItem = evolutionBreakdown[2];
+            const summonerWinBonusValue = summonerWinBonusItem ? parseFloat(summonerWinBonusItem.value.replace(/[×+%]/g, '')) : 1;
+            
             // Multiply and format
-            const total = landRanksValue * marketValue;
+            const total = landRanksValue * marketValue * summonerWinBonusValue;
 
             return total.toExponential(4);
         }
@@ -224,9 +229,7 @@
 
                 if (success) {
                     debugFarmingVariables();
-
                     alert('✅ JSON loaded successfully!');
-                    
                 }
             } catch (e) {
                 console.error(e);

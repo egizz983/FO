@@ -4,7 +4,7 @@
 
 // Cumulative days required for shiny pet levels (capped at level 20)
 const SHINY_CUMULATIVE_DAYS = [
-    0,         // lvl 0 (placeholder)
+    0,         // lvl 0
     0,         // 1
     3,         // 2
     11,        // 3
@@ -19,23 +19,23 @@ const SHINY_CUMULATIVE_DAYS = [
     16234,     // 12
     31633,     // 13
     60989,     // 14
-    116500,    // 15 (116.5 K)
-    220900,    // 16 (220.9 K)
-    415800,    // 17 (415.8 K)
-    778000,    // 18 (778 K)
-    1400000,   // 19 (1.4 M)
-    2700000    // 20 (2.7 M)
+    116500,    // 15 
+    220900,    // 16
+    415800,    // 17
+    778000,    // 18
+    1400000,   // 19
+    2700000    // 20
 ];
 
 function getShinyPetLevel(totalExp) {
     totalExp = Number(totalExp) || 0;
-    // Find the highest level where cumulative days <= total exp
+
     for (let lvl = SHINY_CUMULATIVE_DAYS.length - 1; lvl >= 1; lvl--) {
         if (totalExp >= SHINY_CUMULATIVE_DAYS[lvl]) {
             return lvl;
         }
     }
-    return 1; // minimum level
+    return 1; 
 }
 
 window.parseShinyPetsData = function(data, state = window.farmingState) {
@@ -43,7 +43,7 @@ window.parseShinyPetsData = function(data, state = window.farmingState) {
 
     let breeding = state.playerData.Breeding;
 
-    // Parse breeding data if it's passed as a string
+
     if (typeof breeding === "string") {
         try { 
             breeding = JSON.parse(breeding); 
@@ -58,7 +58,6 @@ window.parseShinyPetsData = function(data, state = window.farmingState) {
         return false;
     }
 
-    // Safe way to pull numeric values from the nested array
     const safeGet = (arr, group, index) => {
         try {
             return Number(arr[group]?.[index]) || 0;

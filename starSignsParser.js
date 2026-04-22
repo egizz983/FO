@@ -28,7 +28,7 @@ window.parseStarSignsData = function(data, state = window.farmingState) {
     // Get the ordered list of star sign names (position is based on key order)
     const starSignOrder = Object.keys(starSg);
 
-    // Helper: returns 1-based position of a star sign (or a very high number if not found)
+    //  returns 1-based position of a star sign (or a very high number if not found)
     const getPosition = (name) => {
         const index = starSignOrder.indexOf(name);
         return index === -1 ? 9999 : index + 1;

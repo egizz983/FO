@@ -80,7 +80,7 @@ window.parseMiscBonusesData = function(data, state = window.farmingState) {
         state.lab.mealBlackDiamondRhinestone = 1.0;
     }
 
-    state.miscBonuses.godshardSetBonus       = String(optLacc[379] || "").includes("GODSHARD_SET") ? 1.15 : 1.0; //Godshard SetBonus -  OptLacc[379]
+    state.miscBonuses.godshardSetBonus       = String(optLacc[379] || "").includes("GODSHARD_SET") ? 15 : 0; //Godshard SetBonus (15% if set equipped, 0% otherwise) -  OptLacc[379]
     state.miscBonuses.evoButton              = safeGet(optLacc, 594); //Evolution Button (raw hold press count)
     state.miscBonuses.vaultOvertuneLevel     = safeGet(upgVault, 42); //Vault Overtune (raw level) multi to vial bonus
 
@@ -103,12 +103,23 @@ window.parseMiscBonusesData = function(data, state = window.farmingState) {
     state.summoning.emperorBonusesArcadeLevel  = safeGet(ArcadeUpg, 51); // Emperor Bonuses ( arcade )// ArcadeUpg[51]level max 100 +1 (101) if super 
     state.summoning.kingOfAllWinnersPurchases  = safeGet(gemPurchased, 11); // King Of All Winners (raw purchase count only) bonus to summoner bonus 
     state.summoning.endlessSummoningWaves      = safeGet(optLacc, 319); // endless summoning battle count // OptLacc[319]
+    state.summoning.meritShopLevel             = safeGet(taskZZ2, 5, 4); // Merit Shop Summoning bonus level // TaskZZ2[5][4]
+
+    // ======================
+    // SAILING BONUSES
+    // ======================
+    state.sailing.winzLanternLevel = safeGet(sailing, 3, 32); // Winz Lantern artifact level
     // ======================
     // LEVELS
     // ======================
     state.levels.farming   = safeGet(lv0_0, 16); //Farming level Lv0_0[16]
     state.levels.summoning = safeGet(lv0_0, 18); //Summoning level Lv0_0[18]
 
+    // ======================
+    // SUMMON LIST
+    // ======================
+    let summonData = parseJsonField("Summon");
+    state.summoning.summonList = Array.isArray(summonData) && summonData[1] ? summonData[1] : [];
 
     console.log(`✅ parseMiscBonusesData completed`);
 

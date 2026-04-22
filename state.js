@@ -30,8 +30,8 @@ window.farmingState = {
     // ======================
     achievements: {
         // 1.01× multipliers (Regalis & Spectre Stars)
-        regalisMyBeloved: 0,   // AchieveReg[373] → 1.01× (unlocked = 1) 	1.01x larger Winners Bonuses from Summoning
-        spectreStars: 0,   // AchieveReg[374] → 1.01× (unlocked = 1) 1.01x larger Winners Bonuses from Summoning
+        regalisMyBeloved: 0,   // AchieveReg[373] → 1.01× (unlocked = -1) 	1.01x larger Winners Bonuses from Summoning
+        spectreStars: 0,   // AchieveReg[379] → 1.01× (unlocked = -1) 1.01x larger Winners Bonuses from Summoning
         farmingEvoLilOvergrowth: 0,   // AchieveReg[355] → 1.05× Crop Evolution chance
         farmingOgBigTimeLandOwner: 0   // AchieveReg[365] → 1.15× Overgrowth chance 
     },
@@ -149,11 +149,21 @@ window.farmingState = {
         emperorBonusesArcadeLevel: 0,   // Emperor Bonuses ( arcade )// ArcadeUpg[51]level max 100 +1 (101) if super 
         kingOfAllWinnersPurchases: 0,   // GemItemsPurchased[11] purchase count
         endlessSummoningWaves: 0,   // OptLacc[319] wave count
+        meritShopLevel: 0,   // TaskZZ2[5][4] - Merit Shop Summoning Winner Bonus level (capped at 10 in calculations)
         // regular summoning battles
         meal_bonuses: 0,
         farming_speed: 1.0,
         crop_evo: 0,
-        winner_bonuses: 1.0
+        winner_bonuses: 1.0,
+        SummWinBonus: null,
+        summonList: []   // Parsed from Savedata.json Summon[1] - list of current player's summoned units
+    },
+
+    // ======================
+    // SAILING BONUSES
+    // ======================
+    sailing: {
+        winzLanternLevel: 0   // Sailing[3][32] - Winz Lantern artifact level (1 + 0.25x per level)
     },
 
     // ======================
@@ -189,7 +199,7 @@ window.farmingState = {
         ogTaffyDisc: 1.0,   // 1.50× Higher Overgrowth Chance (multiplicative, Taffy Disc Pristine Charm) Ninja[107][11]
 
         // Set / Special Bonuses (simple string or flag checks)
-        godshardSetBonus: 1.0,   // 1.15× if OptLacc[379] contains "GODSHARD_SET"
+        godshardSetBonus: 0,   // 15 (15% bonus) if OptLacc[379] contains "GODSHARD_SET", else 0
         votingBonus29: 0,   // +% Crop Evolution Chance  "VOTING_BONUS_29"
         
     },

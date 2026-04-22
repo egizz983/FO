@@ -11,6 +11,7 @@ class FarmingOptimizer {
         try {
             const data = JSON.parse(jsonString);   
             this.parseAll(data);
+            this.recalculateAll();
             this.renderAll();
             console.log("✅ FarmingOptimizer.loadPlayerData completed successfully");
             return true;
@@ -30,6 +31,21 @@ class FarmingOptimizer {
         parseMiscBonusesData(data, this.state); // various misc bonuses (Taffy Disc, Crystal Sneeking, Merit Shop OG, Monument Wisdom, Wisdom Bonus Level, Crop Evo Stamp, Sac Harvest)
         parseShinyPetsData(data, this.state); // shiny pet levels for infinite star and meal bonus calculations
         parseStarSignsData(data, this.state); // star sign positions for infinite star activation
+    }
+
+    // Reset all caches and reinitialize calculations
+    recalculateAll() {
+        // Reset WinBonus cache
+        if (window.resetWinBonusCache) {
+            window.resetWinBonusCache();
+        }
+        
+        // Force reinitialization of dependent functions
+        if (window.getWinBonus) {
+            window.getWinBonus(10);
+        }
+        
+        console.log("ℹ️ recalculateAll: Caches reset and calculations reinitialized");
     }
 
     // Placeholder

@@ -1,5 +1,10 @@
 // ====================== DEATH BRINGER TALENT FORMULAS ======================
 
+// Utility objects for game engine compatibility
+const c = {
+    asNumber: (val) => val == null ? 0 : Number(val)
+};
+
 /**
  * Dank Ranks - Global multiplier to ALL Land Rank Database bonuses
  */
@@ -60,19 +65,36 @@ function LankRankUpgBonus(t, base, level) { // engine formula
  // ====================== Summoner battle multipliers Formulas ======================
 
 
-// Emperorbonus regular summoner bonus multi formula
-function getEmperorSummonerMultiplier() {
+// Emperorbonus regular summoner bonus multi formula onlu works for bonus 8 
+function getEmperorSummonerMultiplier(isMulti = false) {
+    // Ensure farmingState exists
+    if (!window.farmingState) window.farmingState = {};
+    if (!window.farmingState.summoning) window.farmingState.summoning = {};
+    
     //  rawPoint: +1 at 32 kills, then +1 every 48 kills (80, 128, 176, ...)
-    let rawPoint = farming_emperorBonusKills >= 32 
-        ? 1 + Math.floor((farming_emperorBonusKills - 32) / 48) 
+    const emperorKills = window.farmingState.summoning.emperorBonusKills || 0;
+    let rawPoint = emperorKills >= 32 
+        ? 1 + Math.floor((emperorKills - 32) / 48) 
         : 0;
-    const vicarBonus  = farming_vicarOfTheEmperorLevel / 100;
-    const arcadeBonus = (farming_emperorBonuses_arcadeLevel >= 101) ? 0.8 : (farming_emperorBonuses_arcadeLevel * 0.004);
+    
+    const vicarBonus  = (window.farmingState.summoning.vicarOfTheEmperorLevel || 0) / 100;
+    const arcadeLevel = window.farmingState.summoning.emperorBonusesArcadeLevel || 0;
+    const arcadeBonus = (arcadeLevel >= 101) ? 0.8 : (arcadeLevel * 0.004);
 
     const totalBonus  = 1 + vicarBonus + arcadeBonus;
     const effective   = Math.floor(rawPoint * totalBonus);
-    multi_emperor_SummoningWinnerBonus = 1 + (effective / 100);
+    
+    if (isMulti) {
+        // Return multiplier form: (1 + effective/100)
+        const result = 1 + (effective / 100);
+        window.farmingState.summoning.multi_emperor_SummoningWinnerBonus = result;
+        return result;
+    } else {
+        // Return flat form: just the effective percentage value
+        return effective;
+    }
 }
+
  // ====================== Vial Multi formula ======================
 function getVialMultiplier() {
 
@@ -150,8 +172,6 @@ Summoning Winner bonus multi Formula
 
 
 window.calculateAllFarmingMultipliers = function() {
-
- 
 };
 
 
@@ -201,9 +221,116 @@ function calculateCombined(evoGmoLevel, superGmoLevel, cropCount200, cropCount10
 
 
 
+window.getWinBonus = function(t, isMulti = false) {
+    // Make sure the container exists
+    if (!window.farmingState) window.farmingState = {};
+    if (!window.farmingState.summoning) window.farmingState.summoning = {};
+
+    // Reference to your new storage location
+    let SummWinBonus = window.farmingState.summoning.SummWinBonus;
+
+    // === ONE-TIME INITIALIZATION ===
+    if (t !== -1 && (SummWinBonus === undefined || SummWinBonus === null)) {
+        SummWinBonus = new Array(32).fill(0);
+        window.farmingState.summoning.SummWinBonus = SummWinBonus;   // save it
+
+        const customLists = window.SummonEnemies;
+        const summonList = window.farmingState.summoning.summonList;
+
+        // Loop 1: Bonuses from current player's summons (skip rifts)
+        if (summonList && customLists) {
+            for (let e = 0, s = summonList.length; e < s; e++) {
+                const summonName = String(summonList[e]);
+                if (summonName.indexOf("rift") === -1) {
+                    const o = customLists[0].indexOf(summonName);
+
+                    if (o !== -1) {
+                        const slot = Math.round(c.asNumber(customLists[5][o]) - 1);
+                        const bonus = c.asNumber(customLists[7][o]);
+                        if (slot >= 0 && slot < 32) {
+                            SummWinBonus[slot] += bonus;
+                        }
+                    }
+                }
+            }
+        }
+
+        // Loop 2: Extra bonuses from endlessSummoningWaves (OptLacc[319])
+        const optCount = 0 | c.asNumber(window.farmingState.summoning.endlessSummoningWaves);
+        
+        if (optCount > 0 && customLists) {
+            for (let e = 0; e < optCount; e++) {
+                const idx = e - 40 * Math.floor(e / 40);
+                const o = Math.round(c.asNumber(customLists[9][idx]) - 1);
+                const bonus = c.asNumber(customLists[10][idx]);
+                if (o >= 0 && o < 32) {
+                    SummWinBonus[o] += bonus;
+                }
+            }
+        }
+    }
+
+    // === RETURN LOGIC ===
+    if (t === -1) return isMulti ? 1 : 0;
+    if (SummWinBonus === undefined || SummWinBonus === null) return isMulti ? 1 : 0;
+
+    const base = c.asNumber(SummWinBonus[0 | t]);
+
+    // Special raw-return cases
+    if (t === 20 || t === 22 || t === 24 || t === 31) {
+        return isMulti ? (base / 100 + 1) : base;
+    }
+
+    // Common multipliers
+    const pristine = window.farmingState.miscBonuses?.crystalSneeking || 1;
+    const gem      = (10 * (window.farmingState.summoning?.kingOfAllWinnersPurchases || 0)) / 100;
+    const sailing  = 25 * (window.farmingState.sailing?.winzLanternLevel || 0);
+    const merit    = Math.min(10, window.farmingState.summoning?.meritShopLevel || 0);
+    const ach379   = window.farmingState.achievements?.spectreStars === -1 ? 1 : Math.max(0, window.farmingState.achievements?.spectreStars || 0);
+    const ach373   = window.farmingState.achievements?.regalisMyBeloved === -1 ? 1 : Math.max(0, window.farmingState.achievements?.regalisMyBeloved || 0);
+    const godshard = window.farmingState.miscBonuses?.godshardSetBonus || 0;
+    const emperor  = getEmperorSummonerMultiplier();
+    const win31    = getWinBonus(31);
+
+    if (t === 19) {
+        const result = 3.5 * base *
+               pristine *
+               (1 + gem) *
+               (1 + (sailing + merit + ach379 + ach373 + godshard) / 100);
+        return isMulti ? (result / 100 + 1) : result;
+    }
+
+    if (t >= 20 && t <= 33) {
+        const result = base *
+               pristine *
+               (1 + gem) *
+               (1 + (sailing + merit + ach379 + ach373 + win31 + emperor + godshard) / 100);
+        return isMulti ? (result / 100 + 1) : result;
+    }
+
+    // Default case (t = 10 and everything else)
+    const result = 3.5 * base *
+           pristine *
+           (1 + gem) *
+           (1 + (sailing + merit + ach379 + ach373 + win31 + emperor + godshard) / 100);
+    
+
+    
+    return isMulti ? (result / 100 + 1) : result;
+}
+
+// Reset cache when new data is loaded
+window.resetWinBonusCache = function() {
+    if (window.farmingState?.summoning) {
+        window.farmingState.summoning.SummWinBonus = null;
+        console.log(`[resetWinBonusCache] Cache cleared. Next call to getWinBonus will reinitialize.`);
+    }
+}
+
+
 //========================Summoning evo return formula======================================
 
-
+//(1 + m._customBlock_Summoning("WinBonus", 10, 0) / 100) *
 // // SummoningWinBonus(10) returns below then 
 // (3.5 × 
 //   SummWinBonus[10] ×  // probably base bonus from normal bonus win 
@@ -562,3 +689,6 @@ function getButtonBonuses(t, totalButtonUpgrades) {
               //     (1 + (20 * m._customBlock_GamingStatType("SuperBitType", 62, 0)) / 100) * 
               //     c.asNumber(a.engine.getGameAttribute("Research")[9][4]) * 40
               //   );
+
+
+              
