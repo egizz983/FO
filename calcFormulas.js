@@ -164,6 +164,11 @@ window.calculateKillsLeftToAdvance = function() {
     return totalCompletedSlots;
 };
 
+//Tome count total - 5000 every 2000 
+function calculateTomeScorePer2000() {
+    const tomeScore = window.farmingState?.miscBonuses?.tometotalpoints || 0;
+    return Math.floor(Math.max(0, (tomeScore - 5000) / 2000));
+} 
 
 
 

@@ -101,7 +101,7 @@ window.getFarmingBreakdowns = function() {
                 children: [
                     {
                         label: "Crop Chapter Bubble",
-                        value: "×" + (window.calculateBubbleBonus(farmingState.alchemy.cropChapterBubblebonus, 12, 50) ).toFixed(2)
+                        value: "×" + ((window.calculateBubbleBonus(farmingState.alchemy.cropChapterBubblebonus, 12, 50) * window.calculateTomeScorePer2000()) / 100 + 1).toFixed(2)
                     },
                     {
                         label: "Croppius Mapper Bubble",

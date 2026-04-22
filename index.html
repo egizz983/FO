@@ -55,6 +55,19 @@
                             </div>
                         </div>
                     </div>
+
+                    <!-- Other Section -->
+                    <div class="section other-section">
+                        <h4>Other</h4>
+                        <div class="input-group">
+                            <label for="voting-bonus-29">Vote Bonus </label>
+                            <input type="number" id="voting-bonus-29" value="0" min="0">
+                        </div>
+                        <div class="input-group">
+                            <label for="tome-total-points">Tome Score </label>
+                            <input type="number" id="tome-total-points" value="0" min="0">
+                        </div>
+                    </div>
                 </div>
             </div>
 
@@ -288,6 +301,17 @@
             const stampCheck = document.getElementById('lab-stamp-book');
             if (stampCheck) stampCheck.addEventListener('change', () => {
                 window.farmingState.lab.certifiedStampBook = stampCheck.checked ? 1 : 0;
+            });
+
+            // Other inputs
+            const votingInput = document.getElementById('voting-bonus-29');
+            if (votingInput) votingInput.addEventListener('input', () => {
+                window.farmingState.miscBonuses.votingBonus29 = parseFloat(votingInput.value) || 0;
+            });
+
+            const tomeInput = document.getElementById('tome-total-points');
+            if (tomeInput) tomeInput.addEventListener('input', () => {
+                window.farmingState.miscBonuses.tometotalpoints = parseFloat(tomeInput.value) || 0;
             });
         }
 
