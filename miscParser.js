@@ -56,8 +56,10 @@ window.parseMiscBonusesData = function(data, state = window.farmingState) {
     state.miscBonuses.ogTaffyDisc            = safeGet(ninja, 107, 11) === 1 ? 1.5 : 1.0; // sneaking Taffy Disc OG chance
     state.miscBonuses.crystalSneeking        = safeGet(ninja, 107, 8) === 1 ? 1.3 : 1.0; // sneaking  Crystal Comb  Bigger Summoning Winner Bonuses	
     state.miscBonuses.ogMeritShop            = safeGet(taskZZ2, 5, 2);  // Merit Shop Overgrowth raw level
-    state.miscBonuses.evoMonumentWisdom      = safeGet(holes, 15, 24); // x Farming Crop Evo Chance stores level
-    state.miscBonuses.wisdomBonusLevel       = safeGet(holes, 15, 29); ; //x Wisdom Bonuses Multiplier , stores level
+    state.holes.hole15[24]                   = safeGet(holes, 15, 24); // Parse Holes[15][24]
+    state.holes.hole15[29]                   = safeGet(holes, 15, 29); // Parse Holes[15][29]
+    state.holes.hole4[0]                     = safeGet(holes, 4, 0); // Parse Holes[4][0]
+    state.holes.hole21[8]                    = safeGet(holes, 21, 8); // Parse Holes[21][8]
     state.miscBonuses.evoCropEvoStamp        = safeGet(state.playerData.StampLv, 1, 47); // evo stamp
     state.miscBonuses.evoSacrificeHarvest    = safeGet(state.playerData.Grimoire, 14); //Sacrifice Harvest grimoire upgrade level
     
@@ -90,8 +92,7 @@ window.parseMiscBonusesData = function(data, state = window.farmingState) {
 
 
     // Croppius Evolvius Bonus Vault upgrade evo chance
-    tempLevel = safeGet(upgVault, 78);
-    state.miscBonuses.croppiusEvolviusBonus  = 1 + 0.1 * tempLevel + 0.01 * Math.floor((tempLevel + 5) / 12);
+    state.miscBonuses.croppiusEvolviusBonus  = safeGet(upgVault, 78);
 
     // ======================
     // MEALS

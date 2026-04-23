@@ -419,7 +419,7 @@ window.resetWinBonusCache = function() {
  * ZenithMarketBonus = zenitmarketLampLevel (from Spelunk[45][2])
  */
 window.getLampBonus = function() {
-    const evoMajigerLamp = window.farmingState?.miscBonuses?.evoMajigerLamp || 0;
+    const evoMajigerLamp = window.farmingState?.holes.hole21?.[8] || 0;
     const zenitmarketLampLevel = window.farmingState?.miscBonuses?.zenitmarketLampLevel || 0;
     const zenithMarketBonus = Math.floor(1 * zenitmarketLampLevel);
     
@@ -727,15 +727,31 @@ function getRibbonBonus(t) {
 
 
 //===================MonumentROGbonuses(2,4) return formula ===
-//HolesInfo[37][x] // where x 24 = 4 where x 29 = 250 
-//---------------------------------------------------
-// HoleozDN = 1 + (holes[15][29]/100) + (25 × Holes[4][0]/100)
 
-// IF HolesInfo[37][24] < 30:
-//   return holes[15][24] × HolesInfo[37][24] × max(1, HoleozDN)
+function getmonumentROGbonuses(t, i) { // 2,4 ( 24 , 2,9 (29) )
 
-// ELSE (HolesInfo[37][24] >= 30):
-//   return 0.1 × ceil((holes[15][24] / (250 + holes[15][24])) × 10 × HolesInfo[37][24] × max(1, HoleozDN))
+
+  let holeozDN = 1;                                 // default starting value
+  
+  if (9 !== i) {
+    // 1. Apply MonumentROGbonuses
+    holeozDN = 1 + getmonumentROGbonuses(t, 9) / 100;
+
+    // 2. Add CosmoBonusQTY on top of the previous value
+    holeozDN += 25* window.farmingState.holes.hole4[0]  / 100;
+  }
+
+  const index = Math.round(10 * t + i);
+  const holelevel = c.asNumber(window.farmingState.holes.hole15[index]);
+  const infovalue = c.asNumber(window.HolesInfo[37][index]);
+
+  return 30 > infovalue
+    ? holelevel * infovalue *  Math.max(1, holeozDN)
+    : 0.1 * Math.ceil((holelevel / (250 + holelevel)) * 10 * infovalue * Math.max(1, holeozDN)
+      );
+}
+
+
 //==============================================================
 
 //===================Stamp return formula ===

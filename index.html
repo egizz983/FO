@@ -243,8 +243,14 @@
             // 10. Nyanborgir Meal Bonus
             const nyanborgirTotal = (window.getMealBonus(66, state.meals.evoNyanborgirRibbonLevel, state.meals.evoNyanborgir) * Math.ceil((c.asNumber(state.levels.summoning) + 1) / 50)).toMulti();
             
+            // 11. Monument Bonus
+            const monumentTotal = getmonumentROGbonuses(2, 4).toMulti();
+            
+            // 12. Vault Upgrade Bonus
+            const vaultUpgradeTotal = window.getVaultUpgBonus(78, state.miscBonuses.croppiusEvolviusBonus).toMulti();
+            
             // Multiply all with full precision, then format for display
-            const total = landRanksTotal * marketTotal * summonerWinBonusTotal * holeLampBonusTotal * sushiBonusTotal * cardBonusTotal * croppiusMapperTotal * cropChapterBubbleTotal * billJackPepperTotal * nyanborgirTotal;
+            const total = landRanksTotal * marketTotal * summonerWinBonusTotal * holeLampBonusTotal * sushiBonusTotal * cardBonusTotal * croppiusMapperTotal * cropChapterBubbleTotal * billJackPepperTotal * nyanborgirTotal * monumentTotal * vaultUpgradeTotal;
 
             return total.toExponential(4);
         }

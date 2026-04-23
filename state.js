@@ -177,16 +177,22 @@ window.farmingState = {
     // ======================
     // MISC FARMING BONUSES (Ninja, TaskZZ2, Holes, StampLv, Grimoire, Lv0_1, OptLacc, Gaming, Research, LAB, Sailing, GemItemsPurchased, UpgVault)
     // ======================
+    holes:{
+        hole4: {
+            0: 0   // Holes[4][0] monument bonus - Monumental Vibes level → (multiplier calculated later)
+        },
+        hole15:{
+            24: 0,   // Holes[15][24] evoMonumentWisdom - × Farming Crop Evo Chance (multiplicative, scales with waves)
+            29: 0   // Holes[15][29] wisdomBonusLevel - Wisdom Bonus level → (multiplier calculated later)
+        },
+        hole21:{
+            8: 0   // Holes[21][8] evoMajigerLamp - +% Next Crop Chance (additive) points invested
+        }
+    },
     miscBonuses: {
         // meritshop
         ogMeritShop: 0,     // +2% Overgrowth Chance per level (additive) TaskZZ2[5][2] 
 
-
-        // holes
-        evoMonumentWisdom: 0,   // × Farming Crop Evo Chance (multiplicative, scales with waves) Holes[15][24]
-        evoMajigerLamp: 0,   // +% Next Crop Chance (additive) Holes[21][8] points invested
-
-        wisdomBonusLevel: 0,   // Wisdom Bonus level → Holes[15][29] (multiplier calculated later)
         //stamp
         evoCropEvoStamp: 0,   // +% Crop Evolution Chance (additive, scales with stamp level) StampLv[1][47]
         //other
