@@ -48,6 +48,9 @@ window.parseMiscBonusesData = function(data, state = window.farmingState) {
     let spelunk      = parseJsonField("Spelunk");
     let sushi        = parseJsonField("Sushi");
     let rift         = parseJsonField("Rift");
+    let cards0       = parseJsonField("Cards0");
+    let weeklyBoss   = parseJsonField("WeeklyBoss");
+    let Ribbon       = parseJsonField("Ribbon");
 
     
     state.miscBonuses.ogTaffyDisc            = safeGet(ninja, 107, 11) === 1 ? 1.5 : 1.0; // sneaking Taffy Disc OG chance
@@ -75,17 +78,10 @@ window.parseMiscBonusesData = function(data, state = window.farmingState) {
     state.miscBonuses.evoStickers            = safeGet(research, 9, 4); // Farming Stickers count
 
     // Black Diamond Rhinestone (Lab)
-    const lab16 = safeGet(lab, 14, 16);
-    const lab17 = safeGet(lab, 14, 17);
-    if (lab16 === 1 && lab17 === 1) {
-        state.lab.mealBlackDiamondRhinestone = 1.24;
-    } else if (lab16 === 1) {
-        state.lab.mealBlackDiamondRhinestone = 1.16;
-    } else {
-        state.lab.mealBlackDiamondRhinestone = 1.0;
-    }
+    state.miscBonuses.mealBlackDiamondRhinestone = safeGet(lab, 14, 16);
 
     state.miscBonuses.godshardSetBonus       = String(optLacc[379] || "").includes("GODSHARD_SET") ? 15 : 0; //Godshard SetBonus (15% if set equipped, 0% otherwise) -  OptLacc[379]
+    state.miscBonuses.emperorSetBonus        = String(optLacc[379] || "").includes("EMPEROR_SET") ? 20 : 0; //Emperor SetBonus (20% if set equipped, 0% otherwise) -  OptLacc[379]
     state.miscBonuses.evoButton              = safeGet(optLacc, 594); //Evolution Button (raw hold press count)
     state.miscBonuses.vaultMasteryLevel      = safeGet(upgVault, 32); //Vault Mastery (raw level) 1.65× multiplier to vault upgrades
     state.miscBonuses.vaultMastery2Level     = safeGet(upgVault, 61); //Vault Mastery II (raw level) 2.00× multiplier to green highlight vault upgrades
@@ -102,7 +98,8 @@ window.parseMiscBonusesData = function(data, state = window.farmingState) {
     // ======================
     state.meals.evoBillJackPepper = safeGet(meals, 0, 62); // Bill Jack Pepper (+5% Crop Evolution per level, additive)
     state.meals.evoNyanborgir     = safeGet(meals, 0, 66); // Nyanborgir (raw level only — multiplicative scaling based on Summoning Lv )
-
+    state.meals.evoBillJackPepperRibbonLevel = safeGet(state.playerData.Ribbon, 90); // Ribbon level for Bill Jack Pepper  Ribbon[MealIndex+28] 90
+    state.meals.evoNyanborgirRibbonLevel = safeGet(state.playerData.Ribbon, 94); // Ribbon level for Nyanborgir  Ribbon[MealIndex+28] 94
     // ======================
     // SUMMONING RELATED
     // ======================
@@ -122,6 +119,18 @@ window.parseMiscBonusesData = function(data, state = window.farmingState) {
     // RIFT
     // ======================
     state.miscBonuses.riftlevel = safeGet(rift, 0); // Rift level Rift[0]
+    
+    // ======================
+    // CARDS
+    // ======================
+    state.miscBonuses.jellofishcard = safeGet(cards0, "w7b5"); // Jello Fish Card quantity/level Cards0[w7b5]
+    
+    // ======================
+    // DREAM
+    // ======================
+    // Check if WeeklyBoss["d_73"] is unlocked (value = -1)
+    state.miscBonuses.dream_d_73 = safeGet(weeklyBoss, "h", "d_73") === -1 ? 1 : 0; // Dream d_73 unlock flag (1 if unlocked, 0 otherwise)
+    
     state.levels.farming   = safeGet(lv0_0, 16); //Farming level Lv0_0[16]
     state.levels.summoning = safeGet(lv0_0, 18); //Summoning level Lv0_0[18]
 

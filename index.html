@@ -101,6 +101,7 @@
     <footer>
         Legends of IdleOn Farming Optimizer v2.0
     </footer>
+    <script src="GlobalFunctions.js"></script>
     <script src="CustomList.js"></script>
     <script src="models.js"></script>
     <script src="state.js"></script>
@@ -165,15 +166,14 @@
         function calculateEvolutionTotal() {
             const state = window.farmingState;
             
-            // 1. Land Ranks - multiply all Evolution upgrades
+            // 1. Land Ranks Total - multiply all Evolution upgrades
             const landRanksTotal = state.landRank.upgrades
                 .filter(u => u.group === "Evolution")
-                .reduce((prod, u) => prod * u.getBonus(true), 1);
-            
+                .reduce((prod, u) => prod * u.getBonus().toMulti(), 1);
             // 2. Market - Day × Night × Exotic
             const marketDay = state.market.day
                 .filter(u => u.group === "Evolution")
-                .reduce((prod, u) => prod * u.getBonus(), 1);
+                .reduce((prod, u) => prod * u.getBonus().toMulti(), 1);
             
             const marketNight = state.market.night
                 .filter(u => u.group === "Evolution")
@@ -181,28 +181,40 @@
             
             const exoticMultipliers = state.market.exotic
                 .filter(u => u.group === "Evolution" && u.isMultiplier)
-                .reduce((prod, u) => prod * u.getBonus(), 1);
+                .reduce((prod, u) => prod * u.getBonus().toMulti(), 1);
             
-            const exoticAdditives = 1 + state.market.exotic
+            const exoticAdditives = state.market.exotic
                 .filter(u => u.group === "Evolution" && !u.isMultiplier)
-                .reduce((sum, u) => sum + u.getBonus(), 0) / 100;
+                .reduce((sum, u) => sum + u.getBonus(), 0).toMulti();
             
             const marketTotal = marketDay * marketNight * exoticMultipliers * exoticAdditives;
             
             // 3. SummonerWinBonus
-            const summonerWinBonusTotal = window.getWinBonus(10, true);
+            const summonerWinBonusTotal = window.getWinBonus(10, ).toMulti();
             
             // 4. Hole Lamp Bonus
-            const holeLampBonusTotal = window.getLampBonus(true);
+            const holeLampBonusTotal = window.getLampBonus().toMulti();
             
             // 5. Sushi Bonus
-            const sushiBonusTotal = window.getSushiBonus(true);
+            const sushiBonusTotal = window.getSushiBonus().toMulti();
             
-            // 6. Croppius Mapper Bubble (with KLA multiplier)
-            const croppiusMapperTotal = (window.calculateBubbleBonus(state.alchemy.croppiusMapperBubblebonus, 5, 70) * window.calculateKillsLeftToAdvance()) / 100 + 1;
+            // 6. Card Bonus (Jello Fish Card)
+            const cardBonusTotal = getCardBonus(window.farmingState.miscBonuses.jellofishcard).toMulti();
+            
+            // 7. Croppius Mapper Bubble (with KLA multiplier)
+            const croppiusMapperTotal = (window.calculateBubbleBonus(state.alchemy.croppiusMapperBubblebonus, 5, 70) * window.calculateKillsLeftToAdvance()).toMulti();
+            
+            // 8. Crop Chapter Bubble (with Tome Score multiplier)
+            const cropChapterBubbleTotal = (window.calculateBubbleBonus(state.alchemy.cropChapterBubblebonus, 12, 50) * window.calculateTomeScorePer2000()).toMulti();
+            
+            // 9. Bill Jack Pepper Meal Bonus
+            const billJackPepperTotal = window.getMealBonus(62, state.meals.evoBillJackPepperRibbonLevel, state.meals.evoBillJackPepper).toMulti();
+            
+            // 10. Nyanborgir Meal Bonus
+            const nyanborgirTotal = (window.getMealBonus(66, state.meals.evoNyanborgirRibbonLevel, state.meals.evoNyanborgir) * Math.ceil((c.asNumber(state.levels.summoning) + 1) / 50)).toMulti();
             
             // Multiply all with full precision, then format for display
-            const total = landRanksTotal * marketTotal * summonerWinBonusTotal * holeLampBonusTotal * sushiBonusTotal * croppiusMapperTotal;
+            const total = landRanksTotal * marketTotal * summonerWinBonusTotal * holeLampBonusTotal * sushiBonusTotal * cardBonusTotal * croppiusMapperTotal * cropChapterBubbleTotal * billJackPepperTotal * nyanborgirTotal;
 
             return total.toExponential(4);
         }

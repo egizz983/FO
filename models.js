@@ -73,7 +73,7 @@ class LandRankUpgrade {
     }
 
 //Fnctions
-    getBonus(multi = false) {
+    getBonus() {
         const level = this.currentLevel || 0;
         if (level <= 0) return 0;
 
@@ -84,9 +84,7 @@ class LandRankUpgrade {
             bonus = bonus * (window.farmingState.landRank.stats.first || 0) + (window.farmingState.miscBonuses.votingBonus29 || 0);
         }
 
-        if (multi) {
-            return 1 + bonus / 100;
-        }
+
 
         return bonus;
     }
@@ -102,7 +100,7 @@ class ExoticMarketUpgrade {
         Object.assign(this, data);
     }
 
-    getBonus(forceMultiplier = false) {
+    getBonus() {
         const level = this.currentLevel || 0;
         if (level <= 0) return 0;
 
@@ -131,9 +129,7 @@ class ExoticMarketUpgrade {
             bonus *= levelsAboveThreshold;   
         }
 
-        if (forceMultiplier || this.isMultiplier) {
-            bonus = 1 + (bonus / 100);
-        }
+
 
         return bonus;
     }

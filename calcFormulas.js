@@ -45,7 +45,7 @@ function LankRankUpgBonus(t, base, level) { // engine formula
     // Common part used in BOTH branches common = dankranks * exotic bonus 
     const common = 
     calculateDankRanksMultiplier(farmingState.talents?.dankRanks || 0) *
-    (farmingState.market?.exotic?.find(u => u.index === 34)?.getBonus?.(true) ?? 1);
+    (farmingState.market?.exotic?.find(u => u.index === 34)?.getBonus?.().toMulti() ?? 1);
 
 
     // Special case for t = 4, 9, 14, 19
@@ -279,8 +279,8 @@ function calculateCombined(evoGmoLevel, superGmoLevel, cropCount200, cropCount10
 
 
 
-//Summoner win bonus
-window.getWinBonus = function(t, isMulti = false) {
+//Summoner win bonus - returns flat percentage bonus
+window.getWinBonus = function(t) {
     // Make sure the container exists
     if (!window.farmingState) window.farmingState = {};
     if (!window.farmingState.summoning) window.farmingState.summoning = {};
@@ -330,14 +330,14 @@ window.getWinBonus = function(t, isMulti = false) {
     }
 
     // === RETURN LOGIC ===
-    if (t === -1) return isMulti ? 1 : 0;
-    if (SummWinBonus === undefined || SummWinBonus === null) return isMulti ? 1 : 0;
+    if (t === -1) return 0;
+    if (SummWinBonus === undefined || SummWinBonus === null) return 0;
 
     const base = c.asNumber(SummWinBonus[0 | t]);
 
     // Special raw-return cases
     if (t === 20 || t === 22 || t === 24 || t === 31) {
-        return isMulti ? (base / 100 + 1) : base;
+        return base;
     }
 
     // Common multipliers
@@ -356,7 +356,7 @@ window.getWinBonus = function(t, isMulti = false) {
                pristine *
                (1 + gem) *
                (1 + (sailing + merit + ach379 + ach373 + godshard) / 100);
-        return isMulti ? (result / 100 + 1) : result;
+        return result;
     }
 
     if (t >= 20 && t <= 33) {
@@ -364,7 +364,7 @@ window.getWinBonus = function(t, isMulti = false) {
                pristine *
                (1 + gem) *
                (1 + (sailing + merit + ach379 + ach373 + win31 + emperor + godshard) / 100);
-        return isMulti ? (result / 100 + 1) : result;
+        return result;
     }
 
     // Default case (t = 10 and everything else)
@@ -372,10 +372,8 @@ window.getWinBonus = function(t, isMulti = false) {
            pristine *
            (1 + gem) *
            (1 + (sailing + merit + ach379 + ach373 + win31 + emperor + godshard) / 100);
-    
 
-    
-    return isMulti ? (result / 100 + 1) : result;
+    return result;
 }
 
 // Reset cache when new data is loaded
@@ -388,18 +386,18 @@ window.resetWinBonusCache = function() {
 
 
 /**
- * Get Lamp Bonus from Holes Magic Lamp
+ * Get Lamp Bonus from Holes Magic Lamp - returns flat percentage bonus
  * Formula: 20 × Holes[21][8] × (1 + ZenithMarketBonus/100)
  * ZenithMarketBonus = zenitmarketLampLevel (from Spelunk[45][2])
  */
-window.getLampBonus = function(isMulti = false) {
+window.getLampBonus = function() {
     const evoMajigerLamp = window.farmingState?.miscBonuses?.evoMajigerLamp || 0;
     const zenitmarketLampLevel = window.farmingState?.miscBonuses?.zenitmarketLampLevel || 0;
     const zenithMarketBonus = Math.floor(1 * zenitmarketLampLevel);
     
     const result = 20 * evoMajigerLamp * (1 + zenithMarketBonus / 100);
     
-    return isMulti ? result / 100 + 1 : result;
+    return result;
 };
 
 
@@ -407,11 +405,11 @@ window.getLampBonus = function(isMulti = false) {
  * Get Sushi Bonus
  * Returns 100 (or 2x as multiplier) if Sushi[5][35] is unlocked
  */
-window.getSushiBonus = function(isMulti = false) {
+window.getSushiBonus = function() {
     const sushiBonus = window.farmingState?.miscBonuses?.sushiBonus || 0;
     const base = sushiBonus > -1 ? 100 : 0;
     
-    return isMulti ? base / 100 + 1 : base;
+    return base;
 };  
 
 
@@ -512,57 +510,190 @@ window.getVaultUpgBonus = function (t, level) {
 
 //====================Card multi return formula ==========================================
 
+/**
+ * Get Card Bonus based on card quantity and multiplier type
+ * Card w7b5 (Jello Fish) thresholds: 1 (lvl 1), 1500000 (lvl 2), 4500000 (lvl 3), 7500000 (lvl 4), 24000000 (lvl 5), 688500000 (lvl 6), 21967500000 (lvl 7)
+ * Each level grants +50% bonus 
+ * Level 0: 0 cards (no bonus)
+ */
+function getCardBonus(cardQuantity = 0) {
+    const thresholds = [1, 1500000, 4500000, 7500000, 24000000, 688500000, 21967500000];
+    let level = 0;
+    
+    // Determine card level based on quantity
+    for (let i = 0; i < thresholds.length; i++) {
+        if (cardQuantity >= thresholds[i]) {
+            level = i + 1;
+        } else {
+            break;
+        }
+    }
+    
+    // Calculate bonus: +50% per level
+    const bonusPercent = level * 50;
+    
+
+    return bonusPercent; // Flat: return % value
+
+}
 
 
-// Card w7b5 // jello fish multi card requirements for each level 1500000/4500000/7500000/24000000/688500000/21967500000 . each level +50%
-// 1 + (50*Cards0[w7b5]) / 100
+/**
+ * Clean version of p._customBlock_MainframeBonus(e)
+ * Returns the current Mainframe / Lab / Jewel bonus value for the given ID `e`.
+ * - e < 100   → Base Lab Mainframe bonuses (from LabMainBonus list)
+ * - e >= 100  → Jewel-related bonuses (from JewelDesc list)
+
+ */
+function getMainframeBonus(e) {
+  const labMainBonus = window.LabMainBonus;
+
+  // 1. Early safety check for invalid IDs
+  if (e >= labMainBonus.length && e < 100) {
+    return 0;
+  }
 
 
 
+  // 3. DEFAULT CALCULATION (no cache or empty cache) — this is where all the complex logic lives
+
+  if (e < 100) {
+    // ==================== BASE LAB MAINFRAME BONUSES (e < 100) ====================
+
+    const baseValue4 = c.asNumber(labMainBonus[0 | e][4]); // default column used for most IDs
+    const baseValue5 = c.asNumber(labMainBonus[0 | e][5]); // special column used for overridden IDs
+
+    // Special overridden IDs that get extra recursive bonuses added
+    if (e === 9) {
+      return baseValue5 + getMainframeBonus(113);
+    }
+    if (e === 0) {
+      return (
+        baseValue5 +
+        getMainframeBonus(101)
+      ) * 5; // total pets found place holder 5
+    }
+    if (e === 3) {
+      return baseValue5 + getMainframeBonus(107);
+    }
+    if (e === 11) {
+      return baseValue5 + getMainframeBonus(117);
+    }
+    if (e === 13) {
+      return baseValue5;
+    }
+    if (e === 15) {
+      return baseValue5 + getMainframeBonus(118);
+    }
+    if (e === 17) {
+      return baseValue5 + getMainframeBonus(120);
+    }
+    if (e === 8) {
+      // Special case: Spelunker Obol must be unlocked to return a bonus
+      if (!window.farmingState.spelunkerObol) {
+        return 0;
+      }
+      return baseValue5 + getMainframeBonus(119) / 100;
+    }
+
+    // All other base Lab bonuses just return the normal [4] value
+    return baseValue4;
+  } else {
+    // ==================== JEWEL BONUSES (e >= 100) ====================
+
+    // const pixelHelper = a.engine.getGameAttribute("PixelHelperActor")[22]
+    //   .behaviors.getBehavior("ActorEvents_548");
+
+    // const genInfo92 = n.__cast(pixelHelper, eb)._GenINFO[92];
+
+    // const jewelIndex = (e - 100) | 0;
+    // const adjustedUnlockIndex = (e - 100 + labMainBonus.length) | 0;
+
+    // // Is this specific jewel bonus unlocked?
+    // const isUnlocked = 1 === genInfo92[adjustedUnlockIndex];
+
+    // if (!isUnlocked) {
+    //   return 0;
+    // }
+
+    const jewelBase = c.asNumber(window.JewelDesc[jewelIndex][12]);
+
+    // Special doubled jewel cases (only when certain prerequisite Mainframe bonuses are active)
+    if (e === 100) {
+      return (0 < getMainframeBonus(101) && 0 < getMainframeBonus(102))
+        ? 2 * jewelBase * getMainframeBonus(8)
+        : jewelBase * getMainframeBonus(8);
+    }
+    if (e === 103) {
+      return (0 < getMainframeBonus(104) && 0 < getMainframeBonus(105) && 0 < getMainframeBonus(106))
+        ? 2 * jewelBase * getMainframeBonus(8)
+        : jewelBase * getMainframeBonus(8);
+    }
+    if (e === 110) {
+      return (0 < getMainframeBonus(107) && 0 < getMainframeBonus(108) && 0 < getMainframeBonus(109))
+        ? 2 * jewelBase * getMainframeBonus(8)
+        : jewelBase * getMainframeBonus(8);
+    }
+    if (e === 112) {
+      return (
+        0 < getMainframeBonus(111) &&
+        0 < getMainframeBonus(113) &&
+        0 < getMainframeBonus(114) &&
+        0 < getMainframeBonus(115)
+      )
+        ? 2 * jewelBase * getMainframeBonus(8)
+        : jewelBase * getMainframeBonus(8);
+    }
+    if (e === 119) {
+      return jewelBase; // no multiplier for this one
+    }
+
+    // All other jewel bonuses (including your 116)
+    return jewelBase * getMainframeBonus(8);
+  }
+}
 
 
 //================================Meal multi return formula==============================
 
-//Cooking meal bonus multi formula (CookingMealBonusMultioo)
-// return (
-//   (1 + (p._customBlock_MainframeBonus(116) + p._customBlock_Breeding("ShinyBonusS", "Nah", 20, -1)) / 100) *
-//   (1 + m._customBlock_Summoning("WinBonus", 26, 0) / 100) *
-//   (1 + (25 * m._customBlock_Companions(162)) / 100)
-// );
-
-// // Meal bonus calculation formula 
-// this._DN = 
-//   p._customBlock_CookingR("CookingMealBonusMultioo", 0, 0) *
-//   m._customBlock_Summoning("RibbonBonus", 
-//     a.engine.getGameAttribute("Ribbon")[
-//       Math.round(28 + (this._GenINFO[74] + n))
-//     ], 
-//     0
-//   ) *
-//   a.engine.getGameAttribute("Meals")[0][this._DN5] *
-//   a.engine.getGameAttribute("CustomLists").h.MealINFO[this._DN5][2]
+function getMealBonus(index,ribbonLevel,meallevel) {
+    return getCookingMealBonusMultiplier() * getRibbonBonus(ribbonLevel) * meallevel * window.MealINFO[index][2];
+}
 
 
-  //Final Meal Bonus=CookingMealBonusMultioo×RibbonBonus×MealLevel×MealBase
+function getCookingMealBonusMultiplier() {
+  // Part 1: Mainframe bonus (ID 116) + special Shiny Breeding bonus
+  const mainframeAndBreeding = window.farmingState.mealBlackDiamondRhinestone
+    ? (getMainframeBonus(116) + window.farmingState.shinyPets.mealBonus)
+    : window.farmingState.shinyPets.mealBonus;
+
+  // Part 2: Summoning WinBonus (ID 26)
+  const summoningBonus = window.getWinBonus(26);
+
+  // Part 3: Companions bonus (ID 162), scaled by 25
+  const companionsBonus = 25 * window.farmingState.companion.w6b2b_162;
+
+  // Final formula (exactly the same math as the original)
+  return (
+    (1 + mainframeAndBreeding / 100) *
+    (1 + summoningBonus / 100) *
+    (1 + companionsBonus / 100)
+  );
+}
 
 
+function getRibbonBonus(t) {
+  const baseCalc = Math.floor(
+    5 * t + Math.floor(t / 2) * (4 + 6.5 * Math.floor(t / 5))
+  );
 
-  //Ribon bonus formula t = ribbon level
-//   if ("RibbonBonus" == e)
-//   return (
-//     1 +
-//     (Math.floor(
-//       5 * t + Math.floor(t / 2) * (4 + 6.5 * Math.floor(t / 5)),
-//     ) +
-//       (Math.floor(t / 4) * (m._customBlock_GetSetBonus("EMPEROR_SET", "Bonus", 0, 0) / 4) +
-//         Math.floor(t / 10) * m._customBlock_Dreamstuff("CloudBonus", 73))
-//     ) / 100
-//   );
+  const emperorBonus = window.farmingState.miscBonuses.emperorSetBonus / 4; //emperorSetBonus default = 20
+  const setContribution = Math.floor(t / 4) * emperorBonus;
 
-//WeeklyBoss["d_73"] = -1 // check if unlocked for ribon bonus if WeeklyBoss["d_73"] = null or undefined then not unlocked 
+  const cloudContribution = Math.floor(t / 10) * window.farmingState.miscBonuses.dream_d_73; //dream_d_73 is either 1 or 0
 
-//==============================================================
-
+  return 1 + (baseCalc + setContribution + cloudContribution) / 100;
+}
 
 
 

@@ -10,7 +10,7 @@ window.getFarmingBreakdowns = function() {
                 label: "Land Ranks", 
                 value: "×" + farmingState.landRank.upgrades
                     .filter(u => u.group === "Evolution")
-                    .reduce((prod, u) => prod * u.getBonus(true), 1)
+                    .reduce((prod, u) => prod * u.getBonus().toMulti(), 1)
                     .toFixed(2),
                 
                 children: farmingState.landRank.upgrades
@@ -39,9 +39,9 @@ window.getFarmingBreakdowns = function() {
                         .reduce((prod, u) => prod * u.getBonus(), 1) *
 
                     // 4. Exotic additives (Geneology I–V) convert to multiplier
-                    (1 + farmingState.market.exotic
+                    farmingState.market.exotic
                         .filter(u => u.group === "Evolution" && !u.isMultiplier)
-                        .reduce((sum, u) => sum + u.getBonus(), 0) / 100)
+                        .reduce((sum, u) => sum + u.getBonus(), 0).toMulti()
                 ).toExponential(4),   
                 
                 children: [
@@ -76,12 +76,12 @@ window.getFarmingBreakdowns = function() {
                             // Exotic multipliers 
                             farmingState.market.exotic
                                 .filter(u => u.group === "Evolution" && u.isMultiplier)
-                                .reduce((prod, u) => prod * u.getBonus(), 1) *
+                                .reduce((prod, u) => prod * u.getBonus().toMulti(), 1) *
 
                             // Exotic additives convert to multiplier
-                            (1 + farmingState.market.exotic
+                            farmingState.market.exotic
                                 .filter(u => u.group === "Evolution" && !u.isMultiplier)
-                                .reduce((sum, u) => sum + u.getBonus(), 0) / 100)
+                                .reduce((sum, u) => sum + u.getBonus(), 0).toMulti()
                         ).toFixed(3),
                         
                         children: farmingState.market.exotic
@@ -89,7 +89,7 @@ window.getFarmingBreakdowns = function() {
                             .map(u => ({
                                 label: u.name,
                                 value: u.isMultiplier 
-                                    ? "×" + u.getBonus().toFixed(3)
+                                    ? "×" + u.getBonus().toMulti().toFixed(3)
                                     : "+" + u.getBonus().toFixed(2) + "%"
                             }))
                     }
@@ -101,11 +101,11 @@ window.getFarmingBreakdowns = function() {
                 children: [
                     {
                         label: "Crop Chapter Bubble",
-                        value: "×" + ((window.calculateBubbleBonus(farmingState.alchemy.cropChapterBubblebonus, 12, 50) * window.calculateTomeScorePer2000()) / 100 + 1).toFixed(2)
+                        value: "×" + ((window.calculateBubbleBonus(farmingState.alchemy.cropChapterBubblebonus, 12, 50) * window.calculateTomeScorePer2000()).toMulti()).toFixed(2)
                     },
                     {
                         label: "Croppius Mapper Bubble",
-                        value: "×" + ((window.calculateBubbleBonus(farmingState.alchemy.croppiusMapperBubblebonus, 5, 70) * window.calculateKillsLeftToAdvance()) / 100 + 1).toFixed(2)
+                        value: "×" + ((window.calculateBubbleBonus(farmingState.alchemy.croppiusMapperBubblebonus, 5, 70) * window.calculateKillsLeftToAdvance()).toMulti()).toFixed(2)
                     },
                     {
                         label: "Vials(Flavorgil)",
@@ -113,11 +113,34 @@ window.getFarmingBreakdowns = function() {
                     }
                 ]
             },
-            { label: "SummonerWinBonus", value: "×" + window.getWinBonus(10, true).toFixed(2) },
-            { label: "Hole Lamp Bonus", value: "×" + window.getLampBonus(true).toFixed(2) },
-            { label: "Sushi Bonus", value: "×" + window.getSushiBonus(true).toFixed(2) },
-            { label: "Meal", value: "86042.55" },
-            { label: "Final Multiplier", value: "×62.8" }
+            {
+                label: "Meal Bonuses",
+                value: "×[placeholder]",
+                children: [
+                    {
+                        label: "Bill Jack Pepper",
+                        value: "×" + window.getMealBonus(62, farmingState.meals.evoBillJackPepperRibbonLevel, farmingState.meals.evoBillJackPepper).toMulti().toFixed(2)
+                    },
+                    {
+                        label: "Nyanborgir",
+                        value: "×" + (window.getMealBonus(66, farmingState.meals.evoNyanborgirRibbonLevel, farmingState.meals.evoNyanborgir) * Math.ceil((c.asNumber(farmingState.levels.summoning) + 1) / 50)).toMulti().toFixed(2)
+                    }
+                ]
+            },
+            { label: "SummonerWinBonus", value: "×" + window.getWinBonus(10,).toMulti().toFixed(2) },
+            { label: "Hole Lamp Bonus", value: "×" + window.getLampBonus().toMulti().toFixed(2) },
+            { label: "Sushi Bonus", value: "×" + window.getSushiBonus().toMulti().toFixed(2) },
+            { label: "Card Bonus", value: "×" + getCardBonus(window.farmingState.miscBonuses.jellofishcard).toMulti().toFixed(2) },
+            { label: "Vault Upgrade", value: "×1" },
+            { label: "Monument", value: "×1" },
+            { label: "Stamp", value: "×1" },
+            { label: "Grimoire", value: "×1" },
+            { label: "Achievement", value: "×1" },
+            { label: "KillRoy", value: "×1" },
+            { label: "Skill Mastery", value: "×1" },
+            { label: "StarSigns Talent", value: "×1" },
+            { label: "Sticker", value: "×1" },
+            { label: "Button", value: "×1" }
         ],
 
         "Overgrowth": [

@@ -22,7 +22,8 @@ window.farmingState = {
     lab: {
         my1stChemistrySet: 0, // check if active  , doubles vial bonus 
         certifiedStampBook: 0, // check if active doubles stamp bonus
-        mealBlackDiamondRhinestone: 1.0,   // Black Diamond Rhinestone (LAB[14][16] + LAB[14][17]) 
+        spelunkerObol: 0, // check if active 1.5x jewel bonus
+        mealBlackDiamondRhinestone: 0,   // Black Diamond Rhinestone (LAB[14][16] ) 
     },
 
     // ======================
@@ -204,11 +205,17 @@ window.farmingState = {
 
         // Set / Special Bonuses (simple string or flag checks)
         godshardSetBonus: 0,   // 15 (15% bonus) if OptLacc[379] contains "GODSHARD_SET", else 0
+        emperorSetBonus: 0,   // 20 (20% bonus) if OptLacc[379] contains "EMPEROR_SET", else 0
         votingBonus29: 0,   // +% Crop Evolution Chance  "VOTING_BONUS_29"
         zenitmarketLampLevel: 0,   // Spelunk[45][2]
         sushiBonus: 0,   // Sushi[5][35] - Sushi multi bonus
         tometotalpoints: 0,   // Total points 
-        riftlevel: 0   // Rift[0] - Rift level
+        riftlevel: 0,   // Rift[0] - Rift level
+
+        //Cards
+        jellofishcard: 0,   // Cards0[w7b5] - Jello Fish Card quantity/level
+        //dream
+        dream_d_73 : 0,   // WeeklyBoss["d_73"] // check if unlocked for ribon bonus 
     },
 
     // ======================
@@ -243,7 +250,9 @@ window.farmingState = {
     // ======================
     meals: {
         evoBillJackPepper: 0,          // +5% Crop Evolution Chance (additive, no scaling) Meals[0][62]
-        evoNyanborgir: 0              // +9% base (doubles at Summoning Lv 50, triples at 100, etc. — multiplicative scaling) Meals[0][66]
+        evoNyanborgir: 0,              // +9% base (doubles at Summoning Lv 50, triples at 100, etc. — multiplicative scaling) Meals[0][66]
+        evoBillJackPepperRibbonLevel: 0,   // Ribbon level for Bill Jack Pepper meal (max 5) Ribbon[MealIndex+28] 
+        evoNyanborgirRibbonLevel: 0   // Ribbon level for Nyanborgir meal (max 5) Ribbon[MealIndex+28] 
     },
 
     // ======================
@@ -284,6 +293,16 @@ window.farmingState = {
     multi: {
         emperorSummoningWinnerBonus: 1.0, // Calculated in CaclFormulas based on Emperor Bonuses, Arcade , AC vicar 
         vialMultiplier: 1.0 // Calculated in CalcFormulas based on all vial levels and bonuses
+    },
+    companion: {
+        potato_19: 0, // {5%_Ballot_Bonus_Multi_(World_2_feature)
+        w7a8_39: 0, // +50%_Meritocracy_Bonus_Multi_(World_7_feature)
+        Crystal6_41: 0, // {40%_Ballot_Bonus_Multi_(World_2_feature)
+        w7b6b_54: 0, // {1_new_Research_Shape,_shows_up_after_you_get_Research_LV._20
+        w7b11_55: 0, // Multiplies_ALL_Research_Grid_bonuses_by_1.15x_(World_7_feature)
+        rift4_88: 0, // {50%_Prisma_Bubble_bonus_multi_and_{5_Prisma_Bubbles
+        poppy_161: 0, // 2x_bonuses_from_Bonus_Ballot_and_Multi_Meritocracy
+        w6b2b_162: 0, // All_meals_are_5x_cheaper_to_level_up,_and_give_1.25x_higher_bonuses!
     }
 };
 
