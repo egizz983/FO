@@ -47,6 +47,13 @@ window.farmingState = {
         "10000": 0,   // crops with 10000+ → used by Value GMO
         "100000": 0    // crops with 100000+ → used by Super GMO
     },
+    customcropcount:{
+            "200": -1,     // custom input for crops with 200+ → used by Evolution GMO (-1 = not set)
+            "1000": -1,    // custom input for crops with 1000+ → used by Speed GMO (-1 = not set)
+            "2500": -1,    // custom input for crops with 2500+ → EXP GMO (-1 = not set)
+            "10000": -1,   // custom input for crops with 10000+ → used by Value GMO (-1 = not set)
+            "100000": -1    // custom input for crops with 100000+ → used by Super GMO (-1 = not set)
+    },
 
     // ======================
     // LAND RANK SUMMARY STATS

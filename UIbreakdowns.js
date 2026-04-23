@@ -166,7 +166,7 @@ window.getFarmingBreakdowns = function() {
         ],
 
         "Crop Value": [
-            { label: "Uncapped Value",
+            { label: "Uncapped Value this has Random Modifier",
               value: "×" + window.calculateCropsBonusValue(0, 0),//69420
             children: [
                 { 

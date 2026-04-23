@@ -26,7 +26,7 @@
                         <h4>Talent</h4>
                         <div class="input-group">
                             <label for="talent-dank-ranks">Dank Ranks </label>
-                            <input type="number" id="talent-dank-ranks" value="0" min="0">
+                            <input type="number" id="talent-dank-ranks" value="0" min="0" >
                         </div>
                         <div class="input-group">
                             <label for="talent-mass-irrigation">Mass Irrigation </label>
@@ -66,6 +66,36 @@
                         <div class="input-group">
                             <label for="tome-total-points">Tome Score </label>
                             <input type="number" id="tome-total-points" value="0" min="0">
+                        </div>
+                    </div>
+
+                    <!-- Crop Value Section -->
+                    <div class="section crop-value-section">
+                        <h4>Custom Crop Count</h4>
+                        <div class="input-group">
+                            <label for="crop-count-200">200</label>
+                            <input type="number" id="crop-count-200" value="0" min="0" placeholder="0">
+                            <button onclick="setCropCount(200)">SET</button>
+                        </div>
+                        <div class="input-group">
+                            <label for="crop-count-1000">1000</label>
+                            <input type="number" id="crop-count-1000" value="0" min="0" placeholder="0">
+                            <button onclick="setCropCount(1000)">SET</button>
+                        </div>
+                        <div class="input-group">
+                            <label for="crop-count-2500">2500</label>
+                            <input type="number" id="crop-count-2500" value="0" min="0" placeholder="0">
+                            <button onclick="setCropCount(2500)">SET</button>
+                        </div>
+                        <div class="input-group">
+                            <label for="crop-count-10000">10000</label>
+                            <input type="number" id="crop-count-10000" value="0" min="0" placeholder="0">
+                            <button onclick="setCropCount(10000)">SET</button>
+                        </div>
+                        <div class="input-group">
+                            <label for="crop-count-100000">100000</label>
+                            <input type="number" id="crop-count-100000" value="0" min="0" placeholder="0">
+                            <button onclick="setCropCount(100000)">SET</button>
                         </div>
                     </div>
                 </div>
@@ -331,6 +361,25 @@
                 window.farmingState.miscBonuses.tometotalpoints = parseFloat(tomeInput.value) || 0;
             });
         }
+
+        window.setCropCount = function(count) {
+            const inputId = `crop-count-${count}`;
+            const inputElement = document.getElementById(inputId);
+            const value = inputElement.value !== '' ? parseFloat(inputElement.value) : count;
+            
+            window.farmingState.customcropcount[count.toString()] = value;
+            
+            // Reset caches and recalculate everything
+            if (window.resetWinBonusCache) {
+                window.resetWinBonusCache();
+            }
+            
+            // Full page update
+            renderFarmingBonuses();
+            updateFarmingLevelDisplay();
+            
+            alert('✅ Crop Count ' + count + ' set to: ' + value);
+        };
 
         // Initialize
         window.onload = function() {

@@ -173,27 +173,27 @@ class MarketUpgrade {
 
             switch (this.index) {
                 case 11: // Evolution GMO → special exponential formula
-                    cropCount = state.gmoCropCounts["200"] || 0;
+                    cropCount = (state.customcropcount["200"] || 0) !== -1 ? (state.customcropcount["200"] || 0) : (state.gmoCropCounts["200"] || 0);
                     bonus = Math.pow(1 + level * (this.param || 0) / 100, cropCount);
                     break;
 
                 case 12: // Speed GMO
-                    cropCount = state.gmoCropCounts["1000"] || 0;
+                    cropCount = (state.customcropcount["1000"] || 0) !== -1 ? (state.customcropcount["1000"] || 0) : (state.gmoCropCounts["1000"] || 0);
                     bonus = 1 + (level * (this.param || 0) * cropCount) / 100;
                     break;
 
                 case 14: // EXP GMO
-                    cropCount = state.gmoCropCounts["2500"] || 0;
+                    cropCount = (state.customcropcount["2500"] || 0) !== -1 ? (state.customcropcount["2500"] || 0) : (state.gmoCropCounts["2500"] || 0);
                     bonus = 1 + (level * (this.param || 0) * cropCount) / 100;
                     break;
 
                 case 16: // Value GMO
-                    cropCount = state.gmoCropCounts["10000"] || 0;
+                    cropCount = (state.customcropcount["10000"] || 0) !== -1 ? (state.customcropcount["10000"] || 0) : (state.gmoCropCounts["10000"] || 0);
                     bonus = 1 + (level * (this.param || 0) * cropCount) / 100;
                     break;
 
                 case 17: // Super GMO → returns its own multiplier ONLY
-                    cropCount = state.gmoCropCounts["100000"] || 0;
+                    cropCount = (state.customcropcount["100000"] || 0) !== -1 ? (state.customcropcount["100000"] || 0) : (state.gmoCropCounts["100000"] || 0);
                     bonus = 1 + (level * (this.param || 0) * cropCount) / 100;
                     return bonus;   // Super GMO does NOT multiply itself
             }
