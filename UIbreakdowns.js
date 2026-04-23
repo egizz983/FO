@@ -115,7 +115,10 @@ window.getFarmingBreakdowns = function() {
             },
             {
                 label: "Meal Bonuses",
-                value: "×[placeholder]",
+                value: "×" + (
+                    window.getMealBonus(62, farmingState.meals.evoBillJackPepperRibbonLevel, farmingState.meals.evoBillJackPepper).toMulti() *
+                    (window.getMealBonus(66, farmingState.meals.evoNyanborgirRibbonLevel, farmingState.meals.evoNyanborgir) * Math.ceil((c.asNumber(farmingState.levels.summoning) + 1) / 50)).toMulti()
+                ).toFixed(2),
                 children: [
                     {
                         label: "Bill Jack Pepper",
@@ -138,7 +141,8 @@ window.getFarmingBreakdowns = function() {
             { label: "Achievement", value: "×1" },
             { label: "KillRoy", value: "×1" },
             { label: "Skill Mastery", value: "×1" },
-            { label: "StarSigns Talent", value: "×1" },
+            { label: "StarSigns", value: "×1" },
+            { label: "Talent", value: "×1" },
             { label: "Sticker", value: "×1" },
             { label: "Button", value: "×1" }
         ],
