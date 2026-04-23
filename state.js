@@ -251,8 +251,8 @@ window.farmingState = {
     meals: {
         evoBillJackPepper: 0,          // +5% Crop Evolution Chance (additive, no scaling) Meals[0][62]
         evoNyanborgir: 0,              // +9% base (doubles at Summoning Lv 50, triples at 100, etc. — multiplicative scaling) Meals[0][66]
-        evoBillJackPepperRibbonLevel: 0,   // Ribbon level for Bill Jack Pepper meal (max 5) Ribbon[MealIndex+28] 
-        evoNyanborgirRibbonLevel: 0   // Ribbon level for Nyanborgir meal (max 5) Ribbon[MealIndex+28] 
+        evoBillJackPepperRibbonLevel: 0,   // Ribbon level for Bill Jack Pepper meal (max 5) Ribbon[MealIndex+28] 90
+        evoNyanborgirRibbonLevel: 0   // Ribbon level for Nyanborgir meal (max 5) Ribbon[MealIndex+28] 94
     },
 
     // ======================

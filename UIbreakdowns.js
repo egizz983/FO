@@ -166,8 +166,7 @@ window.getFarmingBreakdowns = function() {
         ],
 
         "Crop Value": [
-            { label: "Base Value", value: "100%" },
-            { label: "Final Multiplier", value: "×185%" }
+            { label: "Uncapped Value", value: "×" + window.calculateCropsBonusValue(0, 69420) }
         ],
 
         "Growth Speed": [

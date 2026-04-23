@@ -58,7 +58,34 @@ function LankRankUpgBonus(t, base, level) { // engine formula
 }
 
 
+function getLandRankUpgBonusTOTAL(t) {
 
+    const bonus = (id) => window.farmingState.landRank.upgrades[id]?.getBonus() || 0;
+
+    switch (t) {
+        case 0:
+            return (
+                (1 + bonus(3) / 100) *
+                (1 + bonus(10) / 100) *
+                (1 + bonus(15) / 100)
+            );
+
+        case 1:
+            return bonus(8) + bonus(17);
+
+        case 2:
+            return bonus(6) + bonus(13);
+
+        case 3:
+            return bonus(7) + bonus(11) + bonus(18);
+
+        case 4:
+            return bonus(5) + bonus(12) + bonus(16);
+
+        default:
+            return 1;
+    }
+}
 
 
 
@@ -959,3 +986,87 @@ function getButtonBonuses(t, totalButtonUpgrades) {
 
 
               
+
+//===================Crop Value 
+
+function getCropValueCap() {
+    
+    const exotic23 = farmingState.market.exotic.find(u => u.index === 23+20)?.getBonus() || 0;
+    const exotic24 = farmingState.market.exotic.find(u => u.index === 24+20)?.getBonus() || 0;
+    const exotic25 = farmingState.market.exotic.find(u => u.index === 25+20)?.getBonus() || 0;
+
+
+    const hardCap = 10000 * (1 + (exotic23 + exotic24 + exotic25) / 100);
+
+
+    return hardCap;
+}
+
+
+            /**
+ * Calculates the final Crop Value Multiplier (the "crop value multi cap")
+ * This is the exact logic from m._customBlock_FarmingStuffs("CropsBonusValue", t, i)
+ *
+ * @param {number} plotIndex - Plot index (t in original code)
+ * @param {number} mode      - Special flag: 69420 = deterministic (tooltip/max), anything else = normal harvest roll with RNG
+ * @returns {number} Final capped crop value multiplier
+ */
+
+function calculateCropsBonusValue(plotIndex, mode) {
+
+
+    // ──────────────────────────────────────────────────────────────
+    // 2. COMMON FACTORS (used in both deterministic and random paths)
+    // ──────────────────────────────────────────────────────────────
+    const landRankBonusTotal = getLandRankUpgBonusTOTAL(1); // 8+17 landrank bonus flat
+    const basket99_6         = window.farmingState.market.night?.find(u => u.index === 16)?.getBonus() || 1; // value gmo
+    const lankRankBonus      = window.farmingState.landRank.upgrades[1]?.getBonus() || 0;
+    const currentFarmRank    = window.farmingState.landRank.stats.first || 0; // should be plot index but we use first plot rank
+    const votingBonus        = window.farmingState.miscBonuses.votingBonus29 || 0;
+    const rankMultiplier = 1 + (lankRankBonus * currentFarmRank + votingBonus) / 100;
+    const landFactor = 1 + landRankBonusTotal / 100;
+    const basketFactor = Math.max(1, basket99_6);
+
+
+    // ──────────────────────────────────────────────────────────────
+    // CALCULATE UNCAPPED VALUE
+    // ──────────────────────────────────────────────────────────────
+    let uncapped;
+
+    if (mode === 69420) {
+        
+
+        uncapped = Math.round(
+            landFactor *
+            basketFactor *
+            rankMultiplier
+        );
+        
+    } else {
+        
+
+        const basket05     = window.farmingState.market.day?.find(u => u.index === 5)?.getBonus() || 0; // product doubler bonus 
+        const exotic28     = window.farmingState.market.exotic?.find(u => u.index === 28+20)?.getBonus() || 0; //exotic 28 bonus
+        const exotic29     = window.farmingState.market.exotic?.find(u => u.index === 29+20)?.getBonus() || 0; //exotic 29 bonus
+
+        
+        const randomRoll = c.randomFloat(); // 0 ≤ randomRoll < 1
+    
+        const baseRoll = 1 + (basket05 + exotic28 + exotic29) / 100;
+        const rolledValue = Math.floor(baseRoll + randomRoll);
+        
+        uncapped = Math.round(
+            Math.max(1, rolledValue) *
+            landFactor *
+            basketFactor *
+            rankMultiplier
+        );
+       
+    }
+
+    const hardCap = getCropValueCap();
+   
+
+
+    return uncapped;
+}
