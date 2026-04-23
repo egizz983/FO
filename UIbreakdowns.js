@@ -167,7 +167,7 @@ window.getFarmingBreakdowns = function() {
 
         "Crop Value": [
             { label: "Uncapped Value",
-              value: "×" + window.calculateCropsBonusValue(0, 69420),//69420
+              value: "×" + window.calculateCropsBonusValue(0, 0),//69420
             children: [
                 { 
                     label: "Land Ranks", 
@@ -223,6 +223,10 @@ window.getFarmingBreakdowns = function() {
                 }
             ]
             }, 
+            {
+                label: "Uncapped Value - 2x chance",
+                value: "×" + window.calculateCropsBonusValue(0, 69420),//69420
+            },
             { 
                 label: "Max Cap Sources", 
                 value: "+" + (
