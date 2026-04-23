@@ -212,11 +212,11 @@ window.getFarmingBreakdowns = function() {
                             value: "x" + (farmingState.market.night.find(u => u.index === 16)?.getBonus() || 0).toFixed(2)
                         },
                         {
-                            label: "Geneology V",
+                            label: "Double Petal I",
                             value: "+" + (farmingState.market.exotic.find(u => u.index === 28+20)?.getBonus() || 0).toFixed(2) + "%"
                         },
                         {
-                            label: "Stableroot I",
+                            label: "Double Petal II",
                             value: "+" + (farmingState.market.exotic.find(u => u.index === 29+20)?.getBonus() || 0).toFixed(2) + "%"
                         }
                     ]
