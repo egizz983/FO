@@ -2,7 +2,8 @@
 
 // Utility objects for game engine compatibility
 const c = {
-    asNumber: (val) => val == null ? 0 : Number(val)
+    asNumber: (val) => val == null ? 0 : Number(val),
+    randomFloat: () => Math.random()
 };
 
 /**
@@ -1045,7 +1046,7 @@ function calculateCropsBonusValue(plotIndex, mode) {
     } else {
         
 
-        const basket05     = window.farmingState.market.day?.find(u => u.index === 5)?.getBonus() || 0; // product doubler bonus 
+        const basket05     = window.farmingState.market.day?.find(u => u.index === 5+2)?.getBonus() || 0; // product doubler bonus 
         const exotic28     = window.farmingState.market.exotic?.find(u => u.index === 28+20)?.getBonus() || 0; //exotic 28 bonus
         const exotic29     = window.farmingState.market.exotic?.find(u => u.index === 29+20)?.getBonus() || 0; //exotic 29 bonus
 
@@ -1063,10 +1064,6 @@ function calculateCropsBonusValue(plotIndex, mode) {
         );
        
     }
-
-    const hardCap = getCropValueCap();
-   
-
 
     return uncapped;
 }

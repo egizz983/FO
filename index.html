@@ -226,7 +226,7 @@
             const evolutionTotal = calculateEvolutionTotal();
             
             // Calculate Crop Value Cap dynamically
-            const cropValueCap = window.getCropValueCap();
+            const cropValueCap = window.getCropValueCap().toFixed(0);
             
             const bonusesWithCalculated = farmingBonuses.map(bonus => 
                 bonus.name === "Evolution" 

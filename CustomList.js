@@ -635,8 +635,6 @@ window.JewelDesc = [
   "2042 410 100 +}%_extra_Arcane_Cultist_Tachyons._@_This_bonus_always_has_a_100px_connection_range_no_matter_what! Boosts_entire_Lab SpiB2b 1000 Meal58 10000000 Spice21 10000 Eternal_Energy_Jewel 50".split(" "),
 ];
 
-
-
 window.LabMainBonus = [
   "0 91 353 90 0 1 Animal_Farm +1%_Total_Damage_for_every_different_species_you_have_bred_within_Mob_Breeding._You_just_need_to_breed_the_Mob_type_one_time_for_it_to_count!_@_-_@_Total_Bonus:_{%".split(" "),
   "1 250 310 90 1 2 Wired_In All_Uploaded_Players_print_2x_more_resources_from_their_section_of_the_3D_Printer._The_displayed_amount_will_NOT_appear_doubled,_just_to_avoid_confusion_as_to_what_your_actual_base_Sampling_Rate_is,_but_it_will_be_displayed_in_blue.".split(" "),
@@ -652,4 +650,24 @@ window.LabMainBonus = [
   "11 1300 380 90 0 2 Unadulterated_Banking_Fury +2%_Total_Damage_for_each_'green_stack'_of_resources_in_your_bank._A_'green_stack'_is_a_stack_in_your_Storage_Chest_with_10_million_or_more_items,_since_the_number_turns_Green_after_10M!_@_-_@_Total_Bonus:_{%".split(" "),
   "12 400 390 90 0 1 Sigils_of_Olden_Alchemy Allows_you_to_level_up_Alchemy_Sigils_by_assigning_players_in_alchemy,_at_a_base_rate_of_1_sigil_xp_per_hour._@_Sigils_can_be_leveled_up_just_twice:_Once_to_unlock_their_bonus,_and_once_more_to_boost_their_bonus._Their_bonuses_are_passive,_and_apply_to_all_characters_always.".split(" "),
   "13 1430 265 90 0 50 Viral_Connection All_mainframe_bonuses_and_jewels_have_a_50%_larger_connection_range,_unless_it_states_otherwise._@_This_bonus_always_has_a_80px_connection_range_no_matter_what!".split(" "),
+];
+
+
+window.MarketInfo = [
+  "LAND_PLOTS You_get_{_extra_plots_of_land_to_plant_crops_in 0 2 2 2 0 20 1".split(" "),
+  "STRONGER_VINES +{%_chance_for_+1_crop_when_fully_grown 1 0.18 2 1.13 3 500 2".split(" "),
+  "NUTRITIOUS_SOIL +{%_growth_speed_for_all_land 7 0.15 3 1.12 8 500 1".split(" "),
+  "SMARTER_SEEDS +{%_farming_EXP_gain_from_all_sources 21 0.14 6 1.1 14 500 3".split(" "),
+  "BIOLOGY_BOOST +{%_chance_of_crop_evolution,_or_'next_crop'_chance 46 0.09 10 1.1 31 500 15".split(" "),
+  "PRODUCT_DOUBLER +{%_chance_for_crops_to_be_worth_2x_when_collected 30 0.12 15 1.2 42 500 3".split(" "),
+  "MORE_BEENZ +{%_magic_beans_gained_when_trading_in_crops 61 0.11 25 1.15 53 500 2".split(" "),
+  "RANK_BOOST Plots_earn_+{%_more_Rank_XP_when_a_crop_is_collected 84 0.11 30 1.2 80 500 3".split(" "),
+  "OVERGROWTH Unlocks_Overgrowth_(OG)._Each_OG_doubles_crop_value_~_EXP 2 0.10 10 1.1 19 1 1".split(" "),
+  "EVOLUTION_GMO }x_crop_evolution_chance_per_crop_you_have_200_of 2 0.10 15 1.080 25 500 0.8".split(" "),
+  "SPEED_GMO +{%_growth_speed_per_crop_you_have_1000_of 2 0.10 25 1.155 36 500 0.3".split(" "),
+  "OG_FERTILIZER }x_higher_chance_for_Overgrowth_to_occur 2 0.10 40 1.060 48 500 1".split(" "),
+  "EXP_GMO +{%_farming_EXP_gain_crop_you_have_2500_of 2 0.10 60 1.095 57 100 1".split(" "),
+  "LAND_RANK Each_plot_now_gets_Rank_XP_when_a_crop_is_collected. 2 0.10 80 1.050 61 1 1".split(" "),
+  "VALUE_GMO +{%_crop_value_per_per_crop_you_have_10000_of 2 0.10 150 1.125 95 500 0.02".split(" "),
+  "SUPER_GMO +{%_all_'GMO'_bonuses_per_crop_you_have_100K 2 0.10 250 1.20 109 50 0.5".split(" "),
 ];

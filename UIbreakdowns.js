@@ -161,22 +161,100 @@ window.getFarmingBreakdowns = function() {
                         value: "+" + u.getBonus(calculateDankRanksMultiplier(farmingState.talents.dankRanks), farmingState.market.exotic.find(u => u.name === "Plump Database").getBonus()).toFixed(2) + "%"
                     }))
             },
-            { label: "Base Value", value: "100%" },
-            { label: "Final Multiplier", value: "×420%" }
+            { label: "Land Ranks", value: "PLACEHOLDER%" },
+            { label: "Market", value: "×PLACEHOLDER%" }
         ],
 
         "Crop Value": [
-            { label: "Uncapped Value", value: "×" + window.calculateCropsBonusValue(0, 69420) }
+            { label: "Uncapped Value",
+              value: "×" + window.calculateCropsBonusValue(0, 69420),//69420
+            children: [
+                { 
+                    label: "Land Ranks", 
+                    value: "×" + Math.round(
+                        getLandRankUpgBonusTOTAL(1).toMulti() *
+                        (1 + (farmingState.landRank.upgrades[1].getBonus() * farmingState.landRank.stats.first + window.farmingState.miscBonuses.votingBonus29) / 100)
+                    ).toFixed(2),
+                    children: [
+                        {
+                            label: "Production Boost",
+                            value: "×" + (farmingState.landRank.upgrades[1].getBonus() * farmingState.landRank.stats.first + window.farmingState.miscBonuses.votingBonus29).toMulti().toFixed(2)
+                        },
+                        {
+                            label: "Production Megaboost",
+                            value: "×" + farmingState.landRank.upgrades[8].getBonus().toMulti().toFixed(2)
+                        },
+                        {
+                            label: "Production Superboost",
+                            value: "×" + farmingState.landRank.upgrades[17].getBonus().toMulti().toFixed(2)
+                        }
+                    ]
+                },
+                {
+                    label: "Market",
+                    value: (function() {
+                        const basket05 = window.farmingState.market.day?.find(u => u.index === 5+2)?.getBonus() || 0;
+                        const exotic28 = window.farmingState.market.exotic?.find(u => u.index === 28+20)?.getBonus() || 0;
+                        const exotic29 = window.farmingState.market.exotic?.find(u => u.index === 29+20)?.getBonus() || 0;
+                        const basketFactor = window.farmingState.market.night?.find(u => u.index === 16)?.getBonus() || 1;
+                        const randomRoll = c.randomFloat();
+                        const baseRoll = 1 + (basket05 + exotic28 + exotic29) / 100;
+                        const rolledValue = Math.floor(baseRoll + randomRoll);
+                        return "×" + Math.round(Math.max(1, rolledValue) * basketFactor).toFixed(2);
+                    })(),
+                    children: [
+                        {
+                            label: "Product Doubler",
+                            value: "+" + (farmingState.market.day.find(u => u.index === 5+2)?.getBonus() || 0).toFixed(2) + "%"
+                        },
+                        {
+                            label: "Value GMO",
+                            value: "x" + (farmingState.market.night.find(u => u.index === 16)?.getBonus() || 0).toFixed(2)
+                        },
+                        {
+                            label: "Geneology V",
+                            value: "+" + (farmingState.market.exotic.find(u => u.index === 28+20)?.getBonus() || 0).toFixed(2) + "%"
+                        },
+                        {
+                            label: "Stableroot I",
+                            value: "+" + (farmingState.market.exotic.find(u => u.index === 29+20)?.getBonus() || 0).toFixed(2) + "%"
+                        }
+                    ]
+                }
+            ]
+            }, 
+            { 
+                label: "Max Cap Sources", 
+                value: "+" + (
+                    (farmingState.market.exotic.find(u => u.index === 43)?.getBonus() || 0) +
+                    (farmingState.market.exotic.find(u => u.index === 44)?.getBonus() || 0) +
+                    (farmingState.market.exotic.find(u => u.index === 45)?.getBonus() || 0)
+                ).toFixed(2) + "%",
+                children: [
+                    {
+                        label: "Stalk Value I",
+                        value: "+" + (farmingState.market.exotic.find(u => u.index === 43)?.getBonus() || 0).toFixed(2) + "%"
+                    },
+                    {
+                        label: "Stalk Value II",
+                        value: "+" + (farmingState.market.exotic.find(u => u.index === 44)?.getBonus() || 0).toFixed(2) + "%"
+                    },
+                    {
+                        label: "Stalk Value III",
+                        value: "+" + (farmingState.market.exotic.find(u => u.index === 45)?.getBonus() || 0).toFixed(2) + "%"
+                    }
+                ]
+            } 
         ],
 
         "Growth Speed": [
-            { label: "Base Value", value: "100%" },
-            { label: "Final Multiplier", value: "×420%" }
+            { label: "Market", value: "PLACEHOLDER%" },
+            { label: "SummoningBonus", value: "PLACEHOLDER%" }
         ],
 
         "Soil EXP": [
-            { label: "Base Value", value: "100%" },
-            { label: "Final Multiplier", value: "×280%" }
+            { label: "Land Ranks", value: "PLACEHOLDER%" },
+            { label: "Market", value: "PLACEHOLDER%" }
         ]
     };
 };
