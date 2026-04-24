@@ -833,3 +833,810 @@ window.HolesInfo = [
                   " ",
                 ),
 ];
+
+
+window.Research =  [
+                "16,0;32,29;16,59;0,30 29,0;45,5;55,16;58,28;54,44;47,52;31,58;15,54;4,44;0,30;3,16;14,4 1,1;31,1;31,31;1,31 17,0;58,0;75,33;58,67;17,67;0,34 0,0;111,0;111,80;0,80 42,0;53,26;83,29;63,50;71,80;42,67;12,80;20,50;0,29;30,26 110,0;141,63;0,58 62,0;92,8;103,21;67,18;46,30;35,52;37,82;48,99;71,109;102,105;100,113;86,122;65,127;40,123;20,110;5,90;0,70;2,45;15,22;36,6 20,0;31,3;35,7;39,3;50,0;63,5;70,19;64,34;35,63;4,32;0,18;7,5 14,0;33,10;40,0;47,11;55,11;62,0;69,10;88,0;102,25;99,30;102,34;89,60;57,45;51,54;45,45;13,60;0,34;3,30;0,25".split(
+                  " ",
+                ),
+                "33,60 59,59 33,33 76,68 111,83 84,82 142,64 104,128 71,64 103,61".split(
+                  " ",
+                ),
+                "-140,2,-10,20,34 60,-129,13,125,69 239,-127,3,244,29 -126,86,5,46,158 -127,114,-2,181,180 289,-131,-5,362,50 265,-135,10,294,142 -130,190,-3,22,267 396,-128,8,473,24 438,-128,2,435,144 -128,230,3,136,271 -130,240,-3,273,267 272,-132,4,382,244 426,-138,-11,496,260".split(
+                  " ",
+                ),
+                "Purple_Diamond Blue_Circle Green_Microsquare Cyan_Hexagon Golden_Rectangle Orange_Star Maroon_Triangle White_Moon Pink_Heart Bat_Symbol".split(
+                  " ",
+                ),
+                "Multiplies_highlighted_bonuses_by_}x Multiplies_highlighted_bonuses_by_}x Multiplies_highlighted_bonuses_by_}x +{%_Research_EXP_per_highlighted_bonus Multiplies_highlighted_bonuses_by_}x Multiplies_highlighted_bonuses_by_}x +{%_Research_EXP_per_highlighted_bonus Multiplies_highlighted_bonuses_by_}x Multiplies_highlighted_bonuses_by_}x Multiplies_highlighted_bonuses_by_}x".split(
+                  " ",
+                ),
+                "25 15 50 20 20 35 25 30 35 60".split(" "),
+                "Adds_a_new_Magnifier_for_you_to_use!_Drag_it_around_just_like_you_do_with_your_other_magnifier! Adds_a_new_shape_to_your_Research_Grid,_which_boosts_the_bonuses_of_all_squares_it_touches! Adds_another_shape_to_your_Research_Grid!_Keep_in_mind,_each_grid_upgrade_can_only_be_boosted_by_one_shape_at_a_time._No_point_in_overlapping_shapes! You_can_now_place_TWO_magnifiers_on_the_same_Observation! Adds_another_shape_to_your_Research_Grid! You_now_get_an_additional_Grid_Point_every_10_Research_Levels! You_can_now_place_THREE_magnifiers_on_the_same_Observation! Adds_another_shape_to_your_Research_Grid! You_can_now_rotate_your_shapes!_You'll_find_the_rotation_buttons_after_selecting_a_shape. Adds_yet_another_Magnifier_to_your_Clipboard!_Those_Observations_wont_observe_themselves! Adds_another_shape_to_your_Research_Grid! You_can_now_place_TWENTY_magnif...._wait,_wait_no,_I_meant_four..._FOUR_magnifiers_on_the_same_Observation! Adds_an_additional_Magnifier_to_your_Clipboard! +1_Magnifier!_Bro_why_you_even_clicking_on_this_one,_you_absolutely_knew_what_this_did_from_the_picture...".split(
+                  " ",
+                ),
+                ["Magnifying_Glass", "Optical_Monocle", "Kaleidoscope"],
+                [
+                  "When_placed_on_an_observation,_this_lens_will_give_you_Research_EXP!",
+                  "When_placed_on_an_observation,_this_lens_will_give_insight_for_that_observation,_which_levels_it_up_over_time!",
+                  "When_placed_on_an_observation,_all_adjacent_lenses_will_be_{%_more_powerful!",
+                ],
+                "3,3 4,3 5,3 4,4 6,3 5,4 6,4 7,4 6,5 7,5 8,5 9,5 10,5 9,6 10,6 11,6 12,6".split(
+                  " ",
+                ),
+                "20 3 19 16 21 17 1 12 14 26 8 2 13 9 28 5 15 10 7 24 0 6 18 4 22 11 23 25 27 29 30 31".split(
+                  " ",
+                ),
+                "Brainhead Basshead Goldhead Gemhead Baldhead Screamhead Brainhead Blindhead Clownhead Ironhead Grosshead Stouthead Kelphead Maizehead Snouthead Ballhead Sashimihead Saturnhead Leopahead Yarnhead Bronzehead Bleckhead Royalhead Chillhead Detahead Summerhead Threadhead Tentahead Purrhead Humungohead Mr_Minehead Boghead".split(
+                  " ",
+                ),
+                "00000001111111111111222222222343".split(""),
+                ["200", "170", "100", "65", "52"],
+                ["3,-3", "-6,-8", "-21,-26", "-54,-51", "-65,-67"],
+                "first second third fourth fifth sixth seventh eighth ninth tenth eleventh twelfth thirteenth fourteenth fifteenth sixteenth seventeenth eighteenth nineteenth twentieth twenty_first twenty_second twenty_third twenty_fourth twenty_fifth twenty_sixth twenty_seventh twenty_eighth twenty_ninth thirtieth final permanent".split(
+                  " ",
+                ),
+                "the_honorable the_honorable the_honorable the_honorable the_honorable the_honorable the_honorable the_honorable the_honorable the_honorable the_honorable the_honorable the_honorable the_honorable the_honorable the_honorable the_honorable the_honorable the_honorable the_honorable the_honorable the_honorable the_honorable the_honorable the_honorable the_honorable the_honorable the_honorable the_honorable the_honorable the_big_man_himself the_never_ending".split(
+                  " ",
+                ),
+                "00251679111144743316082188653619".split(""),
+                "255,236,223;228,176,146;96,64,52 231,245,255;162,178,189;70,77,84 255,248,215;255,215,99;121,72,25 255,232,209;255,166,87;119,46,0 237,255,181;174,226,113;41,88,32 247,208,255;185,128,243;71,36,133 255,196,183;255,117,117;149,28,25 255,220,251;236,146,208;129,49,119 255,241,236;200,176,162;101,78,73 196,255,228;127,193,173;53,99,90".split(
+                  " ",
+                ),
+                "}x_Total_Damage_and_}x_Drop_Rate!_@_(NOTE:All_Bonuses_earned_from_beating_Opponents_affect_the_rest_of_the_game) +{%_AFK_gains_for_Research!_This_affects_offline_Research,_you_get_100%_gains_if_you're_online!_Current_Research_AFK_rate:_$%. +{_new_Research_Magnifier_to_study_your_Observations! Increases_the_Max_LV_of_'Blooming_Axe'_upgrade_in_Breeding_by_+{_LVs +{%_Damage_per_Weapon_POW._Based_on_your_current_weapon,_you're_getting_$x_Damage All_of_Bubba_the_Seal's_upgrades_are_}x_cheaper_than_normal Multiplies_Minehead_Currency_gain_by_}x Unlock_another_Atom_for_your_Atom_Collider,_which_boosts_minehead_currency_gain_when_upgraded +{_more_weekly_Exotic_Market_purchases_for_Farming,_and_first_few_purchases_cost_no_crops +{_Max_LVs_for_blessing_upgrades,_for_all_Divinities +{%_extra_AFK_gains_for_research }x_multiplier_to_Bucks_gained_in_the_Sushi_Station +{_new_Magnifier,_with_which_you_can_more_carefully_observe_your_Observations! +{_LVs_for_your_Grind_Time_bubble_every_day +{%_grand_discovery_chance_per_Spelunking_LV +{_daily_bubble_LVs_from_Kattlekruk_divinity The_trapping_bonus_from_your_Magnesium_Atom_keeps_increasing_for_+{_extra_days }x_higher_chance_to_grow_Chemical_Plants_in_Gaming +{_more_Trimmed_Construction_Slot,_which_build_things_$x_faster }x_extra_Monument_AFK_Hours_gained_from_all_sources_for_all_monuments +{_new_Magnifier,_further_expanding_your_capacity_to_scrutinize_and_systematically_examine_your_Observations +{%_Hat_Rack_bonus_multi }x_daily_amber_gains_from_your_Biggest_Hauls_in_Spelunking Nothing..._yet... Nothing..._yet... Nothing..._yet... Nothing..._yet... Nothing..._yet... Nothing..._yet... Nothing..._yet... Nothing..._yet... Nothing..._yet...".split(
+                  " ",
+                ),
+                "10 2 1 40 1 100 50 1 2 80 3 25 1 30 2 10 20 5 1 25 1 2 50 23 24 25 26 27 28 29 30 31".split(
+                  " ",
+                ),
+                ["38,0", "28,-2", "15,-20", "-18,-36", "-31,-49"],
+                "188,146,119;159,121,98;117,87,71;81,58,49 141,169,178;119,141,149;98,119,129;68,84,92 255,219,85;211,161,47;180,118,40;121,76,29 255,169,104;228,130,79;180,93,62;128,60,43 141,173,88;108,136,63;80,108,49;51,71,34 217,148,232;170,107,186;137,75,148;87,51,100 251,138,123;213,97,94;171,67,71;111,40,48 240,144,225;200,113,183;166,83,134;104,57,95 213,195,189;170,153,150;132,116,114;84,72,72 161,199,179;127,165,149;99,129,116;62,78,74".split(
+                  " ",
+                ),
+                "Mega_Mongo_Sticker Laissez_Maize_Sticker Chocotastic_Muffin_Sticker UWU_Kawaii_Rice_Sticker Sporrious_Stalk_Sticker Glassical_Bananical_Sticker Threepeat_Champ_Sticker Nonexistent_Sticker Nonexistent_Sticker Nonexistent_Sticker Nonexistent_Sticker Nonexistent_Sticker".split(
+                  " ",
+                ),
+                "Multiplies_Class_EXP_gain_for_all_of_your_players_by_a_staggering_}x Boosts_your_Research_EXP_gain_rate_by_approximately_+{% Increases_Artifact_Find_Chance_by_a_measly,_almost_imperceivable_+{% Multiplies_your_Bits_Gained_in_Gaming_by_a_whopping_}x Boost_Crop_Evolution_chance_by_what_some_consider_a_lot,_that_being_}x Multiplies_Megacrop_growth_chance,_AKA_your_Sticker_Find_chance,_by_}x Multiplies_Spelunking_POW_by_}x_in_an_effort_to_help_you_defeat_Lore_bosses! Exclusive_access_to_secret_areas_that_only_cool_people_are_in Unlimited_Tradeable_pets Infinite_Gems 200%_Character_Size Complete_ownership_of_all_players'_storage_chests".split(
+                  " ",
+                ),
+                "10 5 15 250 40 30 60 1 1 1 1 1".split(" "),
+                "2 3 13 21 32 43 45 50 54 56 57 58 61 63 65 68 71 75 81 85 87 89".split(
+                  " ",
+                ),
+                "Coral3 Pearl6 Refinery3 Refinery4 w7B1b Critter7A Refinery5 Coral4 Refinery6 Critter9A Timecandy5 Refinery7 Refinery8 Soul8 Quest110 w7B11b Critter10A Ladle Critter11 Spelunking4 SilverPen Refinery9".split(
+                  " ",
+                ),
+                "1.06 1.005 1.20 1.10 1.40 1.06 1.10 1.06 1.10 1.05 1.01 1.10 1.30 1.35 1.35 1.25 1.07 1.25 1.20 1.25 1.5 1.5".split(
+                  " ",
+                ),
+                "1101001111010111111110".split(""),
+                "Fish_Eggs Eggroll Egg_Maki Sashimi Tuna_Maki Salmon_Uramaki Salmon_Maki Cucumber_Uramaki Cucumber_Maki Onigiri Toro_Slice Toro_Nigiri Beef_Nigiri Beef_Tobo_Nigiri Tobiko_Maki Tobiko_Temaki Tobiko_Cluster Tobo_Sardine Tobo_Twins Live_Squid Live_Octopus Calamari_Ring Bluefin_Ring Tobo_Tamago Tako_Sashimi Hamachi_Sashimi Fat_Tuna_Sashimi King_Beef_Sashimi Salmon_Sashimi Salmon_Nigiri Fried_Bass_Nigiri Seasoned_Bass_Nigiri Jumbo_Shrimp Aged_Shrimp_Nigiri Tempura_Shrimp Ika_Sashimi Abalone_Sashimi Aji_Sashimi Aji_Aji_Sashimi Bubba_Grand_Salmon Tobiko_Roll Spicy_Tuna_Roll Salmon_Uramajor Sesame_Salmon_Muramajor Dragon_Roll Imaginei_Dragonroll Dragon_Nigiri Tamago_Nigiri Unagi_Nigiri Soylent_Nigiri Masago Masago_Temaki Masagoroll Caviar_Supreme Dulce_Vitiri Wasabaisamarama Kraken_Roll Leviathan_Roll Golthulu_Roll".split(
+                  " ",
+                ),
+                ["lol"],
+                "41 8 44 1 30 9 0 6 2 43 17 31 14 42 13 23 35 10 3 20 32 7 18 16 27 29 11 36 21 4 37 24 19 15 12 22 33 28 26 5 25 40 38 34 39".split(
+                  " ",
+                ),
+                "0 1 2 0 2 3 1 0 2 4 3 0 1 5 2 4 3 0 6 3 2 5 1 4 0 6 2 7 3 5 1 6 0 4 8 2 7 5 6 3 1 8 4 9 2 7 5 8 3 10 6 9 8 10".split(
+                  " ",
+                ),
+                "+{%_more_Bucks_generated +{%_bonus_Knowledge_XP +^%_chance_for_+1_Tier_for_cooked_sushi }x_higher_Fuel_Capacity +{%_faster_Fuel_generation +^%_chance_for_free_shaker_usage +{%_cheaper_upgrades }x_faster_Fuel_generation +^%_bigger_effects_from_Slots +^%_bigger_effects_from_Fireplaces }x_higher_chance_to_Perfecto_all_sushi".split(
+                  " ",
+                ),
+                "20 2 0.1 10 3 .05 1 2 .2 .2 100".split(" "),
+                "}x_multiplier_to_Research_EXP_gain All_Minehead_upgrades_are_{%_cheaper +{_daily_rolls_for_getting_new_Observations_in_Research +{_Research_Points_to_buy_upgrades_with +{%_Research_AFK_gains..._if_you're_at_100%,_I_have_good_news_and_bad_news... Every_new_event,_you_get_+{_play_at_the_event_game,_FOREVER! All_Spelunk_Shop_upgrades_are_{%_cheaper }x_artifact_find_chance +{_new_magnifier_to_study_your_observations_with All_Summoning_upgrades_are_{%_cheaper All_your_breeding_Mobs_deal_}x_damage_when_fighting }x_Stamina_Regen_Multi_so_you_can_get_back_to_delving_asap }x_multiplier_to_Minehead_currency_gain +{_Research_Point_to_buy_upgrades Whenever_you_get_a_new_ribbon,_theres_a_{%_chance_it's_1_tier_higher }x_Class_EXP_gain All_Minehead_upgrades_are_now_{%_cheaper_instead_of_just_25% All_your_Exalted_Stamps_give_a_0.01x_higher_bonus_than_before }x_extra_coins_dropped_by_monsters +{_Legend_Talent_Point._Sponsored_by_Whallamus. }x_Spelunking_POW +{%_grand_discovery_chance_per_Spelunking_LV Unlocks_a_new_Atom,_which_boosts_Bucks_gained All_your_Prisma_Bubbles_give_a_0.01x_higher_bonus_than_before +{%_Research_AFK_gains }x_Burger. All_Sushi_Station_upgrades_are_{%_cheaper All_Spelunk_Shop_upgrades_are_now_{%_cheaper_instead_of_just_25% }x_more_Amber_gained_from_Spelunking,_time_for_new_Biggest_Hauls! }x_bits_gained_from_Gaming +{_maximum_possible_roll_when_rolling_for_new_Observations }x_higher_odds_of_getting_new_crowns_for_the_Rat_King_in_Gaming }x_more_Stealth_for_all_your_Ninja_Twins_in_Sneaking Get_+{_more_Exotic_Market_purchases_at_the_start_of_each_week All_Summoning_upgrades_are_now_{%_cheaper_instead_of_just_25% }x_higher_farming_Evo_chance,_to_get_new_crop_types_with +{%_Hat_Rack_multi }x_extra_coins_dropped_by_monsters All_Upgrade_Vault_upgrades_are_{%_cheaper Bubba_now_produced_}x_more_Meat_Slice._Business_is_BOOMING! Get_+{_more_Tiny_Cogs_every_day._You_do_have_them_unlocked_by_now_right? }x_multiplier_to_all_Sigil_EXP_gains }x_higher_Palette_Luck_in_Gaming }x_Lab_EXP_gain All_Sushi_Station_upgrades_are_now_{%_cheaper_instead_of_just_25% All_your_Sailing_Captains_earn_}x_more_personal_EXP_than_before Generate_}x_more_Divinity_PTS_for_Divinity All_Upgrade_Vault_upgrades_are_now_{%_cheaper_instead_of_just_25% }x_Drop_Rate }x_Total_DMG +{%_Bonus_Ballot_Multiplier +{%_Meritocracy_Bonus_Multi }x_chance_for_'Blue_Chest'_Monument_Rewards }x_bonuses_from_ALL_Research_upgrades +{%_Gallery_Bonus_Multi }x_Megacrop_Growth_Chance_for_getting_more_Farming_Stickers +{_Opals_for_your_Villagers }x_extra_Treasure_found_from_opening_Sailing_Chests +{_Max_Build_LVs_for_all_Shrines_in_Construction".split(
+                  " ",
+                ),
+                "100 30 2 2 2 1 30 30 1 30 100 25 50 1 20 25 50 1 20 1 200 3 1 1 2 30 25 50 100 100 1 50 100 3 50 100 1 40 25 100 1 100 20 50 50 25 30 50 10 10 10 10 50 1 1 25 2 30 10".split(
+                  " ",
+                ),
+                ["0,0", "82,23", "82,23", "82,23"],
+                "42 89 15 63 28 91 3 76 54 11 68 24 95 37 80 1 59 22 73 14 66 9 83 31 47 70 5 98 26 61 18 85 34 72 0 56 13 92 40 77 21 64 8 99 30 52 17 69 2 88 45 12 79 33 94 6 57 25 81 39 67 4 90 53 19 74 29 87 10 62 36 96 23 58 41 78 16 65 32 84 27 7 71 44 93 20 60 35 82 48 97 38 75 50 86 43 55 49 46 51".split(
+                  " ",
+                ),
+];
+
+window.ResGridSquares =  [
+                "Name 1 1 0 0 desc".split(" "),
+                "Name 1 1 0 0 desc".split(" "),
+                "Name 1 1 0 0 desc".split(" "),
+                "Name 1 1 0 0 desc".split(" "),
+                "Name 1 1 0 0 desc".split(" "),
+                "Name 1 1 0 0 desc".split(" "),
+                "Name 1 1 0 0 desc".split(" "),
+                "Name 1 1 0 0 desc".split(" "),
+                "Name 1 1 0 0 desc".split(" "),
+                "Name 1 1 0 0 desc".split(" "),
+                "Name 1 1 0 0 desc".split(" "),
+                "Name 1 1 0 0 desc".split(" "),
+                "Name 1 1 0 0 desc".split(" "),
+                "Name 1 1 0 0 desc".split(" "),
+                "Name 1 1 0 0 desc".split(" "),
+                "Name 1 1 0 0 desc".split(" "),
+                "Name 1 1 0 0 desc".split(" "),
+                "Name 1 1 0 0 desc".split(" "),
+                "Name 1 1 0 0 desc".split(" "),
+                "Name 1 1 0 0 desc".split(" "),
+                "Name 1 1 0 0 desc".split(" "),
+                "Name 1 1 0 0 desc".split(" "),
+                "Name 1 1 0 0 desc".split(" "),
+                "Name 1 1 0 0 desc".split(" "),
+                "Name 1 1 0 0 desc".split(" "),
+                "Name 1 1 0 0 desc".split(" "),
+                "Name 1 1 0 0 desc".split(" "),
+                "Name 1 1 0 0 desc".split(" "),
+                "Name 1 1 0 0 desc".split(" "),
+                "Name 1 1 0 0 desc".split(" "),
+                "Name 1 1 0 0 desc".split(" "),
+                "Smart_Eye 3 5 0 0 Raises_the_minimum_possible_Roll_by_+1_for_each_failed_Roll,_up_to_+$._This_resets_back_to_0_upon_a_successful_Roll._Also_+{%_Research_EXP_Gain.".split(
+                  " ",
+                ),
+                "Name 1 1 0 0 desc".split(" "),
+                "Name 1 1 0 0 desc".split(" "),
+                "Name 1 1 0 0 desc".split(" "),
+                "Name 1 1 0 0 desc".split(" "),
+                "Name 1 1 0 0 desc".split(" "),
+                "Name 1 1 0 0 desc".split(" "),
+                "Name 1 1 0 0 desc".split(" "),
+                "Name 1 1 0 0 desc".split(" "),
+                "Name 1 1 0 0 desc".split(" "),
+                "Name 1 1 0 0 desc".split(" "),
+                "Name 1 1 0 0 desc".split(" "),
+                "Name 1 1 0 0 desc".split(" "),
+                "Name 1 1 0 0 desc".split(" "),
+                "Name 1 1 0 0 desc".split(" "),
+                "Name 1 1 0 0 desc".split(" "),
+                "Sticker-it_To_Em! 2 1 0 0 Unlocks_a_new_TRUE_Damage_Multiplier_as_shown_in_the_Sticker_Depot,_which_goes_up_by_+{%_for_every_Sticker_you_find!".split(
+                  " ",
+                ),
+                "Materials_Science 4 25 0 0 Reduces_the_Cycle_Time_for_the_Polymerization_tab_in_the_Refinery_by_{%".split(
+                  " ",
+                ),
+                "Polymer_Refinery 2 5 0 0 Unlocks_a_new_tab_in_the_Refinery,_POLYMERIZATION!_Also,_+{%_faster_refinery_cycles_for_ALL_tabs!".split(
+                  " ",
+                ),
+                "Pts_Every_Ten 1 5 0 0 Get_+|_extra_Research_PTS_every_10_Research_LVs!_Also,_+{%_Research_EXP_Gain!".split(
+                  " ",
+                ),
+                "Sharp_Eye 4 5 0 0 Increase_the_max_possible_Roll_while_searching_for_new_observations_by_+|,_and_+{%_Research_EXP_gain!".split(
+                  " ",
+                ),
+                "Holding_Onto_You 3 10 0 0 Twists_the_Kaleidoscope_behind_both_of_your_eyes,_increasing_their_effect_by_+{%".split(
+                  " ",
+                ),
+                "Name 1 1 0 0 desc".split(" "),
+                "Name 1 1 0 0 desc".split(" "),
+                "Name 1 1 0 0 desc".split(" "),
+                "Name 1 1 0 0 desc".split(" "),
+                "Name 1 1 0 0 desc".split(" "),
+                "Name 1 1 0 0 desc".split(" "),
+                "Name 1 1 0 0 desc".split(" "),
+                "Name 1 1 0 0 desc".split(" "),
+                "Name 1 1 0 0 desc".split(" "),
+                "Name 1 1 0 0 desc".split(" "),
+                "Name 1 1 0 0 desc".split(" "),
+                "Name 1 1 0 0 desc".split(" "),
+                "Name 1 1 0 0 desc".split(" "),
+                "Name 1 1 0 0 desc".split(" "),
+                "Sticky_Crowns 3 25 0 0 For_every_King_Rat_Crown_you_reclaim,_your_Megacrop_growth_chance_goes_up_by_{%._Total_Bonus:^x".split(
+                  " ",
+                ),
+                "Boony_Crowns 1 1 0 0 For_every_King_Rat_Crown_you_reclaim,_all_your_stickers_gives_{%_higher_bonuses._Total_Bonus:$%".split(
+                  " ",
+                ),
+                "Adequate_Sized,_Actually 2 50 0 0 All_Tiny_Cogs_you_get_have_a_{%_chance_be_1_Tier_higher_than_they_otherwise_would've_been!_Huge,_honestly!".split(
+                  " ",
+                ),
+                "Takin'_Notes 4 12 0 0 Multiplies_Research_EXP_gain_by_}x,_TRUE_multiplier_style!_So_this_bonus_will_never_be_additive!".split(
+                  " ",
+                ),
+                "Powered_Down_Research 2 1 0 0 Further_increases_your_Research_AFK_Gains_rate_by_+{%,_in_your_unending_quest_for_100%".split(
+                  " ",
+                ),
+                "Kaleidoscope 4 5 0 0 Gives_+|_Kaleidoscopes_to_use_for_Observations!_Also,_+{%_Kaleidoscope_effect!".split(
+                  " ",
+                ),
+                "Name 1 1 0 0 desc".split(" "),
+                "Name 1 1 0 0 desc".split(" "),
+                "Name 1 1 0 0 desc".split(" "),
+                "Name 1 1 0 0 desc".split(" "),
+                "Name 1 1 0 0 desc".split(" "),
+                "Name 1 1 0 0 desc".split(" "),
+                "Name 1 1 0 0 desc".split(" "),
+                "Name 1 1 0 0 desc".split(" "),
+                "Name 1 1 0 0 desc".split(" "),
+                "Name 1 1 0 0 desc".split(" "),
+                "Name 1 1 0 0 desc".split(" "),
+                "Name 1 1 0 0 desc".split(" "),
+                "Name 1 1 0 0 desc".split(" "),
+                "Equinox_Nightmares 3 20 0 0 Unlocks_new_dreams_to_complete_at_the_Equinox_Valley_in_World_3!_@_Also_boosts_Equinox_Bar_Fill_Rate_by_}x".split(
+                  " ",
+                ),
+                "Gaming_Zuperbits 2 200 0 0 Unlocks_the_Zuperbits_page_of_Superbits_in_Gaming!_Yea,_you_ain't_done_with_those_just_yet!_Also_gives_}x_Gaming_Bit_Multi!".split(
+                  " ",
+                ),
+                "Sticker_Depot 3 50 0 0 Unlocks_the_Sticker_mechanic_for_Farming!_Also,_boosts_Megacrop_growth_chance_by_}x".split(
+                  " ",
+                ),
+                "Tiny_Cogs 4 200 0 0 Unlocks_the_Tiny_Cog_board,_and_generates_a_single_Tiny_Cog_per_day!_Also_boosts_Flaggy_Rate_by_}x".split(
+                  " ",
+                ),
+                "Observationalistic 4 1 0 0 Gives_you_+|_more_Daily_Rolls_for_getting_new_Observations!_Also,_+{%_Research_EXP_gain!".split(
+                  " ",
+                ),
+                "Optical_Monocle 4 1 0 0 Gives_+|_Optical_Monocles_to_use_for_Observations!_Also_+{%_Insight_EXP_gain,_to_level_up_your_Observations_faster_with!".split(
+                  " ",
+                ),
+                "Oracular_Spectacular 2 25 0 0 Taking_only_what_you_need_from_it,_your_Optical_Monocles_generate_+{%_more_Insight!".split(
+                  " ",
+                ),
+                "Game_Design_101 3 4 0 0 Psst..._you_forgot_to_give_Observation_LV_a_purpose_while_helping_Lava_research_new_content!_How_about_you_do..._Observations_give_}x_more_EXP_per_LV!".split(
+                  " ",
+                ),
+                "Game_Design_102 4 1 0 0 Design_problem,_why_would_players_level_up_old_Observations?_How_about..._+{%_Research_EXP_per_TOTAL_Observation_LV!_@_Total_Bonus:$%".split(
+                  " ",
+                ),
+                "Name 1 1 0 0 desc".split(" "),
+                "Name 1 1 0 0 desc".split(" "),
+                "Name 1 1 0 0 desc".split(" "),
+                "Name 1 1 0 0 desc".split(" "),
+                "Name 1 1 0 0 desc".split(" "),
+                "Name 1 1 0 0 desc".split(" "),
+                "Name 1 1 0 0 desc".split(" "),
+                "Name 1 1 0 0 desc".split(" "),
+                "Name 1 1 0 0 desc".split(" "),
+                "Name 1 1 0 0 desc".split(" "),
+                "Revival_of_the_Undead_Battalion 1 1 0 0 Your_Sailing_Boats_turn_into_the_Undead_Battalion_at_LV_400+_These_boats_find_3x_more_Treasure,_are_3x_faster,_and_have_3x_higher_Artifact_Find_Chance!".split(
+                  " ",
+                ),
+                "The_Maw 4 25 0 0 Unlocks_a_new_island_in_Sailing,_THE_MAW!_@_Also,_}x_Artifact_Find_Chance._You'll_need_it.".split(
+                  " ",
+                ),
+                "Palettable_Crowns 1 3 0 0 +{%_Palette_Luck_for_every_King_Rat_Crown_you_reclaim._@_Total_Bonus:$%".split(
+                  " ",
+                ),
+                "Rat_King_of_Olde 2 25 0 0 You_can_now_buy_the_Rat_King_from_the_Import_Shop_in_Gaming!_Also,_+{%_King_Tokens_per_hour!".split(
+                  " ",
+                ),
+                "Transcendent_Artifacts 1 25 0 0 Unlocks_Transcendent_Sailing_Artifacts_tier,_and_boosts_Artifact_Find_Chance_by_a_smol_+{%".split(
+                  " ",
+                ),
+                "All_Night_Studying 2 50 0 0 Boosts_Research_EXP_gain_by_+{%_@_You'll_be_filling_out_this_Grid_in_no_time_at_all!".split(
+                  " ",
+                ),
+                "Research_AFK_Gains 2 5 0 0 +{%_Research_AFK_Gains._This_affects_OFFLINE_gains_for_Research,_Minehead,_Insight..._everything_Research_related!".split(
+                  " ",
+                ),
+                "See_'Em_All 1 5 0 0 +{%_Research_EXP_gain_per_Observation_found!_@_Total_Bonus:+$%".split(
+                  " ",
+                ),
+                "Name 1 1 0 0 desc".split(" "),
+                "Name 1 1 0 0 desc".split(" "),
+                "Name 1 1 0 0 desc".split(" "),
+                "Name 1 1 0 0 desc".split(" "),
+                "Name 1 1 0 0 desc".split(" "),
+                "Name 1 1 0 0 desc".split(" "),
+                "Name 1 1 0 0 desc".split(" "),
+                "Name 1 1 0 0 desc".split(" "),
+                "Name 1 1 0 0 desc".split(" "),
+                "Name 1 1 0 0 desc".split(" "),
+                "Name 1 1 0 0 desc".split(" "),
+                "Name 1 1 0 0 desc".split(" "),
+                "Better_Button 3 5 0 0 All_button_bonuses_are_+{%_bigger,_which_is_ballin'_since_all_button_upgrades_sans_Class_EXP_are_multiplicative!".split(
+                  " ",
+                ),
+                "Insta_Skips 2 3 0 0 Every_week,_you_get_+|_Insta_uses_for_The_Button_on_the_Mantaray_map,_which_let_you_skip_the_current_demand._@_Also,_+{%_chance_for_+1_use_every_day".split(
+                  " ",
+                ),
+                "Eclectoplasmaticism 1 1 0 0 What_kind_of_word_is_Eclectopl..._whatever,_this_gives_you_+{%_TRUE_DMG_Multi_per_Eclectic_Sigil!".split(
+                  " ",
+                ),
+                "Eclectic_Sigils 1 10 0 0 Sigils_can_be_upgraded_a_5th_time_to_Eclectic!_@_NOTE:You_must_defeat_Lore_Boss_7_in_Spelunking_first!".split(
+                  " ",
+                ),
+                "Mr_Minehead_Linguistics 4 10 0 0 You_can_now_speak_to_Mr_Minehead_and_play_his_Depth_Charge_game!_Also,_+{_base_Minehead_Currency/hr".split(
+                  " ",
+                ),
+                "Legendary_Yellow_Fever 3 5 0 0 Raises_the_Max_LV_of_certain_Yellow_Legend_Talents_by_+|._Also,_}x_Class_EXP_gain!".split(
+                  " ",
+                ),
+                "Legendary_Red_Fever 3 5 0 0 Raises_the_Max_LV_of_certain_Red_Legend_Talents_by_+|._@_Also,_}x_Class_EXP_gain!".split(
+                  " ",
+                ),
+                "Legendary_Brown_Fever 3 5 0 0 Raises_the_Max_LV_of_certain_Brown_Legend_Talents_by_+|._Also,_}x_Class_EXP_gain!".split(
+                  " ",
+                ),
+                "Name 1 1 0 0 desc".split(" "),
+                "Name 1 1 0 0 desc".split(" "),
+                "Name 1 1 0 0 desc".split(" "),
+                "Name 1 1 0 0 desc".split(" "),
+                "Name 1 1 0 0 desc".split(" "),
+                "Name 1 1 0 0 desc".split(" "),
+                "Name 1 1 0 0 desc".split(" "),
+                "Name 1 1 0 0 desc".split(" "),
+                "Name 1 1 0 0 desc".split(" "),
+                "Name 1 1 0 0 desc".split(" "),
+                "Name 1 1 0 0 desc".split(" "),
+                "Name 1 1 0 0 desc".split(" "),
+                "Name 1 1 0 0 desc".split(" "),
+                "Risky_Strategy 2 10 0 0 Your_Minehead_Damage_is_boosted_by_+{%_for_every_tile_revealed_in_a_single_turn._This_resets_at_the_start_of_every_turn.".split(
+                  " ",
+                ),
+                "Depth_Charge_Rematch! 4 25 0 0 Gives_you_+|_more_tries_every_day_at_Mr_Minehead's_Depth_Charge!_Also,_+{%_Minehead_Currency/hr".split(
+                  " ",
+                ),
+                "More_of_that_Minehead_Money_Pls 4 25 0 0 Multiplies_Minehead_Currency/hr_by_}x".split(
+                  " ",
+                ),
+                "Glimbo_Linguistics 1 15 0 0 You_can_now_speak_to_Glimbo,_and_make_trades_with_him!_Also_boosts_coins_dropped_by_monsters_by_}x!".split(
+                  " ",
+                ),
+                "Masterclass_Research 2 10 0 0 Reduces_the_cost_of_all_Masterclass_upgrades_by_{%_every_day,_FOREVER!_Total_Reduction:-&%".split(
+                  " ",
+                ),
+                "Spelunking_Research 2 25 0 0 Boosts_Spelunking_POW_by_+{%_every_day,_FOREVER!_@_Total_Boost:^x_POW".split(
+                  " ",
+                ),
+                "Legendary_Green_Fever 3 5 0 0 Raises_the_Max_LV_of_certain_Green_Legend_Talents_by_+|._Also,_}x_Class_EXP_gain!".split(
+                  " ",
+                ),
+                "Name 1 1 0 0 desc".split(" "),
+                "Name 1 1 0 0 desc".split(" "),
+                "Name 1 1 0 0 desc".split(" "),
+                "Name 1 1 0 0 desc".split(" "),
+                "Name 1 1 0 0 desc".split(" "),
+                "Name 1 1 0 0 desc".split(" "),
+                "Name 1 1 0 0 desc".split(" "),
+                "Name 1 1 0 0 desc".split(" "),
+                "Name 1 1 0 0 desc".split(" "),
+                "Name 1 1 0 0 desc".split(" "),
+                "Name 1 1 0 0 desc".split(" "),
+                "Name 1 1 0 0 desc".split(" "),
+                "Name 1 1 0 0 desc".split(" "),
+                "Minehead_Copium 4 15 0 0 If_your_1st_click_is_on_a_depth_charge,_50%_chance_it_wiggles_and_doesn't_count!_Happens_up_to_|_times_per_game._@_Also,_+{%_Minehead_Currency_gain!".split(
+                  " ",
+                ),
+                "Minehead_Damagio 3 15 0 0 Multiplies_all_damage_you_deal_in_Mr_Minehead's_Depth_Charge_by_}x".split(
+                  " ",
+                ),
+                "Glimbo_Insider_Trading_Secrets 1 1 0 0 +{%_Drop_Rate_TRUE_Multi_per_100_Glimbo_Trades!_@_Total_Bonus:^x_DR".split(
+                  " ",
+                ),
+                "Glimbo_BOGO_Offer 2 10 0 0 Some_of_Glimbo's_trades_give_+|_additional_LVs!_This_works_retroactively._Also,_}x_Coin_gain".split(
+                  " ",
+                ),
+                "All_Quick_All_Done 3 50 0 0 Every_day,_the_first_'All_Quick'_use_at_the_MSA_in_World_3_gives_}x_more_Souls_and_EXP!".split(
+                  " ",
+                ),
+                "Day_'N'_Nite 4 50 0 0 Increases_the_Max_LV_of_all_Day_and_Night_Market_upgrades_by_+{".split(
+                  " ",
+                ),
+                "Well_Dressed 2 25 0 0 The_first_MISC_Bonus_on_your_Attire_Equipment_(i.e._Clothing)_gives_}x_more_bonus!".split(
+                  " ",
+                ),
+                "Divine_Design 1 25 0 0 <._Also,_+{%_Drop_Rate.".split(" "),
+                "Name 1 1 0 0 desc".split(" "),
+                "Name 1 1 0 0 desc".split(" "),
+                "Name 1 1 0 0 desc".split(" "),
+                "Name 1 1 0 0 desc".split(" "),
+                "Name 1 1 0 0 desc".split(" "),
+                "Name 1 1 0 0 desc".split(" "),
+                "Name 1 1 0 0 desc".split(" "),
+                "Name 1 1 0 0 desc".split(" "),
+                "Name 1 1 0 0 desc".split(" "),
+                "Name 1 1 0 0 desc".split(" "),
+                "Name 1 1 0 0 desc".split(" "),
+                "Name 1 1 0 0 desc".split(" "),
+                "Name 1 1 0 0 desc".split(" "),
+                "Name 1 1 0 0 desc".split(" "),
+                "Shakin'_It 2 1 0 0 Every_day,_you_get_another_+|_extra_uses_for_ALL_your_shakers_at_the_Sushi_Station!_@_And_+{%_chance_for_free_use_when_using_Shakers!".split(
+                  " ",
+                ),
+                "Sushi_Station_Linguistics 4 25 0 0 You_can_now_speak_to_the_knife_found_in_the_map_past_Glimbo_to_play_the_Sushi_Station_game!_@_Also,_}x_more_Bucks_gained_from_your_Sushi!".split(
+                  " ",
+                ),
+                "Name 1 1 0 0 desc".split(" "),
+                "Name 1 1 0 0 desc".split(" "),
+                "Name 1 1 0 0 desc".split(" "),
+                "Name 1 1 0 0 desc".split(" "),
+                "Name 1 1 0 0 desc".split(" "),
+                "Name 1 1 0 0 desc".split(" "),
+                "Name 1 1 0 0 desc".split(" "),
+                "Name 1 1 0 0 desc".split(" "),
+                "Name 1 1 0 0 desc".split(" "),
+                "Name 1 1 0 0 desc".split(" "),
+                "Name 1 1 0 0 desc".split(" "),
+                "Name 1 1 0 0 desc".split(" "),
+                "Name 1 1 0 0 desc".split(" "),
+                "Name 1 1 0 0 desc".split(" "),
+                "Name 1 1 0 0 desc".split(" "),
+                "Name 1 1 0 0 desc".split(" "),
+                "Name 1 1 0 0 desc".split(" "),
+                "Name 1 1 0 0 desc".split(" "),
+                "Name 1 1 0 0 desc".split(" "),
+                "Name 1 1 0 0 desc".split(" "),
+                "Name 1 1 0 0 desc".split(" "),
+                "Name 1 1 0 0 desc".split(" "),
+                "Name 1 1 0 0 desc".split(" "),
+                "Name 1 1 0 0 desc".split(" "),
+                "Name 1 1 0 0 desc".split(" "),
+                "Name 1 1 0 0 desc".split(" "),
+                "Name 1 1 0 0 desc".split(" "),
+                "Name 1 1 0 0 desc".split(" "),
+                "Name 1 1 0 0 desc".split(" "),
+                "Name 1 1 0 0 desc".split(" "),
+                "Name 1 1 0 0 desc".split(" "),
+                "Name 1 1 0 0 desc".split(" "),
+                "Name 1 1 0 0 desc".split(" "),
+                "Name 1 1 0 0 desc".split(" "),
+                "Name 1 1 0 0 desc".split(" "),
+                "Name 1 1 0 0 desc".split(" "),
+                "Name 1 1 0 0 desc".split(" "),
+                "Name 1 1 0 0 desc".split(" "),
+                "Name 1 1 0 0 desc".split(" "),
+                "Name 1 1 0 0 desc".split(" "),
+                "Name 1 1 0 0 desc".split(" "),
+                "Name 1 1 0 0 desc".split(" "),
+                "Name 1 1 0 0 desc".split(" "),
+                "Name 1 1 0 0 desc".split(" "),
+                "Name 1 1 0 0 desc".split(" "),
+                "Name 1 1 0 0 desc".split(" "),
+                "Name 1 1 0 0 desc".split(" "),
+                "Name 1 1 0 0 desc".split(" "),
+                "Name 1 1 0 0 desc".split(" "),
+                "Name 1 1 0 0 desc".split(" "),
+];
+
+window.NinjaInfo = [
+                "000000000000".split(""),
+                "0 0 13 19 21 22 10 21 17 15 8 18".split(" "),
+                "000000000000".split(""),
+                "1 150 800 5000 25000 200000 1500000 20000000 100000000 2000000000.0 40000000000.0 45000000000000.0".split(
+                  " ",
+                ),
+                "0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 -1 -1 -1 -1 -1 -1 -1 0 1 2 4 2 1 0 -1 -7 -5 -3 -3 -5 -7 -5 -3 -3 -5 -7 0 -1 -1 0 -1 0 0 0 0 0 0 0 0 0 -1 -1 0 0 -1 -1 -1 -1 -1 0 -1 -2 0 2 1 0 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 0 2 2 2 2 0 0 0 1 1 1 2 3 5 10 7 7 7 7 7 7 7 7".split(
+                  " ",
+                ),
+                "0 0 -1 -1 0 1 0 -1 0 0 -1 -1 0 0 -1 -1 1 0 0 0 2 1 1 2 4 3 3 3 3 2 1 0 0 -1 -2 -1 0 0 -1 -2 -1 0 5 5 4 4 5 5 5 5 6 2 1 2 6 5 0 -1 -1 -1 -1 0 1 1 0 -1 -2 -2 -1 1 0 -1 -1 -1 2 2 1 1 1 2 3 2 2 2 3 3 3 3 2 2 0 1 2 5 4 5 8 22 21 21 21 21 21 21 21 21".split(
+                  " ",
+                ),
+                "0 200 650 150 350 720 180 600 760 300 170 650".split(" "),
+                "0 2 3 4 4 5 6 6 6 7 10 11".split(" "),
+                "0 10 60 750 3000 17000 80000 500000 1500000 7000000 30000000 200000000.0".split(
+                  " ",
+                ),
+                "0.01 15 80 500 2500 8000 40000 170000 800000 3000000 10000000 20000000.0".split(
+                  " ",
+                ),
+                "0 100 300 1500 6000 17500 60000 170000 800000 4000000 15000000 60000000.0".split(
+                  " ",
+                ),
+                "25 40 150 1150 2000 14000 25000 170000 200000 2250000 5000000 25000000.0".split(
+                  " ",
+                ),
+                ["NjItem2", "0.001", "NjItem0", "0.10"],
+                "NjItem0 0.05 NjTr0 0.2 NjTr8 0.3 NjItem1 0.05 NjItem14 0.03 NjWep0 0.15".split(
+                  " ",
+                ),
+                "NjItem5 0.04 NjTr15 0.15 NjTr13 0.17 NjTr5 0.2 NjWep1 0.15".split(
+                  " ",
+                ),
+                "NjItem3 0.02 NjItem11 0.04 NjTr7 0.17 NjTr9 0.2 NjWep5 0.15".split(
+                  " ",
+                ),
+                "NjItem9 0.03 NjItem10 0.01 NjTr10 0.17 NjTr4 0.2 NjWep2 0.15".split(
+                  " ",
+                ),
+                "NjItem12 0.04 NjTr14 0.17 NjTr11 0.2 NjWep6 0.15".split(" "),
+                "NjItem4 0.03 NjTr18 0.17 NjTr1 0.2 NjWep3 0.15".split(" "),
+                "NjItem13 0.02 NjTr2 0.17 NjGl0 0.08 NjTr6 0.2 NjWep7 0.15".split(
+                  " ",
+                ),
+                "NjItem6 0.005 NjTr12 0.17 NjTr16 0.23 NjWep4 0.15".split(" "),
+                "NjItem7 0.001 NjGl1 0.05 NjTr17 0.21 NjWep8 0.15".split(" "),
+                "NjItem8 0.0005 NjGl2 0.04 NjTr3 0.2".split(" "),
+                ["NjItem2", "0.0001", "NjTr19", "0.2"],
+                "0 12 5 8 22 27 18 1 17 24 19 25 13 16 26 7 9 23 14 20 28 2 3 15 10 11 6 21 35 30 34 37 29 31 32 4 36 33 38 39 40 41 42 43 44 45 46 47 48 49".split(
+                  " ",
+                ),
+                "14 1530 105 90 0 50 Artifact_Attraction Artifact_find_chance_is_1.5x_higher!_If_you've_found_all_artifacts_at_max_rarity,_then_this_bonus_changes_to_1,000x_artifact_find_chance!".split(
+                  " ",
+                ),
+                "15 1630 365 90 0 25 Slab_Sovereignty All_bonuses_given_by_the_Slab_are_1.25x_higher!".split(
+                  " ",
+                ),
+                "16 1790 250 90 0 50 Spiritual_Growth Boosts_EXP_multi_for_all_three_World_6_skills_by_+50%!".split(
+                  " ",
+                ),
+                "17 1950 195 90 0 30 Depot_Studies_PhD All_bonuses_given_at_the_Crop_Depot_are_1.30x_higher!".split(
+                  " ",
+                ),
+                "41 6 PeanutG 12 292 ButterBar 34 52 FoodG1 97 179 FoodG2 28 221 FoodG3 100 52 FoodG4 42 148 FoodG5 121 213 FoodG6 94 135 FoodG7 4 174 FoodG8 95 287 FoodG9 -2 246 FoodG10 78 236 FoodG11 85 10 FoodG12 63 101 FoodG13 51 267 FoodG14 61 196 FoodG15".split(
+                  " ",
+                ),
+                "slimeB poopBig babayaga babaHour babaMummy mini3a mini4a mini5a mini6a".split(
+                  " ",
+                ),
+                "+{%_DMG }x_Gaming_Evo +{%_Jade }x_Meal_Spd +{%_Cash +{%_Mobs +{_Critters +{%_DR +{%_Spelunky +{%_Research_XP".split(
+                  " ",
+                ),
+                "5 11 3 65 22 0 2 1 7 4 6 81 8 9 53 10 107 109 12 113 106 75 13 14 80 79 25 15 16 17 18 19 21 23 24 26 27 28 29 85 86 108 30 31 32 33 34 35 37 36 76 38 54 40 41 42 39 44 50 48 46 47 49 51 52 45 55 60 57 61 62 66 59 64 63 111 58 56 93 84 83 92 91 87 88 89 82 94 68 69 67 77 78 112 72 74 99 71 70 73 96 20 43 90 100 101 95 97 103 104 98 102 105 110 114 115 116 117".split(
+                  " ",
+                ),
+                "+{%_DMG +{%_Skill_Eff +{%_Drop_Rate +{%_STR +{%_AGI +{%_WIS".split(
+                  " ",
+                ),
+                "Evolution_Boost Production_Boost Soil_Exp_Boost Evolution_Megaboost Seed_of_Stealth Farmtastic_Boost Soil_Exp_Megaboost Overgrowth_Boost Production_Megaboost Seed_of_Loot Evolution_Superboost Overgrowth_Megaboost Farmtastic_Megaboost Soil_Exp_Superboost Seed_of_Damage Evolution_Ultraboost Farmtastic_Superboost Production_Superboost Overgrowth_Superboost Seed_of_Stats".split(
+                  " ",
+                ),
+                "Increases_next_crop_chance_by_+{%_per_rank_of_the_land_plot Boosts_value_of_crops_harvested_by_+{%_per_rank_of_the_land_plot Each_land_gains_+{%_extra_Rank_EXP_per_rank_of_the_previous_land Increases_next_crop_chance_by_+{%_multiplicatively! Increases_the_Stealth_of_all_Ninja_Twins_by_+{%_per_Farming_LV Increases_Farming_Skill_EXP_gained_by_+{% All_plots_of_land_gain_+{%_more_Rank_EXP Increases_chance_for_Overgrowth_by_+{% Increases_the_amount_of_crops_harvested_by_+{% Increases_the_Drop_Rate_of_all_characters_by_+{% Increases_next_crop_chance_by_+{%_multiplicatively! Increases_chance_for_Overgrowth_by_+{% Increases_Farming_Skill_EXP_gained_by_+{% All_plots_of_land_gain_+{%_more_Rank_EXP Gives_a_+{%_Total_Damage_bonus_to_all_characters Increases_next_crop_chance_by_+{%_multiplicatively! Increases_Farming_Skill_EXP_gained_by_+{% Increases_the_amount_of_crops_harvested_by_+{% Increases_chance_for_Overgrowth_by_+{% Gives_a_+{%_All_Stat_bonus_to_your_characters".split(
+                  " ",
+                ),
+                "250 5 25 600 2 90 200 120 100 10 3000 340 110 520 20 40000 220 600 1500 5".split(
+                  " ",
+                ),
+                "1 5 20 30 60 80 125 180 250 400 500 600 700 900 1200 1300 1500 1750 2000 3500".split(
+                  " ",
+                ),
+                "All_your_characters_deal_}x_more_damage_to_enemies 25 0 All_your_characters_deal_}x_more_damage_to_enemies 25 0 Increases_STR_AGI_WIS_and_LUK_for_all_characters_by_+{% 15 0 Increases_Defence_and_Accuracy_by_+{%_for_all_characters 30 0 Logging_in_each_day_gives_+{_more_GP_to_your_guild_than_you_normally_do 30 0 }x_Kill_per_Kill,_making_monster_kills_worth_more_for_portals_and_Deathnote 20 0 +{%_AFK_gain_for_both_fighting_and_skills_for_all_characters 15 0 Boosts_all_Mining_EXP_gain_and_Mining_Efficiency_by_+{% 42 0 Boosts_all_Fishing_EXP_gain_and_Fishing_Efficiency_by_+{% 50 0 Boosts_all_Choppin'_EXP_gain_and_Choppin'_Efficiency_by_+{% 38 0 Boosts_all_Catching_EXP_gain_and_Catching_Efficiency_by_+{% 46 0 Increases_the_amount_of_resources_produced_by_the_3D_Printer_by_}x 20 3 Boosts_liquid_generation_rate_for_all_Alchemy_liquids_by_+{% 25 0 Boosts_all_Cooking_EXP_gain_and_Cooking_Speed_by_+{% 63 4 Boosts_Dungeon_Credit_and_Dungeon_Flurbo_gain_by_}x 50 0 All_your_characters_gain_+{%_more_Class_EXP_from_monsters 60 0 Speeds_up_Egg_Incubation_time_and_Breeding_EXP_gain_by_+{% 50 4 Boosts_Sigil_EXP_gain_by_}x,_still_requires_Sigils_active_in_Lab 80 4 Boosts_Construction_Build_Rate_and_Construction_EXP_gain_by_+{% 40 3 Boosts_Shrine_EXP_gain_by_a_staggering_}x 53 3 Boosts_Artifact_Find_chance_in_Sailing_by_}x 31 5 Boosts_New_Species_chance_when_using_DNA_in_Gaming_by_}x 80 5 Find_+{%_more_Gold_Nuggets_when_digging_with_the_Shovel_in_Gaming 75 5 Boosts_Divinity_PTS_gain_by_}x_and_Divinity_EXP_Gain_by_+{% 60 5 Boosts_Sailing_Captain_EXP_gain_and_Sailing_Speed_by_}x 50 5 Boosts_Sneaking_Stealth_by_}x_and_EXP_Gain_by_+{%_for_all_your_Ninja_Twins 65 6 Boosts_bonuses_from_all_Golden_Food_by_+{% 30 0 Increases_Drop_Rate_for_all_your_characters_by_+{% 38 0 Boosts_Summoning_EXP_gain_by_+{%_and_all_Essence_gained_by_}x 40 6 Boosts_Crop_Value,_and_Farming_EXP_gain,_AND_Next_Crop_Chance_by_+{% 40 6 Increases_Trapping_EXP_gain_and_Worship_EXP_gain_by_+{% 54 3 Increases_Lab_EXP_gain_by_+{% 90 4 Boosts_Equinox_Bar_Fill_rate_by_}x 40 3 Boosts_Refinery_Cycle_Speed_by_+{% 50 3 Increases_cash_earned_from_monsters_by_+{% 52 0".split(
+                  " ",
+                ),
+                "Golden_Tome_@_Adds_a_new_DMG_Multi_bonus_type_to_the_Tome_in_World_4 25 Stamp_Stack_@_Get_+3_Stamp_LVs_every_day_for_a_random_Stamp 30 Bubble_Broth_@_Get_+5_LVs_for_a_random_Alchemy_Bubble_every_day 20 Equinox_Enhancement_@_Get_1.5x_faster_Bar_Fill_Rate_in_Equinox_Valley_in_World_3 15 Supreme_Wiring_@_+2%_Printer_Output_per_day,_taking_new_sample_resets_this 45 Sleepy_Joe_Armstrong_@_+20%_AFK_Gains_for_all_things_IdleOn_related 25 Village_Encouragement_@_All_Villagers_in_World_5_Camp_get_1.25x_EXP_Gain 30 Gilded_Vote_Button_@_Get_+17%_higher_Ballot_Bonus_Multi_from_Voting 35 Extra_Page_@_Get_+1_more_Filter_Page._Find_it_on_the_left_side_of_Cards 20 Coin_Stacking_@_Get_a_1.50x_multiplier_to_ALL_coin_gain,_and_profit_big_time! 15 Storage_Chest_@_Get_+12_storage_slots_for_your_storage_chest 15 Storage_Vault_@_Get_+16_storage_slots_for_your_storage_chest 40 Secret_Pouch_@_Get_+3_Inventory_slots_for_your_Items_Backpack 27 Ribbon_Connoisseur_@_Get_+3_more_ribbons_every_day_for_your_Ribbon_Shelf 55 Golden_Square_@_Get_+1_Trimmed_Construction_slot,_which_has_3x_speed! 23 Summoning_Star_@_Get_+10_Summoning_Doublers,_used_on_Summoning_Upgrades! 30 Royal_Vote_Button_@_Get_+30%_higher_Ballot_Bonus_Multi_instead_of_+17% 25 Another_Page_@_Get_+1_more_Filter_Page._Find_it_on_the_left_side_of_Cards 50 Extra_Exaltedness_@_Get_+1_Exalted_Stamp_use,_and_+20%_Exalt_Bonus. 35 Smiley_Statue_@_All_statues_give_1.30x_higher_bonuses,_forever! 70 Government_Subsidy_@_Get_1.60x_more_coins_from_defeating_monsters! 17 Automated_Mail_@_Get_+5_Boxes_at_the_Post_Office_every_day_you_play! 15 Friendly_Slot_@_Adds_+1_more_slot_for_your_Friend_Bonuses_in_Codex! 12 Fossil_Meritocracy_@_Get_+20%_higher_Meritocracy_Bonus_in_World_7 45 Bonus_Points_@_You_now_earn_1.5x_PTS_for_the_Hoops_and_Darts_shops! 20 Coolral_@_Boosts_daily_gain_for_the_Coral_Reef_in_W7_by_1.30x 30 Plain_Showcase_@_Get_+1_more_trophy_slot_for_the_Gallery_in_World_7 35 Singed_Tome_@_Adds_a_new_Drop_Rate_Multi_bonus_to_the_Tome_in_World_4 125 Higgs_Boson_@_All_atoms_have_a_+20_higher_Max_LV 150 Worldclass_Showcase_@_Turns_a_Gallery_Slot_in_World_7_to_Grade_4 180 King_of_the_Rack_@_+10%_Hat_Rack_Bonus_Multi 30 Omega_Bubble_@_Kattlekruk_divinity_gives_1.50x_more_daily_bubbles 75 Legend_Scroll_@_Get_+2_more_Legend_Talent_PTS_for_World_7 25 Kaleidoscope_@_Gives_you_1_more_Kaleidoscope_for_Research_in_World_7 35 Magnifying_Glass_@_Gives_you_1_more_Magnifier_for_Research_in_World_7 25 Keen_Observations_@_Get_+3_more_Daily_Attempts_at_finding_Observations! 33 Shape_Obsession_@_Get_+1_more_Shape_for_your_Research_Grid_in_World_7 200 Rift_Guy_Sticker_@_Increases_all_Sticker_Bonuses_by_+30% 75 Glimbo_Coupon_@_Lowers_the_cost_of_all_Glimbo_Trades_in_World_7_by_25% 60 Tiny_Cog_Twins_@_Daily_producion_of_Tiny_Cogs_is_now_double! 175 Glimbo_VIP_Pass_@_Each_Glimbo_Trade_boosts_Vault_Max_LV_by_+2_not_+1 199 Golden_Registrant_@_Registering_for_Grand_Tournament_gives_1000_Gold_Balls 15 Glass_Dice_@_+50%_total_Crystal_Mob_Spawn_Chance 35 Magnate_Exotica_@_+8_weekly_Exotic_Market_purchases_and_+30%_are_free 170 Minehead_Money_@_Earn_2x_more_currency_for_World_7's_Depth_Charge 35 Sushi_Stackz_@_Earn_2x_more_currency_for_World_7's_Sushi_Station 20 Research_Registrant_@_Registering_for_Tournament_gives_12hrs_Research_gains 150 Monumental_Reverence_@_+100_LVs_for_all_Monument_bonuses_every_day_forever 100".split(
+                  " ",
+                ),
+                "ForestBOSS zDesertNightZboss ySnowCBOSS xSpaceaaTown wLavaCBOSS vSpiritCBOSS ySnowD3 xSpaceRift".split(
+                  " ",
+                ),
+                "Multiplies_everything_in_the_game_by_1.00x 0 0 Multiplies_all_Gaming_Bits_gained_by_}x 700 0 Multiplies_your_chance_to_get_Double_Snail_Mail_each_day_by_}x 150 0 Kattlekruk_gives_}x_more_Bubble_LVs_than_normal_each_day 200 0 Multiplies_how_many_Shiny_Critters_you_get_from_Trapping_by_}x 400 0 Multiplies_your_Total_Damage_dealt_to_monsters_by_}x 200 0 Multiplies_all_the_Jade_your_ninja_twins_find_by_}x 900 0 Multiplies_your_Monument_Reward_Multi_by_}x 200 0 Multiplies_your_total_Palette_Luck_in_Gaming_by_}x 200 0 The_Bonus_Ballo..._ugh,_THAT_guy..._the_Bonus_Ballot's_stuff_is_like_}x_more_or_whatever... 100 0 Multiplies_Skill_EXP_gain_by_}x 125 0 You_get_}x_more_Ribbons_added_to_your_Ribbon_Shelf_every_day 100 0 Multiplies_Feather_and_Fish_production_Rate_by_}x_for_your_friends_Orion_and_Poppy 9900 0 Your_Beryllium_atom_creates_}x_more_PO_Boxes_each_day_while_still_using_up_just_1_Silver_Pen 200 0 All_material_costs_for_upgrading_Stamp_Max_LV_are_}x_lower 100 0 You're_guaranteed_}x_more_Crystal_Mobs_than_normal_to_start_each_day 900 0 Get_}x_more_Worship_PTS_while_playing_Tower_Defence 100 0 Stamina_Regeneration_Rate_in_Spelunking_is_}x_faster 200 0 Multiplies_the_chance_for_Killroy_Skulls_to_drop_by_}x 200 0 When_you_claim_48hrs_or_less_of_AFK_gains_on_a_Masterclass,_you_get_}x_more_AFK_items 200 0 All_of_your_Vials_give_}x_higher_bonuses_than_normal 50 0 All_of_your_Sigils_give_}x_higher_bonuses_than_normal 40 0 All_of_your_Starsigns_give_}x_higher_bonuses_than_normal 60 0 All_of_your_Slab_give_}x_higher_bonuses_than_normal 30 0 Your_Brain_Coral_gives_}x_more_daily_LVs_for_your_Grind_Time_bubble 200 0 All_masterclasses_find_}x_more_Bones,_Dust,_and_Tachyons 200 0 All_of_your_Statues_give_}x_higher_bonuses_than_normal 50 0 Multiplies_Class_EXP_gain_by_}x 150 0".split(
+                  " ",
+                ),
+];
+
+
+window.ArcadeShopInfo = [
+                "+{_Base_Damage 1 0 add _ +{_Dmg -1".split(" "),
+                "+{_Base_Defence 0.2 0 add _ +{_Def -1".split(" "),
+                "+{%_Total_Accuracy 60 100 decay _ +{%_Acc -1".split(" "),
+                "+{%_Mining_EXP_gain 60 100 decay % +{%_Min_EXP -1".split(" "),
+                "+{%_Fishing_EXP_gain 60 100 decay % +{%_Fish_EXP -1".split(
+                  " ",
+                ),
+                "+{%_Sample_Size 4 100 decay % +{%_Size -1".split(" "),
+                "+{%_AFK_Gains_Rate 4 100 decay % +{%_Rate -1".split(" "),
+                "+{_Cap_for_all_Liquids 25 100 decay % +{_Cap -1".split(" "),
+                "+{%_Multikill_per_Tier 10 100 decay % +{%_Multikill -1".split(
+                  " ",
+                ),
+                "+{%_Catching_EXP_gain 50 100 decay % +{%_Catch_EXP -1".split(
+                  " ",
+                ),
+                "+{%_Cash_from_Mobs 20 100 decay % +{%_Cash -1".split(" "),
+                "+{%_Cash_from_Mobs 30 100 decay % +{%_Cash -1".split(" "),
+                "+{%_Class_EXP_gain 20 100 decay % +{%_EXP -1".split(" "),
+                "+{%_Shiny_Chance 100 100 decay % +{%_Chance -1".split(" "),
+                "+{%_Trapping_EXP 50 100 decay % +{%_Trap_EXP -1".split(" "),
+                "+{_Starting_TD_Pts 1 0 add _ +{_Worship_Pts -1".split(" "),
+                "+{_Tab_1_Talent_Pt 1 10 intervalAdd _ +1_Pt_per_10_LVs -1".split(
+                  " ",
+                ),
+                "+{_Weapon_Power 0.07 0 add _ +{_Wep_POW -1".split(" "),
+                "+{%_Skill_EXP_gain 20 100 decay % +{%_EXP -1".split(" "),
+                "+{_Base_STR 1 0 add _ +{_STR -1".split(" "),
+                "+{_Base_AGI 1 0 add _ +{_AGI -1".split(" "),
+                "+{_Base_WIS 1 0 add _ +{_WIS -1".split(" "),
+                "+{_Base_LUK 1 0 add _ +{_LUK -1".split(" "),
+                "+{%_Trapping_Critters 30 100 decay % +{%_Critters -1".split(
+                  " ",
+                ),
+                "+{%_Worship_Souls 30 100 decay % +{%_Souls -1".split(" "),
+                "+{%_Refinery_Speed 30 100 decay % +{%_Speed -1".split(" "),
+                "+{%_Forge_Capacity 100 100 decay % +{%_Cap -1".split(" "),
+                "+{%_Drop_Rate 30 100 decay % +{%_Drop -1".split(" "),
+                "+{%_Cook_SPD_multi 40 100 decay % +{%_SPD -1".split(" "),
+                "+{%_Lab_EXP_gain 30 100 decay % +{%_EXP -1".split(" "),
+                "+{%_Breed_Mob_DMG 40 100 decay % +{%_DMG -1".split(" "),
+                "+{%_Nugget_Regen 30 100 decay % +{%_Regen -1".split(" "),
+                "+{%_Artifact_Find 50 100 decay % +{%_Chance -1".split(" "),
+                "+{%_Sailing_Loot 30 100 decay % +{%_Loot -1".split(" "),
+                "+{%_W_Ess_gain 40 100 decay % +{%_W_Ess -1".split(" "),
+                "+{%_Jade_gain 50 100 decay % +{%_Jade -1".split(" "),
+                "+{%_Farming_EXP 30 100 decay % +{%_EXP -1".split(" "),
+                "+{%_Divinity_EXP 40 100 decay % +{%_EXP -1".split(" "),
+                "+{%_Villager_XP_multi 40 100 decay % +{%_XP_multi -1".split(
+                  " ",
+                ),
+                "+{%_Gold_Ball_Gain 1 0 add % +{%_Balls -1".split(" "),
+                "+{%_Deathbringer_Bones 1 0 add % +{%_Bones -1".split(" "),
+                "+{%_Equinox_Fill_Rate .75 0 add % +{%_Fill_Rate -1".split(" "),
+                "+{%_Monument_AFK .5 0 add % +{%_AFK -1".split(" "),
+                "+{%_Sigil_Speed 1 0 add % +{%_Speed -1".split(" "),
+                "+{%_Construction_Build 2 0 add % +{%_Build_Rate -1".split(" "),
+                "+{%_Burger 1 0 add % +{%_Burger -1".split(" "),
+                "+{%_Total_Damage 2 0 add % +{%_Damage -1".split(" "),
+                "+{%_Windwalker_Dust 1 0 add % +{%_Dust -1".split(" "),
+                "+{%_Medallion_Chance 0.5 0 add % +{%_Chance -1".split(" "),
+                "+{%_Breedability_Rate 100 100 decay % +{%_Breed_Rate -1".split(
+                  " ",
+                ),
+                "+{%_Arcane_Tachyons 1 0 add % +{%_Tachyons 17".split(" "),
+                "+{%_Emperor_Bonuses 0.2 0 add % +{%_Bonus 42".split(" "),
+                "+{%_Sneaking_XP_multi 100 100 decay % +{%_XP_multi 29".split(
+                  " ",
+                ),
+                "+{%_Summon_XP_multi 100 100 decay % +{%_XP_multi 23".split(
+                  " ",
+                ),
+                "+{%_Prisma_Bonuses 10 100 decay % +{%_Bonus 21".split(" "),
+                "+{%_Spelunking_Amber 50 100 decay % +{%_Amber 28".split(" "),
+                "+{%_Spelunk_XP_multi 30 100 decay % +{%_XP_multi 39".split(
+                  " ",
+                ),
+                "+{%_Daily_Coral 10 100 decay % +{%_Coral 41".split(" "),
+                "+{%_Palette_Luck 50 100 decay % +{%_Luck 42".split(" "),
+                "+{%_Meritocracy_Bonus 10 100 decay % +{%_Bonus 31".split(" "),
+                "+{%_Class_XP_multi 50 100 decay % +{%_XP_multi 31".split(" "),
+                "+{%_Kruk_Bubble_LVs 40 100 decay % +{%_Bubble_LV 22".split(
+                  " ",
+                ),
+                "+{%_Minehead_Currency 25 100 decay % +{%_Currency 9".split(
+                  " ",
+                ),
+                "+{%_Research_XP 20 100 decay % +{%_XP 37".split(" "),
+                "+{%_Megacrop_Chance 50 100 decay % +{%_Chance 4".split(" "),
+                "+{%_New_Crown_Chance 15 100 decay % +{%_Chance 21".split(" "),
+                "+{%_Artifact_Find 60 100 decay % +{%_Chance 31".split(" "),
+                "+{%_Sushi_Bucks 25 100 decay % +{%_Bucks 35".split(" "),
+              ];
+
+window.LegendTalents =  [
+                "Coral_Restoration 2 30 filler +{%_Daily_Coral_gain +{%_more_Daily_Coral_gained_each_and_every_day!".split(
+                  " ",
+                ),
+                "Greatest_Drop_Party_Ever 4 500 filler +{%_Drop_Rate +{%_Drop_Rate_for_all_players!_@_This_bonus_is_additive,_not_a_multiplier.".split(
+                  " ",
+                ),
+                "Double_Aint_Enough 3 100 filler $x_Statue_and_Gold_Food_drops ''2x_Statue_and_Gold_Food_drops''_now_drop_in_bundles_of_$x_instead!".split(
+                  " ",
+                ),
+                "Extended_Database 3 10 filler +{_Max_LV_for_5th_column +{_Max_LV_for_5th_column_of_Farming_Land_Rank_Database".split(
+                  " ",
+                ),
+                "Familiar_Firesale 2 40 filler {%_chance_for_no_Familiar_cost_increase Whenever_you_buy_a_Summoning_Familiar,_there's_a_{%_chance_for_the_cost_to_not_go_up_at_all..._almost_like_it's_free!)".split(
+                  " ",
+                ),
+                "Kruk_be_Bubblin' 5 10 filler +{_LVs_per_day_from_Kattlekruk Kattlekruk_gives_+{_more_Bubble_LVs_per_day_for_each_of_his_bubbles".split(
+                  " ",
+                ),
+                "The_Charms_got_Rizz 2 25 filler }x_higher_bonuses All_of_your_Gold_Charms_in_Sneaking_give_}x_higher_bonuses".split(
+                  " ",
+                ),
+                "Super_Duper_Talents 5 10 filler +{_LVs Super_Talent_PTS_give_+{_more_LVs_to_talents_than_they_normally_do".split(
+                  " ",
+                ),
+                "Buy_One_Get_One_Free 2 100 filler }x_more_LVs Get_}x_more_LVs_when_buying_Exotic_Market_upgrades".split(
+                  " ",
+                ),
+                "Superb_Gallerium 2 2 filler {_showcase_slots_are_1_grade_higher The_first_{_normal_showcase_slots_in_your_Gallery_are_1_grade_higher_(i.e._they_become_Featured,_and_give_150%_bonuses)".split(
+                  " ",
+                ),
+                "Picasso_Gaming 5 25 filler }x_higher_Palette_bonuses All_the_bonuses_from_your_Gaming_Palette_colours_are_}x_higher".split(
+                  " ",
+                ),
+                "Davey_Jones_Returns 4 15 filler }x_higher_bonuses,_and_{%_less_minimum_time }x_bonus_to_all_the_same_stats_that_'Davey_Jones_Training'_gives,_check_it_in_W5_Gemshop._Also,_-{%_Minimum_Travel_Time".split(
+                  " ",
+                ),
+                "Opa_Opal_Style 3 100 filler }x_Villager_EXP_gains Villagers_at_the_Hole_in_World_5_gain_}x_more_EXP".split(
+                  " ",
+                ),
+                "Blue_Ribbon_Certification 4 1 filler +{_more_daily_Ribbons Get_+{_more_Ribbons_every_day_for_your_Ribbon_Shelf_in_Cooking".split(
+                  " ",
+                ),
+                "Recycled_Particle_Upgrades 1 100 filler {%_of_unspent_upgrades_are_spent {%_of_Unspent_'Alternate_Particle_Upgrades'_each_day_are_spent_equally_across_the_1st_bubbles_of_each_colour,_for_free!".split(
+                  " ",
+                ),
+                "Reduced_Jail_Sentence 2 150 filler }x_Lab_and_Divinity_EXP_gain }x_higher_EXP_gain_for_both_Laboratory_and_Divinity".split(
+                  " ",
+                ),
+                "Thanatos's_Teachings 2 200 filler +{%_extra_kills +{%_extra_kills,_for_opening_portals_and_Deathnote._@_This_bonus_is_additive,_not_a_multiplier.".split(
+                  " ",
+                ),
+                "Yet_Another_Printer_Multi 2 5 filler +{%_daily_printer_output,_maxed_out_at_20_days +{%_printer_output_every_day_for_20_days,_resets_when_taking_a_new_sample!".split(
+                  " ",
+                ),
+                "Cog_Lover 2 2 filler +{_daily_Jeweled_Cog_claims You_can_claim_+{_more_Jeweled_Cogs_every_day,_if_you_have_them_unlocked...".split(
+                  " ",
+                ),
+                "More_Soot_More_Salt 2 75 filler }x_faster_Refinery_cycles Refinery_cycles_are_}x_faster".split(
+                  " ",
+                ),
+                "Skillium_Fancyson 4 75 filler }x_Skill_EXP_gain }x_higher_EXP_gain_for_all_skills,_except_Research_and_W7_Skill_3!".split(
+                  " ",
+                ),
+                "Flopping_a_Full_House 5 15 filler }x_Active_Card_bonuses Actively_equipped_cards_give_}x_higher_bonuses,_and_this_stacks_with_Lab_chips!".split(
+                  " ",
+                ),
+                "Democracy_FTW 1 25 filler +{%_higher_Ballot_Bonus The_Bonus_Ballot_gives_a_+{%_higher_bonus_for_the_winning_bonus_of_the_week".split(
+                  " ",
+                ),
+                "Daily_Shopping_Spree 3 8 filler +{_daily_cheap_upgrades The_first_{_upgrades_you_buy_each_day_for_Masterclasses_are_80%_cheaper".split(
+                  " ",
+                ),
+                "May_the_Best_Man_Win 1 20 filler +{%_higher_Meritocracy_Multi The_Multi_Meritocracy_gives_a_+{%_higher_multiplier_for_the_winning_bonus_of_the_week".split(
+                  " ",
+                ),
+                "Midusian_Appetite 3 500 filler +{%_Golden_Food_bonus +{%_total_Golden_Food_bonus._@_This_bonus_is_additive,_not_a_multiplier.".split(
+                  " ",
+                ),
+                "Furry_Friends_Forever 2 200 filler }x_bigger_'rest-of-the-game'_bonuses The_'rest-of-the-game'_bonuses_from_your_friends_Orion_and_Poppy_are_all_}x_bigger".split(
+                  " ",
+                ),
+                "Best_Story_Ever_Told 3 50 filler }x_higher_Reward_Multi }x_higher_Reward_Multi_for_all_Monument_Stories_in_the_W5_caverns._Also,_reward_multi's_build_up_for_an_extra_+{_hours!".split(
+                  " ",
+                ),
+                "+1_Slab 2 15 filler }x_bigger_Slab_bonuses The_Slab_in_World_5_gives_}x_bigger_bonuses".split(
+                  " ",
+                ),
+                "Whats_in_your_Jar? 2 20 filler }x_collectible_bonuses }x_higher_bonuses_from_all_of_your_Jar_Collectibles_in_Cavern_11".split(
+                  " ",
+                ),
+                "Lightning_Fast_Naps 2 25 filler }x_faster_Stamina_Regen }x_faster_Stamina_regeneration_for_Spelunking".split(
+                  " ",
+                ),
+                "Big_Sig_Fig 3 150 filler }x_Sigil_level_up_speed All_your_Sigils_in_Alchemy_level_up_}x_faster_than_normal".split(
+                  " ",
+                ),
+                "Purebred_Eggs 1 900 filler }x_Breeding_Egg_luck The_chance_for_eggs_in_Breeding_to_rank_up,_which_remember_gives_higher_Mob_Power,_is_}x_higher_than_normal!".split(
+                  " ",
+                ),
+                "Inevitable_Builder 2 75 filler }x_Trimmed_slot_build_speed Gives_1_additional_Trimmed_Construction_Slot,_and_makes_them_}x_faster_for_a_total_bonus_speed_of_$x!".split(
+                  " ",
+                ),
+                "Blessed_Be_Thy_Luck 2 100 filler }x_better_Blessing_luck }x_better_luck_when_using_Blessings_in_your_Sneaking_inventory".split(
+                  " ",
+                ),
+                "Obsolete_No_More 1 1 filler All_them_big_words_above_will_become_true The_Metal_Detector_bonus_from_Equinox_Valley_no_longer_resets_when_you_find_a_new_best_nugget".split(
+                  " ",
+                ),
+                "Wowa_Woowa 5 3 filler +{%_higher_Prisma_and_Exalted_bonuses The_bonus_from_Prisma_Bubbles_and_Exalted_Stamps_is_+{%_higher".split(
+                  " ",
+                ),
+                "6_O'Clock_Crystals 1 2000 filler }x_more_Daily_Guaranteed_Crystal_Mobs You_know_how_you're_guaranteed_to_spawn_$_Crystal_Mobs_every_day?_Well_that'll_be_}x_higher_with_this_talent!".split(
+                  " ",
+                ),
+                "Shrine_World_Order_Bill 1 1 filler All_7_Worlds_will_ratify_this_bill_into_the_IdleOn_constitution Introduces_a_bill_to_congress_that_will_make_Shrines_gain_EXP_from_AFK_gains_no_matter_what_world_you're_in!".split(
+                  " ",
+                ),
+                "Super_Talent_Points 1 1 filler Unlocks_this_system_for_all_characters! You_get_+1_Super_Talent_Point_at_Class_LV_500,_LV_600,_LV_700_and_so_on._Spend_these_on_Talents_to_give_them_+$_LV!".split(
+                  " ",
+                ),
+                "filler 1 filler filler filler I_have_not_yet_considered_this_talent...".split(
+                  " ",
+                ),
+                "filler 1 filler filler filler I_have_not_yet_considered_this_talent...".split(
+                  " ",
+                ),
+                "filler 1 filler filler filler I_have_not_yet_considered_this_talent...".split(
+                  " ",
+                ),
+                "filler 1 filler filler filler I_have_not_yet_considered_this_talent...".split(
+                  " ",
+                ),
+                "filler 1 filler filler filler I_have_not_yet_considered_this_talent...".split(
+                  " ",
+                ),
+                "filler 1 filler filler filler I_have_not_yet_considered_this_talent...".split(
+                  " ",
+                ),
+                "filler 1 filler filler filler I_have_not_yet_considered_this_talent...".split(
+                  " ",
+                ),
+                "filler 1 filler filler filler I_have_not_yet_considered_this_talent...".split(
+                  " ",
+                ),
+                "filler 1 filler filler filler I_have_not_yet_considered_this_talent...".split(
+                  " ",
+                ),
+                "filler 1 filler filler filler I_have_not_yet_considered_this_talent...".split(
+                  " ",
+                ),
+              ];

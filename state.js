@@ -155,6 +155,7 @@ window.farmingState = {
         emperorBonusKills: 0,   // OptLacc[369] kill count
         vicarOfTheEmperorLevel: 0,   // Vicar of the Emperor //Arcane[48] 
         emperorBonusesArcadeLevel: 0,   // Emperor Bonuses ( arcade )// ArcadeUpg[51]level max 100 +1 (101) if super 
+        arcadebonus59: 0,   // ArcadeUpg[59] level max 100 +1 (101) if super
         kingOfAllWinnersPurchases: 0,   // GemItemsPurchased[11] purchase count
         endlessSummoningWaves: 0,   // OptLacc[319] wave count
         meritShopLevel: 0,   // TaskZZ2[5][4] - Merit Shop Summoning Winner Bonus level (capped at 10 in calculations)
@@ -192,7 +193,8 @@ window.farmingState = {
     miscBonuses: {
         // meritshop
         ogMeritShop: 0,     // +2% Overgrowth Chance per level (additive) TaskZZ2[5][2] 
-
+        EventShopOwned: "",   // OptLacc[311] - string identifier for event shop items owned
+        gaming12array: "",   // Gaming[12] - string identifier for gaming items/stickers owned
         //stamp
         evoCropEvoStamp: 0,   // +% Crop Evolution Chance (additive, scales with stamp level) StampLv[1][47]
         //other
@@ -200,8 +202,10 @@ window.farmingState = {
         Writhing_Grimoire: 0,   // Writhing Grimoire (Grimoire[36]) 
         evoSkillMastery200: 1.0, // 1.15× (multiplicative at 200 total Farming levels) Lv0_1[16] > 200 ? 1.15 : 1
         evoSkullShop: 0,   // × Crop Evolution Chance (multiplicative) OptLacc[229] 
-        evoButton: 0,   // Evolution Button  press count → OptLacc[594] (+0.25× per level multiplicative, calculated later)
-
+        evoButtonPressCount: 0,   // Evolution Button  press count → OptLacc[594] (+0.25× per level multiplicative, calculated later)
+        meritocracybonusid: 0, //OptLacc[453] 
+        meritocracycanvote: 0, //OptLacc[472]
+        clamworksLevel: 0,   // Clamworks level → OptLacc[464] 
         // Vault / Alchemy related (raw levels only)
         vaultMasteryLevel: 0,   // Vault Mastery raw level → UpgVault[32] (1.65× multiplier to highlighted vault upgrades)
         vaultMastery2Level: 0,   // Vault Mastery II raw level → UpgVault[61] (2.00× multiplier to green highlight vault upgrades)
@@ -210,7 +214,6 @@ window.farmingState = {
         croppiusEvolviusBonus: 0,   // Croppius Evolvius raw level → UpgVault[78]
 
         // Stickers
-        bettahStickahsZuperbits: 1.0,   // 1.20× higher bonuses from all Farming Stickers (multiplicative) Gaming[12] contains "管"
         evoStickers: 0,     // +% or × Crop Evolution Chance from all Farming Stickers (sporrious Stalk sticker) Research[9][4] 
 
         // Ninja Crystal Bonuses (simple 0/1 → multiplier)
@@ -223,13 +226,17 @@ window.farmingState = {
         votingBonus29: 0,   // +% Crop Evolution Chance  "VOTING_BONUS_29"
         zenitmarketLampLevel: 0,   // Spelunk[45][2]
         sushiBonus: 0,   // Sushi[5][35] - Sushi multi bonus
+        uniquesushicount: 0,   // Sushi[5]
         tometotalpoints: 0,   // Total points 
         riftlevel: 0,   // Rift[0] - Rift level
 
         //Cards
         jellofishcard: 0,   // Cards0[w7b5] - Jello Fish Card quantity/level
         //dream
-        dream_d_73 : 0,   // WeeklyBoss["d_73"] // check if unlocked for ribon bonus 
+        dream_d_73 : 0,   // WeeklyBoss["d_73"] //Ribbons give +1% extra multi every 10 Ranks!
+        dream_d_71 : 0,   // WeeklyBoss["d_71"] // All Research Grid bonuses are +1% bigger
+        dream_d_72 : 0,   // WeeklyBoss["d_72"] // All Research Grid bonuses are +1% bigger
+        dream_d_76 : 0,   // WeeklyBoss["d_76"] // All Research Grid bonuses are +1% bigger
     },
 
     // ======================
@@ -318,7 +325,10 @@ window.farmingState = {
         poppy_161: 0, // 2x_bonuses_from_Bonus_Ballot_and_Multi_Meritocracy
         w6b2b_162: 0, // All_meals_are_5x_cheaper_to_level_up,_and_give_1.25x_higher_bonuses!
         w7b7_147: 0, // All_bonuses_from_The_Button_in_W7_are_1.50x_bigger
-    }
+        reindeer_27: 0, // 2.00x_Gold_Ball_Shop_Bonuses (CompanionDB[27])
+    },
+    research: [],   // Parsed from Savedata.json Research[] - contains all 14 research grid arrays dynamically
+    spelunk: [],   // Parsed from Savedata.json Spelunk[] - contains all spelunking-related variables and arrays
 };
 
 // ======================

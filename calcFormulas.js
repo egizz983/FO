@@ -132,21 +132,6 @@ function getVialMultiplier() {
     multi_vialMultiplier = base * chemistryBonus;
 }
 
- // ====================== Button Formulas W7 ======================
-//Button evo chance formula
-function getButtonCropEvoMultiplier() {
-    if (farming_evo_button < 36) {
-        return 1;
-    }
-    
-    const diff = farming_evo_button - 36;
-    const fullBatches = Math.floor(diff / 45);
-    const remainder = diff % 45;
-    const partial = Math.min(5, remainder + 1);
-    
-    const C = 5 * fullBatches + partial;
-    farming_evo_button = 1 + C * 0.25;
-}
  // ====================== Alchemy bubbles ======================
 
 
@@ -164,7 +149,7 @@ window.calculateBubbleBonus = function(level, x1, x2, percentFromMax = 100) {
     return finalBonus;
 }
 
-//Kills Left To Advance formula 
+//Kills Left To Advance formula W6 only
 window.calculateKillsLeftToAdvance = function() {
     let totalCompletedSlots = 0;
     const state = window.farmingState;
@@ -429,17 +414,102 @@ window.getLampBonus = function() {
 };
 
 
-/**
- * Get Sushi Bonus
- * Returns 100 (or 2x as multiplier) if Sushi[5][35] is unlocked
- */
-window.getSushiBonus = function() {
-    const sushiBonus = window.farmingState?.miscBonuses?.sushiBonus || 0;
-    const base = sushiBonus > -1 ? 100 : 0;
-    
-    return base;
-};  
+function getRoGBonusQTY(t, i=0) { // sushi bonus
 
+    if (window.farmingState?.miscBonuses?.uniquesushicount > t || i === 99) {
+        return c.asNumber(
+            window.Research[37][0 | t]
+        );
+    } else {
+        return 0;
+    }
+}
+
+
+function getMeritocBonusz(t) {
+
+    const specialAccountValue = window.farmingState?.miscBonuses?.meritocracybonusid; // meritocracy bonus current id 
+    if (t === specialAccountValue) {
+        const ninjaInfo = window.NinjaInfo[41];
+        const index = Math.round(1 + 3 * t);
+
+        const baseValue = c.asNumber(ninjaInfo[index]);
+        const multiplier = getMeritocBonuszMulti();
+
+        return baseValue * multiplier;
+    }
+    return 0;
+};
+
+function getMeritocBonuszMulti() {
+    // Check if KillsLeft2Advance is still > 0
+    const killsLeft = c.asNumber(
+        window.farmingState?.killsLeftToAdvance?.character_0?.[250]?.[0] || 0
+    );
+
+    if (killsLeft > 0) {
+        return 0;
+    }
+
+    // Main formula
+    const companionBonus161 = window.CompanionDB[161][2]* window.farmingState.companion.poppy_161;
+    const voteBonus = window.farmingState?.miscBonuses?.meritocracycanvote; // 
+    const eventshopS = window.farmingState?.miscBonuses?.EventShopOwned || 0; // EventShopOwned
+    const baseMultiplier = Math.min(
+        1,
+        Math.max(0.25, 0.25 + voteBonus)
+    );
+    const clamworksLevel = window.farmingState?.miscBonuses?.clamworksLevel || 0;
+
+    const extraBonuses =
+        5 * (clamworksLevel > 3 ? 1 : 0) +
+        (window.farmingState.companion.w7a8_39 * window.CompanionDB[38][2]) +
+        getLegendPTS_bonus(24) +
+        getArcadeBonus(59, window.farmingState?.summoning?.arcadebonus59) +
+        20 * stringSearch(23, eventshopS) +
+        getRoGBonusQTY(51);
+
+    return (1 + companionBonus161 / 100) * (baseMultiplier + extraBonuses / 100);
+};
+
+function getLegendPTS_bonus(t) {
+    const spelunkIndex = 0 | t;   // same as original (fast integer conversion)
+
+    const baseValue = c.asNumber(
+        window.farmingState.spelunk[18][spelunkIndex]
+    );
+
+    const talentMultiplier = c.asNumber(
+        window.LegendTalents[spelunkIndex][2]
+    );
+
+    return Math.round(baseValue * talentMultiplier);
+};
+
+function getArcadeBonus(e,level) {
+    const dnsm = a.engine.getGameAttribute("DNSM");
+    const arcadeIndex = 0 | e; // same as Math.floor(e) — used everywhere in original
+
+    let multiplier = 1;
+    // Double the bonus if this upgrade is at level 101
+    if (level === 101) {
+        multiplier = 2 * c.asNumber(multiplier);
+    }
+
+    // Double the bonus again if Companion 27 is active
+    if (window.farmingState?.companion?.reindeer_27 === 1) {
+        multiplier = 2 * c.asNumber(multiplier);
+    }
+
+    return multiplier * x._customBlock_ArbitraryCode5Inputs(
+        "" + h.string(window.ArcadeShopInfo[arcadeIndex][3]),
+        c.asNumber(window.ArcadeShopInfo[arcadeIndex][1]),
+        c.asNumber(window.ArcadeShopInfo[arcadeIndex][2]),
+        c.asNumber(level),
+        0,
+        0
+    );
+};
 
 // _customBlock_CauldronStats = function (e, t, i, s) 
 // CauldronBonus" == e
@@ -447,28 +517,39 @@ window.getSushiBonus = function() {
 
 // Vials base bonus function
 window.getVialBonus = function(i, level) {
-    let customlist = window.AlchemyDescription[4][0 | i];
+    let customlist = window.AlchemyDescription?.[3]?.[0 | i];
+
+    // Safety check: if customlist doesn't exist, return 0
+    if (!customlist) {
+        console.warn(`[getVialBonus] No customlist found for vial index ${i}`);
+        return 0;
+    }
 
     let riftBonus = 0;
     if (34 < c.asNumber(window.farmingState.miscBonuses.riftlevel)) {
-        riftBonus = 2 * countLevel13;
+        riftBonus = 2 * window.farmingState.alchemy.countLevel13;
     }
 
     const totalBonus = riftBonus + window.getVaultUpgBonus(42,window.farmingState.miscBonuses.vaultOvertuneLevel); 
     const dnzz = totalBonus / 100;
-    const merit = m._customBlock_Summoning2("MeritocBonusz", 20, 0) / 100; // need to update this 
+    const merit = getMeritocBonusz(20) / 100; // need to update this 
 
     var arbitraryResult = ArbitraryCode5Inputs(
-        "" + string(customlist[3]),
+        "" + String(customlist[3]),
         c.asNumber(customlist[1]),
         c.asNumber(customlist[2]),
         c.asNumber(level)
     );
 
+
+
     if (window.farmingState.lab.my1stChemistrySet) {
-        return 2 * (1 + dnzz) * (1 + merit) * arbitraryResult;
+        const result = 2 * (1 + dnzz) * (1 + merit) * arbitraryResult;
+
+        return result;
     } else {
-        return (1 + dnzz) * (1 + merit) * arbitraryResult;
+        const result = (1 + dnzz) * (1 + merit) * arbitraryResult;
+        return result;
     }
 };
 
@@ -896,7 +977,7 @@ function Button_BonusPerTime(t) {
 function Button_BonusMULTI() {
     return (
         (1 + (50 * window.farmingState.companion.w7b7_147) / 100) *
-        (1 + m._customBlock_ResearchStuff("Grid_Bonus", 125, 0) / 100)
+        (1 + getGridBonus(125, 0) / 100)
     );
 }
 
@@ -919,41 +1000,133 @@ function getButtonBonuses(t, totalButtonUpgrades) {
     return Button_Bonsuz[0 | t];
 }
 
+function stringSearch(t,savedString) {
+    const searchKey = String(window.Number2Letter(0 | t));
+    return savedString.indexOf(searchKey) !== -1 ? 1 : 0;
+}
 
-//===============================Stickerbonus(4) ================================ Manual input for now .
-// _customBlock_Summoning("EventShopOwned", 37, 0) // OptionsListAccount[311] containst string  Number2Letter[37]
-// _customBlock_GamingStatType("SuperBitType", 62, 0) // need to check if Gaming[12] have Number2Letter[62] 
-// _customBlock_ResearchStuff("Grid_Bonus", 68, 2) // ("Grid_Bonus", 68, 0) * Research[11].length
-// _customBlock_ResearchStuff("Grid_Bonus", 68, 0){
+function getStickerBonus(t) {
 
-//   return 
-//   -1 == a.engine.getGameAttribute("Research")[1][0 | 68]
-//     ?   // ← Path A: not upgraded
-//         c.asNumber( CustomLists.h.ResGridSquares[68][2] ) *
-//         c.asNumber( Research[0][68] ) *
-//         Math.max(1, m._customBlock_ResearchStuff("Grid_Bonus_Allmulti", 0, 0))
+    const Research = window.farmingState.research;
+    const eventShopS = String(window.farmingState.miscBonuses.EventShopOwned);
+    const GamingArrayS = String(window.farmingState.miscBonuses.gaming12array);
 
-//     :   // ← Path B: upgraded
-//         c.asNumber( CustomLists.h.ResGridSquares[68][2] ) *
-//         c.asNumber( Research[0][68] ) *
-//         (1 + 
-//           c.asNumber( CustomLists.h.Research[5][ Research[1][68] ] ) / 100
-//         ) *
-//         Math.max(1, m._customBlock_ResearchStuff("Grid_Bonus_Allmulti", 0, 0));
-// }
+    // First multiplier:
+    // (1 + (Grid_Bonus(68, mode=2) + 30 * EventShopOwned) / 100)
+    const multi1 = 1 + (
+        getGridBonus(68,2) +
+        30 * stringSearch(37, eventShopS)
+    ) / 100;
 
+    // Second multiplier:
+    // (1 + (20 * SuperBitType) / 100)
+    const multi2 = 1 + (
+        20 * stringSearch(62, GamingArrayS)
+    ) / 100;
 
+    // Base values
+    const researchValue9 = (Research && Research[9]) ? c.asNumber(Research[9][0 | t]) : 0;
+    const researchValue25 = (window.Research && window.Research[25]) ? c.asNumber(window.Research[25][0 | t]) : 0;
 
-
-              // if ("StickerBonus" == e)
-              //   return (
-              //     (1 + (m._customBlock_ResearchStuff("Grid_Bonus", 68, 2) + 30 * m._customBlock_Summoning("EventShopOwned", 37, 0)) / 100) *  
-              //     (1 + (20 * m._customBlock_GamingStatType("SuperBitType", 62, 0)) / 100) * 
-              //     c.asNumber(a.engine.getGameAttribute("Research")[9][4]) * 40
-              //   );
-
+    // Final result
+    return multi1 * multi2 * researchValue9 * researchValue25;
+}
 
               
+function getGridBonus(t, i) {
+    // Mode 1: raw value (most basic call)
+    if (i === 1) {
+        return Math.round(
+            c.asNumber(
+                window.farmingState.research[0][0 | t]
+            )
+        );
+    }
+
+    // Mode 2: special override cases (only used for specific t values)
+    if (i === 2) {
+        if (31 == t) {
+            return 25 * c.asNumber(
+                window.farmingState.research[0][0 | t]
+            );
+        }
+        if (67 == t || 68 == t || 107 == t) {
+            const researchArray = window.farmingState.research[11];
+            const arrayLength = Array.isArray(researchArray) ? researchArray.length : 0;
+            return getGridBonus(t,0) * Math.max(1, arrayLength);
+        }
+        if (94 == t) {
+            return getGridBonus(t,0) *
+                   m._customBlock_ResearchStuff("TotalObsLVs", 0, 0); // researcg exo
+        }
+        if (112 == t) {
+            return getGridBonus(t,0) *
+                   m._customBlock_ResearchStuff("TotalOccurrencesFound", 0, 0); // research exp gain 
+        }
+        if (151 == t) {
+            return a.engine.getGameAttribute("OptionsListAccount")[500]; // spelunking related 
+        }
+        if (168 == t) {
+            return getGridBonus(t,0) * Math.floor( m._customBlock_Minehead("GlimboTotalTrades", 0, 0) / 100 );
+        }
+        // fallback for any other t when i=2
+        return getGridBonus(t,0);
+    }
+
+    // Default case (i = 0 or omitted) - this is the normal calculation used everywhere else
+    const Research = window.farmingState.research;
+    const ResGridSquares = window.ResGridSquares;
+
+    // Safety checks for undefined arrays
+    if (!Research || !Research[0] || !ResGridSquares) {
+        return 0;
+    }
+
+    const base = c.asNumber(ResGridSquares[0 | t]?.[2]) * c.asNumber(Research[0][0 | t]);
+
+    const globalMulti = Math.max(
+        1,
+        getGridBonusAllmulti()
+    );
+
+    if (-1 == Research[1]?.[0 | t]) {
+        // No specific upgrade applied to this grid slot
+        return base * globalMulti;
+    } else {
+        // A specific upgrade from another research is applied
+        const upgradeIdx = Research[1][0 | t];
+        const extraPercent = c.asNumber(window.Research[5][0 | upgradeIdx]) / 100;
+
+        return base * (1 + extraPercent) * globalMulti;
+    }
+}
+
+
+function getGridBonusAllmulti() {
+
+    const Research = window.farmingState.research;
+
+    // Base companion bonus
+    const companions55 = window.CompanionDB[55][2] * window.farmingState.companion.w7b11_55; // grid bonus companion x1.15
+
+    // Research-based bonus (capped at 5%)
+    const researchBonus = 5 * Math.min(
+        1,
+        c.asNumber(Research[0][173]) * 1 // placeholder1 used to check doot if active 1 if not 0 results stil lame capped at 5% 
+    );
+
+    // Cloud bonuses + Sushi bonus
+    const cloud71 = window.farmingState.miscBonuses.dream_d_71;
+    const cloud72 = window.farmingState.miscBonuses.dream_d_72;
+    const cloud76 = window.farmingState.miscBonuses.dream_d_76;
+    const sushi53 = getRoGBonusQTY(53);
+
+    // Sum all the percentage contributions
+    const totalPercent = companions55 + researchBonus + cloud71 + cloud72 + cloud76 + sushi53;
+
+    // Final multiplier = 1 + (total % / 100)
+    return 1 + (totalPercent / 100);
+}
 
 //===================Crop Value 
 

@@ -40,10 +40,10 @@ window.parseCauldronData = function(data, state = window.farmingState) {
     const vials = cauldronInfo[4];
     if (vials && typeof vials === "object") {
         // Ricecakorade Vial +2% Farming Speed per level
-        state.alchemy.ricecakoradeBonus = (Number(vials["64"]) || 0) * 0.02;
+        state.alchemy.ricecakoradeBonus = (Number(vials["64"]) || 0) ;
 
         // Flavorgil Vial +7% Crop Evolution chance per level
-        state.alchemy.flavorgilBonus = (Number(vials["66"]) || 0) * 0.07;
+        state.alchemy.flavorgilBonus = (Number(vials["66"]) || 0) ;
 
         // Count vials at level 13 or higher
         state.alchemy.countLevel13 = Object.keys(vials)

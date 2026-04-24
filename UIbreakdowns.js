@@ -97,7 +97,7 @@ window.getFarmingBreakdowns = function() {
             },
             {
                 label: "Alchemy",
-                value: "×[placeholder]",
+                value: "×" + (getVialBonus(66,window.farmingState.alchemy.flavorgilBonus).toMulti()* ((window.calculateBubbleBonus(farmingState.alchemy.croppiusMapperBubblebonus, 5, 70) * window.calculateKillsLeftToAdvance()).toMulti()) * ((window.calculateBubbleBonus(farmingState.alchemy.cropChapterBubblebonus, 12, 50) * window.calculateTomeScorePer2000()).toMulti())).toFixed(2),
                 children: [
                     {
                         label: "Crop Chapter Bubble",
@@ -109,7 +109,7 @@ window.getFarmingBreakdowns = function() {
                     },
                     {
                         label: "Vials(Flavorgil)",
-                        value: "×[placeholder]"
+                        value: "×" + getVialBonus(66,window.farmingState.alchemy.flavorgilBonus).toMulti().toFixed(2)
                     }
                 ]
             },
@@ -132,7 +132,7 @@ window.getFarmingBreakdowns = function() {
             },
             { label: "SummonerWinBonus", value: "×" + window.getWinBonus(10,).toMulti().toFixed(2) },
             { label: "Hole Lamp Bonus", value: "×" + window.getLampBonus().toMulti().toFixed(2) },
-            { label: "Sushi Bonus", value: "×" + window.getSushiBonus().toMulti().toFixed(2) },
+            { label: "Sushi Bonus", value: "×" + getRoGBonusQTY(35).toMulti().toFixed(2) },
             { label: "Card Bonus", value: "×" + getCardBonus(window.farmingState.miscBonuses.jellofishcard).toMulti().toFixed(2) },
             { label: "Vault Upgrade", value: "×" + window.getVaultUpgBonus(78,window.farmingState.miscBonuses.croppiusEvolviusBonus).toMulti().toFixed(2) },
             { label: "Wisdom Monument", value: "×" + getmonumentROGbonuses(2,4).toMulti().toFixed(2) },
@@ -143,8 +143,8 @@ window.getFarmingBreakdowns = function() {
             { label: "Skill Mastery", value: "×" + getSkillMasteryBonus().toFixed(2) },
             { label: "StarSigns", value: "×1" },
             { label: "Talent(Mass Irrigation)", value: "×" + calculateMassIrrigationMultiplier(window.farmingState.talents.massIrrigation).toFixed(2) },
-            { label: "Sticker", value: "×1" },
-            { label: "Button", value: "×1" }
+            { label: "Sticker", value: "×" + getStickerBonus(4).toMulti().toFixed(2) },
+            { label: "Button", value: "×"+ getButtonBonuses(5,window.farmingState.miscBonuses.evoButtonPressCount).toMulti().toFixed(2) },
         ],
 
         "Overgrowth": [
