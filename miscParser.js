@@ -62,6 +62,7 @@ window.parseMiscBonusesData = function(data, state = window.farmingState) {
     state.holes.hole21[8]                    = safeGet(holes, 21, 8); // Parse Holes[21][8]
     state.miscBonuses.evoCropEvoStamp        = safeGet(state.playerData.StampLv, 1, 47); // evo stamp
     state.miscBonuses.evoSacrificeHarvest    = safeGet(state.playerData.Grimoire, 14); //Sacrifice Harvest grimoire upgrade level
+    state.miscBonuses.Writhing_Grimoire      = safeGet(state.playerData.Grimoire, 36); // Writhing Grimoire level
     
     // Skill Mastery 200
     let thisCharFarming = safeGet(state.playerData.Lv0_1, 16);

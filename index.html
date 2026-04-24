@@ -249,8 +249,33 @@
             // 12. Vault Upgrade Bonus
             const vaultUpgradeTotal = window.getVaultUpgBonus(78, state.miscBonuses.croppiusEvolviusBonus).toMulti();
             
+            // 13. Achievement Bonus
+            const achievementTotal = (5 * (state.achievements.farmingEvoLilOvergrowth === -1 ? 1 : 0)).toMulti();
+            
+            const grimoireTotal = grimoireUpgBonus().toMulti();
+
+            const killroybonus = getKillroyBonus();
+            const skillMasteryBonus = getSkillMasteryBonus();
+            const massIrrigationBonus = calculateMassIrrigationMultiplier(window.farmingState.talents.massIrrigation);
             // Multiply all with full precision, then format for display
-            const total = landRanksTotal * marketTotal * summonerWinBonusTotal * holeLampBonusTotal * sushiBonusTotal * cardBonusTotal * croppiusMapperTotal * cropChapterBubbleTotal * billJackPepperTotal * nyanborgirTotal * monumentTotal * vaultUpgradeTotal;
+            const total = 
+            landRanksTotal * 
+            marketTotal * 
+            summonerWinBonusTotal * 
+            holeLampBonusTotal * 
+            sushiBonusTotal * 
+            cardBonusTotal * 
+            croppiusMapperTotal * 
+            cropChapterBubbleTotal * 
+            billJackPepperTotal * 
+            nyanborgirTotal * 
+            monumentTotal * 
+            vaultUpgradeTotal * 
+            achievementTotal * 
+            grimoireTotal * 
+            killroybonus * 
+            skillMasteryBonus * 
+            massIrrigationBonus;
 
             return total.toExponential(4);
         }

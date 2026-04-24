@@ -723,9 +723,6 @@ function getRibbonBonus(t) {
   return 1 + (baseCalc + setContribution + cloudContribution) / 100;
 }
 
-
-
-
 //===================MonumentROGbonuses(2,4) return formula ===
 
 function getmonumentROGbonuses(t, i) { // 2,4 ( 24 , 2,9 (29) )
@@ -806,40 +803,26 @@ function getmonumentROGbonuses(t, i) { // 2,4 ( 24 , 2,9 (29) )
 
 //===================GrimoireUpgbonus(14) ===
 
-// m._customBlock_Summoning("GrimoireUpgBonus", 14, 0) == Grimoire[14] × 5 × (1 + (Grimoire[36] × 1) / 100)
+function grimoireUpgBonus() {// hardcoded for sacraficeharverst only 
 
-//CustomLists.GrimoireUpg[14][5] = 5 
-//CustomLists.GrimoireUpg[36][5] = 1
-//(1+ (Grimoire[14] × CustomLists.GrimoireUpg[14][5] × (1 + (Grimoire[36] × CustomLists.GrimoireUpg[36][5]) / 100) / 100)
+  const base = window.farmingState.miscBonuses.evoSacrificeHarvest * 5;
+  return base * (1 + (window.farmingState.miscBonuses.Writhing_Grimoire * 1) / 100);
+}
 
-//==============================================================
-//===================achievement 355 bonus formula ===
-
-//(1 + (5 * p._customBlock_AchieveStatus(355)) / 100)  // pretty much = to 1.05 if achievement unlocked
 
 //==============================================================
 //===================Skullshop evo multi formula =========================================
-//Math.max(1,m._customBlock_RandomEvent("KillroyBonuses", 1, 0),)
-
-// m._customBlock_RandomEvent("KillroyBonuses", 1, 0) = 1 + 9 × (OptionsListAccount[229] / (300 + OptionsListAccount[229]))
-
-
-
-//===================BasketUpgQTY", 99) formula=========================================
-// Math.max(
-//   1,
-//   m._customBlock_FarmingStuffs("BasketUpgQTY", 99, 1)
-// )
-
-
-//m._customBlock_FarmingStuffs("BasketUpgQTY", 99, 1) =calculateEvoGMO(evoGmoLevel, cropCount200) * calculateGMOBonus(cropCount100k // evogmo * super gmo)
-
-
+function getKillroyBonus() {
+    return 1 + (window.farmingState.miscBonuses.evoSkullShop  / (300 + window.farmingState.miscBonuses.evoSkullShop )) * 9;
+}
 
 
 //=====================rift skill mastery formula=========================================
 // 1.15× (multiplicative at 200 total Farming levels) Lv0_1[16] > 200 ? 1.15 : 1
+function getSkillMasteryBonus() {
 
+    return window.farmingState.levels.farming >= 200 ? 1.15 : 1;
+}
 
 
 //=====================Star sign bonus formula=========================================
@@ -901,38 +884,6 @@ function calculateStarSign65({
 
 
 
-//===============================Land Rank upgrade bonus total ================================
-//Returns Math.max(1, (1 + EvolutionMegaboostBonus / 100) * (1 + EvolutionSuperboostBonus / 100) * (1 + EvolutionUltraBoostBonus / 100))
-
-
-//===============================Getbonus2(1,205) ================================ // manual input
-// Death bringer talent Mass Irigation
-
-//===============================Land Rank upgrade Evolution Boost per rank ================================ VotingBonus(29) require manual input 
-
-            // (1 +
-            //             (m._customBlock_FarmingStuffs(
-            //               "LankRankUpgBonus",
-            //               0,
-            //               0,
-            //             ) *
-            //               c.asNumber(
-            //                 a.engine.getGameAttribute("FarmRank")[0][0],
-            //               ) +
-            //               m._customBlock_Summoning("VotingBonusz", 29, 0)) /
-            //               100)
-
-
-//Full formula , uses (Evolution boost % * first plot rank level  + voting bonus % )/ 100 + 1
- //1 + (LandRankUpgBonus(0) * FarmRank[0][0] + VotingBonus(29)) / 100 
-
-
-//===============================All exotic multis ================================
-// all exotic multis multiply each other and other multis 
-
-//===============================Exotic evo chance per leve or flat %  ================================
-// all adds up to a single multi 
-
 //===============================Button evo bonus  (its bugged its using wrong multi)================================
 //final formula (1+ getButtonBonuses(5,OptLacc[594]) / 100) // t should be 7 but game uses 5 replace when fixed.
 
@@ -944,7 +895,7 @@ function Button_BonusPerTime(t) {
 // === Button_BonusMULTI
 function Button_BonusMULTI() {
     return (
-        (1 + m._customBlock_Companions(147) / 100) *
+        (1 + (50 * window.farmingState.companion.w7b7_147) / 100) *
         (1 + m._customBlock_ResearchStuff("Grid_Bonus", 125, 0) / 100)
     );
 }

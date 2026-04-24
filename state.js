@@ -197,6 +197,7 @@ window.farmingState = {
         evoCropEvoStamp: 0,   // +% Crop Evolution Chance (additive, scales with stamp level) StampLv[1][47]
         //other
         evoSacrificeHarvest: 0,   // +0.05× per talent level (multiplicative) Grimoire[14]
+        Writhing_Grimoire: 0,   // Writhing Grimoire (Grimoire[36]) 
         evoSkillMastery200: 1.0, // 1.15× (multiplicative at 200 total Farming levels) Lv0_1[16] > 200 ? 1.15 : 1
         evoSkullShop: 0,   // × Crop Evolution Chance (multiplicative) OptLacc[229] 
         evoButton: 0,   // Evolution Button  press count → OptLacc[594] (+0.25× per level multiplicative, calculated later)
@@ -316,6 +317,7 @@ window.farmingState = {
         rift4_88: 0, // {50%_Prisma_Bubble_bonus_multi_and_{5_Prisma_Bubbles
         poppy_161: 0, // 2x_bonuses_from_Bonus_Ballot_and_Multi_Meritocracy
         w6b2b_162: 0, // All_meals_are_5x_cheaper_to_level_up,_and_give_1.25x_higher_bonuses!
+        w7b7_147: 0, // All_bonuses_from_The_Button_in_W7_are_1.50x_bigger
     }
 };
 
