@@ -134,7 +134,7 @@ window.getFarmingBreakdowns = function() {
             { label: "Hole Lamp Bonus", value: "×" + window.getLampBonus().toMulti().toFixed(2) },
             { label: "Sushi Bonus", value: "×" + getRoGBonusQTY(35).toMulti().toFixed(2) },
             { label: "Card Bonus", value: "×" + getCardBonus(window.farmingState.miscBonuses.jellofishcard).toMulti().toFixed(2) },
-            { label: "Vault Upgrade", value: "×" + window.getVaultUpgBonus(78,window.farmingState.miscBonuses.croppiusEvolviusBonus).toMulti().toFixed(2) },
+            { label: "Vault Upgrade", value: "×" + window.getVaultUpgBonus(78).toMulti().toFixed(2) },
             { label: "Wisdom Monument", value: "×" + getmonumentROGbonuses(2,4).toMulti().toFixed(2) },
             { label: "Stamp", value: "×1" },
             { label: "Grimoire", value: "×" + grimoireUpgBonus().toMulti().toFixed(2) },

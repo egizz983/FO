@@ -27,6 +27,7 @@ window.parseAchievementsData = function(data, state = window.farmingState) {
     state.achievements.spectreStars              = Number(achieveReg[379]) || 0;   // 1.01× Winners Bonus
     state.achievements.farmingEvoLilOvergrowth   = Number(achieveReg[355]) || 0;   // 1.05× Crop Evolution chance
     state.achievements.farmingOgBigTimeLandOwner = Number(achieveReg[365]) || 0;   // 1.15× Overgrowth chance
+    state.achievements.checkoutTakeout           = Number(achieveReg[291]) || 0;   // +5 max level
 
     console.log(`✅ parseAchievementsData completed`);
     return true;

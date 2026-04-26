@@ -51,17 +51,27 @@ window.parseMiscBonusesData = function(data, state = window.farmingState) {
     let cards0       = parseJsonField("Cards0");
     let weeklyBoss   = parseJsonField("WeeklyBoss");
     let Ribbon       = parseJsonField("Ribbon");
+    let compass       = parseJsonField("Compass");
 
     // ======================
-    // PARSE RESEARCH ARRAY
+    //  PARSE  ARRAY
     // ======================
     state.research = research;
-    // ======================
-    // PARSE SPELUNK ARRAY
-    // ======================
     state.spelunk = spelunk;
+    state.compass = compass[4];
+    state.pristineCharms = ninja[107];
+    state.vaultupg = upgVault;
+    state.ArcadeUpg = ArcadeUpg;
+    // ======================
+    // PARSE SKILL LEVELS (SL_0-9) - Get max across all characters
+    // ======================
+    state.skillLevels = parseSkillLevels(state.playerData);
 
-    
+    // ======================
+    // PARSE HIGHEST CHARACTER LEVEL (Lv0_0 to Lv0_9 at index [0])
+    // ======================
+    state.levels.highestCharacterLevel = parseHighestCharacterLevel(state.playerData);
+
     state.miscBonuses.ogTaffyDisc            = safeGet(ninja, 107, 11) === 1 ? 1.5 : 1.0; // sneaking Taffy Disc OG chance
     state.miscBonuses.crystalSneeking        = safeGet(ninja, 107, 8) === 1 ? 1.3 : 1.0; // sneaking  Crystal Comb  Bigger Summoning Winner Bonuses	
     state.miscBonuses.ogMeritShop            = safeGet(taskZZ2, 5, 2);  // Merit Shop Overgrowth raw level
@@ -113,18 +123,12 @@ window.parseMiscBonusesData = function(data, state = window.farmingState) {
 
     state.miscBonuses.godshardSetBonus       = String(optLacc[379] || "").includes("GODSHARD_SET") ? 15 : 0; //Godshard SetBonus (15% if set equipped, 0% otherwise) -  OptLacc[379]
     state.miscBonuses.emperorSetBonus        = String(optLacc[379] || "").includes("EMPEROR_SET") ? 20 : 0; //Emperor SetBonus (20% if set equipped, 0% otherwise) -  OptLacc[379]
+    state.miscBonuses.kattlekrukSetBonus     = String(optLacc[379] || "").includes("KATTLEKRUK_SET") ? 5 : 0; //Kattlekruk SetBonus (25% if set equipped, 0% otherwise) -  OptLacc[379]
     state.miscBonuses.evoButtonPressCount              = safeGet(optLacc, 594); //Evolution Button (raw hold press count)
     state.miscBonuses.meritocracybonusid     = safeGet(optLacc, 453); //Meritocracy Bonus ID - OptLacc[453]
     state.miscBonuses.meritocracycanvote     = safeGet(optLacc, 472); //Meritocracy Can Vote flag - OptLacc[472]
     state.miscBonuses.clamworksLevel         = safeGet(optLacc, 464); //Clamworks level - OptLacc[464]
-    state.miscBonuses.vaultMasteryLevel      = safeGet(upgVault, 32); //Vault Mastery (raw level) 1.65× multiplier to vault upgrades
-    state.miscBonuses.vaultMastery2Level     = safeGet(upgVault, 61); //Vault Mastery II (raw level) 2.00× multiplier to green highlight vault upgrades
-    state.miscBonuses.vaultMasteryIIILevel   = safeGet(upgVault, 89); //Vault Mastery III (raw level) tier bonus for upgrades 61-89
-    state.miscBonuses.vaultOvertuneLevel     = safeGet(upgVault, 42); //Vault Overtune (raw level) multi to vial bonus
 
-
-    // Croppius Evolvius Bonus Vault upgrade evo chance
-    state.miscBonuses.croppiusEvolviusBonus  = safeGet(upgVault, 78);
 
     // ======================
     // MEALS
@@ -182,5 +186,112 @@ window.parseMiscBonusesData = function(data, state = window.farmingState) {
 
     return true;
 };
+
+// ======================
+// SKILL LEVELS PARSER
+// ======================
+/**
+ * Parses skill levels from all 10 character arrays (SL_0 through SL_9)
+ * Returns a single array with the maximum value for each index
+ * Only includes indexes that exist in at least one character's skill level object
+ * 
+ * Note: SL_0-9 are stored as stringified JSON objects with string keys (not arrays)
+ */
+function parseSkillLevels(playerData) {
+    const skillLevelMap = {}; // Use object to track indices and max values
+
+    // Loop through all 10 characters (SL_0 to SL_9)
+    for (let char = 0; char < 10; char++) {
+        const fieldName = `SL_${char}`;
+        let charSkillLevels = playerData[fieldName];
+
+        // Parse if stringified
+        if (typeof charSkillLevels === "string") {
+            try {
+                charSkillLevels = JSON.parse(charSkillLevels);
+            } catch (e) {
+                console.warn(`⚠️ Failed to parse ${fieldName} as JSON`);
+                charSkillLevels = {};
+            }
+        }
+
+        // If not an object, skip
+        if (typeof charSkillLevels !== "object" || charSkillLevels === null) {
+            continue;
+        }
+
+        // For each property in this character's skill levels object
+        for (const keyStr in charSkillLevels) {
+            const index = Number(keyStr);
+            const value = Number(charSkillLevels[keyStr]) || 0;
+
+            // Only track if value is greater than 0
+            if (value > 0) {
+                // Keep the maximum value for this index
+                if (skillLevelMap[index] === undefined) {
+                    skillLevelMap[index] = value;
+                } else {
+                    skillLevelMap[index] = Math.max(skillLevelMap[index], value);
+                }
+            }
+        }
+    }
+
+    // Convert object to sparse array
+    const resultArray = [];
+    for (const indexStr in skillLevelMap) {
+        const index = Number(indexStr);
+        resultArray[index] = skillLevelMap[index];
+    }
+
+    console.log(`✅ Parsed Skill Levels - found ${Object.keys(skillLevelMap).length} unique indices`);
+    return resultArray;
+}
+
+// ======================
+// HIGHEST CHARACTER LEVEL PARSER
+// ======================
+/**
+ * Parses character levels from all 10 character arrays (Lv0_0 through Lv0_9)
+ * Returns the highest character level at index [0] across all characters
+ * 
+ * Note: Each Lv0_X array contains the character's levels at different indices
+ * Lv0_X[0] = Character Level
+ */
+function parseHighestCharacterLevel(playerData) {
+    let maxCharacterLevel = 0;
+
+    // Loop through all 10 characters (Lv0_0 to Lv0_9)
+    for (let char = 0; char < 10; char++) {
+        const fieldName = `Lv0_${char}`;
+        let charLevelData = playerData[fieldName];
+
+        // Parse if stringified
+        if (typeof charLevelData === "string") {
+            try {
+                charLevelData = JSON.parse(charLevelData);
+            } catch (e) {
+                console.warn(`⚠️ Failed to parse ${fieldName} as JSON`);
+                continue;
+            }
+        }
+
+        // If not an array, skip
+        if (!Array.isArray(charLevelData)) {
+            continue;
+        }
+
+        // Get character level at index [0]
+        const charLevel = Number(charLevelData[0]) || 0;
+
+        // Track the maximum
+        if (charLevel > maxCharacterLevel) {
+            maxCharacterLevel = charLevel;
+        }
+    }
+
+    console.log(`✅ Parsed Highest Character Level - found max level: ${maxCharacterLevel}`);
+    return maxCharacterLevel;
+}
 
 

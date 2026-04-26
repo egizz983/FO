@@ -34,7 +34,8 @@ window.farmingState = {
         regalisMyBeloved: 0,   // AchieveReg[373] → 1.01× (unlocked = -1) 	1.01x larger Winners Bonuses from Summoning
         spectreStars: 0,   // AchieveReg[379] → 1.01× (unlocked = -1) 1.01x larger Winners Bonuses from Summoning
         farmingEvoLilOvergrowth: 0,   // AchieveReg[355] → 1.05× Crop Evolution chance
-        farmingOgBigTimeLandOwner: 0   // AchieveReg[365] → 1.15× Overgrowth chance 
+        farmingOgBigTimeLandOwner: 0,   // AchieveReg[365] → 1.15× Overgrowth chance 
+        checkoutTakeout: 0   // AchieveReg[291]  +5max level
     },
 
     // ======================
@@ -146,7 +147,8 @@ window.farmingState = {
             new ExoticMarketUpgrade({ index: 50, name: "Gogogrow",            calcType: "diminishing", base: 50,   isMultiplier: false, unit: "%",  currentLevel: 0, perLevel: false, description: "% Growth Speed for all land plots", group: "GrowthSpeed" }),
             new ExoticMarketUpgrade({ index: 51, name: "Bountiful I",         calcType: "diminishing", base: 50,   isMultiplier: false, unit: "%",  currentLevel: 0, perLevel: false, description: "% chance for +1 crop when fully grown", group: "Production" }),
             new ExoticMarketUpgrade({ index: 52, name: "Bountiful II",        calcType: "diminishing", base: 60,   isMultiplier: false, unit: "%",  currentLevel: 0, perLevel: false, description: "% chance for +1 crop when fully grown", group: "Production" }),
-            new ExoticMarketUpgrade({ index: 53, name: "Bountiful III",       calcType: "diminishing", base: 70,   isMultiplier: false, unit: "%",  currentLevel: 0, perLevel: false, description: "% chance for +1 crop when fully grown", group: "Production" })
+            new ExoticMarketUpgrade({ index: 53, name: "Bountiful III",       calcType: "diminishing", base: 70,   isMultiplier: false, unit: "%",  currentLevel: 0, perLevel: false, description: "% chance for +1 crop when fully grown", group: "Production" }),
+            new ExoticMarketUpgrade({ index: 69, name: "Exalted Eldou",       calcType: "diminishing", base: 2,    isMultiplier: false, unit: "%",  currentLevel: 0, perLevel: false, description: "% Exalted Stamp Bonus (Not Farming Related)", group: "NonFarming" }),
         ]
     },
 
@@ -155,7 +157,6 @@ window.farmingState = {
         emperorBonusKills: 0,   // OptLacc[369] kill count
         vicarOfTheEmperorLevel: 0,   // Vicar of the Emperor //Arcane[48] 
         emperorBonusesArcadeLevel: 0,   // Emperor Bonuses ( arcade )// ArcadeUpg[51]level max 100 +1 (101) if super 
-        arcadebonus59: 0,   // ArcadeUpg[59] level max 100 +1 (101) if super
         kingOfAllWinnersPurchases: 0,   // GemItemsPurchased[11] purchase count
         endlessSummoningWaves: 0,   // OptLacc[319] wave count
         meritShopLevel: 0,   // TaskZZ2[5][4] - Merit Shop Summoning Winner Bonus level (capped at 10 in calculations)
@@ -206,12 +207,7 @@ window.farmingState = {
         meritocracybonusid: 0, //OptLacc[453] 
         meritocracycanvote: 0, //OptLacc[472]
         clamworksLevel: 0,   // Clamworks level → OptLacc[464] 
-        // Vault / Alchemy related (raw levels only)
-        vaultMasteryLevel: 0,   // Vault Mastery raw level → UpgVault[32] (1.65× multiplier to highlighted vault upgrades)
-        vaultMastery2Level: 0,   // Vault Mastery II raw level → UpgVault[61] (2.00× multiplier to green highlight vault upgrades)
-        vaultMasteryIIILevel: 0,   // Vault Mastery III raw level → UpgVault[89] (tier bonus for upgrades 61-89)
-        vaultOvertuneLevel: 0,   // Vault Overtune raw level → UpgVault[42] (+0.10 per level, max 3)
-        croppiusEvolviusBonus: 0,   // Croppius Evolvius raw level → UpgVault[78]
+
 
         // Stickers
         evoStickers: 0,     // +% or × Crop Evolution Chance from all Farming Stickers (sporrious Stalk sticker) Research[9][4] 
@@ -223,6 +219,7 @@ window.farmingState = {
         // Set / Special Bonuses (simple string or flag checks)
         godshardSetBonus: 0,   // 15 (15% bonus) if OptLacc[379] contains "GODSHARD_SET", else 0
         emperorSetBonus: 0,   // 20 (20% bonus) if OptLacc[379] contains "EMPEROR_SET", else 0
+        kattlekrukSetBonus: 0,   // 25 (25% bonus) if OptLacc[379] contains "KATTLEKRUK_SET", else 0
         votingBonus29: 0,   // +% Crop Evolution Chance  "VOTING_BONUS_29"
         zenitmarketLampLevel: 0,   // Spelunk[45][2]
         sushiBonus: 0,   // Sushi[5][35] - Sushi multi bonus
@@ -253,7 +250,8 @@ window.farmingState = {
     // ======================
     levels: {
         farming: 0, // Farming level Lv0_0[16] (for Geneology exotic bonuses, etc.)
-        summoning: 0 // Summoning level Lv0_0[18] (for Nyanborgir bonus scaling)
+        summoning: 0, // Summoning level Lv0_0[18] (for Nyanborgir bonus scaling)
+        highestCharacterLevel: 0 // Highest character level among all farming characters (for Nyanborgir bonus scaling)
     },
 
     // ======================
@@ -317,6 +315,7 @@ window.farmingState = {
     },
     companion: {
         potato_19: 0, // {5%_Ballot_Bonus_Multi_(World_2_feature)
+        rift2_1: 0, // +25_Lv_for_all_Talents (CompanionDB[1])
         w7a8_39: 0, // +50%_Meritocracy_Bonus_Multi_(World_7_feature)
         Crystal6_41: 0, // {40%_Ballot_Bonus_Multi_(World_2_feature)
         w7b6b_54: 0, // {1_new_Research_Shape,_shows_up_after_you_get_Research_LV._20
@@ -329,6 +328,11 @@ window.farmingState = {
     },
     research: [],   // Parsed from Savedata.json Research[] - contains all 14 research grid arrays dynamically
     spelunk: [],   // Parsed from Savedata.json Spelunk[] - contains all spelunking-related variables and arrays
+    compass: [],   // Parsed from Savedata.json Compass[4] - contains all compass-related variables and arrays
+    skillLevels: [], // Parsed from Savedata.json SL_0-9[] - contains highest skill level for each index across all characters
+    pristineCharms: [],   // Parsed from Savedata.json Ninja[107] - contains all pristine charm levels and bonuses
+    vaultupg: [],   // Parsed from Savedata.json UpgVault[] - contains all vault upgrade levels and bonuses
+    ArcadeUpg: [],   // Parsed from Savedata.json ArcadeUpg[] - contains all arcade upgrade levels and bonuses
 };
 
 // ======================

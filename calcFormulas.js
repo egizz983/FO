@@ -6,36 +6,6 @@ const c = {
     randomFloat: () => Math.random()
 };
 
-/**
- * Dank Ranks - Global multiplier to ALL Land Rank Database bonuses
- */
-
-
-function calculateDankRanksMultiplier(level) {
-    return 1 + 2 * (level / (level + 200));
-}
-
-
-/**
- * Agricultural 'preciation - Additive % to Farming EXP and Land Rank EXP
- */
-function calculateAgriculturalAppreciationMultiplier(level) {
-    return 1 + (2 * level) / 100;
-}
-
-/**
- * Mass Irrigation - Multiplicative Crop Evolution Chance
- */
-function calculateMassIrrigationMultiplier(level) {
-    return 1 + 50 * (level / (level + 300));
-}
- // ====================== DEATH BRINGER Grimoire FORMULAS ======================
-/**
- * Sacrifice of Harvest 
- */
-function calculateSacrificeOfHarvestMultiplier(level) {
-    return 1 + 0.05 * level;
-}
 
 
  // ====================== LandRank FORMULAS ======================
@@ -106,10 +76,8 @@ function getEmperorSummonerMultiplier(isMulti = false) {
         : 0;
     
     const vicarBonus  = (window.farmingState.summoning.vicarOfTheEmperorLevel || 0) / 100;
-    const arcadeLevel = window.farmingState.summoning.emperorBonusesArcadeLevel || 0;
-    const arcadeBonus = (arcadeLevel >= 101) ? 0.8 : (arcadeLevel * 0.004);
 
-    const totalBonus  = 1 + vicarBonus + arcadeBonus;
+    const totalBonus  = 1 + vicarBonus + getArcadeBonus(51);
     const effective   = Math.floor(rawPoint * totalBonus);
     
     if (isMulti) {
@@ -465,7 +433,7 @@ function getMeritocBonuszMulti() {
         5 * (clamworksLevel > 3 ? 1 : 0) +
         (window.farmingState.companion.w7a8_39 * window.CompanionDB[38][2]) +
         getLegendPTS_bonus(24) +
-        getArcadeBonus(59, window.farmingState?.summoning?.arcadebonus59) +
+        getArcadeBonus(59) +
         20 * stringSearch(23, eventshopS) +
         getRoGBonusQTY(51);
 
@@ -480,16 +448,16 @@ function getLegendPTS_bonus(t) {
     );
 
     const talentMultiplier = c.asNumber(
-        window.LegendTalents[spelunkIndex][2]
+        window.LegendTalents[spelunkIndex][2] // custom list
     );
 
     return Math.round(baseValue * talentMultiplier);
 };
 
-function getArcadeBonus(e,level) {
+function getArcadeBonus(e) {
     const dnsm = a.engine.getGameAttribute("DNSM");
     const arcadeIndex = 0 | e; // same as Math.floor(e) — used everywhere in original
-
+    const level = window.farmingState?.ArcadeUpg[arcadeIndex] || 0;
     let multiplier = 1;
     // Double the bonus if this upgrade is at level 101
     if (level === 101) {
@@ -530,7 +498,7 @@ window.getVialBonus = function(i, level) {
         riftBonus = 2 * window.farmingState.alchemy.countLevel13;
     }
 
-    const totalBonus = riftBonus + window.getVaultUpgBonus(42,window.farmingState.miscBonuses.vaultOvertuneLevel); 
+    const totalBonus = riftBonus + window.getVaultUpgBonus(42); 
     const dnzz = totalBonus / 100;
     const merit = getMeritocBonusz(20) / 100; // need to update this 
 
@@ -554,10 +522,10 @@ window.getVialBonus = function(i, level) {
 };
 
 // VaultUpgbonus
-window.getVaultUpgBonus = function (t, level) {
+window.getVaultUpgBonus = function (t) {
 
   const mult = c.asNumber(window.UpgradeVault[0 | t]?.[5]);
-
+  const vaultlevel = window.farmingState.vaultupg[t] || 0;
   // Simple upgrades that only do level × multiplier (no extra bonus)
   const simpleUpgrades = new Set([
     1, 6, 7, 8, 9, 13, 32, 33, 36, 40, 42, 43, 44, 49, 51, 52, 53, 57, 61,
@@ -565,52 +533,49 @@ window.getVaultUpgBonus = function (t, level) {
   ]);
 
   if (simpleUpgrades.has(t)) {
-    return level * mult;
+    return vaultlevel * mult;
   }
 
   let bonusId = 0;
-  let bonuslevel = 0;
+
   if (t < 32) {
     bonusId = 32;
-    bonuslevel = window.farmingState.miscBonuses.vaultMasteryLevel;
   } else if (t < 61) {
     bonusId = 61;
-    bonuslevel = window.farmingState.miscBonuses.vaultMastery2Level;
   } else if (t < 89) {
     bonusId = 89;
-    bonuslevel = window.farmingState.miscBonuses.vaultMasteryIIILevel;
   } else {
     return 0;
   }
 
-  const bonus = window.getVaultUpgBonus(bonusId, bonuslevel);
+  const bonus = window.getVaultUpgBonus(bonusId);
 
   // Special case: upgrade 0
   if (t === 0) {
     const extra =
-      Math.max(0, level - 25) +
-      (Math.max(0, level - 50) + Math.max(0, level - 100));
+      Math.max(0, vaultlevel - 25) +
+      (Math.max(0, vaultlevel - 50) + Math.max(0, vaultlevel - 100));
 
-    return (level * mult + extra) * (1 + bonus / 100);
+    return (vaultlevel * mult + extra) * (1 + bonus / 100);
   }
 
   // Special case: upgrade 60
   if (t === 60) {
     const extra =
-      Math.max(0, level - 25) +
-      (Math.max(0, level - 50) +
-        (2 * Math.max(0, level - 100) +
-          (3 * Math.max(0, level - 200) +
-            (5 * Math.max(0, level - 300) +
-              (7 * Math.max(0, level - 400) +
-                10 * Math.max(0, level - 450))))));
+      Math.max(0, vaultlevel - 25) +
+      (Math.max(0, vaultlevel - 50) +
+        (2 * Math.max(0, vaultlevel - 100) +
+          (3 * Math.max(0, vaultlevel - 200) +
+            (5 * Math.max(0, vaultlevel - 300) +
+              (7 * Math.max(0, vaultlevel - 400) +
+                10 * Math.max(0, vaultlevel - 450))))));
 
-    const tierBonus = 1 + Math.floor(level / 25) / 5;
+    const tierBonus = 1 + Math.floor(vaultlevel / 25) / 5;
 
-    return (level * mult + extra) * tierBonus * (1 + bonus / 100);
+    return (vaultlevel * mult + extra) * tierBonus * (1 + bonus / 100);
   }
 
-  return level * mult * (1 + bonus / 100);
+  return vaultlevel * mult * (1 + bonus / 100);
 };
 
 
@@ -664,7 +629,7 @@ function getMainframeBonus(e) {
 
 
 
-  // 3. DEFAULT CALCULATION (no cache or empty cache) — this is where all the complex logic lives
+  
 
   if (e < 100) {
     // ==================== BASE LAB MAINFRAME BONUSES (e < 100) ====================
@@ -839,46 +804,101 @@ function getmonumentROGbonuses(t, i) { // 2,4 ( 24 , 2,9 (29) )
 //Compass[4] contains b48  // if yes stamp is exalted and then uses stamp multi formula to know its multi
 
 
-
-// Stamp doubler multi formula
-
-//StampExalted_double = 1 + m._customBlock_Windwalker("StampDoubler", 0, 0) / 100
-
-// if ("StampDoubler" == e)
-//                 return (
-//                   100 +
-//                   (m._customBlock_AtomCollider("AtomBonuses", 12, 0) +
-//                     (m._customBlock_Ninja("PristineBon", 20, 0) +
-//                       (m._customBlock_Windwalker("CompassBonus", 76, 0) +
-//                         (m._customBlock_GetSetBonus(
-//                           "EMPEROR_SET",
-//                           "Bonus",
-//                           0,
-//                           0,
-//                         ) +
-//                           (20 *
-//                             m._customBlock_Summoning("EventShopOwned", 18, 0) +
-//                             (m._customBlock_GamingStatType(
-//                               "PaletteBonus",
-//                               23,
-//                               0,
-//                             ) +
-//                               (m._customBlock_FarmingStuffs(
-//                                 "ExoticBonusQTY",
-//                                 49,
-//                                 0,
-//                               ) +
-//                                 Math.round(
-//                                   c.asNumber(
-//                                     a.engine.getGameAttribute("Spelunk")[4][3],
-//                                   ),
-//                                 ))))))) +
-//                     (m._customBlock_Thingies("LegendPTS_bonus", 36, 0) +
-//                       m._customBlock_SushiStuff("RoG_BonusQTY", 17, 0)))
-//                 );
-
 //Full formula for stamp
 //5 × your_StampB48_level × (exalted doubler) × 2 (Mainframe) × (1 + Pristine %)
+
+/**
+ * Clean version of the StampDoubler calculation
+ * (This is the body that runs when e === "StampDoubler")
+ */
+function calculateStampDoublerBonus() {
+    const eventshopString =window.farmingState?.miscBonuses?.EventShopOwned || "";
+
+    return 100
+        + m._customBlock_AtomCollider("AtomBonuses", 12, 0)
+            + 20 * (window.farmingState?.pristineCharms?.[20] || 0) // Jellypick	+20% Stamp Doubler Bonus
+            + m._customBlock_Windwalker("CompassBonus", 76, 0)
+            + (20 * emperorSetBonus)
+            + 20 * stringSearch(18, eventshopString)
+            + m._customBlock_GamingStatType("PaletteBonus", 23, 0)
+            + (window.farmingState.market.exotic?.find(u => u.index === 69)?.getBonus() || 0) 
+            + Math.round(
+                c.asNumber(
+                    window.farmingState.spelunk[4][3]
+                )
+            )
+            + getLegendPTS_bonus(36)
+            + getRoGBonusQTY(17);
+    
+}
+
+// get stamp bonus function refactored from engine code much cleaner takes 3 param instead of 1 ( stamp level could be avoided if parse entire stamp array)
+function getStampBonusOfType(stampType,stampindex,stampLevel) {
+
+    const CustomLists   = window.StampData;
+    let StampBonus = 0;
+    let exaltedMultiplier = 1;
+
+    // Build the key used in Compass[4] (e.g. "A25", "B7", etc.)
+    const compassKey = String(
+        window.Number2Letter(Math.floor(stampindex / 1000))
+    ) + String(Math.round(stampindex % 1000));
+
+    if (window.farmingState.compass && window.farmingState.compass.includes(compassKey)) {
+        const doublerTalent = calculateStampDoublerBonus();
+        exaltedMultiplier = 1 + doublerTalent / 100;
+    }
+
+    // ── Calculate raw bonus from this single stamp ──
+    const stampDetails = CustomLists[stampType][stampindex];
+    const rawBonus = ArbitraryCode5Inputs(
+        String(stampDetails[1]),                    // base value
+        c.asNumber(stampDetails[2]),                // scaling factor 1
+        c.asNumber(stampDetails[3]),                // scaling factor 2
+        Math.floor(stampLevel), // effective level
+        0,
+        0
+    );
+
+    // Add to running total (with exalted multiplier)
+    StampBonus += exaltedMultiplier * rawBonus;
+
+
+    // ─────────────────────────────────────────────────────────────
+    // 6. APPLY GLOBAL MULTIPLIERS (talents, mainframe, vault, etc.)
+    // ─────────────────────────────────────────────────────────────
+
+    // Efficiency stamps get an extra talent multiplier
+    if (stampType === 1) {
+        const effTalent = k._customBlock_GetTalentNumber(1, 625);
+        StampBonus *= Math.max(effTalent, 1);
+    }
+
+    // Mainframe Bonus (doubles Book A & B stamps under certain condition)
+    if (getMainframeBonus(7) === 2 && stampType < 2) {
+        StampBonus *= 2;
+    }
+
+    // Vault Upgrades affect Base stats
+    if (stampType === 0) {
+        const vaultBonus = getVaultUpgBonus(16); //16
+        StampBonus *= (1 + vaultBonus / 100);
+    }
+
+    // Pristine Stamp bonus (only Books A & B)
+    if (stampType < 2) {
+        const pristineBonus = 25 * (window.farmingState?.pristineCharms?.[17] || 0); //Liqorice Rolle	1.25x Bigger Bonuses of Non Misc Stamps
+        StampBonus *= (1 + pristineBonus / 100);
+    }
+
+    // ─────────────────────────────────────────────────────────────
+    // 7. CACHE THE RESULT & RETURN
+    // ─────────────────────────────────────────────────────────────
+    const finalValue = StampBonus;
+
+    return finalValue;
+}
+
 
 //==============================================================
 
@@ -1206,4 +1226,182 @@ function calculateCropsBonusValue(plotIndex, mode) {
     }
 
     return uncapped;
+}
+
+
+//==========================================================================
+//Talent level calculation ==============================================
+//===========================================================================
+
+
+/**
+
+ * @param {number} mode     - 1 = primary effect (usually the one shown in-game)
+ *                          - any other value = secondary effect (often the "per level" description)
+ * @param {number} talentId - Talent ID (e.g. 625 for "Toilet Paper Postage")
+ * @returns {number}        - The final talent bonus value
+ */
+function getTalentNumber(mode, talentId) {
+    const skillLevels = window.farmingState.skillLevels; // points allocated
+    const baseLevel = c.asNumber(skillLevels[Math.floor(talentId)]);
+
+    // No points invested → no bonus
+    if (baseLevel <= 0) {
+        return 0;
+    }
+
+    const talentData = window.TalentDescriptions[Math.floor(talentId)][1];
+
+
+    const calcLevel =  getAllTalentLV(talentId) + baseLevel;
+
+    // Choose which formula + parameters to use
+    let formula, paramA, paramB;
+    if (mode === 1) {
+        // Primary effect
+        formula = String(talentData[2]);
+        paramA  = c.asNumber(talentData[0]);
+        paramB  = c.asNumber(talentData[1]);
+    } else {
+        // Secondary effect
+        formula = String(talentData[5]);
+        paramA  = c.asNumber(talentData[3]);
+        paramB  = c.asNumber(talentData[4]);
+    }
+
+    // Run the game's formula evaluator
+    return ArbitraryCode5Inputs(
+        formula,
+        paramA,
+        paramB,
+        calcLevel
+    );
+}
+
+
+
+/**
+ * Calculates the total EXTRA levels given to a talent from ALL global sources
+ * (Super Talent points, other talents, achievements, familiars, divinity, etc.)
+ *
+ * @param {number} t - Talent ID 
+ * @returns {number} Total bonus levels 
+ */
+function getAllTalentLV(t,) { 
+    const talentId = Math.floor(c.asNumber(t));
+
+    const skillLevels = window.farmingState.skillLevels; // points allocated
+    const baseLevel = c.asNumber(skillLevels[talentId]);
+    const gamingString = window.farmingState.miscBonuses.gaming12array || ""; // string that contains gaming related bonuses (e.g. "SuperBitType")
+
+ 
+    // Is this talent banned from receiving any AllTalentLV bonus?
+    const isBannedForAllLV =
+        (talentId >= 49 && talentId <= 59) ||   // range 49–59
+        talentId === 149 ||
+        talentId === 374 ||
+        talentId === 539 ||
+        talentId === 505 ||
+        talentId > 614;
+
+    if (isBannedForAllLV) {
+        return 0;
+    }
+
+    // Spelunk 20-43 arrays contains ids of talents for each player that have been suppered for both presets
+    // checks if skill is super
+    let spelunkMultiplier = 0;                   
+    const spelunk = window.farmingState.spelunk;
+
+    for (let slot = 20; slot <= 43; slot++) {
+        if (spelunk[slot] && spelunk[slot].indexOf(talentId) !== -1) {
+            spelunkMultiplier = 1;
+            break;
+        }
+    }
+
+
+    // === All the bonus sources ===
+    const superTalentPoints = m._customBlock_Thingies("SuperTalentPTS_LVgiven", 0, 0);
+
+    const talentBonuses =
+        getTalentNumber(1, 149) +
+        getTalentNumber(1, 374) +
+        getTalentNumber(1, 539) +
+        (window.farmingState.achievements.checkoutTakeout == -1 ? 5 : 0);
+
+    const otherBonuses =
+        Math.floor(c.asNumber(a.engine.getGameAttribute("DNSM").h.FamBonusQTYs.h[68])) +
+        (window.farmingState.companion.rift2_1 ? 25 : 0) +
+        Math.ceil(m._customBlock_Divinity("Bonus_Minor", playerIndex, 2)) +
+        c.asNumber(a.engine.getGameAttribute("Dream")[12]) +
+        5 * Math.floor((97 + c.asNumber(a.engine.getGameAttribute("OptionsListAccount")[232])) / 100) +
+        m._customBlock_Summoning("GrimoireUpgBonus", 39, 0) +
+        window.farmingState.miscBonuses.kattlekrukSetBonus +
+        Math.min(5, getArcadeBonus(57)) +
+        // to have it accurate need indexof character that t id belongs to and his level  for now use highest level of all characters
+        Math.max(0, Math.floor(
+            ((c.asNumber(window.farmingState.levels.highestCharacterLevel) - 500) / 100) * 
+            stringSearch(47, gamingString) // SuperBitType check
+        ));
+
+    // Final result
+    return Math.floor(
+        spelunkMultiplier * superTalentPoints +
+        talentBonuses +
+        otherBonuses
+    );
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/**
+ * Dank Ranks - Global multiplier to ALL Land Rank Database bonuses
+ */
+
+
+function calculateDankRanksMultiplier(level) {
+    return 1 + 2 * (level / (level + 200));
+}
+
+
+/**
+ * Agricultural 'preciation - Additive % to Farming EXP and Land Rank EXP
+ */
+function calculateAgriculturalAppreciationMultiplier(level) {
+    return 1 + (2 * level) / 100;
+}
+
+/**
+ * Mass Irrigation - Multiplicative Crop Evolution Chance
+ */
+function calculateMassIrrigationMultiplier(level) {
+    return 1 + 50 * (level / (level + 300));
+}
+ // ====================== DEATH BRINGER Grimoire FORMULAS ======================
+/**
+ * Sacrifice of Harvest 
+ */
+function calculateSacrificeOfHarvestMultiplier(level) {
+    return 1 + 0.05 * level;
 }

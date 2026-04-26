@@ -133,6 +133,7 @@
     </footer>
     <script src="GlobalFunctions.js"></script>
     <script src="CustomList.js"></script>
+    <script src="CustomList2.js"></script>
     <script src="models.js"></script>
     <script src="state.js"></script>
     <script src="Number2Letter.js"></script>
@@ -248,7 +249,7 @@
             const monumentTotal = getmonumentROGbonuses(2, 4).toMulti();
             
             // 12. Vault Upgrade Bonus
-            const vaultUpgradeTotal = window.getVaultUpgBonus(78, state.miscBonuses.croppiusEvolviusBonus).toMulti();
+            const vaultUpgradeTotal = window.getVaultUpgBonus(78).toMulti();
             
             // 13. Achievement Bonus
             const achievementTotal = (5 * (state.achievements.farmingEvoLilOvergrowth === -1 ? 1 : 0)).toMulti();
