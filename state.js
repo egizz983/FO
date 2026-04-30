@@ -29,6 +29,7 @@ window.farmingState = {
         certifiedStampBook: 0, // check if active doubles stamp bonus
         spelunkerObol: 0, // check if active 1.5x jewel bonus
         mealBlackDiamondRhinestone: 0,   // Black Diamond Rhinestone (LAB[14][16] ) 
+        Pure_Opal_Navette: 0,   // Pure Opal Navette 
     },
 
     // ======================

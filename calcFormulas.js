@@ -792,14 +792,13 @@ function getMainframeBonus(e) {
       return baseValue5 + getMainframeBonus(120);
     }
     if (e === 8) {
-      // Special case: Spelunker Obol must be unlocked to return a bonus
-      if (!window.farmingState.spelunkerObol) {
+
+      if (!window.farmingState.lab.spelunkerObol) {
         return 0;
       }
       return baseValue5 + getMainframeBonus(119) / 100;
     }
 
-    // All other base Lab bonuses just return the normal [4] value
     return baseValue4;
   } else {
     // ==================== JEWEL BONUSES (e >= 100) ====================
@@ -818,24 +817,23 @@ function getMainframeBonus(e) {
     // if (!isUnlocked) {
     //   return 0;
     // }
-
+    const multi = (window.farmingState.lab.spelunkerObol && e !== 119) ? getMainframeBonus(8) : 1; // Don't apply multiplier to ID 119 to avoid circular dependency
     const jewelBase = c.asNumber(window.JewelDesc[jewelIndex][12]);
-
     // Special doubled jewel cases (only when certain prerequisite Mainframe bonuses are active)
     if (e === 100) {
       return (0 < getMainframeBonus(101) && 0 < getMainframeBonus(102))
-        ? 2 * jewelBase * getMainframeBonus(8)
-        : jewelBase * getMainframeBonus(8);
+        ? 2 * jewelBase * multi
+        : jewelBase * multi;
     }
     if (e === 103) {
       return (0 < getMainframeBonus(104) && 0 < getMainframeBonus(105) && 0 < getMainframeBonus(106))
-        ? 2 * jewelBase * getMainframeBonus(8)
-        : jewelBase * getMainframeBonus(8);
+        ? 2 * jewelBase * multi
+        : jewelBase * multi;
     }
     if (e === 110) {
       return (0 < getMainframeBonus(107) && 0 < getMainframeBonus(108) && 0 < getMainframeBonus(109))
-        ? 2 * jewelBase * getMainframeBonus(8)
-        : jewelBase * getMainframeBonus(8);
+        ? 2 * jewelBase * multi
+        : jewelBase * multi;
     }
     if (e === 112) {
       return (
@@ -844,15 +842,19 @@ function getMainframeBonus(e) {
         0 < getMainframeBonus(114) &&
         0 < getMainframeBonus(115)
       )
-        ? 2 * jewelBase * getMainframeBonus(8)
-        : jewelBase * getMainframeBonus(8);
+        ? 2 * jewelBase * multi
+        : jewelBase * multi;
     }
     if (e === 119) {
-      return jewelBase; // no multiplier for this one
+        if(window.farmingState.lab.Pure_Opal_Navette){
+            return jewelBase; // no multiplier for this one
+        } else {
+            return 0; // locked if Pure Opal Navette is not unlocked
+        }
     }
 
     // All other jewel bonuses (including your 116)
-    return jewelBase * getMainframeBonus(8);
+    return jewelBase * multi;
   }
 }
 
@@ -866,10 +868,9 @@ function getMealBonus(index,ribbonLevel,meallevel) {
 
 function getCookingMealBonusMultiplier() {
   // Part 1: Mainframe bonus (ID 116) + special Shiny Breeding bonus
-  const mainframeAndBreeding = window.farmingState.mealBlackDiamondRhinestone
+  const mainframeAndBreeding = window.farmingState.lab.mealBlackDiamondRhinestone
     ? (getMainframeBonus(116) + window.farmingState.shinyPets.mealBonus)
     : window.farmingState.shinyPets.mealBonus;
-
   // Part 2: Summoning WinBonus (ID 26)
   const summoningBonus = window.getWinBonus(26);
 

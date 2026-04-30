@@ -25,6 +25,7 @@ window.imageLinks = {
         certifiedStampBook: "https://idleontoolbox.com/data/LabBonus7.png", 
         spelunkerObol: "https://idleontoolbox.com/data/LabBonus8.png",
         mealBlackDiamondRhinestone: "https://idleontoolbox.com/data/ConsoleJwl16.png",   
+        Pure_Opal_Navette: "https://idleontoolbox.com/data/ConsoleJwl19.png",   // Pure Opal Navette 
     },
 };
 
