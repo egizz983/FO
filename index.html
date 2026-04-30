@@ -4,147 +4,161 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Farming Optimizer - Legends of IdleOn</title>
+    <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="style.css">
 </head>
-<body>
-    <!-- HEADER -->
-    <header>
-        <div class="header-content">
-            <div class="load-section">
-                <h2>Load Character Data</h2>
-                <div class="paste-area">
-                    <input type="text" id="json-paste" placeholder="Paste full JSON content here...">
-                    <button onclick="loadJsonData()">LOAD</button>
+<body class="bg-slate-50">
+    <!-- HEADER: Simple Load Data + Title -->
+    <header class="bg-white border-b border-slate-200 py-6 px-8">
+        <div class="max-w-7xl mx-auto">
+            <div class="flex justify-between items-center gap-12">
+                <!-- LEFT: Load Section -->
+                <div class="flex-1">
+                    <h2 class="text-lg font-bold text-emerald-600 mb-4">Load Character Data</h2>
+                    <div class="flex gap-3 items-center">
+                        <input type="text" id="json-paste" placeholder="Paste full JSON content here..." class="flex-1 h-11 px-4 text-base border-2 border-slate-300 rounded-lg focus:outline-none focus:border-emerald-500 focus:ring-2 focus:ring-emerald-100 transition">
+                        <button onclick="loadJsonData()" class="h-11 px-8 bg-pink-500 text-white font-bold rounded-lg hover:bg-pink-600 transition transform hover:-translate-y-0.5 whitespace-nowrap">LOAD</button>
+                    </div>
                 </div>
 
-                <!-- Manual Inputs Section  -->
-                <div class="manual-inputs">
-                    <h3>Manual Inputs</h3>
-                    
-                    <!-- Talent Section -->
-                    <div class="section talent-section">
-                        <h4>Talent</h4>
-                        <div class="input-group">
-                            <label for="talent-dank-ranks">Dank Ranks </label>
-                            <input type="number" id="talent-dank-ranks" value="0" min="0" >
-                        </div>
-                        <div class="input-group">
-                            <label for="talent-mass-irrigation">Mass Irrigation </label>
-                            <input type="number" id="talent-mass-irrigation" value="0" min="0">
-                        </div>
-                        <div class="input-group">
-                            <label for="talent-agri-appreciation">Agricultural Appreciation </label>
-                            <input type="number" id="talent-agri-appreciation" value="0" min="0">
-                        </div>
-                    </div>
+                <!-- RIGHT: Title Section -->
+                <div class="flex-shrink-0 text-right">
+                    <h1 class="text-4xl font-bold text-emerald-500 leading-tight mb-1">Farming Optimizer</h1>
+                    <p class="text-base text-gray-600">Legends of IdleOn</p>
+                </div>
+            </div>
+            <div class="h-1 bg-emerald-500 mt-6"></div>
+        </div>
+    </header>
 
-                    <!-- Lab Section -->
-                    <div class="section lab-section">
-                        <h4>Lab</h4>
-                        <div class="lab-items-group">
-                            <h5>Lab Items (Active?)</h5>
-                            <div class="lab-checkboxes">
-                                <label>
-                                    <input type="checkbox" id="lab-chemistry-set">
-                                    My 1st Chemistry Set
-                                </label>
-                                <label>
-                                    <input type="checkbox" id="lab-stamp-book">
-                                    Certified Stamp Book
-                                </label>
+    <main class="w-full px-8 py-10">
+        <!-- LOAD JSON NOTICE (Full Width) -->
+        <div id="json-load-notice" class="inline-block bg-amber-100 border-l-4 border-amber-500 px-4 py-3 rounded text-sm text-amber-900 mb-6">
+            ⚠️ <strong>Load JSON data first</strong> to enable manual inputs and trigger calculations
+        </div>
+
+        <!-- COMPANIONS SECTION (Full Width) -->
+        <section class="bg-white border border-slate-200 rounded-xl p-8 mb-8">
+            <h2 class="text-2xl font-bold text-emerald-500 mb-6 pb-4 border-b-2 border-slate-200">Companions</h2>
+            <div class="companions-list" id="companions-list">
+                <!-- Populated by JS -->
+            </div>
+        </section>
+
+        <!-- TWO COLUMN LAYOUT: Settings (30%) + Farming Bonuses (70%) -->
+        <div class="flex gap-8">
+            <!-- LEFT COLUMN: Settings & Configuration (30%) -->
+            <div class="w-[30%]">
+                <!-- MANUAL INPUTS PANEL -->
+                <section class="bg-white border border-slate-200 rounded-xl p-8 mb-8">
+                    <div class="manual-inputs">
+                        <h2 class="text-2xl font-bold text-emerald-500 mb-6 pb-4 border-b-2 border-slate-200">Settings & Configuration</h2>
+
+                        <!-- Lab Section -->
+                        <div class="section lab-section mb-8">
+                            <h3 class="text-xl font-bold text-slate-900 mb-4 pb-2 border-b-2 border-slate-200">Lab</h3>
+                            <div class="lab-items-group">
+                                <h5 class="text-base font-semibold text-slate-700 mb-3">Lab Items (Active?)</h5>
+                                <div class="lab-checkboxes space-y-3">
+                                    <label class="flex items-center gap-3 cursor-pointer">
+                                        <input type="checkbox" id="lab-chemistry-set" class="w-5 h-5 accent-emerald-500">
+                                        <span class="text-base text-slate-700">My 1st Chemistry Set</span>
+                                    </label>
+                                    <label class="flex items-center gap-3 cursor-pointer">
+                                        <input type="checkbox" id="lab-stamp-book" class="w-5 h-5 accent-emerald-500">
+                                        <span class="text-base text-slate-700">Certified Stamp Book</span>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Other Section -->
+                        <div class="section other-section mb-8">
+                            <h3 class="text-xl font-bold text-slate-900 mb-4 pb-2 border-b-2 border-slate-200">Other</h3>
+                            <div class="space-y-4">
+                                <div class="input-group flex items-center gap-4">
+                                    <label for="voting-bonus-29" class="w-32 text-base font-semibold text-slate-700">Vote Bonus</label>
+                                    <input type="number" id="voting-bonus-29" value="0" min="0" class="w-32 h-10 px-3 text-base border-2 border-slate-300 rounded-lg focus:outline-none focus:border-emerald-500 focus:ring-2 focus:ring-emerald-100">
+                                </div>
+                                <div class="input-group flex items-center gap-4">
+                                    <label for="tome-total-points" class="w-32 text-base font-semibold text-slate-700">Tome Score</label>
+                                    <input type="number" id="tome-total-points" value="0" min="0" class="w-32 h-10 px-3 text-base border-2 border-slate-300 rounded-lg focus:outline-none focus:border-emerald-500 focus:ring-2 focus:ring-emerald-100">
+                                </div>
                             </div>
                         </div>
                     </div>
+                </section>
 
-                    <!-- Other Section -->
-                    <div class="section other-section">
-                        <h4>Other</h4>
-                        <div class="input-group">
-                            <label for="voting-bonus-29">Vote Bonus </label>
-                            <input type="number" id="voting-bonus-29" value="0" min="0">
-                        </div>
-                        <div class="input-group">
-                            <label for="tome-total-points">Tome Score </label>
-                            <input type="number" id="tome-total-points" value="0" min="0">
+                <!-- STATE INSPECTOR PANEL -->
+                <section class="bg-white border border-slate-200 rounded-xl p-8">
+                    <div class="section state-inspector-wrapper">
+                        <h2 class="text-2xl font-bold text-emerald-500 mb-6 pb-4 border-b-2 border-slate-200">State Inspector</h2>
+                        <p class="text-sm text-gray-600 mb-4">Edit any variable to test and see real-time recalculation.</p>
+                        <div id="state-inspector-container"></div>
+                    </div>
+                </section>
+            </div>
+
+            <!-- RIGHT COLUMN: Farming Bonuses (70%) -->
+            <div class="w-[70%]">
+                <!-- FARMING BONUSES PANEL -->
+                <div class="farming-bonuses-panel bg-white border border-slate-200 rounded-xl p-8">
+                    <!-- Header: Title + Levels -->
+                    <div class="flex justify-between items-center mb-6">
+                        <h2 class="text-2xl font-bold text-emerald-500">Farming Bonuses</h2>
+                        <div class="farming-level-top text-lg font-bold text-emerald-500 text-right">
+                            <div>Farming Level <span id="farming-level-value" class="level-value text-slate-900">0</span></div>
+                            <div>Summonings Level <span id="summoning-level-value" class="level-value text-slate-900">0</span></div>
                         </div>
                     </div>
 
-                    <!-- Crop Value Section -->
-                    <div class="section crop-value-section">
-                        <h4>Custom Crop Count</h4>
-                        <div class="input-group">
-                            <label for="crop-count-200">200</label>
-                            <input type="number" id="crop-count-200" value="0" min="0" placeholder="0">
-                            <button onclick="setCropCount(200)">SET</button>
-                        </div>
-                        <div class="input-group">
-                            <label for="crop-count-1000">1000</label>
-                            <input type="number" id="crop-count-1000" value="0" min="0" placeholder="0">
-                            <button onclick="setCropCount(1000)">SET</button>
-                        </div>
-                        <div class="input-group">
-                            <label for="crop-count-2500">2500</label>
-                            <input type="number" id="crop-count-2500" value="0" min="0" placeholder="0">
-                            <button onclick="setCropCount(2500)">SET</button>
-                        </div>
-                        <div class="input-group">
-                            <label for="crop-count-10000">10000</label>
-                            <input type="number" id="crop-count-10000" value="0" min="0" placeholder="0">
-                            <button onclick="setCropCount(10000)">SET</button>
-                        </div>
-                        <div class="input-group">
-                            <label for="crop-count-100000">100000</label>
-                            <input type="number" id="crop-count-100000" value="0" min="0" placeholder="0">
-                            <button onclick="setCropCount(100000)">SET</button>
-                        </div>
+                    <div class="h-1 bg-emerald-500 mb-6"></div>
+
+                    <!-- Bonus Type Buttons -->
+                    <div class="flex gap-2 mb-6 flex-wrap" id="bonus-buttons-container">
+                        <!-- Populated by JS -->
+                    </div>
+
+                    <!-- Bonus Viewport: Shows only selected bonus -->
+                    <div id="bonus-viewport" class="bg-slate-50 border border-slate-200 rounded-lg p-6 min-h-96">
+                        <!-- Populated by JS -->
                     </div>
                 </div>
-            </div>
 
-            <div class="title-section">
-                <h1>Farming Optimizer</h1>
-                <p>Legends of IdleOn</p>
-            </div>
-        </div>
-        
-        <div class="header-divider"></div>
-    </header>
-
-    <main>
-        <div class="farming-bonuses-panel">
-            <div class="panel-top">
-                <h2>Farming Bonuses</h2>
-                <div class="farming-level-top">
-                    Farming Level <span id="farming-level-value" class="level-value">0</span>
-                    Summonings Level <span id="summoning-level-value" class="level-value">0</span>
+                <!-- OTHER BONUSES AFFECTING FARMING SECTION -->
+                <div class="bg-white border border-slate-200 rounded-xl p-8 mt-8" style="min-height: 500px;">
+                    <h2 class="text-2xl font-bold text-emerald-500 mb-6 pb-4 border-b-2 border-slate-200">Other Bonuses Affecting Farming</h2>
+                    <!-- Content to be added -->
                 </div>
-            </div>
-
-            <div class="green-line"></div>
-
-            <div class="bonuses-columns" id="bonuses-columns">
-                <!-- Populated by JS -->
             </div>
         </div>
     </main>
 
-    <footer>
+    <footer class="text-center py-8 px-8 border-t border-slate-200 text-slate-600 text-sm bg-white">
         Legends of IdleOn Farming Optimizer v2.0
     </footer>
     <script src="GlobalFunctions.js"></script>
     <script src="CustomList.js"></script>
-    <script src="CustomList2.js"></script>
     <script src="models.js"></script>
     <script src="state.js"></script>
+    <!-- State Management System -->
+    <script src="stateManager.js"></script>
+    <script src="statePersistence.js"></script>
+    <script src="stateAutoWire.js"></script>
+    <script src="stateInspector.js"></script>
+    <!-- End State Management System -->
+    <script src="imageLinks.js"></script>
     <script src="Number2Letter.js"></script>
     <script src="calcFormulas.js"></script>
-    <script src="farmingParser.js"></script>
-    <script src="alchemyParser.js"></script>
-    <script src="achievementsParser.js"></script>
-    <script src="miscParser.js"></script>
-    <script src="shinyPetsParser.js"></script>
-    <script src="starSignsParser.js"></script>
-    <script src="killsLeftToAdvanceParser.js"></script>
+    <script src="parsers/farmingParser.js"></script>
+    <script src="parsers/alchemyParser.js"></script>
+    <script src="parsers/achievementsParser.js"></script>
+    <script src="parsers/miscParser.js"></script>
+    <script src="parsers/shinyPetsParser.js"></script>
+    <script src="parsers/starSignsParser.js"></script>
+    <script src="parsers/killsLeftToAdvanceParser.js"></script>
+    <script src="parsers/skillLevelsParser.js"></script>
+    <script src="parsers/lv0Parser.js"></script>
     <script src="UIbreakdowns.js"></script>
     <script>
         const optimizer = new FarmingOptimizer(); // main optimizer instance that holds state and logic
@@ -157,41 +171,122 @@
             { name: "Soil EXP",      totalLabel: "Total EXP Multiplier",  totalValue: "280%" }
         ];
 
+        // Companions data structure
+        const companionsList = [
+            { id: "babaMummy_0", name: "King Doot", bonus: "All Divinities from World 5 count as Active", imageKey: "kingDoot" },
+            { id: "potato_19", name: "Mashed Potato", bonus: "+5% Ballot Bonus Multi", imageKey: "mashedPotato" },
+            { id: "rift2_1", name: "Rift Slug", bonus: "+25 Lv for all Talents", imageKey: "riftSlug" },
+            { id: "w7a8_39", name: "Pufferblob", bonus: "+50% Meritocracy Bonus Multi", imageKey: "pufferblob" },
+            { id: "Crystal6_41", name: "Crystal Cuttlefish", bonus: "+40% Ballot Bonus Multi", imageKey: "crystalCuttlefish" },
+            { id: "w7b11_55", name: "Pirate Deckhand", bonus: "×1.15 ALL Research Grid bonuses", imageKey: "pirateDeckhand" },
+            { id: "rift4_88", name: "Rift Hivemind", bonus: "+50% Prisma Bubble bonus & +5 Prisma Bubbles", imageKey: "riftHivemind" },
+            { id: "poppy_161", name: "Poppy", bonus: "2x bonuses from Bonus Ballot & Multi Meritocracy", imageKey: "poppy" },
+            { id: "w6b2b_162", name: "Wickerlight Spirit", bonus: "All meals 5x cheaper & 1.25x higher bonuses", imageKey: "wickerlightSpirit" },
+            { id: "w7b7_147", name: "Mantaray", bonus: "All Button bonuses in W7 are 1.50x bigger", imageKey: "mantaray" },
+            { id: "reindeer_27", name: "Spirit Reindeer", bonus: "2.00x Gold Ball Shop Bonuses", imageKey: "spiritReindeer" }
+        ];
 
-        function renderTree(container, nodes) {
-            nodes.forEach(node => {
-                const item = document.createElement('div');
+        // Initialize companions UI on page load
+        window.addEventListener('DOMContentLoaded', function() {
+            // Initialize state management systems
+            window.StateManager.registerRecalculationTriggers();
+            window.StatePersistence.setupAutoSave();
+            window.StatePersistence.loadUserSelections(); // Restore saved user selections
+            window.StateAutoWire.wireAllInputs();
+            
+            // Disable all manual input fields until JSON is loaded
+            // This prevents state updates before JSON data is parsed
+            window.StateAutoWire.setInputsDisabled(true);
+            
+            // Initialize State Inspector (will be populated after JSON loads)
+            if (window.StateInspector && window.StateInspector.renderInspector) {
+                window.StateInspector.renderInspector();
+            }
+            
+            // Render UI
+            renderCompanions();
+        });
 
-                if (node.children && node.children.length > 0) {
-                    // Parent (expandable)
-                    item.innerHTML = `
-                        <div class="tree-header">
-                            <span><span class="arrow">▶</span> ${node.label}</span>
-                            <span>${node.value}</span>
-                        </div>
-                    `;
-                    const header = item.querySelector('.tree-header');
-                    const childrenDiv = document.createElement('div');
-                    childrenDiv.className = 'tree-children';
+        // Render companions list
+        function renderCompanions() {
+            const companionsContainer = document.getElementById('companions-list');
+            if (!companionsContainer) return;
 
-                    header.addEventListener('click', () => {
-                        const isExpanded = childrenDiv.classList.contains('expanded');
-                        childrenDiv.classList.toggle('expanded', !isExpanded);
-                        header.classList.toggle('expanded', !isExpanded);
-                    });
+            companionsList.forEach(companion => {
+                const imageUrl = window.getImageUrl('companions', companion.imageKey);
+                
+                const companionItem = document.createElement('div');
+                companionItem.className = 'companion-item';
+                companionItem.innerHTML = `
+                    <div class="companion-checkbox-wrapper">
+                        <input type="checkbox" id="companion-${companion.id}" class="companion-checkbox">
+                    </div>
+                    <div class="companion-checkmark">✓</div>
+                    <div class="companion-image">
+                        <img src="${imageUrl}" alt="${companion.name}" onerror="this.style.opacity='0.5'">
+                    </div>
+                    <div class="companion-info">
+                        <div class="companion-name">${companion.name}</div>
+                        <div class="companion-bonus">${companion.bonus}</div>
+                    </div>
+                `;
 
-                    renderTree(childrenDiv, node.children);   // recursive
-                    item.appendChild(childrenDiv);
-                } else {
-                    // Leaf node (no children)
-                    item.innerHTML = `
-                        <div class="sub-breakdown">
-                            <span>${node.label}</span>
-                            <span class="value">${node.value}</span>
-                        </div>
-                    `;
+                // Add click handler to entire card
+                companionItem.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const checkbox = companionItem.querySelector(`#companion-${companion.id}`);
+                    checkbox.checked = !checkbox.checked;
+                    
+                    // Toggle selected class
+                    companionItem.classList.toggle('selected');
+                    
+                    // Update state through StateManager
+                    const newValue = checkbox.checked ? 1 : 0;
+                    window.StateManager.updateState('companion.' + companion.id, newValue);
+                    console.log(`Companion ${companion.name} toggled: ${checkbox.checked}`);
+                });
+
+                companionsContainer.appendChild(companionItem);
+            });
+        }
+
+        function renderGroups(container, groupedData) {
+            if (!groupedData || !groupedData.groups) return;
+            
+            groupedData.groups.forEach(group => {
+                // Create group wrapper container
+                const groupWrapper = document.createElement('div');
+                groupWrapper.className = 'bonus-group';
+                
+                // Group header (if name exists)
+                if (group.name) {
+                    const groupHeader = document.createElement('div');
+                    groupHeader.className = 'group-header';
+                    const totalValue = typeof group.total === 'function' ? group.total() : group.total;
+                    groupHeader.innerHTML = `<div style="display: flex; justify-content: space-between; align-items: center;"><h4 style="margin: 0;">${group.name}</h4><span class="group-total" style="font-weight: 700; color: var(--sub-value);">${totalValue || ''}</span></div>`;
+                    groupWrapper.appendChild(groupHeader);
                 }
-                container.appendChild(item);
+                
+                // Group items container
+                const itemsContainer = document.createElement('div');
+                itemsContainer.className = 'group-items';
+                
+                // Group items (all visible)
+                if (group.items && group.items.length > 0) {
+                    group.items.forEach(item => {
+                        const itemDiv = document.createElement('div');
+                        itemDiv.className = 'sub-breakdown';
+                        itemDiv.innerHTML = `
+                            <div class="item-name">${item.label}</div>
+                            <div class="item-bonus">${item.value}</div>
+                            <div class="item-threshold">${item.threshold || '-'}</div>
+                        `;
+                        itemsContainer.appendChild(itemDiv);
+                    });
+                }
+                
+                groupWrapper.appendChild(itemsContainer);
+                container.appendChild(groupWrapper);
             });
         }
 
@@ -199,31 +294,22 @@
             const state = window.farmingState;
             
             // 1. Land Ranks Total - multiply all Evolution upgrades
-            const landRanksTotal = state.landRank.upgrades
-                .filter(u => u.group === "Evolution")
-                .reduce((prod, u) => prod * u.getBonus().toMulti(), 1);
-            // 2. Market - Day × Night × Exotic
-            const marketDay = state.market.day
-                .filter(u => u.group === "Evolution")
-                .reduce((prod, u) => prod * u.getBonus().toMulti(), 1);
-            
-            const marketNight = state.market.night
-                .filter(u => u.group === "Evolution")
-                .reduce((prod, u) => prod * u.getBonus(), 1);
-            
+            const landRanksTotal = getLandRankUpgBonusTOTAL(0) || 1;
+            const marketDay = farmingState.market.day.find(u => u.index === 6)?.getBonus() || 1;
+            const marketNight = farmingState.market.night.find(u => u.index === 11)?.getBonus() || 1;
             const exoticMultipliers = state.market.exotic
                 .filter(u => u.group === "Evolution" && u.isMultiplier)
                 .reduce((prod, u) => prod * u.getBonus().toMulti(), 1);
-            
+
             const exoticAdditives = state.market.exotic
                 .filter(u => u.group === "Evolution" && !u.isMultiplier)
                 .reduce((sum, u) => sum + u.getBonus(), 0).toMulti();
-            
+
             const marketTotal = marketDay * marketNight * exoticMultipliers * exoticAdditives;
             
             // 3. SummonerWinBonus
-            const summonerWinBonusTotal = window.getWinBonus(10, ).toMulti();
-            
+            const summonerWinBonusTotal = window.getWinBonus(10).toMulti();
+
             // 4. Hole Lamp Bonus
             const holeLampBonusTotal = window.getLampBonus().toMulti();
             
@@ -235,16 +321,12 @@
             
             // 7. Croppius Mapper Bubble (with KLA multiplier)
             const croppiusMapperTotal = (window.calculateBubbleBonus(state.alchemy.croppiusMapperBubblebonus, 5, 70) * window.calculateKillsLeftToAdvance()).toMulti();
-            
             // 8. Crop Chapter Bubble (with Tome Score multiplier)
             const cropChapterBubbleTotal = (window.calculateBubbleBonus(state.alchemy.cropChapterBubblebonus, 12, 50) * window.calculateTomeScorePer2000()).toMulti();
-            
             // 9. Bill Jack Pepper Meal Bonus
             const billJackPepperTotal = window.getMealBonus(62, state.meals.evoBillJackPepperRibbonLevel, state.meals.evoBillJackPepper).toMulti();
-            
             // 10. Nyanborgir Meal Bonus
             const nyanborgirTotal = (window.getMealBonus(66, state.meals.evoNyanborgirRibbonLevel, state.meals.evoNyanborgir) * Math.ceil((c.asNumber(state.levels.summoning) + 1) / 50)).toMulti();
-            
             // 11. Monument Bonus
             const monumentTotal = getmonumentROGbonuses(2, 4).toMulti();
             
@@ -253,15 +335,14 @@
             
             // 13. Achievement Bonus
             const achievementTotal = (5 * (state.achievements.farmingEvoLilOvergrowth === -1 ? 1 : 0)).toMulti();
-            
             const grimoireTotal = grimoireUpgBonus().toMulti();
-
             const killroybonus = getKillroyBonus();
             const skillMasteryBonus = getSkillMasteryBonus();
-            const massIrrigationBonus = calculateMassIrrigationMultiplier(window.farmingState.talents.massIrrigation);
+            const massIrrigationBonus = getTalentNumber(1,205);
             const stickerBonus = getStickerBonus(4).toMulti();
             const buttonBonus = getButtonBonuses(5,window.farmingState.miscBonuses.evoButtonPressCount).toMulti();
             const flavorgilVial = getVialBonus(66,window.farmingState.alchemy.flavorgilBonus).toMulti();
+
             // Multiply all with full precision, then format for display
             const total = 
             landRanksTotal * 
@@ -289,7 +370,8 @@
         }
 
         function renderFarmingBonuses() {
-            const container = document.getElementById('bonuses-columns');
+            const buttonsContainer = document.getElementById('bonus-buttons-container');
+            const viewport = document.getElementById('bonus-viewport');
             
             // Calculate Evolution total dynamically
             const evolutionTotal = calculateEvolutionTotal();
@@ -305,28 +387,52 @@
                     : bonus
             );
             
-            container.innerHTML = bonusesWithCalculated.map(bonus => `
-                <div class="bonus-column">
-                    <div class="column-header">${bonus.name}</div>
-                    <div class="stats-box">
-                        <div class="total-row">
-                            <span class="sub-name">${bonus.totalLabel}:</span>
-                            <span class="sub-value">${bonus.totalValue}</span>
-                        </div>
-                        <div class="breakdown" id="breakdown-${bonus.name.toLowerCase().replace(/[^a-z0-9]/g, '-')}"></div>
-                    </div>
-                </div>
+            // Create buttons for each bonus type
+            buttonsContainer.innerHTML = bonusesWithCalculated.map((bonus, index) => `
+                <button class="bonus-tab-button ${index === 0 ? 'active' : ''}" data-bonus-name="${bonus.name}">
+                    ${bonus.name}
+                </button>
             `).join('');
 
-            
-            const breakdowns = window.getFarmingBreakdowns();
-            farmingBonuses.forEach(bonus => {
-                const breakdownContainer = document.getElementById(`breakdown-${bonus.name.toLowerCase().replace(/[^a-z0-9]/g, '-')}`);
-                if (!breakdownContainer) return;
-
-                const treeData = breakdowns[bonus.name] || [];
-                renderTree(breakdownContainer, treeData);
+            // Add click handlers to buttons
+            document.querySelectorAll('.bonus-tab-button').forEach(button => {
+                button.addEventListener('click', () => {
+                    // Remove active class from all buttons
+                    document.querySelectorAll('.bonus-tab-button').forEach(btn => btn.classList.remove('active'));
+                    // Add active class to clicked button
+                    button.classList.add('active');
+                    // Render the selected bonus
+                    const selectedBonus = bonusesWithCalculated.find(b => b.name === button.dataset.bonusName);
+                    renderBonusViewport(selectedBonus);
+                });
             });
+
+            // Render the first bonus by default
+            renderBonusViewport(bonusesWithCalculated[0]);
+        }
+
+        function renderBonusViewport(bonus) {
+            const viewport = document.getElementById('bonus-viewport');
+            
+            // Create the total row and breakdown container
+            viewport.innerHTML = `
+                <div class="total-row mb-4">
+                    <span class="sub-name">${bonus.totalLabel}:</span>
+                    <span class="sub-value">${bonus.totalValue}</span>
+                </div>
+                <div class="column-header">
+                    <span class="col-name">Name</span>
+                    <span class="col-bonus">Bonus</span>
+                    <span class="col-threshold">Threshold</span>
+                </div>
+                <div class="breakdown" id="breakdown-${bonus.name.toLowerCase().replace(/[^a-z0-9]/g, '-')}"></div>
+            `;
+
+            // Render the grouped breakdown
+            const breakdownContainer = document.getElementById(`breakdown-${bonus.name.toLowerCase().replace(/[^a-z0-9]/g, '-')}`);
+            const breakdowns = window.getFarmingBreakdowns();
+            const groupedData = breakdowns[bonus.name] || {};
+            renderGroups(breakdownContainer, groupedData);
         }
 
         function updateFarmingLevelDisplay() {
@@ -365,62 +471,59 @@
             // Talents
             const dankInput = document.getElementById('talent-dank-ranks');
             if (dankInput) dankInput.addEventListener('input', () => {
-                window.farmingState.talents.dankRanks = parseFloat(dankInput.value) || 0;
+                const value = parseFloat(dankInput.value) || 0;
+                window.StateManager.updateState('talents.dankRanks', value);
             });
 
             const massInput = document.getElementById('talent-mass-irrigation');
             if (massInput) massInput.addEventListener('input', () => {
-                window.farmingState.talents.massIrrigation = parseFloat(massInput.value) || 0;
+                const value = parseFloat(massInput.value) || 0;
+                window.StateManager.updateState('talents.massIrrigation', value);
             });
 
             const appInput = document.getElementById('talent-agri-appreciation');
             if (appInput) appInput.addEventListener('input', () => {
-                window.farmingState.talents.agriculturalAppreciation = parseFloat(appInput.value) || 0;
+                const value = parseFloat(appInput.value) || 0;
+                window.StateManager.updateState('talents.agriculturalAppreciation', value);
             });
 
             // Lab checkboxes
             const chemCheck = document.getElementById('lab-chemistry-set');
             if (chemCheck) chemCheck.addEventListener('change', () => {
-                window.farmingState.lab.my1stChemistrySet = chemCheck.checked ? 1 : 0;
+                const value = chemCheck.checked ? 1 : 0;
+                window.StateManager.updateState('lab.my1stChemistrySet', value);
             });
 
             const stampCheck = document.getElementById('lab-stamp-book');
             if (stampCheck) stampCheck.addEventListener('change', () => {
-                window.farmingState.lab.certifiedStampBook = stampCheck.checked ? 1 : 0;
+                const value = stampCheck.checked ? 1 : 0;
+                window.StateManager.updateState('lab.certifiedStampBook', value);
             });
 
             // Other inputs
             const votingInput = document.getElementById('voting-bonus-29');
             if (votingInput) votingInput.addEventListener('input', () => {
-                window.farmingState.miscBonuses.votingBonus29 = parseFloat(votingInput.value) || 0;
+                const value = parseFloat(votingInput.value) || 0;
+                window.StateManager.updateState('miscBonuses.votingBonus29', value);
             });
 
             const tomeInput = document.getElementById('tome-total-points');
             if (tomeInput) tomeInput.addEventListener('input', () => {
-                window.farmingState.miscBonuses.tometotalpoints = parseFloat(tomeInput.value) || 0;
+                const value = parseFloat(tomeInput.value) || 0;
+                window.StateManager.updateState('miscBonuses.tometotalpoints', value);
             });
         }
 
-        window.setCropCount = function(count) {
-            const inputId = `crop-count-${count}`;
-            const inputElement = document.getElementById(inputId);
-            const value = inputElement.value !== '' ? parseFloat(inputElement.value) : count;
-            
-            window.farmingState.customcropcount[count.toString()] = value;
-            
-            // Reset caches and recalculate everything
-            if (window.resetWinBonusCache) {
-                window.resetWinBonusCache();
+        // Initialize
+        // Helper function to hide/show the JSON load notice
+        window.hideJsonLoadNotice = function() {
+            const notice = document.getElementById('json-load-notice');
+            if (notice) {
+                notice.style.display = 'none';
+                console.log('[UI] JSON load notice hidden - inputs enabled');
             }
-            
-            // Full page update
-            renderFarmingBonuses();
-            updateFarmingLevelDisplay();
-            
-            alert('✅ Crop Count ' + count + ' set to: ' + value);
         };
 
-        // Initialize
         window.onload = function() {
             renderFarmingBonuses();
             setupManualInputs();

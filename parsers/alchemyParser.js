@@ -34,6 +34,9 @@ window.parseCauldronData = function(data, state = window.farmingState) {
     if (kazamCauldron && typeof kazamCauldron === "object") {
         const level = Number(kazamCauldron["25"]) || 0;
         state.alchemy.croppiusMapperBubblebonus = level;
+
+        const bigPLevel = Number(kazamCauldron["21"]) || 0;
+        state.alchemy.bigP = bigPLevel;
     }
 
     // === Vials (CauldronInfo[4]) ===

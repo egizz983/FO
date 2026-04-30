@@ -11,8 +11,37 @@ class FarmingOptimizer {
         try {
             const data = JSON.parse(jsonString);   
             this.parseAll(data);
+            
+            // Restore user selections after parsing JSON
+            // This ensures user's companion/talent selections persist over the parsed defaults
+            if (window.StatePersistence && window.StatePersistence.loadUserSelections) {
+                window.StatePersistence.loadUserSelections();
+            }
+            
             this.recalculateAll();
             this.renderAll();
+            
+            // Mark JSON as successfully loaded - enables recalculations and input interactions
+            if (window.StateManager && window.StateManager.markJsonLoaded) {
+                window.StateManager.markJsonLoaded();
+            }
+            
+            // Enable manual input fields now that JSON is loaded
+            if (window.StateAutoWire && window.StateAutoWire.setInputsDisabled) {
+                window.StateAutoWire.setInputsDisabled(false);
+            }
+            
+            // Render State Inspector with parsed data
+            if (window.StateInspector && window.StateInspector.renderInspector) {
+                window.StateInspector.renderInspector();
+                window.StateInspector.syncAllFields();
+            }
+            
+            // Hide the "load JSON first" notice
+            if (window.hideJsonLoadNotice) {
+                window.hideJsonLoadNotice();
+            }
+            
             console.log("✅ FarmingOptimizer.loadPlayerData completed successfully");
             return true;
         } catch (e) {
@@ -32,6 +61,14 @@ class FarmingOptimizer {
         parseShinyPetsData(data, this.state); // shiny pet levels for infinite star and meal bonus calculations
         parseStarSignsData(data, this.state); // star sign positions for infinite star activation
         parseKillsLeftToAdvanceData(data, this.state); // kills left to advance (KLA_0 through KLA_9) progression data
+        parseSkillLevelsData(data, this.state); // skill levels for all characters (SL_0 through SL_9 compared with SLpre_0 through SLpre_9)
+        parseCharacterClassData(data, this.state); // character class IDs for all characters (CharacterClass_0 through CharacterClass_9)
+        parseLv0Data(data, this.state); // level 0 player data (Lv0_0 through Lv0_6) for all characters
+        
+        // Initialize DNSM chip bonuses after all parsers complete
+        if (window.DNSMInit) {
+            window.DNSMInit();
+        }
     }
 
     // Reset all caches and reinitialize calculations
@@ -44,6 +81,11 @@ class FarmingOptimizer {
         // Force reinitialization of dependent functions
         if (window.getWinBonus) {
             window.getWinBonus(10);
+        }
+        
+        // Update talent levels from all sources (called here after ALL parsers complete)
+        if (window.UpdateTalentLevelsFromAllSources) {
+            window.UpdateTalentLevelsFromAllSources();
         }
         
         // Run all calculations
@@ -78,13 +120,6 @@ class LandRankUpgrade {
         if (level <= 0) return 0;
 
         let bonus = LankRankUpgBonus(this.id, this.base, level);
-
-        // Special case for index 0 (Evolution Boost - scales with first plot rank)
-        if (this.id === 0) {
-            bonus = bonus * (window.farmingState.landRank.stats.first || 0) + (window.farmingState.miscBonuses.votingBonus29 || 0);
-        }
-
-
 
         return bonus;
     }
@@ -173,27 +208,27 @@ class MarketUpgrade {
 
             switch (this.index) {
                 case 11: // Evolution GMO → special exponential formula
-                    cropCount = (state.customcropcount["200"] || 0) !== -1 ? (state.customcropcount["200"] || 0) : (state.gmoCropCounts["200"] || 0);
+                    cropCount = state.gmoCropCounts["200"] || 0;
                     bonus = Math.pow(1 + level * (this.param || 0) / 100, cropCount);
                     break;
 
                 case 12: // Speed GMO
-                    cropCount = (state.customcropcount["1000"] || 0) !== -1 ? (state.customcropcount["1000"] || 0) : (state.gmoCropCounts["1000"] || 0);
+                    cropCount = state.gmoCropCounts["1000"] || 0;
                     bonus = 1 + (level * (this.param || 0) * cropCount) / 100;
                     break;
 
                 case 14: // EXP GMO
-                    cropCount = (state.customcropcount["2500"] || 0) !== -1 ? (state.customcropcount["2500"] || 0) : (state.gmoCropCounts["2500"] || 0);
+                    cropCount = state.gmoCropCounts["2500"] || 0;
                     bonus = 1 + (level * (this.param || 0) * cropCount) / 100;
                     break;
 
                 case 16: // Value GMO
-                    cropCount = (state.customcropcount["10000"] || 0) !== -1 ? (state.customcropcount["10000"] || 0) : (state.gmoCropCounts["10000"] || 0);
+                    cropCount = state.gmoCropCounts["10000"] || 0;
                     bonus = 1 + (level * (this.param || 0) * cropCount) / 100;
                     break;
 
                 case 17: // Super GMO → returns its own multiplier ONLY
-                    cropCount = (state.customcropcount["100000"] || 0) !== -1 ? (state.customcropcount["100000"] || 0) : (state.gmoCropCounts["100000"] || 0);
+                    cropCount = state.gmoCropCounts["100000"] || 0;
                     bonus = 1 + (level * (this.param || 0) * cropCount) / 100;
                     return bonus;   // Super GMO does NOT multiply itself
             }

@@ -48,13 +48,6 @@ window.farmingState = {
         "10000": 0,   // crops with 10000+ → used by Value GMO
         "100000": 0    // crops with 100000+ → used by Super GMO
     },
-    customcropcount:{
-            "200": -1,     // custom input for crops with 200+ → used by Evolution GMO (-1 = not set)
-            "1000": -1,    // custom input for crops with 1000+ → used by Speed GMO (-1 = not set)
-            "2500": -1,    // custom input for crops with 2500+ → EXP GMO (-1 = not set)
-            "10000": -1,   // custom input for crops with 10000+ → used by Value GMO (-1 = not set)
-            "100000": -1    // custom input for crops with 100000+ → used by Super GMO (-1 = not set)
-    },
 
     // ======================
     // LAND RANK SUMMARY STATS
@@ -148,6 +141,7 @@ window.farmingState = {
             new ExoticMarketUpgrade({ index: 51, name: "Bountiful I",         calcType: "diminishing", base: 50,   isMultiplier: false, unit: "%",  currentLevel: 0, perLevel: false, description: "% chance for +1 crop when fully grown", group: "Production" }),
             new ExoticMarketUpgrade({ index: 52, name: "Bountiful II",        calcType: "diminishing", base: 60,   isMultiplier: false, unit: "%",  currentLevel: 0, perLevel: false, description: "% chance for +1 crop when fully grown", group: "Production" }),
             new ExoticMarketUpgrade({ index: 53, name: "Bountiful III",       calcType: "diminishing", base: 70,   isMultiplier: false, unit: "%",  currentLevel: 0, perLevel: false, description: "% chance for +1 crop when fully grown", group: "Production" }),
+            new ExoticMarketUpgrade({ index: 68, name: "Prisma Petal",        calcType: "diminishing", base: 2,    isMultiplier: false, unit: "%",  currentLevel: 0, perLevel: false, description: "% Prisma Bubble Bonus (Not Farming Related)", group: "NonFarming" }),
             new ExoticMarketUpgrade({ index: 69, name: "Exalted Eldou",       calcType: "diminishing", base: 2,    isMultiplier: false, unit: "%",  currentLevel: 0, perLevel: false, description: "% Exalted Stamp Bonus (Not Farming Related)", group: "NonFarming" }),
         ]
     },
@@ -182,6 +176,13 @@ window.farmingState = {
     holes:{
         hole4: {
             0: 0   // Holes[4][0] monument bonus - Monumental Vibes level → (multiplier calculated later)
+        },
+        hole6:{
+            0: 0,   // Holes[6][0] monument bonus - Monumental Vibes level → (multiplier calculated later)
+        },
+        hole11:{ // active div 
+            29: 0,   
+            30: 0    
         },
         hole15:{
             24: 0,   // Holes[15][24] evoMonumentWisdom - × Farming Crop Evo Chance (multiplicative, scales with waves)
@@ -219,7 +220,7 @@ window.farmingState = {
         // Set / Special Bonuses (simple string or flag checks)
         godshardSetBonus: 0,   // 15 (15% bonus) if OptLacc[379] contains "GODSHARD_SET", else 0
         emperorSetBonus: 0,   // 20 (20% bonus) if OptLacc[379] contains "EMPEROR_SET", else 0
-        kattlekrukSetBonus: 0,   // 25 (25% bonus) if OptLacc[379] contains "KATTLEKRUK_SET", else 0
+        kattlekrukSetBonus: 0,   // +5 if OptLacc[379] contains "KATTLEKRUK_SET", else 0
         votingBonus29: 0,   // +% Crop Evolution Chance  "VOTING_BONUS_29"
         zenitmarketLampLevel: 0,   // Spelunk[45][2]
         sushiBonus: 0,   // Sushi[5][35] - Sushi multi bonus
@@ -234,6 +235,7 @@ window.farmingState = {
         dream_d_71 : 0,   // WeeklyBoss["d_71"] // All Research Grid bonuses are +1% bigger
         dream_d_72 : 0,   // WeeklyBoss["d_72"] // All Research Grid bonuses are +1% bigger
         dream_d_76 : 0,   // WeeklyBoss["d_76"] // All Research Grid bonuses are +1% bigger
+        EquinoxSymbol: 0,   // Dream[12] - +level
     },
 
     // ======================
@@ -259,9 +261,9 @@ window.farmingState = {
     // ======================
     starSigns: {
         // Final variables (1 = active / enabled for farming bonuses, 0 = inactive)
-        seraphCosmos: 0,   // Seraph_Cosmos active flag 1.10× Crop Evolution Chance per 20 summoning level
-        ogSignalais: 0,   // O.G._Signalais active flag // 15% og chance
-        cropiovoMinor: 0   // Cropiovo_Minor active flag // +3% evo per farming level 
+        seraphCosmos: 0,   // Seraph_Cosmos active flag 1.10× Crop Evolution Chance per 20 summoning level / id 79
+        ogSignalais: 0,   // O.G._Signalais active flag // 15% og chance / id 67
+        cropiovoMinor: 0   // Cropiovo_Minor active flag // +3% evo per farming level / id 65
     },
 
     // ======================
@@ -281,29 +283,12 @@ window.farmingState = {
         // Alchemy Bubbles
         cropChapterBubblebonus: 0,   // CauldronInfo[0]["29"]  → Crop Chapter x1=12 x2=50
         croppiusMapperBubblebonus: 0,   // CauldronInfo[3]["25"]  → Croppius Mapper x1=5 x2=70
+        bigP: 0,   // CauldronInfo[3]["21"]  bigger minor link bonus
 
         // Vials
         ricecakoradeBonus: 0,   // CauldronInfo[4]["64"]  → +{2%/level} Farming Speed
         flavorgilBonus: 0,   // CauldronInfo[4]["66"]  → +{7%/level} Crop Evolution chance
         countLevel13: 0   // Total number of vials that are level 13 or higher
-    },
-
-    // ======================
-    // Kills Left To Advance (KLA)
-    // ======================
-    killsLeftToAdvance: {
-        // Arrays for each farming character (0-9)
-        // Each array contains progression/evolution data parsed from KLA_0 through KLA_9
-        character_0: [],   // KLA_0
-        character_1: [],   // KLA_1
-        character_2: [],   // KLA_2
-        character_3: [],   // KLA_3
-        character_4: [],   // KLA_4
-        character_5: [],   // KLA_5
-        character_6: [],   // KLA_6
-        character_7: [],   // KLA_7
-        character_8: [],   // KLA_8
-        character_9: []    // KLA_9
     },
 
     // ====================== ====================== ======================
@@ -314,25 +299,48 @@ window.farmingState = {
         vialMultiplier: 1.0 // Calculated in CalcFormulas based on all vial levels and bonuses
     },
     companion: {
-        potato_19: 0, // {5%_Ballot_Bonus_Multi_(World_2_feature)
-        rift2_1: 0, // +25_Lv_for_all_Talents (CompanionDB[1])
-        w7a8_39: 0, // +50%_Meritocracy_Bonus_Multi_(World_7_feature)
-        Crystal6_41: 0, // {40%_Ballot_Bonus_Multi_(World_2_feature)
+        babaMummy_0: 0, // All_Divinities_from_World_5_count_as_Active (CompanionDB[0]) // King Doot
+        potato_19: 0, // {5%_Ballot_Bonus_Multi_(World_2_feature) //Mashed Potato
+        rift2_1: 0, // +25_Lv_for_all_Talents (CompanionDB[1]) // Rift Slug
+        w7a8_39: 0, // +50%_Meritocracy_Bonus_Multi_(World_7_feature) //Pufferblob
+        Crystal6_41: 0, // {40%_Ballot_Bonus_Multi_(World_2_feature) // Crystal Cuttlefish
         w7b6b_54: 0, // {1_new_Research_Shape,_shows_up_after_you_get_Research_LV._20
-        w7b11_55: 0, // Multiplies_ALL_Research_Grid_bonuses_by_1.15x_(World_7_feature)
-        rift4_88: 0, // {50%_Prisma_Bubble_bonus_multi_and_{5_Prisma_Bubbles
-        poppy_161: 0, // 2x_bonuses_from_Bonus_Ballot_and_Multi_Meritocracy
-        w6b2b_162: 0, // All_meals_are_5x_cheaper_to_level_up,_and_give_1.25x_higher_bonuses!
-        w7b7_147: 0, // All_bonuses_from_The_Button_in_W7_are_1.50x_bigger
-        reindeer_27: 0, // 2.00x_Gold_Ball_Shop_Bonuses (CompanionDB[27])
+        w7b11_55: 0, // Multiplies_ALL_Research_Grid_bonuses_by_1.15x_(World_7_feature)//Pirate Deckhand
+        rift4_88: 0, // {50%_Prisma_Bubble_bonus_multi_and_{5_Prisma_Bubbles //Rift Hivemind
+        poppy_161: 0, // 2x_bonuses_from_Bonus_Ballot_and_Multi_Meritocracy //Poppy
+        w6b2b_162: 0, // All_meals_are_5x_cheaper_to_level_up,_and_give_1.25x_higher_bonuses! //Wickerlight Spirit
+        w7b7_147: 0, // All_bonuses_from_The_Button_in_W7_are_1.50x_bigger // Mantaray
+        reindeer_27: 0, // 2.00x_Gold_Ball_Shop_Bonuses (CompanionDB[27]) //Spirit_Reindeer
+    },
+    playerDatabase: {
+        Lv0: [],   // Parsed from Savedata.json Lv0_0[] - contains all player level-related variables and arrays, including farming level, summoning level, etc.
+        KillsLeftToAdvance: [], // Parsed from Savedata.json KLA_0-9[] - contains all kills left to advance data for each farming character
+        TalentPoints: [],  // Parsed from Savedata.json SL_0-9 vs SLpre_0-9[] - contains all talent point levels for each character (max of current vs previous)
+        CharacterClass: [],  // Parsed from Savedata.json CharacterClass_0-9 - contains class identifiers for each character, used for class-specific bonuses and calculations
+    },  
+    PersonalValueMap:{
+        starSigns: [],   // Parsed from Savedata.json PVtStarSign_0-9 - contains all star sign-related variables and arrays
+    },
+    DNSM: {
+        ChipBbonusz: [],   
     },
     research: [],   // Parsed from Savedata.json Research[] - contains all 14 research grid arrays dynamically
     spelunk: [],   // Parsed from Savedata.json Spelunk[] - contains all spelunking-related variables and arrays
     compass: [],   // Parsed from Savedata.json Compass[4] - contains all compass-related variables and arrays
-    skillLevels: [], // Parsed from Savedata.json SL_0-9[] - contains highest skill level for each index across all characters
     pristineCharms: [],   // Parsed from Savedata.json Ninja[107] - contains all pristine charm levels and bonuses
     vaultupg: [],   // Parsed from Savedata.json UpgVault[] - contains all vault upgrade levels and bonuses
     ArcadeUpg: [],   // Parsed from Savedata.json ArcadeUpg[] - contains all arcade upgrade levels and bonuses
+    grimoire: [],   // Parsed from Savedata.json Grimoire[] - contains all grimoire-related variables and arrays
+    arcane: [],   // Parsed from Savedata.json Arcane[] - contains all arcane-related variables and arrays
+    optionsListAccount: [],   // Parsed from Savedata.json OptLacc[] - contains all account-wide options and variables that affect farming bonuses
+    GemItemsPurchased: [],   // Parsed from Savedata.json GemItemsPurchased[] - contains all gem item purchase counts and levels that affect farming bonuses
+    divinity: [],   // Parsed from Savedata.json Divinity[] - contains all divinity-related variables and arrays
+    CauldronInfo: [],   // Parsed from Savedata.json CauldronInfo[] - contains all alchemy bubble and vial levels and bonuses
+    cards: [],   // Parsed from Savedata.json Cards0-1[] - contains all card-related variables and arrays
+    atoms: [],   // Parsed from Savedata.json Atoms[] - contains all atom-related variables and arrays
+    meals: [],   // Parsed from Savedata.json Meals[] - contains all meal-related variables and arrays
+    towerinfo: [],   // Parsed from Savedata.json Tower[] - contains all tower-related variables and arrays 
+    lab: [],   // Parsed from Savedata.json Lab[] - contains all lab-related variables and arrays
 };
 
 // ======================

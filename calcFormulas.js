@@ -15,7 +15,7 @@ const c = {
 function LankRankUpgBonus(t, base, level) { // engine formula 
     // Common part used in BOTH branches common = dankranks * exotic bonus 
     const common = 
-    calculateDankRanksMultiplier(farmingState.talents?.dankRanks || 0) *
+    getTalentNumber(1,207) *
     (farmingState.market?.exotic?.find(u => u.index === 34)?.getBonus?.().toMulti() ?? 1);
 
 
@@ -76,10 +76,11 @@ function getEmperorSummonerMultiplier(isMulti = false) {
         : 0;
     
     const vicarBonus  = (window.farmingState.summoning.vicarOfTheEmperorLevel || 0) / 100;
+    const totalBonus  = 1 + vicarBonus + (getArcadeBonus(51) / 100);
 
-    const totalBonus  = 1 + vicarBonus + getArcadeBonus(51);
-    const effective   = Math.floor(rawPoint * totalBonus);
     
+    const effective   = Math.floor(rawPoint * totalBonus);
+
     if (isMulti) {
         // Return multiplier form: (1 + effective/100)
         const result = 1 + (effective / 100);
@@ -117,6 +118,126 @@ window.calculateBubbleBonus = function(level, x1, x2, percentFromMax = 100) {
     return finalBonus;
 }
 
+
+
+function getBubbleBonus(t, i) {
+
+  const Clist = window.AlchemyDescription[Math.floor(t)][Math.floor(i)];
+  const baseResult = ArbitraryCode5Inputs(
+    "" + String(Clist[3]),
+    c.asNumber(Clist[1]),
+    c.asNumber(Clist[2]),
+    c.asNumber(window.farmingState.CauldronInfo[t][i])
+);
+
+  if (isBubbleSuperr(t, i) === 1) {
+    const prismaMultiplier = Math.max(
+      1,
+      getPrismaBonusMult()
+    );
+    return prismaMultiplier * baseResult;
+  }
+
+  return baseResult;
+}
+
+function getPrismaBonusMult() {
+  const arcaneUpg = getArcaneUpgBonus(45, 0);
+  const arcadeBonus = getArcadeBonus(54);
+  const rogBonus = getRoGBonusQTY(23);
+  const haveW6Trophy = (window.farmingState?.cards?.[1] && String(window.farmingState.cards[1] || "").includes("Trophy23")) ? 1 : 0;
+  const paletteBonus = getPaletteBonus(28);
+  const purpleSigils = getTotalSigils("purple");
+  const exoticBonus = window.farmingState.market.exotic?.find(u => u.index === 48+20)?.getBonus?.() || 0;
+  const legendPtsBonus = getLegendPTS_bonus(36);
+  const companionsBonus = window.farmingState?.companion?.rift4_88 || 0;
+
+  // Original deeply nested sum, now flattened for readability
+  const total =
+    arcaneUpg +
+    (arcadeBonus +
+      rogBonus +
+      (haveW6Trophy +
+        (paletteBonus + (0.2 * purpleSigils + exoticBonus)))) +
+    (legendPtsBonus + 50 * companionsBonus);
+
+  const result = 2 + total / 100;
+
+  return Math.min(4, result);
+}
+
+
+function getPaletteBonus(t) {
+
+    const spelunk = window.farmingState?.spelunk || [];
+    const PaletteClist = window.GamingPalette;
+    const gamingString = window.farmingState?.miscBonuses?.gaming12array || ""; 
+
+    const spelunkVal = c.asNumber(spelunk[9][t]);
+    const paletteMult = c.asNumber(PaletteClist[t][4]);
+    const isSpecialFormula = c.asNumber(PaletteClist[t][5]) === 1;
+
+    let bonus = isSpecialFormula
+    ? (spelunkVal / (spelunkVal + 25)) * paletteMult
+    : spelunkVal * paletteMult;
+
+
+    // Global multipliers (applied to every entry)
+    const legendBonus = getLegendPTS_bonus(10);
+    const loreBonus = c.asNumber(spelunk[0][8]) >= 1 ? 1 : 0
+
+
+
+
+    if (
+        (stringSearch(49, gamingString) === 1 && t === 25) ||
+        (stringSearch(51, gamingString) === 1 && t === 13) ||
+        (stringSearch(52, gamingString) === 1 && t === 31) ||
+        (stringSearch(54, gamingString) === 1 && t === 18) ||
+        (stringSearch(58, gamingString) === 1 && t === 3) ||
+        (stringSearch(61, gamingString) === 1 && t === 12)
+        )  {
+        const superBit59 = stringSearch(59, gamingString);
+        bonus *= (2 + 0.5 * superBit59);
+    }
+
+    // Global multipliers (applied to every palette bonus)
+    bonus *= (1 + legendBonus / 100);
+    bonus *= (1 + 0.5 * loreBonus);
+
+  return bonus;
+}
+
+function getTotalSigils(type) { // "green" or "purple"
+
+  let minLevel = 3;                    // purple default
+  if (type === "green" || type === "Green") {
+    minLevel = 4;
+  }
+
+  let count = 0;
+  const cauldronP2W = a.engine.getGameAttribute("CauldronP2W");
+
+  // Check all 24 sigil slots (odd indices: 1, 3, 5, ..., 47)
+  for (let i = 0; i < 24; i++) {
+    const level = c.asNumber(cauldronP2W[4][1 + 2 * i]);
+    if (level >= minLevel) {
+      count++;
+    }
+  }
+
+  return Math.round(c.asNumber(count));
+}
+
+function isBubbleSuperr(t,i) {
+  const optionsString = window.farmingState.optionsListAccount[384] || ""; // default to empty string if not found
+  const letter = window.Number2Letter(t); 
+  const searchKey = letter + (Math.round(i) + ",");
+
+  return optionsString.indexOf(searchKey) !== -1 ? 1 : 0;
+}
+
+
 //Kills Left To Advance formula W6 only
 window.calculateKillsLeftToAdvance = function() {
     let totalCompletedSlots = 0;
@@ -124,8 +245,7 @@ window.calculateKillsLeftToAdvance = function() {
     
     // Loop through all 10 characters (0-9)
     for (let characterIndex = 0; characterIndex < 10; characterIndex++) {
-        const characterKey = `character_${characterIndex}`;
-        const characterData = state.killsLeftToAdvance[characterKey];
+        const characterData = state.playerDatabase.KillsLeftToAdvance[characterIndex];
         
         // If character data exists and is an array
         if (Array.isArray(characterData)) {
@@ -144,6 +264,38 @@ window.calculateKillsLeftToAdvance = function() {
     
     return totalCompletedSlots;
 };
+
+
+function getArcaneUpgBonus(t, i = 0) {
+  const index = Math.floor(t); 
+
+  // Special t values that skip the bonus multiplier
+  const specialT = [3, 7, 8, 10, 13, 16, 20, 25, 26, 28, 33, 35, 39, 40, 43, 45, 48, 57, 58];
+
+  const isSpecial = specialT.includes(index);
+
+  // Common values used in both paths
+  const arcaneVal = c.asNumber(window.farmingState.arcane[index] || 0);
+  const upgVal = c.asNumber(
+    window.ArcaneUpg[index][5]
+  );
+
+  // Handle the 999 special case first
+  if (i == 999) {
+    return isSpecial ? 0 : 69.42;
+  }
+
+  // Normal calculation
+  const base = arcaneVal * upgVal;
+
+  if (isSpecial) {
+    return base;
+  }
+
+  // Non-special: apply bonus multiplier
+  const bonusPct = getArcaneUpgBonus( 39, 0);
+  return base * (1 + bonusPct / 100);
+}
 
 //Tome count total - 5000 every 2000 
 function calculateTomeScorePer2000() {
@@ -217,25 +369,6 @@ function ArbitraryCode5Inputs(type, x1, x2, level) {
     }
 }
 
-//misc functions
-
-
-window.getBubblePercentFromMax = function(rawBonus) { // must pass alchemy_CropChapterbonus or alchemy_CroppiusMapperbonus
-    // This function is designed specifically for your two bubbles
-
-    // Crop Chapter max = 12
-    if (typeof alchemy_CropChapterBubblebonus !== "undefined" && rawBonus === alchemy_CropChapterBubblebonus) {
-        return Number(((rawBonus / 12) * 100).toFixed(2));
-    }
-
-    // Croppius Mapper max = 5
-    if (typeof alchemy_CroppiusMapperBubblebonus !== "undefined" && rawBonus === alchemy_CroppiusMapperBubblebonus) {
-        return Number(((rawBonus / 5) * 100).toFixed(2));
-    }
-
-    console.warn("Unknown bubble - please use getPercentFromMax(rawBonus, maxBonus) instead");
-    return 0;
-};
 
 
 
@@ -412,7 +545,7 @@ function getMeritocBonusz(t) {
 function getMeritocBonuszMulti() {
     // Check if KillsLeft2Advance is still > 0
     const killsLeft = c.asNumber(
-        window.farmingState?.killsLeftToAdvance?.character_0?.[250]?.[0] || 0
+        window.farmingState?.playerDatabase?.KillsLeftToAdvance?.[0]?.[250]?.[0] || 0
     );
 
     if (killsLeft > 0) {
@@ -455,8 +588,7 @@ function getLegendPTS_bonus(t) {
 };
 
 function getArcadeBonus(e) {
-    const dnsm = a.engine.getGameAttribute("DNSM");
-    const arcadeIndex = 0 | e; // same as Math.floor(e) — used everywhere in original
+    const arcadeIndex = 0 | e; 
     const level = window.farmingState?.ArcadeUpg[arcadeIndex] || 0;
     let multiplier = 1;
     // Double the bonus if this upgrade is at level 101
@@ -469,8 +601,8 @@ function getArcadeBonus(e) {
         multiplier = 2 * c.asNumber(multiplier);
     }
 
-    return multiplier * x._customBlock_ArbitraryCode5Inputs(
-        "" + h.string(window.ArcadeShopInfo[arcadeIndex][3]),
+    return multiplier * ArbitraryCode5Inputs(
+        "" + String(window.ArcadeShopInfo[arcadeIndex][3]),
         c.asNumber(window.ArcadeShopInfo[arcadeIndex][1]),
         c.asNumber(window.ArcadeShopInfo[arcadeIndex][2]),
         c.asNumber(level),
@@ -479,13 +611,11 @@ function getArcadeBonus(e) {
     );
 };
 
-// _customBlock_CauldronStats = function (e, t, i, s) 
-// CauldronBonus" == e
-// "VialBonus" == e
+
 
 // Vials base bonus function
 window.getVialBonus = function(i, level) {
-    let customlist = window.AlchemyDescription?.[3]?.[0 | i];
+    let customlist = window.AlchemyDescription?.[4]?.[0 | i];
 
     // Safety check: if customlist doesn't exist, return 0
     if (!customlist) {
@@ -613,7 +743,6 @@ function getCardBonus(cardQuantity = 0) {
 
 
 /**
- * Clean version of p._customBlock_MainframeBonus(e)
  * Returns the current Mainframe / Lab / Jewel bonus value for the given ID `e`.
  * - e < 100   → Base Lab Mainframe bonuses (from LabMainBonus list)
  * - e >= 100  → Jewel-related bonuses (from JewelDesc list)
@@ -680,7 +809,7 @@ function getMainframeBonus(e) {
 
     // const genInfo92 = n.__cast(pixelHelper, eb)._GenINFO[92];
 
-    // const jewelIndex = (e - 100) | 0;
+    const jewelIndex = (e - 100) | 0;
     // const adjustedUnlockIndex = (e - 100 + labMainBonus.length) | 0;
 
     // // Is this specific jewel bonus unlocked?
@@ -794,33 +923,16 @@ function getmonumentROGbonuses(t, i) { // 2,4 ( 24 , 2,9 (29) )
       );
 }
 
-
-//==============================================================
-
-//===================Stamp return formula ===
-// Evo stamp base 5 * level * (1 + Certified Stamp Book Node(1) + Liqorice Rolle(0.25) + Exalted bonus)) 
-
-
-//Compass[4] contains b48  // if yes stamp is exalted and then uses stamp multi formula to know its multi
-
-
-//Full formula for stamp
-//5 × your_StampB48_level × (exalted doubler) × 2 (Mainframe) × (1 + Pristine %)
-
-/**
- * Clean version of the StampDoubler calculation
- * (This is the body that runs when e === "StampDoubler")
- */
 function calculateStampDoublerBonus() {
     const eventshopString =window.farmingState?.miscBonuses?.EventShopOwned || "";
 
     return 100
-        + m._customBlock_AtomCollider("AtomBonuses", 12, 0)
+        + getAtomBonuses(12, 0)
             + 20 * (window.farmingState?.pristineCharms?.[20] || 0) // Jellypick	+20% Stamp Doubler Bonus
-            + m._customBlock_Windwalker("CompassBonus", 76, 0)
-            + (20 * emperorSetBonus)
+            + getCompassBonus(76)
+            + window.farmingState.miscBonuses.emperorSetBonus
             + 20 * stringSearch(18, eventshopString)
-            + m._customBlock_GamingStatType("PaletteBonus", 23, 0)
+            + m.getPaletteBonus(23)
             + (window.farmingState.market.exotic?.find(u => u.index === 69)?.getBonus() || 0) 
             + Math.round(
                 c.asNumber(
@@ -844,7 +956,7 @@ function getStampBonusOfType(stampType,stampindex,stampLevel) {
         window.Number2Letter(Math.floor(stampindex / 1000))
     ) + String(Math.round(stampindex % 1000));
 
-    if (window.farmingState.compass && window.farmingState.compass.includes(compassKey)) {
+    if (window.farmingState.compass && window.farmingState.compass[4] && window.farmingState.compass[4].includes(compassKey)) {
         const doublerTalent = calculateStampDoublerBonus();
         exaltedMultiplier = 1 + doublerTalent / 100;
     }
@@ -863,17 +975,18 @@ function getStampBonusOfType(stampType,stampindex,stampLevel) {
     // Add to running total (with exalted multiplier)
     StampBonus += exaltedMultiplier * rawBonus;
 
-
     // ─────────────────────────────────────────────────────────────
     // 6. APPLY GLOBAL MULTIPLIERS (talents, mainframe, vault, etc.)
     // ─────────────────────────────────────────────────────────────
 
     // Efficiency stamps get an extra talent multiplier
     if (stampType === 1) {
-        const effTalent = k._customBlock_GetTalentNumber(1, 625);
+        const effTalent = getTalentNumber(1, 625);
         StampBonus *= Math.max(effTalent, 1);
+
     }
 
+    
     // Mainframe Bonus (doubles Book A & B stamps under certain condition)
     if (getMainframeBonus(7) === 2 && stampType < 2) {
         StampBonus *= 2;
@@ -889,20 +1002,110 @@ function getStampBonusOfType(stampType,stampindex,stampLevel) {
     if (stampType < 2) {
         const pristineBonus = 25 * (window.farmingState?.pristineCharms?.[17] || 0); //Liqorice Rolle	1.25x Bigger Bonuses of Non Misc Stamps
         StampBonus *= (1 + pristineBonus / 100);
+
     }
 
+    
     // ─────────────────────────────────────────────────────────────
     // 7. CACHE THE RESULT & RETURN
     // ─────────────────────────────────────────────────────────────
     const finalValue = StampBonus;
 
+
     return finalValue;
 }
 
 
+function getAtomBonuses(t, i) {
+
+
+  // === Compute AtomBonCalc1 (excess tower levels) ===
+  let atomBonCalc1 = 0;
+  const towerInfo = window.farmingState.towerinfo || [];
+  for (let s = 0; s < 9; s++) {
+    const towerLevel = c.asNumber(towerInfo[9 + s]);
+    if (towerLevel > 50) {
+      atomBonCalc1 += towerLevel - 50;
+    }
+  }
+
+  // === Compute AtomBonCalc2 (count of meals >= 30) ===
+  let atomBonCalc2 = 0;
+  const meals = window.farmingState.meals[0] || [];
+  for (let s = 0; s < meals.length; s++) {
+    if (c.asNumber(meals[s]) >= 30) {
+      atomBonCalc2++;
+    }
+  }
+
+  // === Base value ===
+  const atoms = window.farmingState.atoms || [];
+  const atomInfo = window.AtomInfo[t];
+
+  let atomBonDN = c.asNumber(atoms[t]) * c.asNumber(atomInfo[4]);
+
+  // === Special cases per t ===
+  if (t === 0) {
+    const optionsMultiplier = c.asNumber(
+      window.farmingState.optionsListAccount[134]
+    );
+    atomBonDN = Math.min(90, atomBonDN * optionsMultiplier);
+  } else if (t === 5) {
+    atomBonDN = 2 * atomBonCalc1;
+  } else if (t === 8) {
+    atomBonDN = Math.pow(1 + atomBonDN / 100, atomBonCalc2);
+  }
+
+  return atomBonDN;
+}
+
+function getCompassBonus(t) {
+
+
+  const compassValue = c.asNumber(window.farmingState.compass[0][t]);
+
+  const compassUpg = window.CompassUpg[t];
+  const upgMultiplier = c.asNumber(compassUpg[5]);
+
+  // Special upgrade type?
+  if (c.asNumber(compassUpg[9]) === 1) {
+    const windwalkerBonus =
+      getCompassBonus(39, 0) +
+      getCompassBonus(80, 0);
+
+    const windwalkerMult = 1 + windwalkerBonus / 100;
+    return windwalkerMult * compassValue * upgMultiplier;
+  }
+
+  // Special case for t = 45
+  if (t === 45) {
+    const powerBonus = Math.pow(2, Math.floor(compassValue / 50));
+    return compassValue * upgMultiplier * powerBonus;
+  }
+
+  // Normal case
+  return compassValue * upgMultiplier;
+}
+
 //==============================================================
 
 //===================GrimoireUpgbonus(14) ===
+
+function getGrimoireUpgBonus(t) {
+    const grimoire = window.farmingState.grimoire || [];
+    const grimoireUpg = window.GrimoireUpg;
+
+    const base = c.asNumber(grimoire[Math.round(t)]) *
+                 c.asNumber(grimoireUpg[0 | t][5]);
+
+    // These upgrade IDs do NOT receive the extra summoning multiplier
+    const specialIds = [9, 11, 26, 36, 39, 17, 32, 45];
+
+    return specialIds.includes(t)
+        ? base
+        : base * (1 + getGrimoireUpgBonus(36) / 100);
+}
+
 
 function grimoireUpgBonus() {// hardcoded for sacraficeharverst only 
 
@@ -926,66 +1129,7 @@ function getSkillMasteryBonus() {
 }
 
 
-//=====================Star sign bonus formula=========================================
-
-//                      (1 +
-//                         (c.asNumber(
-//                           a.engine.getGameAttribute("DNSM").h.StarSigns.h[65],
-//                         ) *
-//                           c.asNumber(a.engine.getGameAttribute("Lv0")[16])) / 
-//                           100)
-
-
-
-/**
- * Calculates the final value for DNSM.h.StarSigns.h[65]
- * ( in _customBlock_StarSigns)
- *
- * Node 65 always gives a base of +3.
- * The full Seraph_Cosmos multiplier is then applied only if you have Seraph_Cosmos unlocked.
- */
-function calculateStarSign65({
-  hasSeraphCosmos = false,     // true if "Seraph_Cosmos" is in StarSignsUnlocked
-  starChipBonus = 0,           // r._customBlock_chipBonuses("star")
-  meritocBonus22 = 0,          // m._customBlock_Summoning2("MeritocBonusz", 22, 0)
-  arcane40 = 0,                // Arcane[40] holds level 
-  summoningLevel = 0,          // Lv0[18] (your Summoning level)
-  enabledStarSigns = 0         // m._customBlock_RiftStuff("enabledStarSigns", 0)
-}) {
-  const base = 3;   // hardcoded bonus from star sign node 65
-
-  // No Seraph_Cosmos → just return the raw base
-  if (!hasSeraphCosmos) {
-    return base;
-  }
-
-  // 1. Star Chip multiplier
-  const chipMultiplier = Math.max(
-    1,
-    Math.min(
-      2,
-      1 + starChipBonus * Math.floor((999 + enabledStarSigns) / 1000)
-    )
-  );
-
-  // 2. Meritoc multiplier
-  const meritocMultiplier = 1 + meritocBonus22 / 100;
-
-  // 3. Exponential multiplier (1.1× per 20 Summoning levels, upgraded by Arcane[40])
-  const basePerLevel = 1.1 + Math.min(arcane40, 10) / 100;
-  const exponent = Math.ceil((summoningLevel + 1) / 20);
-  const expMultiplier = Math.min(5, Math.pow(basePerLevel, exponent));
-
-  // Total Seraph_Cosmos multiplier
-  const totalMultiplier = chipMultiplier * meritocMultiplier * expMultiplier;
-
-  // Final stored value
-  return base * totalMultiplier;
-}
-
-
-
-//===============================Button evo bonus  (its bugged its using wrong multi)================================
+//==============================Button evo bonus  (its bugged its using wrong multi)================================
 //final formula (1+ getButtonBonuses(5,OptLacc[594]) / 100) // t should be 7 but game uses 5 replace when fixed.
 
 // === Button_BonusPerTime
@@ -1132,7 +1276,7 @@ function getGridBonusAllmulti() {
     // Research-based bonus (capped at 5%)
     const researchBonus = 5 * Math.min(
         1,
-        c.asNumber(Research[0][173]) * 1 // placeholder1 used to check doot if active 1 if not 0 results stil lame capped at 5% 
+        c.asNumber(Research[0][173]) * window.farmingState.companion.babaMummy_0 // placeholder1 used to check doot if active 1 if not 0 results stil lame capped at 5% 
     );
 
     // Cloud bonuses + Sushi bonus
@@ -1229,9 +1373,79 @@ function calculateCropsBonusValue(plotIndex, mode) {
 }
 
 
+
+
+
 //==========================================================================
 //Talent level calculation ==============================================
 //===========================================================================
+function getHighesttalentlevelperID(talentId) {
+    const playerDatabase = window.farmingState?.playerDatabase;
+    
+    // Safety check
+    if (!playerDatabase || !playerDatabase.TalentPoints) {
+        return 0;
+    }
+    
+    let maxLevel = 0;
+    
+    // Loop through all 10 characters (0-9)
+    for (let charIndex = 0; charIndex < 10; charIndex++) {
+        const characterLevels = playerDatabase.TalentPoints[charIndex];
+        
+        // Skip if character array doesn't exist
+        if (!characterLevels) {
+            continue;
+        }
+        
+        // Get the skill level for this talent ID
+        const talentLevel = c.asNumber(characterLevels[talentId]) || 0;
+        
+        // Track the maximum
+        if (talentLevel > maxLevel) {
+            maxLevel = talentLevel;
+        }
+    }
+    
+    return maxLevel;
+}
+
+// Get the character index (0-9) with the highest talent level for a given talent ID
+function getCharacterIndexWithHighestTalent(talentId) {
+
+    const playerDatabase = window.farmingState?.playerDatabase;
+    
+    // Safety check
+    if (!playerDatabase || !playerDatabase.TalentPoints) {
+        return -1; // Return -1 if no data available
+    }
+    
+    let maxLevel = 0;
+    let maxCharacterIndex = -1;
+    
+    // Loop through all 10 characters (0-9)
+    for (let charIndex = 0; charIndex < 10; charIndex++) {
+        const characterLevels = playerDatabase.TalentPoints[charIndex];
+        
+        // Skip if character array doesn't exist
+        if (!characterLevels) {
+            continue;
+        }
+        
+        // Get the skill level for this talent ID
+        const talentLevel = c.asNumber(characterLevels[talentId]) || 0;
+        
+        // Track the maximum and its character index
+        if (talentLevel > maxLevel) {
+            maxLevel = talentLevel;
+            maxCharacterIndex = charIndex;
+        }
+    }
+    
+    return maxCharacterIndex;
+}
+
+
 
 
 /**
@@ -1241,19 +1455,17 @@ function calculateCropsBonusValue(plotIndex, mode) {
  * @param {number} talentId - Talent ID (e.g. 625 for "Toilet Paper Postage")
  * @returns {number}        - The final talent bonus value
  */
-function getTalentNumber(mode, talentId) {
-    const skillLevels = window.farmingState.skillLevels; // points allocated
-    const baseLevel = c.asNumber(skillLevels[Math.floor(talentId)]);
+function getTalentNumber(mode, talentId) { //
+
+
+    const calcLevel =  getHighesttalentlevelperID(talentId);
 
     // No points invested → no bonus
-    if (baseLevel <= 0) {
+    if (calcLevel <= 0) {
         return 0;
     }
 
     const talentData = window.TalentDescriptions[Math.floor(talentId)][1];
-
-
-    const calcLevel =  getAllTalentLV(talentId) + baseLevel;
 
     // Choose which formula + parameters to use
     let formula, paramA, paramB;
@@ -1278,7 +1490,50 @@ function getTalentNumber(mode, talentId) {
     );
 }
 
+/**
+ * Updates all talent levels in TalentPoints for each character
+ * by adding bonus levels from getAllTalentLV() to the current level
+ * 
+ * Called AFTER parsing playerDatabase.TalentPoints from savedata.json
+ * Initial values from savedata + getAllTalentLV results = final value
+ */
+function UpdateTalentLevelsFromAllSources() {
+    const playerDatabase = window.farmingState?.playerDatabase;
 
+    // Safety check
+    if (!playerDatabase || !playerDatabase.TalentPoints) {
+        console.warn("[UpdateTalentLevelsFromAllSources] No TalentPoints found");
+        return;
+    }
+    
+    // Loop through all 10 characters (0-9)
+    for (let playerIndex = 0; playerIndex < 10; playerIndex++) {
+        const characterTalents = playerDatabase.TalentPoints[playerIndex];
+        
+        // Skip if character object doesn't exist
+        if (!characterTalents || typeof characterTalents !== 'object') {
+            continue;
+        }
+        
+        // Loop through all talent IDs in this character's object
+        // characterTalents is { talentId: level, talentId: level, ... }
+        for (const talentIdStr in characterTalents) {
+            const talentId = parseInt(talentIdStr, 10);
+            const currentLevel = characterTalents[talentId];
+            
+            // Skip if this talent ID is missing (undefined/null)
+            if (currentLevel === undefined || currentLevel === null) {
+                continue;
+            }
+            
+            // Get bonus levels from all global sources
+            const bonusLevels = getAllTalentLV(talentId, playerIndex);
+            // Update talent level: current + bonus = final level
+            characterTalents[talentId] = c.asNumber(currentLevel) + bonusLevels;
+
+        }
+    }
+}
 
 /**
  * Calculates the total EXTRA levels given to a talent from ALL global sources
@@ -1287,12 +1542,10 @@ function getTalentNumber(mode, talentId) {
  * @param {number} t - Talent ID 
  * @returns {number} Total bonus levels 
  */
-function getAllTalentLV(t,) { 
-    const talentId = Math.floor(c.asNumber(t));
-
-    const skillLevels = window.farmingState.skillLevels; // points allocated
-    const baseLevel = c.asNumber(skillLevels[talentId]);
-    const gamingString = window.farmingState.miscBonuses.gaming12array || ""; // string that contains gaming related bonuses (e.g. "SuperBitType")
+function getAllTalentLV(tID,playerindex) { 
+    const talentId = Math.floor(c.asNumber(tID));
+    const farmingState = window.farmingState || {};
+    const gamingString = farmingState.miscBonuses?.gaming12array || ""; // string that contains gaming related bonuses (e.g. "SuperBitType")
 
  
     // Is this talent banned from receiving any AllTalentLV bonus?
@@ -1308,100 +1561,322 @@ function getAllTalentLV(t,) {
         return 0;
     }
 
-    // Spelunk 20-43 arrays contains ids of talents for each player that have been suppered for both presets
+
     // checks if skill is super
     let spelunkMultiplier = 0;                   
-    const spelunk = window.farmingState.spelunk;
+    const spelunk = farmingState.spelunk;
 
-    for (let slot = 20; slot <= 43; slot++) {
-        if (spelunk[slot] && spelunk[slot].indexOf(talentId) !== -1) {
-            spelunkMultiplier = 1;
+    const slot1 = 20 + playerindex;
+    const slot2 = 32 + playerindex;
+    
+    if ((spelunk[slot1] && spelunk[slot1].indexOf(talentId) !== -1) ||
+        (spelunk[slot2] && spelunk[slot2].indexOf(talentId) !== -1)) {
+        spelunkMultiplier = 1;
+    }
+    const superTalentPoints =  Math.round(50 + getLegendPTS_bonus(7) + getZenithMarketBonus(5) );
+
+    // sum of Symbol of beyond talent across all 3 base classes P,R,G  + achievement
+    const talentBonuses = 
+        getTalentNumber(1, 149) +
+        getTalentNumber(1, 374) +
+        getTalentNumber(1, 539) +
+        (farmingState.achievements?.checkoutTakeout == -1 ? 5 : 0);
+
+    //Divinity
+    let divMinorlink = 0;
+    let otherBonuses = 0;
+    
+    // Only calculate divinity bonuses if required data is loaded
+    if (window.AlchemyDescription && window.GodsInfo) {
+        const holes = HolesCheckForArctis();
+        const research173 = getGridBonus(173, 0) > 0 ? 1 : 0; // research 173 check
+        const coralkid = farmingState.optionsListAccount?.[425] == 1 ? 1 : 0; // coral kit god selection check
+        const personallink = farmingState.divinity?.[12 + playerindex] == 1 ? 1 : 0; // personal link check
+
+        
+        if(farmingState.companion.babaMummy_0 || research173 || coralkid || holes || personallink){ // no ES skill505 check
+            divMinorlink = getDivMinorBonus(playerindex,1); // arctis godid is 1
+        }
+
+    }
+
+    // Find the character with class 34 (Elementary Swordsman)
+    let EScharacterIndex = -1;
+    const characterClasses = farmingState.playerDatabase?.CharacterClass || [];
+    for (let i = 0; i < characterClasses.length; i++) {
+        if (c.asNumber(characterClasses[i]) === 34) {
+            EScharacterIndex = i;
             break;
         }
     }
 
+    // Get the level of that character
+    const ESlevel = EScharacterIndex >= 0 
+        ? c.asNumber(farmingState.playerDatabase.Lv0?.[EScharacterIndex]?.[0]) || 0
+        : 0;
+    
+    // Only add family bonus if ClassFamilyBonuses is loaded
+    const familyBonus = (window.ClassFamilyBonuses) 
+        ? Math.floor(c.asNumber(getFamilyBonsues(34,ESlevel))) 
+        : 0;
 
-    // === All the bonus sources ===
-    const superTalentPoints = m._customBlock_Thingies("SuperTalentPTS_LVgiven", 0, 0);
+    
+    // Break down otherBonuses into separate variables
+    const rift2_1Bonus = (farmingState.companion?.rift2_1 ? 25 : 0);
 
-    const talentBonuses =
-        getTalentNumber(1, 149) +
-        getTalentNumber(1, 374) +
-        getTalentNumber(1, 539) +
-        (window.farmingState.achievements.checkoutTakeout == -1 ? 5 : 0);
+    const equinoxSymbolBonus = c.asNumber(farmingState.miscBonuses?.EquinoxSymbol);
 
-    const otherBonuses =
-        Math.floor(c.asNumber(a.engine.getGameAttribute("DNSM").h.FamBonusQTYs.h[68])) +
-        (window.farmingState.companion.rift2_1 ? 25 : 0) +
-        Math.ceil(m._customBlock_Divinity("Bonus_Minor", playerIndex, 2)) +
-        c.asNumber(a.engine.getGameAttribute("Dream")[12]) +
-        5 * Math.floor((97 + c.asNumber(a.engine.getGameAttribute("OptionsListAccount")[232])) / 100) +
-        m._customBlock_Summoning("GrimoireUpgBonus", 39, 0) +
-        window.farmingState.miscBonuses.kattlekrukSetBonus +
-        Math.min(5, getArcadeBonus(57)) +
-        // to have it accurate need indexof character that t id belongs to and his level  for now use highest level of all characters
-        Math.max(0, Math.floor(
-            ((c.asNumber(window.farmingState.levels.highestCharacterLevel) - 500) / 100) * 
-            stringSearch(47, gamingString) // SuperBitType check
-        ));
+    const optionsListBonus = 5 * Math.floor((97 + c.asNumber(farmingState.optionsListAccount?.[232])) / 100);
+    const grimoireUpgBonus39 = getGrimoireUpgBonus(39);
+    const kattlekrukBonus = farmingState.miscBonuses.kattlekrukSetBonus;
+    const arcaneBonus57 = Math.min(5, getArcaneUpgBonus(57,0));
+    const superBitTypeBonus = Math.max(0, Math.floor(
+        (farmingState.playerDatabase.Lv0?.[playerindex] 
+            ? (c.asNumber(farmingState.playerDatabase.Lv0[playerindex][0]) - 500) / 100
+            : 0
+        ) * 
+        stringSearch(47, gamingString) // SuperBitType check
+    ));
 
-    // Final result
-    return Math.floor(
-        spelunkMultiplier * superTalentPoints +
-        talentBonuses +
-        otherBonuses
+    otherBonuses = 
+        familyBonus +
+        rift2_1Bonus +
+        divMinorlink +
+        equinoxSymbolBonus +
+        optionsListBonus +
+        grimoireUpgBonus39 +
+        kattlekrukBonus +
+        arcaneBonus57 +
+        superBitTypeBonus;
+
+
+    return Math.floor( spelunkMultiplier * superTalentPoints + talentBonuses + otherBonuses );
+}
+
+
+function HolesCheckForArctis() { // checks hole what div assigned
+
+    const holes = window.farmingState.holes.hole11 || []; // Pocket divinity slots
+    
+    const cosmoQty = window.farmingState.holes.hole6[0] || 0; // CosmoBonusQTY (current level of poket divinity cosmos upgrade)
+
+    for(let i = 0; i < cosmoQty; i++){
+        if (holes[29 + i] === 1) {
+            return 1;
+        }
+    }
+
+    return 0;
+}
+
+function getDivMinorBonus(playerindex, godid) {
+
+    // Safety checks for required data
+    if (!window.AlchemyDescription || !window.GodsInfo) {
+        return 0;
+    }
+
+
+    const bubbleClist = window.AlchemyDescription[2] ? window.AlchemyDescription[2][21] : null;
+
+    // Safety check: ensure bubble data exists
+    if (!bubbleClist || bubbleClist[1] === undefined || bubbleClist[2] === undefined) {
+        return 0;
+    }
+
+    // Common values (used in both player paths)
+    const alchMultiplier = getBubbleBonus(3,21) || 1;//yellow index 21
+
+    const coralBonus = 1 + getCoralKidUpgBonus(3) / 100;
+
+    // God minor bonus value (depends on godid)
+    const godInfoData = window.GodsInfo[0 | godid];
+    if (!godInfoData || godInfoData[13] === undefined) {
+        return 0;
+    }
+
+    const godIndex = 0 | c.asNumber(godInfoData[13]);
+    const godBonusData = window.GodsInfo[godIndex];
+    if (!godBonusData || godBonusData[3] === undefined) {
+        return 0;
+    }
+    
+    const godBonus = c.asNumber(godBonusData[3]);
+
+    
+    let lv0 = playerindex === -1 ? 0 : window.farmingState.playerDatabase.Lv0?.[playerindex];
+
+    // Safety check: if Lv0 data not available yet, return 0
+    if (!lv0 || typeof lv0 !== 'object' || !lv0[14]) {
+        return 0;
+    }
+
+    // Final formula (identical math in both original branches)
+    return alchMultiplier * ((coralBonus * lv0[14]) / (60 + lv0[14])) * godBonus;
+}
+
+
+function getCoralKidUpgBonus(t) { // t = index in upgrade list
+    const options = window.farmingState.optionsListAccount;
+    const index = Math.round(427 + t);
+    const value = c.asNumber(options[index]);
+
+    switch (t) {
+        case 0:
+            return 10 * value;
+
+        case 1:
+            return Math.round(2 * value);
+
+        case 2:
+            return (value / (25 + value)) * 20;
+
+        case 3:
+            return Math.round(value);
+
+        case 4:
+            return Math.round(2 * value);
+
+        default:
+            // t ≥ 5 or any other value (original fallback)
+            return (value / (40 + value)) * 100;
+    }
+}
+
+function getZenithMarketBonus(t) {
+
+
+  const zenithMarketValue = window.ZenithMarket[0 | t][4];
+  const spelunkValue = window.farmingState.spelunk[45][0 | t];
+
+  return Math.floor(
+    c.asNumber(zenithMarketValue) * c.asNumber(spelunkValue)
+  );
+}
+
+function getFamilyBonsues(fambonusID, level) { // id 34 
+
+    // Safety check: ensure required data is loaded
+    if (!window.ClassFamilyBonuses) {
+        console.warn(`[getFamilyBonsues] Missing required data: ClassFamilyBonuses`);
+        return 0;
+    }
+
+    const bonusData = window.ClassFamilyBonuses[0 | fambonusID];
+    
+    // Safety check: ensure bonus data exists
+    if (!bonusData) {
+        console.warn(`[getFamilyBonsues] No bonus data found for fambonusID ${fambonusID}`);
+        return 0;
+    }
+
+    // ClassAccountBonus is optional - use it if available, otherwise default to 0
+    const accountBaseLevel = (window.ClassAccountBonus && window.ClassAccountBonus[0 | fambonusID])
+        ? c.asNumber(window.ClassAccountBonus[0 | fambonusID][1])
+        : 0;
+    
+    const effectiveLevel = Math.max(0, Math.round(level - accountBaseLevel));
+
+    return ArbitraryCode5Inputs(
+        String(bonusData[3]),           // formula string
+        c.asNumber(bonusData[1]),                 // param 1
+        c.asNumber(bonusData[2]),                 // param 2
+        effectiveLevel                            // effective level
     );
+
 }
 
 
 
+function getStarSigns(t) {
 
+  const infinitestars = window.farmingState.shinyPets.infiniteStars || 0;
+  let hasstarAssigned = false;
+  const starSigns = window.farmingState?.PersonalValueMap?.starSigns || [];
+  let Basestarbonus = 0;
+    
+    for (let i = 0; i < starSigns.length; i++) {
+        const characterStarSigns = starSigns[i];
+        
+        if (Array.isArray(characterStarSigns) && characterStarSigns.includes(t)) {
+            hasstarAssigned = true; // Found it
+        }
+    }
 
+    // Switch for farming-related star signs
+    // Check if star sign is unlocked OR assigned to this character
+    switch(t) {
+        case 65:  // Cropiovo_Minor
+            if (window.farmingState.starSigns.cropiovoMinor === 1 || hasstarAssigned) {
+                return Basestarbonus = 3 * getStarSigns(79);
+            }
+            return 0; // // Not unlocked(infinite star) or assigned
+            
+        case 67:  // O.G._Signalais
+            if (window.farmingState.starSigns.ogSignalais === 1 || hasstarAssigned) {
+                return Basestarbonus = 15 * getStarSigns(79);
+            }
+            return 0; // Not unlocked(infinite star) or assigned
+            
+        case 79:  // Seraph_Cosmos (multiplier only)
+            if (window.farmingState.starSigns.seraphCosmos === 1 || hasstarAssigned) {
+                const infiniteSCount = window.farmingState.shinyPets.infiniteStars || 0; // Your current infinite stars from pets
+                const chipBonus = getChipBonus("star");
+                const meritBonus = getMeritocBonusz(22);  //All of your Starsigns give x higher bonuses than normal
+                const arcaneBonus = Math.min(10, c.asNumber(window.farmingState.arcane[40]));
+                const levelBonus = c.asNumber(window.farmingState.levels.summoning) + 1;
+                
+                const multiplier = Math.max(1, Math.min(2, 1 + chipBonus * Math.floor((999 + infiniteSCount) / 1000))) * 
+                (1 + meritBonus / 100) * Math.min(5, Math.pow(1.1 + arcaneBonus / 100, Math.ceil(levelBonus / 20)));
 
+                return multiplier;
+            }
+            return 1; // Not unlocked or assigned, return neutral multiplier
+    }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-/**
- * Dank Ranks - Global multiplier to ALL Land Rank Database bonuses
- */
-
-
-function calculateDankRanksMultiplier(level) {
-    return 1 + 2 * (level / (level + 200));
+  return Basestarbonus;
 }
 
 
-/**
- * Agricultural 'preciation - Additive % to Farming EXP and Land Rank EXP
- */
-function calculateAgriculturalAppreciationMultiplier(level) {
-    return 1 + (2 * level) / 100;
+
+function getChipBonus(e) {
+  return c.asNumber(window.farmingState.DNSM?.ChipBbonusz?.[e] ?? 0);
 }
 
-/**
- * Mass Irrigation - Multiplicative Crop Evolution Chance
- */
-function calculateMassIrrigationMultiplier(level) {
-    return 1 + 50 * (level / (level + 300));
+
+function recalcChipBonuses() {
+
+  // Ensure DNSM structure exists
+  if (!window.farmingState.DNSM) {
+    window.farmingState.DNSM = {};
+  }
+  if (!window.farmingState.DNSM.ChipBbonusz) {
+    window.farmingState.DNSM.ChipBbonusz = {};
+  }
+
+  const ChipBbonusz = window.farmingState.DNSM.ChipBbonusz;
+  const labData = window.farmingState.lab || [];
+  const chipDesc = window.ChipDesc;
+  const characterCount = window.farmingState.playerDatabase?.CharacterClass?.length || 0;
+
+  for (let i = 0; i < characterCount; i++) {
+    const playerChipRow = labData[1 + i];
+    for (let f = 0; f < 7; f++) {
+        const chipID = c.asNumber(playerChipRow[f]);
+
+        if (chipID !== -1) {
+        const bonusKeyRaw = chipDesc[chipID][10];
+        const bonusKey = "" + String(bonusKeyRaw);
+
+        const bonusValue = c.asNumber(chipDesc[chipID][11]);
+``
+        // Add to existing value (supports multiple chips giving the same bonus)
+        const currentValue = c.asNumber(ChipBbonusz[bonusKey] ?? 0);
+        ChipBbonusz[bonusKey] = currentValue + bonusValue;
+        }
+    }
+  }
 }
- // ====================== DEATH BRINGER Grimoire FORMULAS ======================
-/**
- * Sacrifice of Harvest 
- */
-function calculateSacrificeOfHarvestMultiplier(level) {
-    return 1 + 0.05 * level;
+function DNSMInit(){
+    recalcChipBonuses();
 }

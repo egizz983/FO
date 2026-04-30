@@ -46,229 +46,747 @@ window.SummonEnemies = [
   [250000, 1000000, 150000000, 10000000, 4000000, 40000000, 500000000, 2000000000, 12000000000]
 ];
 
-window.AlchemyDescription = [
-  [
-                  "SWIFT_STEPPIN 1 0 addDECAY 0 DesertA1 Liquid1 Blank Blank +{_Total_AGI_for_all_players,_always. 0 1 2 0 0 TotalAGI".split(" "),
-                  "ARCHER_OR_BUST 2 50 decayMulti 0 Grasslands1 Liquid1 Blank Blank All_Green_Passive_Bonuses,_which_are_the_smaller_sized_ones,_give_{x_more_bonuses_to_your_archer-based_characters. 0 3 2 0 0 Gpassz".split(" "),
-                  "HAMMER_HAMMER 23 2 bigBase 0 Iron Liquid1 Blank Blank Lets_you_produce_two_items_at_once_in_the_anvil,_and_gives_+{%_production_speed._Big_bubbles_like_this_must_be_equipped_to_give_bonus. 1 5 2 0 0 AnvilACTIVE".split(" "),
-                  "LIL_BIG_DAMAGE 20 100 decay 0 Fish1 Liquid1 Blank Blank +{%_Mastery._Mastery_is_your_stat_that_boosts_minimum_damage._Just_like_in_Maplest..._err,_just_like_how_I_thought_it_up_myself! 0 10 3 0 0 Mastery".split(" "),
-                  "ANVILNOMICS 40 100 decay 0 ForestTree Liquid1 Blank Blank Costs_for_buying_Anvil_Production_Points_is_reduced_by_{%._This_is_just_like_a_tax_cut,_so_remember_me_as_a_hero! 0 20 3 0 0 AnvilProdCost".split(" "),
-                  "QUICK_SLAP 4 0 addDECAY 0 DesertB1 Liquid1 Blank Blank Increases_base_damage_by_+$._This_bonus_increases_based_on_how_much_Movement_Speed_you_have_above_110%. 0 90 4 0 0 bdmgSPD".split(" "),
-                  "SANIC_TOOLS 65 70 decay 0 Jungle1 Liquid1 Blank Blank The_following_tools_give_+{%_more_skilling_Power_than_normal:_$ 0 130 4 0 0 ToolA".split(" "),
-                  "BUG] 23.5 1.5 bigBase 0 Bug3 Liquid1 Blank Blank Multi-Bug_catching_chance_is_increased_by_+{%,_and_your_max_Multi-Bug_chance_is_300%_instead_of_100%. 1 70 4 0 0 CatchingACTIVE".split(" "),
-                  "SHAQURACY 1 0 addDECAY 0 Fish4 Liquid1 Blank Blank Your_secondary_stat_(WIS_for_warrior,_STR_for_archer,_AGI_for_mage)_gives_+{%_more_Accuracy_than_normal. 0 65 5 0 0 AccPct".split(" "),
-                  "CHEAP_SHOT 7 100 decay 0 Bug5 Liquid1 Blank Blank +{%_critical_Chance,_as_it_increases_the_chance_for_your_attack_to_hit_the_monster's_privates,_and_for_the_monster_to_be_male. 0 35 5 0 0 CritChance".split(" "),
-                  "BOW_JACK 40 50 decay 0 Soul1 Liquid2 Blank Blank +{%_Total_damage._This_multiplies_with_other_damage_bonuses,_but_adds_with_the_other_'+%_Total_Damage'_bubbles. 0 5 3 0 0 pctDmg2".split(" "),
-                  "CALL_ME_ASH 25 2 bigBase 0 SaharanFoal Liquid2 Blank Blank +{%_Trapping_Efficiency_when_this_bubble_is_equipped._Also,_+1_Placeable_Trap_ALWAYS,_even_when_this_isn't_equipped! 1 100 3 0 0 TrapACTIVE".split(" "),
-                  "CUZ_I_CATCH_EM_ALL 3 100 decayMulti 0 Soul3 Liquid2 Blank Blank {x_more_likely_to_catch_shiny_critters_when_opening_a_trap. 0 25 4 0 0 CritShiny".split(" "),
-                  "FAST_BOI_TALENT 5 1 bigBase 0 Bug6 Liquid2 Blank Blank +{_Talent_Points_for_EACH_tab,_but_just_for_Archers!_Oh,_and_also_for_the_SECRET_class..._NOTE:_Doesn't_affect_Master_Class 0 120 2 0 0 TalArchers".split(" "),
-                  "GREEN_BARGAIN 40 12 decay 0 Critter5 Liquid2 Blank Blank The_material_costs_of_ALL_green_bubbles_are_{%_lower 0 200 3 0 0 BubbleCostGr".split(" "),
-                  "DOLLAR_OF_AGILITY 18 30 decay 0 CraftMat11 Liquid3 Blank Blank +{%_Cash_from_Monsters_for_every_250_AGI._The_extra_agility_allows_the_dollars_to_stretch_in_size_and_increase_in_value! 0 250 3 0 0 CashAGI".split(" "),
-                  "PREMIGREEN 1.4 30 decayMulti 0 Critter8 Liquid3 Blank Blank The_following_green_bubbles_give_{x_higher_bonus_than_displayed:_1st,_7th,_10th,_13th,_15th 0 150 3 0 0 MultiGr".split(" "),
-                  "FLY_IN_MIND 12 40 decay 0 Bug7 Liquid3 Blank Blank +{%_Catching_AFK_Gains_Rate._Now_you_too_can_dream_about_bugs_in_your_sleep,_just_like_I_do_all_the_time!!!! 0 350 4 0 0 CatchinAFK".split(" "),
-                  "KILL_PER_KILL 70 40 decay 0 Refinery4 Liquid3 Blank Blank +{%_extra_Kills_for_Deathnote_and_opening_portals_to_new_maps._Shoutout_to_my_Idle_Skilling_players_who_remember_'Kill_Per_Kill'! 1 6 4 0 0 kpkACTIVE".split(" "),
-                  "AFK_EXPEXP 40 40 decay 0 Bug8 Liquid3 Blank Blank +{%_chance_for_Double_EXP_when_claiming_AFK_gains._You'll_know_this_happens_because_it_literally_tells_you_it_happened! 0 300 5 0 0 DubEXP".split(" "),
-                  "BOW_POWER 40 60 decay 0 Bits Liquid3 Blank Blank +{%_more_Weapon_Power_from_your_weapon,_but_only_if_its_a_Bow! 0 10000 5 0 0 A1".split(" "),
-                  "SLABO_CRITTERBUG 3 60 decay 0 Tree9 Liquid3 Blank Blank +{_Catching_and_Trapping_Power_per_100_items_found,_shown_on_The_Slab! 0 500 5 0 0 A2".split(" "),
-                  "SAILOR_AT_HEART 16 60 decay 0 SailTr11 Liquid3 Blank Blank When_claiming_AFK_Gains,_+{%_chance_to_gain_an_equal_amount_of_time_for_Sailing_progress! 1 100 6 0 0 A3ACTIVE".split(" "),
-                  "SLABO_AGILITY 25 60 decay 0 LavaB6 Liquid3 Blank Blank +{_Base_AGI_and_LUK_per_100_items_found,_shown_on_The_Slab!_Woah_cool_this_is_like_a_Archer_Beginner_crossover_bubble! 0 250 6 0 0 A4".split(" "),
-                  "POWER_TRITWO 23 50 decay 0 SailTr24 Liquid3 Blank Blank +{%_Total_Damage_per_250_AGI,_but_only_for_archers!_No_triple_dipping_into_STR_and_WIS! 0 150 6 0 0 A5".split(" "),
-                  "QUICKDRAW_QUIVER 40 60 decay 0 W6item0 Liquid3 Blank Blank The_effect_AGI_has_on_Damage_is_increased_by_+{% 0 25000 5 0 0 A6".split(" "),
-                  "ESSENCE_BOOST 50 60 decay 0 Tree12 Liquid3 Blank Blank +{%_Green_Essence_Gain,_this_bonus_increases_based_on_the_total_level_of_ALL_your_archers! 0 500 5 0 0 A7AllCharz".split(" "),
-                  "ENDGAME_EFF_II 3 60 decay 0 W6item3 Liquid4 Blank Blank +{_Catching_and_Trapping_Power._This_bonus_increases_based_on_every_10_Class_LVs_you_are_above_500. 0 150 6 0 0 A8".split(" "),
-                  "TOME_AGILITY 2.5 60 decay 0 Bug13 Liquid4 Blank Blank +{%_AGI_for_every_2000_Tome_Completion_Points_over_5000._So_you'd_get_one_stack_of_this_at_7000_pts,_two_at_9000,_etc 0 750 6 0 0 A9".split(" "),
-                  "STEALTH_CHAPTER 10 50 decay 0 W6item5 Liquid4 Blank Blank +{%_Stealth_(the_stat_that_lowers_detection_rate_in_Sneaking)_for_every_2000_Tome_Completion_Points_above_5000. 0 250 6 0 0 A10AllCharz".split(" "),
-                  "SPAPUNKIE 400 150 decay 0 w7A2 Liquid4 Blank Blank +{%_Spelunking_Efficiency._You_yearn_that_much_more_for_the_tiny_gaps_in_caverns_that_man_was_not_meant_to_venture... 0 4000 7 0 0 A11".split(" "),
-                  "DMG_OF_THE_MOON 4000 300 decay 0 Spelunking1 Liquid4 Blank Blank +{%_Total_Damage._This_is_additive,_so_the_better_you_are_the_less_you'll_even_notice_this_bonus. 0 100 8 0 0 A12".split(" "),
-                  "DUST_BUBBLE 200 500 decay 0 Soul8 Liquid4 Blank Blank +{%_Extra_Dust_for_Windwalkers. 0 300 9 0 0 A13".split(" "),
-                  "BUBBLE 99 40 decay 0 FillerMaterial Liquid4 Blank Blank It's_just_a_normal_bubble._It_doesn't_have_a_bonus_yet,_it_just_floats_and_is_round. 0 2500 6 0 0 A14".split(" "),
-                  "BUBBLE 99 40 decay 0 FillerMaterial Liquid4 Blank Blank It's_just_a_normal_bubble._It_doesn't_have_a_bonus_yet,_it_just_floats_and_is_round. 0 2500 6 0 0 A15".split(" "),
+window.AlchemyDescription =  [
+                [
+                  "ROID_RAGIN 1 0 addDECAY 0 Copper Liquid1 Blank Blank +{_Total_STR_for_all_players,_always. 0 1 2 0 0 TotalSTR".split(
+                    " ",
+                  ),
+                  "WARRIORS_RULE 2 50 decayMulti 0 Grasslands1 Liquid1 Blank Blank All_Orange_Passive_Bubbles,_which_are_the_smaller_sized_ones,_give_a_{x_higher_bonus_to_your_warrior-based_classes. 0 3 2 0 0 Opassz".split(
+                    " ",
+                  ),
+                  "HEARTY_DIGGY 50 100 decay 0 JungleTree Liquid1 Blank Blank +{%_mining_efficiency_per_power_of_10_max_HP_that_your_character_has._The_perfect_bonus_for_miners_with_infinite_HP! 0 5 2 0 0 MinEff".split(
+                    " ",
+                  ),
+                  "WYOMING_BLOOD 23.5 1.5 bigBase 0 Bug1 Liquid1 Blank Blank +{%_chance_for_Multiple_Ores_while_Mining,_and_the_max_is_now_300%,_not_100%._Big_bubbles_like_this_must_be_equipped_to_give_bonus. 1 10 3 0 0 MiningACTIVE".split(
+                    " ",
+                  ),
+                  "REELY_SMART 100 80 decay 0 CraftMat6 Liquid1 Blank Blank +{%_Mining_and_Fishing_EXP_gain._Y'know_what,_I'll_even_DOUBLE_that_bonus_for_whichever_skill_has_the_lower_level! 0 20 3 0 0 MinFishEXP".split(
+                    " ",
+                  ),
+                  "BIG_MEATY_CLAWS 4 0 addDECAY 0 DesertB2 Liquid1 Blank Blank Increases_base_damage_by_+$._This_bonus_increases_based_on_how_much_Max_HP_you_have_above_250. 0 200 4 0 0 bdmgHP".split(
+                    " ",
+                  ),
+                  "SPLOOSH_SPLOOSH 23.5 1.5 bigBase 0 Fish2 Liquid1 Blank Blank Multi-Fish_fishing_chance_is_increased_by_+{%,_and_your_max_Multi-Fish_chance_is_300%_instead_of_100%. 1 100 4 0 0 FishingACTIVE".split(
+                    " ",
+                  ),
+                  "STRONK_TOOLS 65 70 decay 0 Plat Liquid1 Blank Blank The_following_tools_give_+{%_more_skilling_Power_than_normal:_$ 0 60 4 0 0 ToolW".split(
+                    " ",
+                  ),
+                  "FMJ 0.5 0 addDECAY 0 Bug4 Liquid1 Blank Blank +{%_more_defence_from_Equipment._Also,_+1_base_Def_per_Class_LV,_up_to_+{. 0 50 5 0 0 DefPct".split(
+                    " ",
+                  ),
+                  "BAPPITY_BOOPITY 35 100 decay 0 CraftMat8 Liquid1 Blank Blank +{%_critical_Damage._Badabing,_badaboom!_Or_in_Italian,_Babadabinga,_babadaboomahh! 0 100 5 0 0 critDMG".split(
+                    " ",
+                  ),
+                  "BRITTLEY_SPEARS 40 50 decay 0 Critter1 Liquid2 Blank Blank +{%_Total_damage._This_multiplies_with_other_damage_bonuses,_but_adds_with_the_other_'+%_Total_Damage'_bubbles. 0 10 3 0 0 pctDmg1".split(
+                    " ",
+                  ),
+                  "CALL_ME_BOB 25 2.5 bigBase 0 SnowA3 Liquid2 Blank Blank +{%_Construction_EXP_Gain._Also_gives_+50%_Bug-Fixing_speed_if_your_username_is_LavaFlame2. 1 120 3 0 0 conEXPACTIVE".split(
+                    " ",
+                  ),
+                  "CARPENTER 5 50 decay 0 Refinery2 Liquid2 Blank Blank +{%_Build_Speed_per_Construction_Level._Not_affected_by_'Warriors_Rule'_bubble. 0 3 4 0 0 Construction".split(
+                    " ",
+                  ),
+                  "BUFF_BOI_TALENT 5 1 bigBase 0 Critter4 Liquid2 Blank Blank +{_Talent_Points_for_EACH_tab!_But_it's_just_for_warriors,_don't_tell_the_other_classes!!_NOTE:_Doesn't_affect_Master_Class 0 50 2 0 0 TalWarrior".split(
+                    " ",
+                  ),
+                  "ORANGE_BARGAIN 40 12 decay 0 Soul4 Liquid2 Blank Blank The_material_costs_of_ALL_orange_bubbles_are_{%_lower 0 30 3 0 0 BubbleCostOr".split(
+                    " ",
+                  ),
+                  "PENNY_OF_STRENGTH 18 30 decay 0 Fish5 Liquid3 Blank Blank +{%_Cash_from_Monsters_for_every_250_STR._The_pennies_reflect_your_strength_in_themselves,_thus_making_them_more_valuable! 0 200 3 0 0 CashSTR".split(
+                    " ",
+                  ),
+                  "MULTORANGE 1.4 30 decayMulti 0 GalaxyA3 Liquid3 Blank Blank The_following_orange_bubbles_give_{x_higher_bonus_than_displayed:_1st,_3rd,_5th,_8th,_15th 0 250 3 0 0 MultiOr".split(
+                    " ",
+                  ),
+                  "DREAM_OF_IRONFISH 12 30 decay 0 CraftMat13 Liquid3 Blank Blank +{%_Mining_and_Fishing_AFK_GAINS_rate._Wow,_how_bias_can_you_get..._giving_the_warrior's_bubble_TWO_afk_gain_bonuses. 0 200 4 0 0 MinFshAFK".split(
+                    " ",
+                  ),
+                  "SHIMMERON 80 40 decay 0 CraftMat14 Liquid3 Blank Blank +{%_Gold_Food_Effect._Go_on,_its_ok,_I_won't_be_offended._No_seriously,_go_upgrade_something_else,_I_know_I'm_not_a_good_upgrade... 0 300 4 0 0 GFoodz".split(
+                    " ",
+                  ),
+                  "BITE_BUT_NOT_CHEW 50 40 decay 0 GalaxyC4 Liquid3 Blank Blank +{%_Food_Non-Consume_chance._Also,_if_your_capped_Non-Consume_chance_happens_to_be_98%,_this_changes_it_to_99%! 1 200 5 0 0 nonFoodACTIVE".split(
+                    " ",
+                  ),
+                  "SPEAR_POWAH 40 60 decay 0 Bits Liquid3 Blank Blank +{%_more_Weapon_Power_from_your_weapon,_but_only_if_its_a_Spear! 0 10000 5 0 0 W1".split(
+                    " ",
+                  ),
+                  "SLABI_OREFISH 3 60 decay 0 Soul6 Liquid3 Blank Blank +{_Mining_and_Fishing_Power_per_100_items_found,_shown_on_The_Slab! 0 150 5 0 0 W2".split(
+                    " ",
+                  ),
+                  "GAMER_AT_HEART 20 60 decay 0 SailTr9 Liquid3 Blank Blank When_claiming_AFK_Gains,_+{%_chance_to_gain_an_equal_amount_of_time_for_Gaming_progress! 1 100 6 0 0 W3ACTIVE".split(
+                    " ",
+                  ),
+                  "SLABI_STRENGTH 25 60 decay 0 LavaB3b Liquid3 Blank Blank +{_Base_STR_per_100_items_found,_shown_on_The_Slab! 0 2 6 0 0 W4".split(
+                    " ",
+                  ),
+                  "POWER_TRIONE 23 50 decay 0 SailTr20 Liquid3 Blank Blank +{%_Total_Damage_per_250_STR,_but_only_for_warriors!_No_triple_dipping_into_AGI_and_WIS!_Also_this,_but_for_beginners_with_LUK! 0 150 6 0 0 W5".split(
+                    " ",
+                  ),
+                  "FARQUAD_FORCE 30 60 decay 0 W6item1 Liquid3 Blank Blank The_effect_STR_has_on_Damage_is_increased_by_+{% 0 100 5 0 0 W6".split(
+                    " ",
+                  ),
+                  "ENDGAME_EFF_I 3 60 decay 0 SpiA2b Liquid3 Blank Blank +{_Mining_and_Fishing_Power._This_bonus_increases_based_on_every_10_Class_LVs_you_are_above_500. 0 150 5 0 0 W7".split(
+                    " ",
+                  ),
+                  "TOME_STRENGTH 2.5 60 decay 0 W6item8 Liquid4 Blank Blank +{%_STR_for_every_2000_Tome_Completion_Points_over_5000._So_you'd_get_one_stack_of_this_at_7000_pts,_two_at_9000,_etc 0 500 6 0 0 W8".split(
+                    " ",
+                  ),
+                  "ESSENCE_BOOST 50 60 decay 0 Tree13 Liquid4 Blank Blank +{%_Red_Essence_Gain,_this_bonus_increases_based_on_the_total_level_of_ALL_your_warriors! 0 200 6 0 0 W9AllCharz".split(
+                    " ",
+                  ),
+                  "CROP_CHAPTER 12 50 decay 0 W6item10 Liquid4 Blank Blank +{%_Crop_Evolution_chance_for_every_2000_Tome_Completion_Points_above_5000. 0 1500 6 0 0 W10AllCharz".split(
+                    " ",
+                  ),
+                  "DOUBLE_PAGEY 30 130 decay 0 w7A1 Liquid4 Blank Blank +{%_Multi_Page_chance_for_active_Spelunking!_Now_you_can_not_read_things_TWICE_as_much!!_Who_am_I_even_talking_to!!! 0 4000 7 0 0 W11".split(
+                    " ",
+                  ),
+                  "DMG_OF_THE_SUN 4000 300 decay 0 W7item0 Liquid4 Blank Blank +{%_Total_Damage._This_is_additive,_so_the_better_you_are_the_less_you'll_even_notice_this_bonus. 0 10 8 0 0 W12".split(
+                    " ",
+                  ),
+                  "BONE_BUBBLE 200 500 decay 0 Bug15 Liquid4 Blank Blank +{%_Extra_Dust_for_Deathbringers._Wait_I_meant_Bones,_since_Dust_is_for_Arcane_Cultists._Wait_I_meant_Windwalkers. 0 1000 9 0 0 W13".split(
+                    " ",
+                  ),
+                  "BUBBLE 99 40 decay 0 FillerMaterial Liquid4 Blank Blank It's_just_a_normal_bubble._It_doesn't_have_a_bonus_yet,_it_just_floats_and_is_round. 0 2500 6 0 0 W14".split(
+                    " ",
+                  ),
+                  "BUBBLE 99 40 decay 0 FillerMaterial Liquid4 Blank Blank It's_just_a_normal_bubble._It_doesn't_have_a_bonus_yet,_it_just_floats_and_is_round. 0 2500 6 0 0 W15".split(
+                    " ",
+                  ),
                 ],
-  [
-                  "STABLE_JENIUS 1 0 addDECAY 0 OakTree Liquid1 Blank Blank +{_Total_WIS_for_all_players,_always. 0 1 2 0 0 TotalWIS".split(" "),
-                  "MAGE_IS_BEST 2 50 decayMulti 0 Grasslands1 Liquid1 Blank Blank All_Purple_Passive_Bonuses,_which_are_the_smaller_sized_ones,_give_{x_more_bonuses_to_your_mage-based_characters. 0 3 2 0 0 Ppassz".split(" "),
-                  "HOCUS_CHOPPUS 50 100 decay 0 CraftMat5 Liquid1 Blank Blank +{%_choppin_efficiency_per_power_of_10_max_MP_that_your_character_has._Super_diaper!_Err,_duper. 0 5 2 0 0 ChopEff".split(" "),
-                  "MOLTO_LOGGO 23.5 1.5 bigBase 0 IronBar Liquid1 Blank Blank +{%_chance_for_Multiple_Logs_while_Choppin,_and_the_max_is_now_300%,_not_100%._Big_bubbles_like_this_must_be_equipped_to_give_bonus. 1 10 3 0 0 MultiLogACTIVE".split(" "),
-                  "NOODUBBLE 100 60 decay 0 CraftMat7 Liquid1 Blank Blank +{%_Choppin'_and_Alchemy_EXP_gain._Y'know_what,_I'll_even..._actually,_never_mind. 0 20 3 0 0 ChopAlchEXP".split(" "),
-                  "NAME_I_GUESS 4 0 addDECAY 0 Gold Liquid1 Blank Blank Increases_base_damage_by_+$._This_bonus_increases_based_on_how_much_Max_MP_you_have_above_150. 0 40 4 0 0 bdmgMP".split(" "),
-                  "LE_BRAIN_TOOLS 65 70 decay 0 Bug3 Liquid1 Blank Blank The_following_tools_give_+{%_more_skilling_Power_than_normal:_$ 0 55 4 0 0 ToolM".split(" "),
-                  "COOKIN_ROADKILL 120 70 decay 0 ToiletTree Liquid1 Blank Blank Cranium_Cooking_lasts_{%_longer,_gives_{%_more_progress_per_kill,_and_has_a_{%_lower_cooldown._Also_+{%_Alchemy_EXP! 1 75 4 0 0 AlchemyACTIVE".split(" "),
-                  "BREWSTACHIO 50 100 decay 0 DesertC1 Liquid1 Blank Blank +{%_Brew_Speed._This_a_multiplicative_bonus,_which_means_its_ultra_powerful,_all_the_time!_Even_on_Mondays,_the_worst_day! 0 150 5 0 0 BrewSpd".split(" "),
-                  "ALL_FOR_KILL 40 100 decay 0 StumpTree Liquid1 Blank Blank Attack_Talents_give_+{%_higher_bonuses_to_Offline_Gains_than_they_normally_do._So_you_might_as_well_just_AFK_forever,_bye! 0 100 5 0 0 AttackAfk".split(" "),
-                  "MATTY_STAFFORD 40 50 decay 0 Refinery1 Liquid2 Blank Blank +{%_Total_damage._This_multiplies_with_other_damage_bonuses,_but_adds_with_the_other_'+%_Total_Damage'_bubbles. 0 3 3 0 0 pctDmg3".split(" "),
-                  "CALL_ME_POPE 2.4 70 decayMulti 0 Critter2 Liquid2 Blank Blank {x_Worship_Charge_rate_per_hour._Also,_{x_Max_Worship_Charge!_You_bouta_go_super_with_all_that_charge..._just_sayin' 1 25 3 0 0 worshipACTIVE".split(" "),
-                  "GOSPEL_LEADER 60 30 decay 0 Bug5 Liquid2 Blank Blank +{%_Max_Charge_per_10_Worship_levels._I_guess_you_could_say_this_upgrade_doesn't_come_Free_of_Charge! 0 150 4 0 0 maxCharge".split(" "),
-                  "SMART_BOI_TALENT 5 1 bigBase 0 SnowC1 Liquid2 Blank Blank Sorry,_mages_don't_get_anything..._Ok_fine,_you_can_have_+{_Talent_Points_for_each_tab._NOTE:_Doesn't_affect_Master_Class 0 150 2 0 0 TalWiz".split(" "),
-                  "PURPLE_BARGAIN 40 12 decay 0 Soul1 Liquid2 Blank Blank The_material_costs_of_ALL_purple_bubbles_are_{%_lower 0 500 3 0 0 BubbleCostPu".split(" "),
-                  "NICKEL_OF_WISDOM 18 30 decay 0 AlienTree Liquid3 Blank Blank +{%_Cash_from_Monsters_for_every_250_WIS._Wisdom_allows_the_nickel_to_trick_others_into_thinking_its_a_Dime,_increasing_its_value! 0 150 3 0 0 CashWIS".split(" "),
-                  "SEVERAPURPLE 1.4 30 decayMulti 0 Void Liquid3 Blank Blank The_following_purple_bubbles_give_{x_higher_bonus_than_displayed:_1st,_3rd,_5th,_13th,_15th 0 175 3 0 0 MultiPu".split(" "),
-                  "TREE_SLEEPER 12 40 decay 0 Soul5 Liquid3 Blank Blank +{%_Choppin'_AFK_Gains_Rate._Ain't_nothin'_like_sittin'_down_at_the_ol'_tree_and_havin'_a_snooze_n'_a_sleep! 0 60 4 0 0 ChoppinAFK".split(" "),
-                  "HYPERSWIFT 30 30 decay 0 Fish7 Liquid3 Blank Blank +{%_Basic_Attack_Speed._Just_like_all_other_Basic_Attack_Speed_bonuses,_this_boosts_AFK_kills/hr_if_you_do_enough_dmg! 0 250 4 0 0 BAspd".split(" "),
-                  "MATRIX_EVOLVED 60 40 decay 0 Tree8 Liquid3 Blank Blank +{%_Lab_EXP_Gain._Also_+{%_ineptitude_to_face_the_reality_of_what's_REALLY_going_on_behind_the_scenes... 1 250 5 0 0 LabXpACTIVE".split(" "),
-                  "WAND_PAWUR 40 60 decay 0 Bits Liquid3 Blank Blank +{%_more_Weapon_Power_from_your_weapon,_but_only_if_its_a_Wand!_Or_a_fisticuff_I_guess... 0 10000 5 0 0 M1".split(" "),
-                  "SLABE_LOGSOUL 3 60 decay 0 Bug9 Liquid3 Blank Blank +{_Choppin_and_Worship_Power_per_100_items_found,_shown_on_The_Slab! 0 250 5 0 0 M2".split(" "),
-                  "PIOUS_AT_HEART 300 100 decay 0 SailTr13 Liquid3 Blank Blank +{%_Divinity_EXP_Gain 1 15 6 0 0 M3ACTIVE".split(" "),
-                  "SLABE_WISDOM 25 60 decay 0 LavaC1 Liquid3 Blank Blank +{_Base_WIS_per_100_items_found,_shown_on_The_Slab! 0 200 6 0 0 M4".split(" "),
-                  "POWER_TRITHREE 23 50 decay 0 SailTr28 Liquid3 Blank Blank +{%_Total_Damage_per_250_WIS,_but_only_for_mages!_No_triple_dipping_into_STR_and_AGI! 0 200 6 0 0 M5".split(" "),
-                  "SMARTER_SPELLS 25 60 decay 0 W6item6 Liquid3 Blank Blank The_effect_WIS_has_on_Damage_is_increased_by_+{% 0 500 5 0 0 M6".split(" "),
-                  "ENDGAME_EFF_III 3 60 decay 0 W6item7 Liquid3 Blank Blank +{_Choppin_and_Worship_Power._This_bonus_increases_based_on_every_10_Class_LVs_you_are_above_500. 0 950 5 0 0 M7".split(" "),
-                  "ESSENCE_BOOST 50 100 decay 0 Soul7 Liquid4 Blank Blank +{%_Purple_Essence_Gain,_this_bonus_increases_based_on_the_total_level_of_ALL_your_mages! 0 250 6 0 0 M8AllCharz".split(" "),
-                  "TOME_WISDOM 2.5 60 decay 0 W6item4 Liquid4 Blank Blank +{%_WIS_for_every_2000_Tome_Completion_Points_over_5000._So_you'd_get_one_stack_of_this_at_7000_pts,_two_at_9000,_etc 0 150 6 0 0 M9".split(" "),
-                  "ESSENCE_CHAPTER 15 50 decay 0 W6item0 Liquid4 Blank Blank +{%_All_Essence_Gain_for_every_2000_Tome_Completion_Points_above_5000. 0 250000 6 0 0 M10AllCharz".split(" "),
-                  "DEEP_DEPTH 8 200 decay 0 Prehistrium Liquid4 Blank Blank +{%_chance_to_find_the_rope_'n_hole_to_the_next_Depth_in_Speluking_Delves. 0 1000 7 0 0 M11".split(" "),
-                  "DMG_OF_THE_SOUL 4000 300 decay 0 w7A4 Liquid4 Blank Blank +{%_Total_Damage._This_is_additive,_so_the_better_you_are_the_less_you'll_even_notice_this_bonus. 0 4000 8 0 0 M12".split(" "),
-                  "TACHYON_BUBBLE 250 500 decay 0 w7A8 Liquid4 Blank Blank +{%_Extra_Tachyons_for_Arcane_Cultist. 0 4000 9 0 0 M13".split(" "),
-                  "BUBBLE 99 40 decay 0 FillerMaterial Liquid4 Blank Blank It's_just_a_normal_bubble._It_doesn't_have_a_bonus_yet,_it_just_floats_and_is_round. 0 2500 6 0 0 M14".split(" "),
-                  "BUBBLE 99 40 decay 0 FillerMaterial Liquid4 Blank Blank It's_just_a_normal_bubble._It_doesn't_have_a_bonus_yet,_it_just_floats_and_is_round. 0 2500 6 0 0 M14".split(" "),
+                [
+                  "SWIFT_STEPPIN 1 0 addDECAY 0 DesertA1 Liquid1 Blank Blank +{_Total_AGI_for_all_players,_always. 0 1 2 0 0 TotalAGI".split(
+                    " ",
+                  ),
+                  "ARCHER_OR_BUST 2 50 decayMulti 0 Grasslands1 Liquid1 Blank Blank All_Green_Passive_Bonuses,_which_are_the_smaller_sized_ones,_give_{x_more_bonuses_to_your_archer-based_characters. 0 3 2 0 0 Gpassz".split(
+                    " ",
+                  ),
+                  "HAMMER_HAMMER 23 2 bigBase 0 Iron Liquid1 Blank Blank Lets_you_produce_two_items_at_once_in_the_anvil,_and_gives_+{%_production_speed._Big_bubbles_like_this_must_be_equipped_to_give_bonus. 1 5 2 0 0 AnvilACTIVE".split(
+                    " ",
+                  ),
+                  "LIL_BIG_DAMAGE 20 100 decay 0 Fish1 Liquid1 Blank Blank +{%_Mastery._Mastery_is_your_stat_that_boosts_minimum_damage._Just_like_in_Maplest..._err,_just_like_how_I_thought_it_up_myself! 0 10 3 0 0 Mastery".split(
+                    " ",
+                  ),
+                  "ANVILNOMICS 40 100 decay 0 ForestTree Liquid1 Blank Blank Costs_for_buying_Anvil_Production_Points_is_reduced_by_{%._This_is_just_like_a_tax_cut,_so_remember_me_as_a_hero! 0 20 3 0 0 AnvilProdCost".split(
+                    " ",
+                  ),
+                  "QUICK_SLAP 4 0 addDECAY 0 DesertB1 Liquid1 Blank Blank Increases_base_damage_by_+$._This_bonus_increases_based_on_how_much_Movement_Speed_you_have_above_110%. 0 90 4 0 0 bdmgSPD".split(
+                    " ",
+                  ),
+                  "SANIC_TOOLS 65 70 decay 0 Jungle1 Liquid1 Blank Blank The_following_tools_give_+{%_more_skilling_Power_than_normal:_$ 0 130 4 0 0 ToolA".split(
+                    " ",
+                  ),
+                  "BUG] 23.5 1.5 bigBase 0 Bug3 Liquid1 Blank Blank Multi-Bug_catching_chance_is_increased_by_+{%,_and_your_max_Multi-Bug_chance_is_300%_instead_of_100%. 1 70 4 0 0 CatchingACTIVE".split(
+                    " ",
+                  ),
+                  "SHAQURACY 1 0 addDECAY 0 Fish4 Liquid1 Blank Blank Your_secondary_stat_(WIS_for_warrior,_STR_for_archer,_AGI_for_mage)_gives_+{%_more_Accuracy_than_normal. 0 65 5 0 0 AccPct".split(
+                    " ",
+                  ),
+                  "CHEAP_SHOT 7 100 decay 0 Bug5 Liquid1 Blank Blank +{%_critical_Chance,_as_it_increases_the_chance_for_your_attack_to_hit_the_monster's_privates,_and_for_the_monster_to_be_male. 0 35 5 0 0 CritChance".split(
+                    " ",
+                  ),
+                  "BOW_JACK 40 50 decay 0 Soul1 Liquid2 Blank Blank +{%_Total_damage._This_multiplies_with_other_damage_bonuses,_but_adds_with_the_other_'+%_Total_Damage'_bubbles. 0 5 3 0 0 pctDmg2".split(
+                    " ",
+                  ),
+                  "CALL_ME_ASH 25 2 bigBase 0 SaharanFoal Liquid2 Blank Blank +{%_Trapping_Efficiency_when_this_bubble_is_equipped._Also,_+1_Placeable_Trap_ALWAYS,_even_when_this_isn't_equipped! 1 100 3 0 0 TrapACTIVE".split(
+                    " ",
+                  ),
+                  "CUZ_I_CATCH_EM_ALL 3 100 decayMulti 0 Soul3 Liquid2 Blank Blank {x_more_likely_to_catch_shiny_critters_when_opening_a_trap. 0 25 4 0 0 CritShiny".split(
+                    " ",
+                  ),
+                  "FAST_BOI_TALENT 5 1 bigBase 0 Bug6 Liquid2 Blank Blank +{_Talent_Points_for_EACH_tab,_but_just_for_Archers!_Oh,_and_also_for_the_SECRET_class..._NOTE:_Doesn't_affect_Master_Class 0 120 2 0 0 TalArchers".split(
+                    " ",
+                  ),
+                  "GREEN_BARGAIN 40 12 decay 0 Critter5 Liquid2 Blank Blank The_material_costs_of_ALL_green_bubbles_are_{%_lower 0 200 3 0 0 BubbleCostGr".split(
+                    " ",
+                  ),
+                  "DOLLAR_OF_AGILITY 18 30 decay 0 CraftMat11 Liquid3 Blank Blank +{%_Cash_from_Monsters_for_every_250_AGI._The_extra_agility_allows_the_dollars_to_stretch_in_size_and_increase_in_value! 0 250 3 0 0 CashAGI".split(
+                    " ",
+                  ),
+                  "PREMIGREEN 1.4 30 decayMulti 0 Critter8 Liquid3 Blank Blank The_following_green_bubbles_give_{x_higher_bonus_than_displayed:_1st,_7th,_10th,_13th,_15th 0 150 3 0 0 MultiGr".split(
+                    " ",
+                  ),
+                  "FLY_IN_MIND 12 40 decay 0 Bug7 Liquid3 Blank Blank +{%_Catching_AFK_Gains_Rate._Now_you_too_can_dream_about_bugs_in_your_sleep,_just_like_I_do_all_the_time!!!! 0 350 4 0 0 CatchinAFK".split(
+                    " ",
+                  ),
+                  "KILL_PER_KILL 70 40 decay 0 Refinery4 Liquid3 Blank Blank +{%_extra_Kills_for_Deathnote_and_opening_portals_to_new_maps._Shoutout_to_my_Idle_Skilling_players_who_remember_'Kill_Per_Kill'! 1 6 4 0 0 kpkACTIVE".split(
+                    " ",
+                  ),
+                  "AFK_EXPEXP 40 40 decay 0 Bug8 Liquid3 Blank Blank +{%_chance_for_Double_EXP_when_claiming_AFK_gains._You'll_know_this_happens_because_it_literally_tells_you_it_happened! 0 300 5 0 0 DubEXP".split(
+                    " ",
+                  ),
+                  "BOW_POWER 40 60 decay 0 Bits Liquid3 Blank Blank +{%_more_Weapon_Power_from_your_weapon,_but_only_if_its_a_Bow! 0 10000 5 0 0 A1".split(
+                    " ",
+                  ),
+                  "SLABO_CRITTERBUG 3 60 decay 0 Tree9 Liquid3 Blank Blank +{_Catching_and_Trapping_Power_per_100_items_found,_shown_on_The_Slab! 0 500 5 0 0 A2".split(
+                    " ",
+                  ),
+                  "SAILOR_AT_HEART 16 60 decay 0 SailTr11 Liquid3 Blank Blank When_claiming_AFK_Gains,_+{%_chance_to_gain_an_equal_amount_of_time_for_Sailing_progress! 1 100 6 0 0 A3ACTIVE".split(
+                    " ",
+                  ),
+                  "SLABO_AGILITY 25 60 decay 0 LavaB6 Liquid3 Blank Blank +{_Base_AGI_and_LUK_per_100_items_found,_shown_on_The_Slab!_Woah_cool_this_is_like_a_Archer_Beginner_crossover_bubble! 0 250 6 0 0 A4".split(
+                    " ",
+                  ),
+                  "POWER_TRITWO 23 50 decay 0 SailTr24 Liquid3 Blank Blank +{%_Total_Damage_per_250_AGI,_but_only_for_archers!_No_triple_dipping_into_STR_and_WIS! 0 150 6 0 0 A5".split(
+                    " ",
+                  ),
+                  "QUICKDRAW_QUIVER 40 60 decay 0 W6item0 Liquid3 Blank Blank The_effect_AGI_has_on_Damage_is_increased_by_+{% 0 25000 5 0 0 A6".split(
+                    " ",
+                  ),
+                  "ESSENCE_BOOST 50 60 decay 0 Tree12 Liquid3 Blank Blank +{%_Green_Essence_Gain,_this_bonus_increases_based_on_the_total_level_of_ALL_your_archers! 0 500 5 0 0 A7AllCharz".split(
+                    " ",
+                  ),
+                  "ENDGAME_EFF_II 3 60 decay 0 W6item3 Liquid4 Blank Blank +{_Catching_and_Trapping_Power._This_bonus_increases_based_on_every_10_Class_LVs_you_are_above_500. 0 150 6 0 0 A8".split(
+                    " ",
+                  ),
+                  "TOME_AGILITY 2.5 60 decay 0 Bug13 Liquid4 Blank Blank +{%_AGI_for_every_2000_Tome_Completion_Points_over_5000._So_you'd_get_one_stack_of_this_at_7000_pts,_two_at_9000,_etc 0 750 6 0 0 A9".split(
+                    " ",
+                  ),
+                  "STEALTH_CHAPTER 10 50 decay 0 W6item5 Liquid4 Blank Blank +{%_Stealth_(the_stat_that_lowers_detection_rate_in_Sneaking)_for_every_2000_Tome_Completion_Points_above_5000. 0 250 6 0 0 A10AllCharz".split(
+                    " ",
+                  ),
+                  "SPAPUNKIE 400 150 decay 0 w7A2 Liquid4 Blank Blank +{%_Spelunking_Efficiency._You_yearn_that_much_more_for_the_tiny_gaps_in_caverns_that_man_was_not_meant_to_venture... 0 4000 7 0 0 A11".split(
+                    " ",
+                  ),
+                  "DMG_OF_THE_MOON 4000 300 decay 0 Spelunking1 Liquid4 Blank Blank +{%_Total_Damage._This_is_additive,_so_the_better_you_are_the_less_you'll_even_notice_this_bonus. 0 100 8 0 0 A12".split(
+                    " ",
+                  ),
+                  "DUST_BUBBLE 200 500 decay 0 Soul8 Liquid4 Blank Blank +{%_Extra_Dust_for_Windwalkers. 0 300 9 0 0 A13".split(
+                    " ",
+                  ),
+                  "BUBBLE 99 40 decay 0 FillerMaterial Liquid4 Blank Blank It's_just_a_normal_bubble._It_doesn't_have_a_bonus_yet,_it_just_floats_and_is_round. 0 2500 6 0 0 A14".split(
+                    " ",
+                  ),
+                  "BUBBLE 99 40 decay 0 FillerMaterial Liquid4 Blank Blank It's_just_a_normal_bubble._It_doesn't_have_a_bonus_yet,_it_just_floats_and_is_round. 0 2500 6 0 0 A15".split(
+                    " ",
+                  ),
                 ],
-  [
-                  "LOTTO_SKILLS 1 0 addDECAY 0 CraftMat1 Liquid1 Blank Blank +{_LUK_for_all_players,_always. 0 1 2 0 0 TotalLUK".split(" "),
-                  "DROPPIN_LOADS 40 70 decay 0 Fish1 Liquid1 Blank Blank +{%_Drop_Rate._Thanks_to_this_upgrade,_you_can_get_even_MORE_angry_when_you_keep_not_getting_that_rare_item_you're_grinding_for! 0 3 2 0 0 DropRate".split(" "),
-                  "STARTUE_EXP 25 60 decay 0 BirchTree Liquid1 Blank Blank Leveling_up_a_statue_resets_it's_exp_bar_down_to_{%,_instead_of_0%._Staturrific!_Yea..._the_jokes_are_only_gonna_go_downhill_from_here_lol 0 5 2 0 0 StatueStartEXP".split(" "),
-                  "LEVEL_UP_GIFT 100 30 decay 0 DesertA3 Liquid1 Blank Blank {%_chance_for_a_gift_to_drop_when_leveling_up,_like_a_gem_or_an_EXP_Balloon!_Big_bubbles_like_this_must_be_equipped_to_give_bonus. 1 10 2 0 0 LevelUpACTIVE".split(" "),
-                  "PROWESESSARY 1.5 60 decayMulti 0 ToiletTree Liquid1 Blank Blank The_Prowess_Bonus_for_every_skill_is_multiplied_by_{._Prowess_lowers_the_Efficiency_needed_to_get_multiple_QTY_per_drop_from_resources. 0 20 3 0 0 ProwessMulti".split(" "),
-                  "STAMP_TRAMP 1 0 addDECAY 0 Bug2 Liquid1 Blank Blank Increases_the_Max_Lv_of_the_'Toilet_Paper_Postage'_Talent_to_{._You_unlock_this_talent_by_typing_'More_like_Poopy_Pete'_near_Pete. 0 45 4 0 0 TPpostage".split(" "),
-                  "UNDEVELOPED_COSTS 40 70 decay 0 Fish3 Liquid1 Blank Blank Reduces_the_material_costs_of_all_Alchemy_Bubbles_by_{%._They_are_just_bubbles_though,_how_much_could_they_even_cost?_10_dollars? 0 65 6 0 0 BubbleCost".split(" "),
-                  "DA_DAILY_DRIP 30 100 decay 0 CraftMat9 Liquid1 Blank Blank Increases_the_Max_Cap_for_every_liquid_by_+$._This_bonus_increases_based_on_the_combined_Alchemy_LV_of_all_your_characters! 0 125 8 0 0 LqdCap".split(" "),
-                  "GRIND_TIME 9.7 .3 bigBase 0 Liquid1 Liquid2 Blank Blank +{%_Class_EXP._The_go-to_active_bubble_for_anyone_who_wants_to_reach_max_level_faster_and_finally_start_playing_the_game! 1 50 25 0 0 expACTIVE".split(" "),
-                  "LAAARRRRYYYY 120 100 decay 0 Dementia Liquid2 Blank Blank Every_time_you_upgrade_an_Alchemy_bubble,_there's_a_{%_chance_it'll_upgrade_2_times,_for_no_extra_cost!_Two_fer_one,_getter_dun! 0 50 4 0 0 DoubleBubbleUpg".split(" "),
-                  "COGS_FOR_HANDS 4 0 addDECAY 0 SnowA2 Liquid2 Blank Blank +{%_Cog_Production_speed._Cogs_are_great._I_really_really_like_cogs._I_guess_you_could_say_I_think_they're_pretty_Coggers... 0 50 3 0 0 CogMakeSpd".split(" "),
-                  "SAMPLE_IT 12 40 decay 0 Soul2 Liquid2 Blank Blank +{%_Sample_Size_when_taking_samples_for_the_3d_printer._Finally,_your_statisitcal_analysis_will_be_accurate! 0 15 3 0 0 SampleSize".split(" "),
-                  "BIG_GAME_HUNTER 60 30 decay 0 Critter3 Liquid2 Blank Blank Killing_a_Giant_Monster_has_a_{%_chance_to_not_decrease_the_Giant_Mob_Spawn_Odds,_which_reset_at_the_end_of_each_week. 1 40 4 0 0 GiantsACTIVE".split(" "),
-                  "IGNORE_OVERDUES 100 60 decay 0 Tree7 Liquid2 Blank Blank +{%_Book_Checkout_speed,_all_thanks_to_this_one_little_bubble_that_librarians_do_NOT_want_you_to_know_about! 0 120 2 0 0 booksSpeed".split(" "),
-                  "YELLOW_BARGAIN 40 12 decay 0 Critter6 Liquid2 Blank Blank The_material_costs_of_ALL_yellow_bubbles_are_{%_lower. 0 250 3 0 0 BubbleCostYe".split(" "),
-                  "MR_MASSACRE 90 50 decay 0 Refinery3 Liquid3 Blank Blank +{%_Multikill_per_damage_tier._Remember,_damage_tier_is_shown_by_the_Purple_Bar_in_AFK_info,_and_multikill_is_bigtime_for_resources 1 8 3 0 0 MKtierACTIVE".split(" "),
-                  "EGG_INK 40 40 decay 0 Spice0 Liquid3 Blank Blank +{%_faster_Egg_Incubation_Time_in_the_Mob_Nest._This_will_be_an_absolutely_VITAL_upgrade_once_you_unlock_mob_egg_rarity! 0 100 4 0 0 EggInc".split(" "),
-                  "DIAMOND_CHEF 0.3 13 decayMulti 0 Spice6 Liquid3 Blank Blank {x_faster_Meal_and_Fire_Kitchen_Speeds_for_every_Meal_at_Lv_11+._This_is_when_the_meal_plate_becomes_Diamond_Blue,_just_so_you_know! 0 100 4 0 0 MealSpdz".split(" "),
-                  "CARD_CHAMP 100 40 decay 0 Spice9 Liquid3 Blank Blank +{%_Card_Drop_Chance_for_all_card_types,_even_Party_Dungeon_cards! 0 100 5 0 0 CardDropz".split(" "),
-                  "PETTING_THE_RIFT 15 50 decay 0 Critter10 Liquid3 Blank Blank +{%_Shiny_Mob_Chance_for_every_new_Rift_level_you_reach._Go_find_the_Rift_Ripper,_above_the_Octodars_in_World_4. 0 100 5 0 0 NewPetRift".split(" "),
-                  "BOATY_BUBBLE 135 70 decay 0 Bits Liquid3 Blank Blank +{%_Sailing_Speed_for_all_boats 0 5000 5 0 0 Y1".split(" "),
-                  "BIG_P 0.5 60 decayMulti 0 SailTr1 Liquid3 Blank Blank {x_higher_bonus_than_displayed_from_the_Minor_Link_bonus_of_the_deity_you're_linked_to_in_Divinity._AKA_bigger_god_passive! 1 50 5 0 0 Y2ACTIVE".split(" "),
-                  "BIT_BY_BIT 50 70 decay 0 Tree10 Liquid3 Blank Blank +{%_more_bits_earned_in_gaming_per_plant_found,_as_shown_in_the_Log_Book_found_in_the_top_right_of_the_gaming_garden! 0 200 5 0 0 Y3".split(" "),
-                  "GIFTS_ABOUND 40 60 decay 0 Bug10 Liquid3 Blank Blank +{%_chance_to_not_use_up_Divinity_points_when_offering_a_gift! 0 200 6 0 0 Y4".split(" "),
-                  "ATOM_SPLIT 14 40 decay 0 LavaC2 Liquid3 Blank Blank +{%_lower_particle_cost_for_upgrading_all_atoms_ 0 250 6 0 0 Y5".split(" "),
-                  "CROPIUS_MAPPER 5 70 decay 0 SpiA5 Liquid3 Blank Blank +{%_Crop_Evolution_chance_for_EVERY_map_you_unlock_in_world_6,_across_all_characters!_Total_bonus:_$ 0 1000 5 0 0 Y6".split(" "),
-                  "ESSENCE_BOOST 50 60 decay 0 Bug12 Liquid3 Blank Blank +{%_Yellow_Essence_Gain._This_bonus_doesn't_increase_based_on_anything! 0 1500 5 0 0 Y7".split(" "),
-                  "HINGE_BUSTER 100 70 decay 0 W6item2 Liquid4 Blank Blank Your_ninja_twins_do_+{%_more_damage_to_doors!_Knock_knock,_let_'em_in,_let_'em_in! 0 120 5 0 0 Y8".split(" "),
-                  "NINJA_LOOTER 0.3 60 decayMulti 0 W6item9 Liquid4 Blank Blank {x_Item_Find_chance_for_your_ninja_twin_while_sneaking! 1 1200 6 0 0 Y9ACTIVE".split(" "),
-                  "LO_COST_MO_JADE 99 40 decay 0 SpiD1 Liquid4 Blank Blank The_Jade_Cost_of_'Currency_Conduit'_scales_{%_slower,_making_it_cheaper,_allowing_you_to_buy_it_more_and_get_more_JADE! 0 2500 6 0 0 Y10".split(" "),
-                  "FASTER_NRG 20 100 decay 0 Tree14 Liquid4 Blank Blank +{%_faster_Stamina_Regeneration_for_Spelunking._Delve_fast,_delve_often. 0 1000 7 0 0 Y11".split(" "),
-                  "KATTLE_DA_GOAT 40 300 decay 0 W7item1 Liquid4 Blank Blank Kattlekruk,_who_took_literally_2.5yrs_after_being_released_to_let_you_have_his_bonus,_now_gives_+{%_more_Bubble_LVs_per_day. 0 10 8 0 0 Y12".split(" "),
-                  "CODFREY_RULZ_OK 5 500 decay 0 W7item2 Liquid4 Blank Blank +{%_higher_Gallery_Bonus_Multi._This_boosts_the_bonuses_from_both_Trophies_and_Nametags,_incase_you_didn't_know. 0 20 9 0 0 Y13".split(" "),
-                  "BUBBLE 99 40 decay 0 FillerMaterial Liquid4 Blank Blank It's_just_a_normal_bubble._It_doesn't_have_a_bonus_yet,_it_just_floats_and_is_round. 0 2500 6 0 0 Y14".split(" "),
-                  "BUBBLE 99 40 decay 0 FillerMaterial Liquid4 Blank Blank It's_just_a_normal_bubble._It_doesn't_have_a_bonus_yet,_it_just_floats_and_is_round. 0 2500 6 0 0 Y15".split(" "),
+                [
+                  "STABLE_JENIUS 1 0 addDECAY 0 OakTree Liquid1 Blank Blank +{_Total_WIS_for_all_players,_always. 0 1 2 0 0 TotalWIS".split(
+                    " ",
+                  ),
+                  "MAGE_IS_BEST 2 50 decayMulti 0 Grasslands1 Liquid1 Blank Blank All_Purple_Passive_Bonuses,_which_are_the_smaller_sized_ones,_give_{x_more_bonuses_to_your_mage-based_characters. 0 3 2 0 0 Ppassz".split(
+                    " ",
+                  ),
+                  "HOCUS_CHOPPUS 50 100 decay 0 CraftMat5 Liquid1 Blank Blank +{%_choppin_efficiency_per_power_of_10_max_MP_that_your_character_has._Super_diaper!_Err,_duper. 0 5 2 0 0 ChopEff".split(
+                    " ",
+                  ),
+                  "MOLTO_LOGGO 23.5 1.5 bigBase 0 IronBar Liquid1 Blank Blank +{%_chance_for_Multiple_Logs_while_Choppin,_and_the_max_is_now_300%,_not_100%._Big_bubbles_like_this_must_be_equipped_to_give_bonus. 1 10 3 0 0 MultiLogACTIVE".split(
+                    " ",
+                  ),
+                  "NOODUBBLE 100 60 decay 0 CraftMat7 Liquid1 Blank Blank +{%_Choppin'_and_Alchemy_EXP_gain._Y'know_what,_I'll_even..._actually,_never_mind. 0 20 3 0 0 ChopAlchEXP".split(
+                    " ",
+                  ),
+                  "NAME_I_GUESS 4 0 addDECAY 0 Gold Liquid1 Blank Blank Increases_base_damage_by_+$._This_bonus_increases_based_on_how_much_Max_MP_you_have_above_150. 0 40 4 0 0 bdmgMP".split(
+                    " ",
+                  ),
+                  "LE_BRAIN_TOOLS 65 70 decay 0 Bug3 Liquid1 Blank Blank The_following_tools_give_+{%_more_skilling_Power_than_normal:_$ 0 55 4 0 0 ToolM".split(
+                    " ",
+                  ),
+                  "COOKIN_ROADKILL 120 70 decay 0 ToiletTree Liquid1 Blank Blank Cranium_Cooking_lasts_{%_longer,_gives_{%_more_progress_per_kill,_and_has_a_{%_lower_cooldown._Also_+{%_Alchemy_EXP! 1 75 4 0 0 AlchemyACTIVE".split(
+                    " ",
+                  ),
+                  "BREWSTACHIO 50 100 decay 0 DesertC1 Liquid1 Blank Blank +{%_Brew_Speed._This_a_multiplicative_bonus,_which_means_its_ultra_powerful,_all_the_time!_Even_on_Mondays,_the_worst_day! 0 150 5 0 0 BrewSpd".split(
+                    " ",
+                  ),
+                  "ALL_FOR_KILL 40 100 decay 0 StumpTree Liquid1 Blank Blank Attack_Talents_give_+{%_higher_bonuses_to_Offline_Gains_than_they_normally_do._So_you_might_as_well_just_AFK_forever,_bye! 0 100 5 0 0 AttackAfk".split(
+                    " ",
+                  ),
+                  "MATTY_STAFFORD 40 50 decay 0 Refinery1 Liquid2 Blank Blank +{%_Total_damage._This_multiplies_with_other_damage_bonuses,_but_adds_with_the_other_'+%_Total_Damage'_bubbles. 0 3 3 0 0 pctDmg3".split(
+                    " ",
+                  ),
+                  "CALL_ME_POPE 2.4 70 decayMulti 0 Critter2 Liquid2 Blank Blank {x_Worship_Charge_rate_per_hour._Also,_{x_Max_Worship_Charge!_You_bouta_go_super_with_all_that_charge..._just_sayin' 1 25 3 0 0 worshipACTIVE".split(
+                    " ",
+                  ),
+                  "GOSPEL_LEADER 60 30 decay 0 Bug5 Liquid2 Blank Blank +{%_Max_Charge_per_10_Worship_levels._I_guess_you_could_say_this_upgrade_doesn't_come_Free_of_Charge! 0 150 4 0 0 maxCharge".split(
+                    " ",
+                  ),
+                  "SMART_BOI_TALENT 5 1 bigBase 0 SnowC1 Liquid2 Blank Blank Sorry,_mages_don't_get_anything..._Ok_fine,_you_can_have_+{_Talent_Points_for_each_tab._NOTE:_Doesn't_affect_Master_Class 0 150 2 0 0 TalWiz".split(
+                    " ",
+                  ),
+                  "PURPLE_BARGAIN 40 12 decay 0 Soul1 Liquid2 Blank Blank The_material_costs_of_ALL_purple_bubbles_are_{%_lower 0 500 3 0 0 BubbleCostPu".split(
+                    " ",
+                  ),
+                  "NICKEL_OF_WISDOM 18 30 decay 0 AlienTree Liquid3 Blank Blank +{%_Cash_from_Monsters_for_every_250_WIS._Wisdom_allows_the_nickel_to_trick_others_into_thinking_its_a_Dime,_increasing_its_value! 0 150 3 0 0 CashWIS".split(
+                    " ",
+                  ),
+                  "SEVERAPURPLE 1.4 30 decayMulti 0 Void Liquid3 Blank Blank The_following_purple_bubbles_give_{x_higher_bonus_than_displayed:_1st,_3rd,_5th,_13th,_15th 0 175 3 0 0 MultiPu".split(
+                    " ",
+                  ),
+                  "TREE_SLEEPER 12 40 decay 0 Soul5 Liquid3 Blank Blank +{%_Choppin'_AFK_Gains_Rate._Ain't_nothin'_like_sittin'_down_at_the_ol'_tree_and_havin'_a_snooze_n'_a_sleep! 0 60 4 0 0 ChoppinAFK".split(
+                    " ",
+                  ),
+                  "HYPERSWIFT 30 30 decay 0 Fish7 Liquid3 Blank Blank +{%_Basic_Attack_Speed._Just_like_all_other_Basic_Attack_Speed_bonuses,_this_boosts_AFK_kills/hr_if_you_do_enough_dmg! 0 250 4 0 0 BAspd".split(
+                    " ",
+                  ),
+                  "MATRIX_EVOLVED 60 40 decay 0 Tree8 Liquid3 Blank Blank +{%_Lab_EXP_Gain._Also_+{%_ineptitude_to_face_the_reality_of_what's_REALLY_going_on_behind_the_scenes... 1 250 5 0 0 LabXpACTIVE".split(
+                    " ",
+                  ),
+                  "WAND_PAWUR 40 60 decay 0 Bits Liquid3 Blank Blank +{%_more_Weapon_Power_from_your_weapon,_but_only_if_its_a_Wand!_Or_a_fisticuff_I_guess... 0 10000 5 0 0 M1".split(
+                    " ",
+                  ),
+                  "SLABE_LOGSOUL 3 60 decay 0 Bug9 Liquid3 Blank Blank +{_Choppin_and_Worship_Power_per_100_items_found,_shown_on_The_Slab! 0 250 5 0 0 M2".split(
+                    " ",
+                  ),
+                  "PIOUS_AT_HEART 300 100 decay 0 SailTr13 Liquid3 Blank Blank +{%_Divinity_EXP_Gain 1 15 6 0 0 M3ACTIVE".split(
+                    " ",
+                  ),
+                  "SLABE_WISDOM 25 60 decay 0 LavaC1 Liquid3 Blank Blank +{_Base_WIS_per_100_items_found,_shown_on_The_Slab! 0 200 6 0 0 M4".split(
+                    " ",
+                  ),
+                  "POWER_TRITHREE 23 50 decay 0 SailTr28 Liquid3 Blank Blank +{%_Total_Damage_per_250_WIS,_but_only_for_mages!_No_triple_dipping_into_STR_and_AGI! 0 200 6 0 0 M5".split(
+                    " ",
+                  ),
+                  "SMARTER_SPELLS 25 60 decay 0 W6item6 Liquid3 Blank Blank The_effect_WIS_has_on_Damage_is_increased_by_+{% 0 500 5 0 0 M6".split(
+                    " ",
+                  ),
+                  "ENDGAME_EFF_III 3 60 decay 0 W6item7 Liquid3 Blank Blank +{_Choppin_and_Worship_Power._This_bonus_increases_based_on_every_10_Class_LVs_you_are_above_500. 0 950 5 0 0 M7".split(
+                    " ",
+                  ),
+                  "ESSENCE_BOOST 50 100 decay 0 Soul7 Liquid4 Blank Blank +{%_Purple_Essence_Gain,_this_bonus_increases_based_on_the_total_level_of_ALL_your_mages! 0 250 6 0 0 M8AllCharz".split(
+                    " ",
+                  ),
+                  "TOME_WISDOM 2.5 60 decay 0 W6item4 Liquid4 Blank Blank +{%_WIS_for_every_2000_Tome_Completion_Points_over_5000._So_you'd_get_one_stack_of_this_at_7000_pts,_two_at_9000,_etc 0 150 6 0 0 M9".split(
+                    " ",
+                  ),
+                  "ESSENCE_CHAPTER 15 50 decay 0 W6item0 Liquid4 Blank Blank +{%_All_Essence_Gain_for_every_2000_Tome_Completion_Points_above_5000. 0 250000 6 0 0 M10AllCharz".split(
+                    " ",
+                  ),
+                  "DEEP_DEPTH 8 200 decay 0 Prehistrium Liquid4 Blank Blank +{%_chance_to_find_the_rope_'n_hole_to_the_next_Depth_in_Speluking_Delves. 0 1000 7 0 0 M11".split(
+                    " ",
+                  ),
+                  "DMG_OF_THE_SOUL 4000 300 decay 0 w7A4 Liquid4 Blank Blank +{%_Total_Damage._This_is_additive,_so_the_better_you_are_the_less_you'll_even_notice_this_bonus. 0 4000 8 0 0 M12".split(
+                    " ",
+                  ),
+                  "TACHYON_BUBBLE 250 500 decay 0 w7A8 Liquid4 Blank Blank +{%_Extra_Tachyons_for_Arcane_Cultist. 0 4000 9 0 0 M13".split(
+                    " ",
+                  ),
+                  "BUBBLE 99 40 decay 0 FillerMaterial Liquid4 Blank Blank It's_just_a_normal_bubble._It_doesn't_have_a_bonus_yet,_it_just_floats_and_is_round. 0 2500 6 0 0 M14".split(
+                    " ",
+                  ),
+                  "BUBBLE 99 40 decay 0 FillerMaterial Liquid4 Blank Blank It's_just_a_normal_bubble._It_doesn't_have_a_bonus_yet,_it_just_floats_and_is_round. 0 2500 6 0 0 M14".split(
+                    " ",
+                  ),
                 ],
-  [
-    "COPPER_CORONA 3 0 add 0 Copper Liquid1 Blank Blank Orange_bubble_cauldron_brew_speed_is_increased_by_+{% 0 OrangeBrew".split(" "),
-                  "SIPPY_SPLINTERS 3 0 add 0 OakTree Liquid1 Blank Blank Green_bubble_cauldron_brew_speed_is_increased_by_+{% 1 GreenBrew".split(" "),
-                  "MUSHROOM_SOUP 3 0 add 0 Grasslands1 Liquid1 Blank Blank Yellow_cauldron_brew_speed_is_increased_by_+{% 3 YellowBrew".split(" "),
-                  "SPOOL_SPRITE 3 0 add 0 CraftMat1 Liquid1 Blank Blank Purple_cauldron_brew_speed_is_increased_by_+{% 2 PurpleBrew".split(" "),
-                  "BARIUM_MIXTURE 3 0 add 0 CopperBar Liquid1 Blank Blank +{_Water_Droplet_max_capacity._Thats_the_1st_liquid_type_in_Alchemy,_btw. 0 Liquid1Cap".split(" "),
-                  "DIETER_DRINK 1 0 add 0 Grasslands3 Liquid1 Blank Blank Monsters_drop_+{%_more_money. 1 MonsterCash".split(" "),
-                  "SKINNY_0_CAL 2.5 0 add 0 Jungle2 Liquid1 Blank Blank +{%_chance_to_get_double_points_when_depositing_statues._So_like..._if_you_deposit_one_statue,_it_might_count_as_one!_Or_two. 1 StatueDouble".split(" "),
-                  "THUMB_POW 1 0 add 0 CraftMat5 Liquid1 Blank Blank When_converting_Skill_EXP_into_Class_EXP_using_the_'EXP_CONVERTER'_star_talent,_you'll_get_{%_more_Class_EXP_than_you_usually_do. 0 ClassEXPconvert".split(" "),
-                  "JUNGLE_JUICE 1 0 add 0 JungleTree Liquid1 Blank Blank +{%_liquid_regen_rate_for_all_liquid_cauldrons._Yes,_even_the_secret_one! 4 LiquidRegen".split(" "),
-                  "BARLEY_BREW 1 0 add 0 IronBar Liquid1 Blank Blank Alchemy_bubble_upgrade_costs_are_{%_lower_for_all_bubbles!_Even_the_giraffe_bubbles_that_look_strangely_like_elephants! 4 AlchBubbleCost".split(" "),
-                  "ANEARFUL 2 0 add 0 Forest1 Liquid1 Blank Blank +{%_Card_drop_rate._Even_works_offline,_just_like_it_always_has!_What_do_you_mean_this_used_to_say_something_different...? 1 CardDrop".split(" "),
-                  "TEA_WITH_PEA 3 0 add 0 ToiletTree Liquid1 Blank Blank +{_Liquid_Nitrogen_max_capacity._Thats_the_2nd_liquid_type_in_Alchemy,_btw. 3 Liquid2Cap".split(" "),
-                  "GOLD_GUZZLE 1 0 add 0 Gold Liquid1 Blank Blank +{%_Shop_sell_price. 3 ShopSell".split(" "),
-                  "RAMIFICOCTION 1 0 add 0 Forest3 Liquid1 Blank Blank +{_Talent_Points_for_Tab_1._Shout_out_to_that_1_person_who'll_make_it_this_far_without_knowing_what_talents_are,_you're_my_hero! 3 Tab1Pts".split(" "),
-                  "SEAWATER 1 0 add 0 Fish1 Liquid1 Blank Blank +{%_chance_for_1_kill_to_count_for_2_when_trying_to_open_new_portals,_but_only_while_actively_playing._One,_two,_buckle_my_shoe. 3 MultiKillPlay".split(" "),
-                  "TAIL_TIME 0.5 0 add 0 Sewers2 Liquid1 Blank Blank +{_Weapon_Power._This_is_gonna_be_OP_in_later_worlds_I_can_already_tell. 0 WeaponPOW".split(" "),
-                  "FLY_IN_MY_DRINK 3 0 add 0 Bug1 Liquid1 Blank Blank Eww_go_get_me_another_one,_I_can't_drink_this!_...what,_why_are_you_looking_at_me_like_that?_OH_right,_uh,_this_gives_+{_base_Accuracy. 2 baseACC".split(" "),
-                  "MIMICRAUGHT 1 0 add 0 DesertA2 Liquid1 Blank Blank +{%_EXP_from_monsters._Sorry,_I_know_this_is_a_lame_bonus._Send_me_an_email_if_you_want_me_change_it_to_+{%_NPC_dialogue_talking_speed. 3 MonsterEXP".split(" "),
-                  "BLUE_FLAV 30 7 decay 0 Plat Liquid1 Blank Blank -{%_material_cost_for_stamps._You_know_how_it's_hard_to_increase_stamps_max_levels?_Well_this_kinda_makes_that_a_bit_less_factual! 4 MatCostStamp".split(" "),
-                  "SLUG_SLURP 2 0 add 0 Fish2 Liquid1 Blank Blank +{_Post_Office_Box_Points_for_every_character,_and_easily_the_best_bonus_in_the_game._A_box_will_never_abandon_you! 4 BoxPoints".split(" "),
-                  "PICKLE_JAR 50 0 add 0 BobJoePickle Liquid2 Blank Blank +{%_Nothing._Absolutely_nothing,_now_and_forever._It's_a_darn_pickle,_what_were_you_expecting? 1 Nothing".split(" "),
-                  "FUR_REFRESHER 2 0 add 0 SnowA1 Liquid2 Blank Blank +{%_higher_Shiny_Critter_chance._This_is_a_multiplier,_so_+1%_from_this_vial_means_1.01x,_so_5%_shiny_chance_would_go_to_5.05%. 0 Shiny1".split(" "),
-                  "SIPPY_SOUL 1 0 add 0 Soul1 Liquid2 Blank Blank +{_Talent_Points_for_Tab_2. 1 Tab2Pts".split(" "),
-                  "CRAB_JUICE 4 0 add 0 Critter2 Liquid2 Blank Blank +{_Starting_points_in_Worship_Tower_Defence._Of_course,_a_true_balloon_monkey_wouldn't_accept_handouts_like_this. 0 TDpts".split(" "),
-                  "VOID_VIAL 1 0 add 0 Void Liquid2 Blank Blank +{%_Mining_Efficiency. 0 MinEff".split(" "),
-                  "RED_MALT 1 0 add 0 Refinery1 Liquid2 Blank Blank +{%_Refinery_Cycle_Speed._I_just_want_to_see_you_squirm_a_bit_more_as_you_decide_where_to_spend_your_precious_salts_hahahaha!! 0 RefSpd".split(" "),
-                  "EW_GROSS_GROSS 1 0 add 0 Bug5 Liquid2 Blank Blank +{%_Catching_Efficiency. 4 CatchEff".split(" "),
-                  "THE_SPANISH_SAHARA 1 0 add 0 SaharanFoal Liquid2 Blank Blank +{%_Choppin_Efficiency. 4 ChopEff".split(" "),
-                  "POISON_TINCTURE 3 0 add 0 Critter1A Liquid2 Blank Blank Eagle_Eye_Trap-O-Vision_gives_+{%_more_critters. 2 TrapOvision".split(" "),
-                  "ETRUSCAN_LAGER 1 0 add 0 SnowB2 Liquid2 Blank Blank +{%_Fishing_Efficiency. 4 FishEff".split(" "),
-                  "CHONKER_CHUG 1 0 add 0 Soul2 Liquid2 Blank Blank +{%_Talent_Book_Library_checkout_speed. 3 TalBookSpd".split(" "),
-                  "BUBONIC_BURP 1 0 add 0 Critter4 Liquid3 Blank Blank +{_Cog_Inventory_spaces._DONT_PANIC!!!_I_KNOW_ITS_ALARMING_THAT_A_VIAL_FINALLY_GIVES_A_USEFUL_BONUS,_BUT_STAY_CALM! 4 CogInv".split(" "),
-                  "VISIBLE_INK 1 0 add 0 SnowB3 Liquid3 Blank Blank +{%_Construction_Exp_gain. 4 ConsExp".split(" "),
-                  "ORANGE_MALT 5 0 add 0 Refinery2 Liquid3 Blank Blank +{%_higher_Shiny_Critter_chance._This_stacks_with_the_shiny_chance_from_the_Fur_Refresher_vial._You_see,_they_have_the_same_shaped_vial. 0 Shiny2".split(" "),
-                  "SNOW_SLURRY 0.5 0 add 0 SnowB5 Liquid3 Blank Blank +{%_Printer_sample_size._My_my_there_are_a_lot_of_these_'sample_size'_bonuses_in_the_game..._too_many... 4 SampleSize".split(" "),
-                  "SLOWERGY_DRINK 1 0 add 0 Soul4 Liquid3 Blank Blank +{%_Base_Multikill_per_Multikill_Tier_for_all_worlds._Stack_them_skulls! 4 Overkill".split(" "),
-                  "SIPPY_CUP 1 0 add 0 SnowC1 Liquid3 Blank Blank +{%_Cog_production_speed. 4 CogSpd".split(" "),
-                  "BUNNY_BREW 1 0 add 0 Critter7 Liquid3 Blank Blank +{_Talent_Points_for_Tab_3. 2 Tab3Pts".split(" "),
-                  "40-40_PURITY 1 0 add 0 SnowC4 Liquid3 Blank Blank +{_Trench_Seawater_max_capacity._Thats_the_3rd_liquid_type_in_Alchemy,_btw. 4 Liquid3Cap".split(" "),
-                  "SHAVED_ICE 1 0 add 0 Refinery5 Liquid3 Blank Blank +{%_base_Giant_Monster_spawn_rate. 4 GiantMob".split(" "),
-                  "GOOSEY_GLUG 1 0 add 0 Critter9 Liquid3 Blank Blank +{_base_critter_per_trap._This_is_a_sHONKingly_good_bonus,_the_aren't_many_others_of_its_kind! 4 CritterBASED".split(" "),
-                  "BALL_PICKLE_JAR 25 0 add 0 BallJoePickle Liquid1 Blank Blank +{%_arcade_ball_gain_rate,_and_those_are_balls_blessed_by_Balljoepickle_himself,_so_you_know_they're_extra_lucky! 3 arcadeBALLZ".split(" "),
-                  "CAPACHINO 4 0 add 0 GalaxyA1 Liquid3 Blank Blank +{%_Breeding_EXP_gain 2 BreedXP".split(" "),
-                  "DONUT_DRINK 5 0 add 0 GalaxyA3 Liquid3 Blank Blank +{%_Chance_to_breed_a_new_pet._Multiplicative,_so_+5%_here_would_change_a_1_in_100_to_1_in_95_chance. 2 NewPet".split(" "),
-                  "LONG_ISLAND_TEA 6 0 add 0 Fish6 Liquid3 Blank Blank +{%_Meal_Cooking_Speed 3 MealCook".split(" "),
-                  "SPOOK_PINT 5 0 add 0 Soul5 Liquid3 Blank Blank +{%_New_Recipe_Cooking_Speed 2 RecCook".split(" "),
-                  "CALCIUM_CARBONATE 11 0 add 0 GalaxyB3 Liquid3 Blank Blank +{_Starting_Worship_Pts. 2 TDpts".split(" "),
-                  "BLOAT_DRAFT 3 0 add 0 Critter10 Liquid3 Blank Blank +{%_Lab_EXP_gain._Strange,_you'd_think_someone_dumb_enough_to_drink_a_bloated_blobfish_drink_wouldn't_get_bonus_lab_exp_at_all... 2 LabXP".split(" "),
-                  "CHOCO_MILKSHAKE 50 7 decay 0 GalaxyB4 Liquid3 Blank Blank -{%_Kitchen_Upgrading_Cost. 2 Kcosts".split(" "),
-                  "PEARL_SELTZER 0.5 0 add 0 GalaxyC1b Liquid3 Blank Blank +{%_All_Stats._If_you_don't_know_what_all_stats_means_by_now,_you've_prolly_got_bigger_problems_than_not_knowing_what_all_stats_means. 2 AllStatPCT".split(" "),
-                  "KRAKENADE 1 0 add 0 Fish8 Liquid3 Blank Blank +{_Weapon_Power._Unleash_the_kraken... 3 WeaponPOW".split(" "),
-                  "ELECTROLYTE 2 0 add 0 GalaxyC4 Liquid3 Blank Blank +{%_Mob_Team_Damage 2 PetDmg".split(" "),
-                  "ASH_AGUA 2 0 add 0 LavaA1 Liquid3 Blank Blank +{_Talent_Points_for_Tab_4 0 Tab4Pts".split(" "),
-                  "MAPLE_SYRUP 2 0 add 0 Tree9 Liquid3 Blank Blank +{%_Divinity_EXP._Maple_syrup_helps_you_keep_calm_and_meditate_with_the_divine..._No_wonder_those_Canadians_are_so_nice! 0 DivXP".split(" "),
-                  "HAMPTER_DRIPPY 2 0 add 0 LavaA5b Liquid3 Blank Blank +{%_Sailing_EXP_gain._Doesn't_help_level_up_captains,_only_yourself._So_yea,_I'm_basically_saying_you're_a_crappy_captain_lol 3 SailXP".split(" "),
-                  "DREADNOG 2 0 add 0 DreadloBar Liquid3 Blank Blank +{%_Cooking_Speed_for_meals._No,_MEALS,_not_meel,_dont_cook_him!!_Stop!!_STOP!!!! 0 MealCook".split(" "),
-                  "DUSTED_DRINK 2 0 add 0 Bug10 Liquid3 Blank Blank +{%_Gaming_EXP._Cool. 2 GameXP".split(" "),
-                  "OJ_JOOCE 2 0 add 0 LavaB3 Liquid3 Blank Blank +{%_Sailing_Speed._If_only_there_was_a_way_to_also_lower_the_minimum_sailing_time..._I'm_sure_you'll_find_it_eventually... 0 SailSpd".split(" "),
-                  "OOZIE_OOBLEK 2 0 add 0 Soul6 Liquid3 Blank Blank +{%_Bits_gained_in_Gaming._Cool. 0 GameBits".split(" "),
-                  "VENISON_MALT 2 0 add 0 LavaC2 Liquid3 Blank Blank -{%_material_cost_for_stamps._Have_at_it_endgamers! 2 MatCostStamp".split(" "),
-                  "MARBLE_MOCHA 5 0 add 0 Marble Liquid3 Blank Blank +{%_Faster_Equinox_Bar_Fill_Rate 3 EqBar".split(" "),
-                  "WILLOW_SIPPY 4 0 add 0 Tree11 Liquid3 Blank Blank +{%_Faster_Sigil_Charge_Rate 3 SigSpd".split(" "),
-                  "SHINYFIN_STEW 7 0 add 0 Fish13 Liquid3 Blank Blank +{%_Construction_Build_Rate,_so_you_can_hit_all_those_boosted_max_levels_you_keep_unlocking 3 Contspd".split(" "),
-                  "DREAMY_DRINK 3.5 0 add 0 Bug11 Liquid3 Blank Blank Shrines_charge_+{%_faster,_so_this_way_they_charge_faster,_compared_to_like_if_bonus_this_wasn't_oven_you_of_out_hot_eat_the_food. 3 ShrineSpd".split(" "),
-                  "RICECAKORADE 2 0 add 0 SpiA2 Liquid4 Blank Blank +{%_Farming_Speed,_so_the_plants_grow_faster._Makes_sense,_plants_do_get_energy_from_the_dumbest_things... 0 6FarmSpd".split(" "),
-                  "LADYBUG_SERUM 4 0 add 0 Bug12 Liquid4 Blank Blank +{%_White_Essence_gain,_and_before_you_make_an_angry_rant,_male_ladybugs_were_also_used_to_flavor_this_vial! 0 6WhiteEss".split(" "),
-                  "FLAVORGIL 7 0 add 0 Fish12 Liquid4 Blank Blank +{%_Farming_Crop_Evolution_chance._I_guess_like,_the_fishbits_mutate_with_the_crops?_Idk_I'm_not_a_planterman. 1 6FarmEvo".split(" "),
-                  "GREENLEAF_TEA 1.5 0 add 0 SpiB1 Liquid4 Blank Blank +{%_Ninja_Untying_rate._I_wonder_if_bomb_diffusers_drink_tea_before_going_to_work? 1 6Untie".split(" "),
-                  "FIREFLY_GROG 5 0 add 0 Bug13 Liquid4 Blank Blank +{%_Cooking_Speed,_but_multiplicative_so_it_stacks_big_time_with_the_other_892,314_cooking_bonuses_you_have! 0 6CookSpd".split(" "),
-                  "DABAR_SPECIAL 4 0 add 0 GodshardBar Liquid4 Blank Blank +{%_Total_Skill_efficiency,_but_not_multiplicative_so_that_it_drowns_in_the_sea_of_bonuses_you_already_have. 4 6SkillEff".split(" "),
-                  "REFRESHMENT 2 0 add 0 Soul7 Liquid4 Blank Blank +{%_Sneaking_EXP_gain._Something_about_it_makes_you_feel_light_on_your_feet,_as_if_u_just_wanna_fly... 0 6SneakEXP".split(" "),
-                  "GIBBED_DRINK 3.5 0 add 0 SpiC2 Liquid4 Blank Blank +{%_Summoning_EXP_gain._No,_the_horn_doesn't_contribute_to_the_flavor,_just_the_fleshy_bits_inside. 3 6SummEXP".split(" "),
-                  "DED_SAP 3.5 0 add 0 Tree13 Liquid4 Blank Blank +{%_Farming_EXP_gain,_but_dont_drink_too_much_since_Eucalyptus_oil_is_toxic_IRL_no_joke_fr_fr_search_it_or_just_take_my_word. 4 6FarmEXP".split(" "),
-                  "ROYALE_COLA 3.5 0 add 0 SpiD3 Liquid4 Blank Blank +{%_Jade_Gain_in_Sneaking._Congratulations_btw_on_trekking_through_World_6_like_that,_what_a_journey! 0 6Jade".split(" "),
-                  "TURTLE_TISANE 4 0 add 0 Critter11 Liquid4 Blank Blank +{%_Artifact_find_chance,_Sigil_SPD,_Cooking_SPD,_and_Construction_Build_rate._All_MULTIPLICATIVE!_A_very_special_vial_indeed... 0 6turtle".split(" "),
-                  "CHAPTER_CHUG 1 0 add 0 Spelunking0 Liquid4 Blank Blank +{%_Total_Damage_MULTIPLIER!_Yesss_multi_yeeeesss_I_know_how_it_is_I'm_chill_with_it 3 7dmg".split(" "),
-                  "SIPPY_SEAWEED 0.5 0 add 0 Tree14 Liquid4 Blank Blank +{%_faster_Spelunking_Speed..._like,_for_finding_chapter_pages_and_leveling_up! 1 7spelunkspd".split(" "),
-                  "WRIGGLE_WATER 1 0 add 0 w7A3 Liquid4 Blank Blank +{%_Spelunking_Amber_gain 1 7amber".split(" "),
-                  "ROCKY_BOBA 10 0 add 0 Prehistrium Liquid4 Blank Blank +{%_Gaming_Bits_multiplier!_Wait,_bits?_Gaming??_That's_not_very_World_7_of_you_mister_Prehistrium,_not_very_W7_of_you_at_all... 4 7bits".split(" "),
-                  "OCTOSODA 0.2 0 add 0 Soul8 Liquid4 Blank Blank +{%_AFK_Gains_rate_for_Spelunking 2 7skillw7afk".split(" "),
-                  "PAPER_PINT 1 0 add 0 Spelunking2 Liquid4 Blank Blank +{%_extra_Masterclass_drops,_specifically_DB's_Bones,_WW's_Dust,_and_AC's_Tachyons!_We_love_our_acronyms_don't_we! 4 7masta".split(" "),
-                  "SCALE_ON_ICE 0.1 0 add 0 w7A5 Liquid4 Blank Blank +{%_daily_Coral_for_the_Coral_Reef!_I'm_a_bit_of_a_miserly_vial,_so_you'll_be_lucky_to_get_even_a_few_percent_from_me! 0 7corale".split(" "),
-                  "TRASH_DRANK 2 0 add 0 Bug15 Liquid4 Blank Blank +{%_Spelunking_Efficiency,_so_you_can_find_more_chapter_pages_and_help_solve_the_illiteracy_problem_that_plagues_our_community! 1 7spelunkeff".split(" "),
-                  "CRABOMAYSE 0.5 0 add 0 w7A12 Liquid4 Blank Blank +{%_Class_EXP_gain_MULTIPLIER!_What?_No,_don't_thank_Lava,_thank_ME!!!_I'm_the_one_giving_you_my_bonus! 0 7classexp".split(" "),
-  ],
-  [
-    "MEDIOCRE_OBOLS 1 1 0 2.2 Liquid1 Blank Blank Blank 1_random_low-quality_Obol._Sure,_it'll_probably_be_a_crappy_bronze_Obol,_but_that's_not_bad_considering_youre_paying_with_water! 0 10 0 0 0 1 1".split(" "),
-                  "WEAK_UPG_STONE 1 1 0 2.1 Liquid1 Blank Blank Blank `Slaps_roof_of_car`_This_bad_boy_can_upgrade_so_many_equipm..._wait,_how'd_a_car_get_in_here?_Gives_1_random_low-quality_Upgrade_Stone. 0 5 0 0 0 0 1".split(" "),
-                  "DISTILLED_WATER 1 1 0 1.37 Liquid1 Blank Blank Blank This_distilled_water_was_double-purified_by_running_it_through_thousands_of_diamonds!_So_yea,_it's_just_regular_water,_but_more_expensive. 4 1 0 0 0 0 1".split(" "),
-                  "ONE_MEASLY_GEM 1 1 0 7.5 Liquid1 Blank Blank Blank 1_Gem._Perfect_for_buying_things_in_the_Gem_Shop!_Sponsored_by_LavaFlame2's_Gem_Shop!' 4 5 0 0 0 0 1".split(" "),
-                  "STAR_BOOK 1 1 0 1.3 Liquid1 Blank Blank Blank Gives_you_a_Star-Book!_It's_always_the_same_one,_but_it_comes_with_a_random_Max_Lv,_so_keep_buying_it_until_you_get_one_with_a_100_Lv_Max! 3 50 0 0 0 0 1".split(" "),
-                  "EXP_BALLOON 1 1 0 2.8 Liquid1 Blank Blank Blank A_small_exp_balloon._They_give_you_exp_in_whatever_skill_you're_currently_training!_Using_them_in_town_will_give_EXP_in_the_town_skill! 1 15 0 0 0 0 1".split(" "),
-                  "SMALL_DONATION 1 0 1 2 Liquid1 Blank Blank Blank Your_donation_helps_starving_orphan_monsters._They_asked_for_food,_but_beggars_can't_be_choosers!_You_wont_get_anything_for_doing_this. 0 1 0 0 0 0 0".split(" "),
-                  "DECENT_OBOLS 1 1 0 2.5 Liquid1 Liquid2 Blank Blank 1_random_low-quality_Obol,_except_this_time_the_'low'_was_rated_by_someone_with_higher_standards,_so_it's_more_like_medium_quality! 4 20 3 0 0 1 1".split(" "),
+                [
+                  "LOTTO_SKILLS 1 0 addDECAY 0 CraftMat1 Liquid1 Blank Blank +{_LUK_for_all_players,_always. 0 1 2 0 0 TotalLUK".split(
+                    " ",
+                  ),
+                  "DROPPIN_LOADS 40 70 decay 0 Fish1 Liquid1 Blank Blank +{%_Drop_Rate._Thanks_to_this_upgrade,_you_can_get_even_MORE_angry_when_you_keep_not_getting_that_rare_item_you're_grinding_for! 0 3 2 0 0 DropRate".split(
+                    " ",
+                  ),
+                  "STARTUE_EXP 25 60 decay 0 BirchTree Liquid1 Blank Blank Leveling_up_a_statue_resets_it's_exp_bar_down_to_{%,_instead_of_0%._Staturrific!_Yea..._the_jokes_are_only_gonna_go_downhill_from_here_lol 0 5 2 0 0 StatueStartEXP".split(
+                    " ",
+                  ),
+                  "LEVEL_UP_GIFT 100 30 decay 0 DesertA3 Liquid1 Blank Blank {%_chance_for_a_gift_to_drop_when_leveling_up,_like_a_gem_or_an_EXP_Balloon!_Big_bubbles_like_this_must_be_equipped_to_give_bonus. 1 10 2 0 0 LevelUpACTIVE".split(
+                    " ",
+                  ),
+                  "PROWESESSARY 1.5 60 decayMulti 0 ToiletTree Liquid1 Blank Blank The_Prowess_Bonus_for_every_skill_is_multiplied_by_{._Prowess_lowers_the_Efficiency_needed_to_get_multiple_QTY_per_drop_from_resources. 0 20 3 0 0 ProwessMulti".split(
+                    " ",
+                  ),
+                  "STAMP_TRAMP 1 0 addDECAY 0 Bug2 Liquid1 Blank Blank Increases_the_Max_Lv_of_the_'Toilet_Paper_Postage'_Talent_to_{._You_unlock_this_talent_by_typing_'More_like_Poopy_Pete'_near_Pete. 0 45 4 0 0 TPpostage".split(
+                    " ",
+                  ),
+                  "UNDEVELOPED_COSTS 40 70 decay 0 Fish3 Liquid1 Blank Blank Reduces_the_material_costs_of_all_Alchemy_Bubbles_by_{%._They_are_just_bubbles_though,_how_much_could_they_even_cost?_10_dollars? 0 65 6 0 0 BubbleCost".split(
+                    " ",
+                  ),
+                  "DA_DAILY_DRIP 30 100 decay 0 CraftMat9 Liquid1 Blank Blank Increases_the_Max_Cap_for_every_liquid_by_+$._This_bonus_increases_based_on_the_combined_Alchemy_LV_of_all_your_characters! 0 125 8 0 0 LqdCap".split(
+                    " ",
+                  ),
+                  "GRIND_TIME 9.7 .3 bigBase 0 Liquid1 Liquid2 Blank Blank +{%_Class_EXP._The_go-to_active_bubble_for_anyone_who_wants_to_reach_max_level_faster_and_finally_start_playing_the_game! 1 50 25 0 0 expACTIVE".split(
+                    " ",
+                  ),
+                  "LAAARRRRYYYY 120 100 decay 0 Dementia Liquid2 Blank Blank Every_time_you_upgrade_an_Alchemy_bubble,_there's_a_{%_chance_it'll_upgrade_2_times,_for_no_extra_cost!_Two_fer_one,_getter_dun! 0 50 4 0 0 DoubleBubbleUpg".split(
+                    " ",
+                  ),
+                  "COGS_FOR_HANDS 4 0 addDECAY 0 SnowA2 Liquid2 Blank Blank +{%_Cog_Production_speed._Cogs_are_great._I_really_really_like_cogs._I_guess_you_could_say_I_think_they're_pretty_Coggers... 0 50 3 0 0 CogMakeSpd".split(
+                    " ",
+                  ),
+                  "SAMPLE_IT 12 40 decay 0 Soul2 Liquid2 Blank Blank +{%_Sample_Size_when_taking_samples_for_the_3d_printer._Finally,_your_statisitcal_analysis_will_be_accurate! 0 15 3 0 0 SampleSize".split(
+                    " ",
+                  ),
+                  "BIG_GAME_HUNTER 60 30 decay 0 Critter3 Liquid2 Blank Blank Killing_a_Giant_Monster_has_a_{%_chance_to_not_decrease_the_Giant_Mob_Spawn_Odds,_which_reset_at_the_end_of_each_week. 1 40 4 0 0 GiantsACTIVE".split(
+                    " ",
+                  ),
+                  "IGNORE_OVERDUES 100 60 decay 0 Tree7 Liquid2 Blank Blank +{%_Book_Checkout_speed,_all_thanks_to_this_one_little_bubble_that_librarians_do_NOT_want_you_to_know_about! 0 120 2 0 0 booksSpeed".split(
+                    " ",
+                  ),
+                  "YELLOW_BARGAIN 40 12 decay 0 Critter6 Liquid2 Blank Blank The_material_costs_of_ALL_yellow_bubbles_are_{%_lower. 0 250 3 0 0 BubbleCostYe".split(
+                    " ",
+                  ),
+                  "MR_MASSACRE 90 50 decay 0 Refinery3 Liquid3 Blank Blank +{%_Multikill_per_damage_tier._Remember,_damage_tier_is_shown_by_the_Purple_Bar_in_AFK_info,_and_multikill_is_bigtime_for_resources 1 8 3 0 0 MKtierACTIVE".split(
+                    " ",
+                  ),
+                  "EGG_INK 40 40 decay 0 Spice0 Liquid3 Blank Blank +{%_faster_Egg_Incubation_Time_in_the_Mob_Nest._This_will_be_an_absolutely_VITAL_upgrade_once_you_unlock_mob_egg_rarity! 0 100 4 0 0 EggInc".split(
+                    " ",
+                  ),
+                  "DIAMOND_CHEF 0.3 13 decayMulti 0 Spice6 Liquid3 Blank Blank {x_faster_Meal_and_Fire_Kitchen_Speeds_for_every_Meal_at_Lv_11+._This_is_when_the_meal_plate_becomes_Diamond_Blue,_just_so_you_know! 0 100 4 0 0 MealSpdz".split(
+                    " ",
+                  ),
+                  "CARD_CHAMP 100 40 decay 0 Spice9 Liquid3 Blank Blank +{%_Card_Drop_Chance_for_all_card_types,_even_Party_Dungeon_cards! 0 100 5 0 0 CardDropz".split(
+                    " ",
+                  ),
+                  "PETTING_THE_RIFT 15 50 decay 0 Critter10 Liquid3 Blank Blank +{%_Shiny_Mob_Chance_for_every_new_Rift_level_you_reach._Go_find_the_Rift_Ripper,_above_the_Octodars_in_World_4. 0 100 5 0 0 NewPetRift".split(
+                    " ",
+                  ),
+                  "BOATY_BUBBLE 135 70 decay 0 Bits Liquid3 Blank Blank +{%_Sailing_Speed_for_all_boats 0 5000 5 0 0 Y1".split(
+                    " ",
+                  ),
+                  "BIG_P 0.5 60 decayMulti 0 SailTr1 Liquid3 Blank Blank {x_higher_bonus_than_displayed_from_the_Minor_Link_bonus_of_the_deity_you're_linked_to_in_Divinity._AKA_bigger_god_passive! 1 50 5 0 0 Y2ACTIVE".split(
+                    " ",
+                  ),
+                  "BIT_BY_BIT 50 70 decay 0 Tree10 Liquid3 Blank Blank +{%_more_bits_earned_in_gaming_per_plant_found,_as_shown_in_the_Log_Book_found_in_the_top_right_of_the_gaming_garden! 0 200 5 0 0 Y3".split(
+                    " ",
+                  ),
+                  "GIFTS_ABOUND 40 60 decay 0 Bug10 Liquid3 Blank Blank +{%_chance_to_not_use_up_Divinity_points_when_offering_a_gift! 0 200 6 0 0 Y4".split(
+                    " ",
+                  ),
+                  "ATOM_SPLIT 14 40 decay 0 LavaC2 Liquid3 Blank Blank +{%_lower_particle_cost_for_upgrading_all_atoms_ 0 250 6 0 0 Y5".split(
+                    " ",
+                  ),
+                  "CROPIUS_MAPPER 5 70 decay 0 SpiA5 Liquid3 Blank Blank +{%_Crop_Evolution_chance_for_EVERY_map_you_unlock_in_world_6,_across_all_characters!_Total_bonus:_$ 0 1000 5 0 0 Y6".split(
+                    " ",
+                  ),
+                  "ESSENCE_BOOST 50 60 decay 0 Bug12 Liquid3 Blank Blank +{%_Yellow_Essence_Gain._This_bonus_doesn't_increase_based_on_anything! 0 1500 5 0 0 Y7".split(
+                    " ",
+                  ),
+                  "HINGE_BUSTER 100 70 decay 0 W6item2 Liquid4 Blank Blank Your_ninja_twins_do_+{%_more_damage_to_doors!_Knock_knock,_let_'em_in,_let_'em_in! 0 120 5 0 0 Y8".split(
+                    " ",
+                  ),
+                  "NINJA_LOOTER 0.3 60 decayMulti 0 W6item9 Liquid4 Blank Blank {x_Item_Find_chance_for_your_ninja_twin_while_sneaking! 1 1200 6 0 0 Y9ACTIVE".split(
+                    " ",
+                  ),
+                  "LO_COST_MO_JADE 99 40 decay 0 SpiD1 Liquid4 Blank Blank The_Jade_Cost_of_'Currency_Conduit'_scales_{%_slower,_making_it_cheaper,_allowing_you_to_buy_it_more_and_get_more_JADE! 0 2500 6 0 0 Y10".split(
+                    " ",
+                  ),
+                  "FASTER_NRG 20 100 decay 0 Tree14 Liquid4 Blank Blank +{%_faster_Stamina_Regeneration_for_Spelunking._Delve_fast,_delve_often. 0 1000 7 0 0 Y11".split(
+                    " ",
+                  ),
+                  "KATTLE_DA_GOAT 40 300 decay 0 W7item1 Liquid4 Blank Blank Kattlekruk,_who_took_literally_2.5yrs_after_being_released_to_let_you_have_his_bonus,_now_gives_+{%_more_Bubble_LVs_per_day. 0 10 8 0 0 Y12".split(
+                    " ",
+                  ),
+                  "CODFREY_RULZ_OK 5 500 decay 0 W7item2 Liquid4 Blank Blank +{%_higher_Gallery_Bonus_Multi._This_boosts_the_bonuses_from_both_Trophies_and_Nametags,_incase_you_didn't_know. 0 20 9 0 0 Y13".split(
+                    " ",
+                  ),
+                  "BUBBLE 99 40 decay 0 FillerMaterial Liquid4 Blank Blank It's_just_a_normal_bubble._It_doesn't_have_a_bonus_yet,_it_just_floats_and_is_round. 0 2500 6 0 0 Y14".split(
+                    " ",
+                  ),
+                  "BUBBLE 99 40 decay 0 FillerMaterial Liquid4 Blank Blank It's_just_a_normal_bubble._It_doesn't_have_a_bonus_yet,_it_just_floats_and_is_round. 0 2500 6 0 0 Y15".split(
+                    " ",
+                  ),
+                ],
+                [
+                  "COPPER_CORONA 3 0 add 0 Copper Liquid1 Blank Blank Orange_bubble_cauldron_brew_speed_is_increased_by_+{% 0 OrangeBrew".split(
+                    " ",
+                  ),
+                  "SIPPY_SPLINTERS 3 0 add 0 OakTree Liquid1 Blank Blank Green_bubble_cauldron_brew_speed_is_increased_by_+{% 1 GreenBrew".split(
+                    " ",
+                  ),
+                  "MUSHROOM_SOUP 3 0 add 0 Grasslands1 Liquid1 Blank Blank Yellow_cauldron_brew_speed_is_increased_by_+{% 3 YellowBrew".split(
+                    " ",
+                  ),
+                  "SPOOL_SPRITE 3 0 add 0 CraftMat1 Liquid1 Blank Blank Purple_cauldron_brew_speed_is_increased_by_+{% 2 PurpleBrew".split(
+                    " ",
+                  ),
+                  "BARIUM_MIXTURE 3 0 add 0 CopperBar Liquid1 Blank Blank +{_Water_Droplet_max_capacity._Thats_the_1st_liquid_type_in_Alchemy,_btw. 0 Liquid1Cap".split(
+                    " ",
+                  ),
+                  "DIETER_DRINK 1 0 add 0 Grasslands3 Liquid1 Blank Blank Monsters_drop_+{%_more_money. 1 MonsterCash".split(
+                    " ",
+                  ),
+                  "SKINNY_0_CAL 2.5 0 add 0 Jungle2 Liquid1 Blank Blank +{%_chance_to_get_double_points_when_depositing_statues._So_like..._if_you_deposit_one_statue,_it_might_count_as_one!_Or_two. 1 StatueDouble".split(
+                    " ",
+                  ),
+                  "THUMB_POW 1 0 add 0 CraftMat5 Liquid1 Blank Blank When_converting_Skill_EXP_into_Class_EXP_using_the_'EXP_CONVERTER'_star_talent,_you'll_get_{%_more_Class_EXP_than_you_usually_do. 0 ClassEXPconvert".split(
+                    " ",
+                  ),
+                  "JUNGLE_JUICE 1 0 add 0 JungleTree Liquid1 Blank Blank +{%_liquid_regen_rate_for_all_liquid_cauldrons._Yes,_even_the_secret_one! 4 LiquidRegen".split(
+                    " ",
+                  ),
+                  "BARLEY_BREW 1 0 add 0 IronBar Liquid1 Blank Blank Alchemy_bubble_upgrade_costs_are_{%_lower_for_all_bubbles!_Even_the_giraffe_bubbles_that_look_strangely_like_elephants! 4 AlchBubbleCost".split(
+                    " ",
+                  ),
+                  "ANEARFUL 2 0 add 0 Forest1 Liquid1 Blank Blank +{%_Card_drop_rate._Even_works_offline,_just_like_it_always_has!_What_do_you_mean_this_used_to_say_something_different...? 1 CardDrop".split(
+                    " ",
+                  ),
+                  "TEA_WITH_PEA 3 0 add 0 ToiletTree Liquid1 Blank Blank +{_Liquid_Nitrogen_max_capacity._Thats_the_2nd_liquid_type_in_Alchemy,_btw. 3 Liquid2Cap".split(
+                    " ",
+                  ),
+                  "GOLD_GUZZLE 1 0 add 0 Gold Liquid1 Blank Blank +{%_Shop_sell_price. 3 ShopSell".split(
+                    " ",
+                  ),
+                  "RAMIFICOCTION 1 0 add 0 Forest3 Liquid1 Blank Blank +{_Talent_Points_for_Tab_1._Shout_out_to_that_1_person_who'll_make_it_this_far_without_knowing_what_talents_are,_you're_my_hero! 3 Tab1Pts".split(
+                    " ",
+                  ),
+                  "SEAWATER 1 0 add 0 Fish1 Liquid1 Blank Blank +{%_chance_for_1_kill_to_count_for_2_when_trying_to_open_new_portals,_but_only_while_actively_playing._One,_two,_buckle_my_shoe. 3 MultiKillPlay".split(
+                    " ",
+                  ),
+                  "TAIL_TIME 0.5 0 add 0 Sewers2 Liquid1 Blank Blank +{_Weapon_Power._This_is_gonna_be_OP_in_later_worlds_I_can_already_tell. 0 WeaponPOW".split(
+                    " ",
+                  ),
+                  "FLY_IN_MY_DRINK 3 0 add 0 Bug1 Liquid1 Blank Blank Eww_go_get_me_another_one,_I_can't_drink_this!_...what,_why_are_you_looking_at_me_like_that?_OH_right,_uh,_this_gives_+{_base_Accuracy. 2 baseACC".split(
+                    " ",
+                  ),
+                  "MIMICRAUGHT 1 0 add 0 DesertA2 Liquid1 Blank Blank +{%_EXP_from_monsters._Sorry,_I_know_this_is_a_lame_bonus._Send_me_an_email_if_you_want_me_change_it_to_+{%_NPC_dialogue_talking_speed. 3 MonsterEXP".split(
+                    " ",
+                  ),
+                  "BLUE_FLAV 30 7 decay 0 Plat Liquid1 Blank Blank -{%_material_cost_for_stamps._You_know_how_it's_hard_to_increase_stamps_max_levels?_Well_this_kinda_makes_that_a_bit_less_factual! 4 MatCostStamp".split(
+                    " ",
+                  ),
+                  "SLUG_SLURP 2 0 add 0 Fish2 Liquid1 Blank Blank +{_Post_Office_Box_Points_for_every_character,_and_easily_the_best_bonus_in_the_game._A_box_will_never_abandon_you! 4 BoxPoints".split(
+                    " ",
+                  ),
+                  "PICKLE_JAR 50 0 add 0 BobJoePickle Liquid2 Blank Blank +{%_Nothing._Absolutely_nothing,_now_and_forever._It's_a_darn_pickle,_what_were_you_expecting? 1 Nothing".split(
+                    " ",
+                  ),
+                  "FUR_REFRESHER 2 0 add 0 SnowA1 Liquid2 Blank Blank +{%_higher_Shiny_Critter_chance._This_is_a_multiplier,_so_+1%_from_this_vial_means_1.01x,_so_5%_shiny_chance_would_go_to_5.05%. 0 Shiny1".split(
+                    " ",
+                  ),
+                  "SIPPY_SOUL 1 0 add 0 Soul1 Liquid2 Blank Blank +{_Talent_Points_for_Tab_2. 1 Tab2Pts".split(
+                    " ",
+                  ),
+                  "CRAB_JUICE 4 0 add 0 Critter2 Liquid2 Blank Blank +{_Starting_points_in_Worship_Tower_Defence._Of_course,_a_true_balloon_monkey_wouldn't_accept_handouts_like_this. 0 TDpts".split(
+                    " ",
+                  ),
+                  "VOID_VIAL 1 0 add 0 Void Liquid2 Blank Blank +{%_Mining_Efficiency. 0 MinEff".split(
+                    " ",
+                  ),
+                  "RED_MALT 1 0 add 0 Refinery1 Liquid2 Blank Blank +{%_Refinery_Cycle_Speed._I_just_want_to_see_you_squirm_a_bit_more_as_you_decide_where_to_spend_your_precious_salts_hahahaha!! 0 RefSpd".split(
+                    " ",
+                  ),
+                  "EW_GROSS_GROSS 1 0 add 0 Bug5 Liquid2 Blank Blank +{%_Catching_Efficiency. 4 CatchEff".split(
+                    " ",
+                  ),
+                  "THE_SPANISH_SAHARA 1 0 add 0 SaharanFoal Liquid2 Blank Blank +{%_Choppin_Efficiency. 4 ChopEff".split(
+                    " ",
+                  ),
+                  "POISON_TINCTURE 3 0 add 0 Critter1A Liquid2 Blank Blank Eagle_Eye_Trap-O-Vision_gives_+{%_more_critters. 2 TrapOvision".split(
+                    " ",
+                  ),
+                  "ETRUSCAN_LAGER 1 0 add 0 SnowB2 Liquid2 Blank Blank +{%_Fishing_Efficiency. 4 FishEff".split(
+                    " ",
+                  ),
+                  "CHONKER_CHUG 1 0 add 0 Soul2 Liquid2 Blank Blank +{%_Talent_Book_Library_checkout_speed. 3 TalBookSpd".split(
+                    " ",
+                  ),
+                  "BUBONIC_BURP 1 0 add 0 Critter4 Liquid3 Blank Blank +{_Cog_Inventory_spaces._DONT_PANIC!!!_I_KNOW_ITS_ALARMING_THAT_A_VIAL_FINALLY_GIVES_A_USEFUL_BONUS,_BUT_STAY_CALM! 4 CogInv".split(
+                    " ",
+                  ),
+                  "VISIBLE_INK 1 0 add 0 SnowB3 Liquid3 Blank Blank +{%_Construction_Exp_gain. 4 ConsExp".split(
+                    " ",
+                  ),
+                  "ORANGE_MALT 5 0 add 0 Refinery2 Liquid3 Blank Blank +{%_higher_Shiny_Critter_chance._This_stacks_with_the_shiny_chance_from_the_Fur_Refresher_vial._You_see,_they_have_the_same_shaped_vial. 0 Shiny2".split(
+                    " ",
+                  ),
+                  "SNOW_SLURRY 0.5 0 add 0 SnowB5 Liquid3 Blank Blank +{%_Printer_sample_size._My_my_there_are_a_lot_of_these_'sample_size'_bonuses_in_the_game..._too_many... 4 SampleSize".split(
+                    " ",
+                  ),
+                  "SLOWERGY_DRINK 1 0 add 0 Soul4 Liquid3 Blank Blank +{%_Base_Multikill_per_Multikill_Tier_for_all_worlds._Stack_them_skulls! 4 Overkill".split(
+                    " ",
+                  ),
+                  "SIPPY_CUP 1 0 add 0 SnowC1 Liquid3 Blank Blank +{%_Cog_production_speed. 4 CogSpd".split(
+                    " ",
+                  ),
+                  "BUNNY_BREW 1 0 add 0 Critter7 Liquid3 Blank Blank +{_Talent_Points_for_Tab_3. 2 Tab3Pts".split(
+                    " ",
+                  ),
+                  "40-40_PURITY 1 0 add 0 SnowC4 Liquid3 Blank Blank +{_Trench_Seawater_max_capacity._Thats_the_3rd_liquid_type_in_Alchemy,_btw. 4 Liquid3Cap".split(
+                    " ",
+                  ),
+                  "SHAVED_ICE 1 0 add 0 Refinery5 Liquid3 Blank Blank +{%_base_Giant_Monster_spawn_rate. 4 GiantMob".split(
+                    " ",
+                  ),
+                  "GOOSEY_GLUG 1 0 add 0 Critter9 Liquid3 Blank Blank +{_base_critter_per_trap._This_is_a_sHONKingly_good_bonus,_the_aren't_many_others_of_its_kind! 4 CritterBASED".split(
+                    " ",
+                  ),
+                  "BALL_PICKLE_JAR 25 0 add 0 BallJoePickle Liquid1 Blank Blank +{%_arcade_ball_gain_rate,_and_those_are_balls_blessed_by_Balljoepickle_himself,_so_you_know_they're_extra_lucky! 3 arcadeBALLZ".split(
+                    " ",
+                  ),
+                  "CAPACHINO 4 0 add 0 GalaxyA1 Liquid3 Blank Blank +{%_Breeding_EXP_gain 2 BreedXP".split(
+                    " ",
+                  ),
+                  "DONUT_DRINK 5 0 add 0 GalaxyA3 Liquid3 Blank Blank +{%_Chance_to_breed_a_new_pet._Multiplicative,_so_+5%_here_would_change_a_1_in_100_to_1_in_95_chance. 2 NewPet".split(
+                    " ",
+                  ),
+                  "LONG_ISLAND_TEA 6 0 add 0 Fish6 Liquid3 Blank Blank +{%_Meal_Cooking_Speed 3 MealCook".split(
+                    " ",
+                  ),
+                  "SPOOK_PINT 5 0 add 0 Soul5 Liquid3 Blank Blank +{%_New_Recipe_Cooking_Speed 2 RecCook".split(
+                    " ",
+                  ),
+                  "CALCIUM_CARBONATE 11 0 add 0 GalaxyB3 Liquid3 Blank Blank +{_Starting_Worship_Pts. 2 TDpts".split(
+                    " ",
+                  ),
+                  "BLOAT_DRAFT 3 0 add 0 Critter10 Liquid3 Blank Blank +{%_Lab_EXP_gain._Strange,_you'd_think_someone_dumb_enough_to_drink_a_bloated_blobfish_drink_wouldn't_get_bonus_lab_exp_at_all... 2 LabXP".split(
+                    " ",
+                  ),
+                  "CHOCO_MILKSHAKE 50 7 decay 0 GalaxyB4 Liquid3 Blank Blank -{%_Kitchen_Upgrading_Cost. 2 Kcosts".split(
+                    " ",
+                  ),
+                  "PEARL_SELTZER 0.5 0 add 0 GalaxyC1b Liquid3 Blank Blank +{%_All_Stats._If_you_don't_know_what_all_stats_means_by_now,_you've_prolly_got_bigger_problems_than_not_knowing_what_all_stats_means. 2 AllStatPCT".split(
+                    " ",
+                  ),
+                  "KRAKENADE 1 0 add 0 Fish8 Liquid3 Blank Blank +{_Weapon_Power._Unleash_the_kraken... 3 WeaponPOW".split(
+                    " ",
+                  ),
+                  "ELECTROLYTE 2 0 add 0 GalaxyC4 Liquid3 Blank Blank +{%_Mob_Team_Damage 2 PetDmg".split(
+                    " ",
+                  ),
+                  "ASH_AGUA 2 0 add 0 LavaA1 Liquid3 Blank Blank +{_Talent_Points_for_Tab_4 0 Tab4Pts".split(
+                    " ",
+                  ),
+                  "MAPLE_SYRUP 2 0 add 0 Tree9 Liquid3 Blank Blank +{%_Divinity_EXP._Maple_syrup_helps_you_keep_calm_and_meditate_with_the_divine..._No_wonder_those_Canadians_are_so_nice! 0 DivXP".split(
+                    " ",
+                  ),
+                  "HAMPTER_DRIPPY 2 0 add 0 LavaA5b Liquid3 Blank Blank +{%_Sailing_EXP_gain._Doesn't_help_level_up_captains,_only_yourself._So_yea,_I'm_basically_saying_you're_a_crappy_captain_lol 3 SailXP".split(
+                    " ",
+                  ),
+                  "DREADNOG 2 0 add 0 DreadloBar Liquid3 Blank Blank +{%_Cooking_Speed_for_meals._No,_MEALS,_not_meel,_dont_cook_him!!_Stop!!_STOP!!!! 0 MealCook".split(
+                    " ",
+                  ),
+                  "DUSTED_DRINK 2 0 add 0 Bug10 Liquid3 Blank Blank +{%_Gaming_EXP._Cool. 2 GameXP".split(
+                    " ",
+                  ),
+                  "OJ_JOOCE 2 0 add 0 LavaB3 Liquid3 Blank Blank +{%_Sailing_Speed._If_only_there_was_a_way_to_also_lower_the_minimum_sailing_time..._I'm_sure_you'll_find_it_eventually... 0 SailSpd".split(
+                    " ",
+                  ),
+                  "OOZIE_OOBLEK 2 0 add 0 Soul6 Liquid3 Blank Blank +{%_Bits_gained_in_Gaming._Cool. 0 GameBits".split(
+                    " ",
+                  ),
+                  "VENISON_MALT 2 0 add 0 LavaC2 Liquid3 Blank Blank -{%_material_cost_for_stamps._Have_at_it_endgamers! 2 MatCostStamp".split(
+                    " ",
+                  ),
+                  "MARBLE_MOCHA 5 0 add 0 Marble Liquid3 Blank Blank +{%_Faster_Equinox_Bar_Fill_Rate 3 EqBar".split(
+                    " ",
+                  ),
+                  "WILLOW_SIPPY 4 0 add 0 Tree11 Liquid3 Blank Blank +{%_Faster_Sigil_Charge_Rate 3 SigSpd".split(
+                    " ",
+                  ),
+                  "SHINYFIN_STEW 7 0 add 0 Fish13 Liquid3 Blank Blank +{%_Construction_Build_Rate,_so_you_can_hit_all_those_boosted_max_levels_you_keep_unlocking 3 Contspd".split(
+                    " ",
+                  ),
+                  "DREAMY_DRINK 3.5 0 add 0 Bug11 Liquid3 Blank Blank Shrines_charge_+{%_faster,_so_this_way_they_charge_faster,_compared_to_like_if_bonus_this_wasn't_oven_you_of_out_hot_eat_the_food. 3 ShrineSpd".split(
+                    " ",
+                  ),
+                  "RICECAKORADE 2 0 add 0 SpiA2 Liquid4 Blank Blank +{%_Farming_Speed,_so_the_plants_grow_faster._Makes_sense,_plants_do_get_energy_from_the_dumbest_things... 0 6FarmSpd".split(
+                    " ",
+                  ),
+                  "LADYBUG_SERUM 4 0 add 0 Bug12 Liquid4 Blank Blank +{%_White_Essence_gain,_and_before_you_make_an_angry_rant,_male_ladybugs_were_also_used_to_flavor_this_vial! 0 6WhiteEss".split(
+                    " ",
+                  ),
+                  "FLAVORGIL 7 0 add 0 Fish12 Liquid4 Blank Blank +{%_Farming_Crop_Evolution_chance._I_guess_like,_the_fishbits_mutate_with_the_crops?_Idk_I'm_not_a_planterman. 1 6FarmEvo".split(
+                    " ",
+                  ),
+                  "GREENLEAF_TEA 1.5 0 add 0 SpiB1 Liquid4 Blank Blank +{%_Ninja_Untying_rate._I_wonder_if_bomb_diffusers_drink_tea_before_going_to_work? 1 6Untie".split(
+                    " ",
+                  ),
+                  "FIREFLY_GROG 5 0 add 0 Bug13 Liquid4 Blank Blank +{%_Cooking_Speed,_but_multiplicative_so_it_stacks_big_time_with_the_other_892,314_cooking_bonuses_you_have! 0 6CookSpd".split(
+                    " ",
+                  ),
+                  "DABAR_SPECIAL 4 0 add 0 GodshardBar Liquid4 Blank Blank +{%_Total_Skill_efficiency,_but_not_multiplicative_so_that_it_drowns_in_the_sea_of_bonuses_you_already_have. 4 6SkillEff".split(
+                    " ",
+                  ),
+                  "REFRESHMENT 2 0 add 0 Soul7 Liquid4 Blank Blank +{%_Sneaking_EXP_gain._Something_about_it_makes_you_feel_light_on_your_feet,_as_if_u_just_wanna_fly... 0 6SneakEXP".split(
+                    " ",
+                  ),
+                  "GIBBED_DRINK 3.5 0 add 0 SpiC2 Liquid4 Blank Blank +{%_Summoning_EXP_gain._No,_the_horn_doesn't_contribute_to_the_flavor,_just_the_fleshy_bits_inside. 3 6SummEXP".split(
+                    " ",
+                  ),
+                  "DED_SAP 3.5 0 add 0 Tree13 Liquid4 Blank Blank +{%_Farming_EXP_gain,_but_dont_drink_too_much_since_Eucalyptus_oil_is_toxic_IRL_no_joke_fr_fr_search_it_or_just_take_my_word. 4 6FarmEXP".split(
+                    " ",
+                  ),
+                  "ROYALE_COLA 3.5 0 add 0 SpiD3 Liquid4 Blank Blank +{%_Jade_Gain_in_Sneaking._Congratulations_btw_on_trekking_through_World_6_like_that,_what_a_journey! 0 6Jade".split(
+                    " ",
+                  ),
+                  "TURTLE_TISANE 4 0 add 0 Critter11 Liquid4 Blank Blank +{%_Artifact_find_chance,_Sigil_SPD,_Cooking_SPD,_and_Construction_Build_rate._All_MULTIPLICATIVE!_A_very_special_vial_indeed... 0 6turtle".split(
+                    " ",
+                  ),
+                  "CHAPTER_CHUG 1 0 add 0 Spelunking0 Liquid4 Blank Blank +{%_Total_Damage_MULTIPLIER!_Yesss_multi_yeeeesss_I_know_how_it_is_I'm_chill_with_it 3 7dmg".split(
+                    " ",
+                  ),
+                  "SIPPY_SEAWEED 0.5 0 add 0 Tree14 Liquid4 Blank Blank +{%_faster_Spelunking_Speed..._like,_for_finding_chapter_pages_and_leveling_up! 1 7spelunkspd".split(
+                    " ",
+                  ),
+                  "WRIGGLE_WATER 1 0 add 0 w7A3 Liquid4 Blank Blank +{%_Spelunking_Amber_gain 1 7amber".split(
+                    " ",
+                  ),
+                  "ROCKY_BOBA 10 0 add 0 Prehistrium Liquid4 Blank Blank +{%_Gaming_Bits_multiplier!_Wait,_bits?_Gaming??_That's_not_very_World_7_of_you_mister_Prehistrium,_not_very_W7_of_you_at_all... 4 7bits".split(
+                    " ",
+                  ),
+                  "OCTOSODA 0.2 0 add 0 Soul8 Liquid4 Blank Blank +{%_AFK_Gains_rate_for_Spelunking 2 7skillw7afk".split(
+                    " ",
+                  ),
+                  "PAPER_PINT 1 0 add 0 Spelunking2 Liquid4 Blank Blank +{%_extra_Masterclass_drops,_specifically_DB's_Bones,_WW's_Dust,_and_AC's_Tachyons!_We_love_our_acronyms_don't_we! 4 7masta".split(
+                    " ",
+                  ),
+                  "SCALE_ON_ICE 0.1 0 add 0 w7A5 Liquid4 Blank Blank +{%_daily_Coral_for_the_Coral_Reef!_I'm_a_bit_of_a_miserly_vial,_so_you'll_be_lucky_to_get_even_a_few_percent_from_me! 0 7corale".split(
+                    " ",
+                  ),
+                  "TRASH_DRANK 2 0 add 0 Bug15 Liquid4 Blank Blank +{%_Spelunking_Efficiency,_so_you_can_find_more_chapter_pages_and_help_solve_the_illiteracy_problem_that_plagues_our_community! 1 7spelunkeff".split(
+                    " ",
+                  ),
+                  "CRABOMAYSE 0.5 0 add 0 w7A12 Liquid4 Blank Blank +{%_Class_EXP_gain_MULTIPLIER!_What?_No,_don't_thank_Lava,_thank_ME!!!_I'm_the_one_giving_you_my_bonus! 0 7classexp".split(
+                    " ",
+                  ),
+                ],
+                [
+                  "MEDIOCRE_OBOLS 1 1 0 2.2 Liquid1 Blank Blank Blank 1_random_low-quality_Obol._Sure,_it'll_probably_be_a_crappy_bronze_Obol,_but_that's_not_bad_considering_youre_paying_with_water! 0 10 0 0 0 1 1".split(
+                    " ",
+                  ),
+                  "WEAK_UPG_STONE 1 1 0 2.1 Liquid1 Blank Blank Blank `Slaps_roof_of_car`_This_bad_boy_can_upgrade_so_many_equipm..._wait,_how'd_a_car_get_in_here?_Gives_1_random_low-quality_Upgrade_Stone. 0 5 0 0 0 0 1".split(
+                    " ",
+                  ),
+                  "DISTILLED_WATER 1 1 0 1.37 Liquid1 Blank Blank Blank This_distilled_water_was_double-purified_by_running_it_through_thousands_of_diamonds!_So_yea,_it's_just_regular_water,_but_more_expensive. 4 1 0 0 0 0 1".split(
+                    " ",
+                  ),
+                  "ONE_MEASLY_GEM 1 1 0 7.5 Liquid1 Blank Blank Blank 1_Gem._Perfect_for_buying_things_in_the_Gem_Shop!_Sponsored_by_LavaFlame2's_Gem_Shop!' 4 5 0 0 0 0 1".split(
+                    " ",
+                  ),
+                  "STAR_BOOK 1 1 0 1.3 Liquid1 Blank Blank Blank Gives_you_a_Star-Book!_It's_always_the_same_one,_but_it_comes_with_a_random_Max_Lv,_so_keep_buying_it_until_you_get_one_with_a_100_Lv_Max! 3 50 0 0 0 0 1".split(
+                    " ",
+                  ),
+                  "EXP_BALLOON 1 1 0 2.8 Liquid1 Blank Blank Blank A_small_exp_balloon._They_give_you_exp_in_whatever_skill_you're_currently_training!_Using_them_in_town_will_give_EXP_in_the_town_skill! 1 15 0 0 0 0 1".split(
+                    " ",
+                  ),
+                  "SMALL_DONATION 1 0 1 2 Liquid1 Blank Blank Blank Your_donation_helps_starving_orphan_monsters._They_asked_for_food,_but_beggars_can't_be_choosers!_You_wont_get_anything_for_doing_this. 0 1 0 0 0 0 0".split(
+                    " ",
+                  ),
+                  "DECENT_OBOLS 1 1 0 2.5 Liquid1 Liquid2 Blank Blank 1_random_low-quality_Obol,_except_this_time_the_'low'_was_rated_by_someone_with_higher_standards,_so_it's_more_like_medium_quality! 4 20 3 0 0 1 1".split(
+                    " ",
+                  ),
                   "TALENT_POINT;1;1;1;1.3;Liquid1;Liquid2;Blank;Blank;Gives_a_redeemable_talent_point_for_the_2nd_Talent Tab._Applies_to_all_characters._Also,_this_item's_cost_will_never_reset,_never_ever_ever!;1;3;1;0;0;0;0".split(
                     ";",
                   ),
-                  "GRAND_OBOLS 1 1 0 2.2 Liquid2 Liquid3 Blank Blank 1_random_Obol._It_could_be_a_super_rare_gold_obol,_but_it's_most_likely_gonna_be_a_bronze_obol. 3 5 3 0 0 1 1".split(" "),
-                  "BARGAIN_TAG 1 1 0 1.19 Liquid2 Liquid3 Blank Blank Lowers_the_cost_of_the_next_bubble_you_upgrade_by_25%!_Can_stack_multiple_times,_but_max_is_90%_off. 3 1 1 0 0 0 1".split(" "),
-                  "DENSE_WATER 1 1 0 1.37 Liquid3 Blank Blank Blank Sourced_from_the_bottom_of_the_Great_Trench,_dont_drink_this_or_you'll_become_dummy_thicc_or_whatever! 2 1 0 0 0 0 1".split(" "),
-                  "A_PAIR_OF_GEMS 1 2 0 8.5 Liquid3 Blank Blank Blank 2_Gems._Thats_two_steps_closer_to_buying_everything_in_Gem_Shop!_Sure_are_a_lot_of_steps_for_that_one_though... 4 5 0 0 0 0 1".split(" "),
-                  "EMPTY_SPACE 1 0 0 1 Liquid3 Blank Blank Blank There's_nothing_here_buddy,_but_that_ain't_gon_stop_me_from_selling_it_to_ya! 0 1 0 0 0 0 1".split(" "),
-                  "EMPTY_SPACE 1 0 0 1 Liquid3 Blank Blank Blank This_is_EXTRA_rare_nothing,_sure_ain't_going_for_cheap! 0 10 0 0 0 0 1".split(" "),
-                  "EMPTY_SPACE 1 0 0 1 Liquid3 Blank Blank Blank There's_nothing_here_buddy,_but_that_ain't_gon_stop_me_from_selling_it_to_ya! 0 1 0 0 0 0 1".split(" "),
-                  "EMPTY_SPACE 1 0 0 1 Liquid3 Blank Blank Blank There's_nothing_here_buddy,_but_that_ain't_gon_stop_me_from_selling_it_to_ya! 0 1 0 0 0 0 1".split(" "),
+                  "GRAND_OBOLS 1 1 0 2.2 Liquid2 Liquid3 Blank Blank 1_random_Obol._It_could_be_a_super_rare_gold_obol,_but_it's_most_likely_gonna_be_a_bronze_obol. 3 5 3 0 0 1 1".split(
+                    " ",
+                  ),
+                  "BARGAIN_TAG 1 1 0 1.19 Liquid2 Liquid3 Blank Blank Lowers_the_cost_of_the_next_bubble_you_upgrade_by_25%!_Can_stack_multiple_times,_but_max_is_90%_off. 3 1 1 0 0 0 1".split(
+                    " ",
+                  ),
+                  "DENSE_WATER 1 1 0 1.37 Liquid3 Blank Blank Blank Sourced_from_the_bottom_of_the_Great_Trench,_dont_drink_this_or_you'll_become_dummy_thicc_or_whatever! 2 1 0 0 0 0 1".split(
+                    " ",
+                  ),
+                  "A_PAIR_OF_GEMS 1 2 0 8.5 Liquid3 Blank Blank Blank 2_Gems._Thats_two_steps_closer_to_buying_everything_in_Gem_Shop!_Sure_are_a_lot_of_steps_for_that_one_though... 4 5 0 0 0 0 1".split(
+                    " ",
+                  ),
+                  "EMPTY_SPACE 1 0 0 1 Liquid3 Blank Blank Blank There's_nothing_here_buddy,_but_that_ain't_gon_stop_me_from_selling_it_to_ya! 0 1 0 0 0 0 1".split(
+                    " ",
+                  ),
+                  "EMPTY_SPACE 1 0 0 1 Liquid3 Blank Blank Blank This_is_EXTRA_rare_nothing,_sure_ain't_going_for_cheap! 0 10 0 0 0 0 1".split(
+                    " ",
+                  ),
+                  "EMPTY_SPACE 1 0 0 1 Liquid3 Blank Blank Blank There's_nothing_here_buddy,_but_that_ain't_gon_stop_me_from_selling_it_to_ya! 0 1 0 0 0 0 1".split(
+                    " ",
+                  ),
+                  "EMPTY_SPACE 1 0 0 1 Liquid3 Blank Blank Blank There's_nothing_here_buddy,_but_that_ain't_gon_stop_me_from_selling_it_to_ya! 0 1 0 0 0 0 1".split(
+                    " ",
+                  ),
                   "TALENT_POINT;1;1;1;1.27;Liquid3;Blank;Blank;Blank;Gives_a_redeemable_talent_point_for_the_3rd_Talent Tab._Applies_to_all_characters._This_item's_cost_will_reset_every_50,000,000_years.;4;3;0;0;0;0;0".split(
                     ";",
-    ),
-  ],
+                  ),
+                ],
 ];
+
 
 window.UpgradeVault = [
   "Bigger_Damage 8 1.025 0 500 1 0 0 0 +{_Damage._Monsters_hate_this_upgrade! _".split(" "),
@@ -1391,7 +1909,6 @@ window.NinjaInfo = [
                   " ",
                 ),
 ];
-
 
 window.ArcadeShopInfo = [
                 "+{_Base_Damage 1 0 add _ +{_Dmg -1".split(" "),
@@ -4842,4 +5359,1459 @@ window.TalentDescriptions = [
                 [["_"], "_ _ txt _ _ txt".split(" "), ["_"], ["0"]],
                 [["_"], "_ _ txt _ _ txt".split(" "), ["_"], ["0"]],
                 [["_"], "_ _ txt _ _ txt".split(" "), ["_"], ["0"]],
+              ];
+
+
+window.GrimoireUpg = [
+                "Wraith_Damage_製_(Tap_for_more_info) 8 1.10 0 999999 1 0 0 0 +{_Base_Damage_in_Wraith_Form".split(
+                  " ",
+                ),
+                "Wraith_Accuracy 8 1.04 0 999999 1 1 0 0 +{_Base_Accuracy_in_Wraith_Form".split(
+                  " ",
+                ),
+                "Wraith_Defence 9 1.10 0 999999 1 5 0 0 +{_Base_Defence_in_Wraith_Form".split(
+                  " ",
+                ),
+                "Wraith_Health 10 1.07 0 999999 1 10 0 0 +{_Base_HP_in_Wraith_Form".split(
+                  " ",
+                ),
+                "Ribbon_Shelf 1000 1.30 0 1 1 25 0 0 Unlocks_Ribbons_for_Meals,_found_at_Le_Menu_in_W4".split(
+                  " ",
+                ),
+                "Ribbon_Winning_製 50 1.60 0 50 1 26 0 0 Get_+1_Daily_Ribbon,_+{%_chance_for_rare_quality".split(
+                  " ",
+                ),
+                "Wraith_Damage_II 25 1.11 0 999999 3 80 0 0 +{_Base_Damage_in_Wraith_Form".split(
+                  " ",
+                ),
+                "Wraith_of_all_Trades 50 1.18 0 999999 1 125 0 0 +{%_Accuracy,_Defence,_and_HP_in_Wraith_Form".split(
+                  " ",
+                ),
+                "Wraith_Destruction 70 1.15 0 999999 1 155 0 0 +{%_Total_Damage_in_Wraith_Form".split(
+                  " ",
+                ),
+                "Land_Rank_Database_Maxim 100 10 0 10 1 190 0 0 +{_Max_LV_for_5th_column_Land_Rank_upgrades".split(
+                  " ",
+                ),
+                "Wraith_Crits 150 1.25 0 40 1 220 0 0 +{%_Crit_Chance_in_Wraith_Form".split(
+                  " ",
+                ),
+                "Pure_Opals 1500 1.8 1 25 1 255 0 0 +{_Opals_to_give_to_your_Villagers_in_World_5".split(
+                  " ",
+                ),
+                "Wraith_Accuracy_II 200 1.06 0 999999 3 290 0 0 +{_Base_Accuracy_in_Wraith_Form".split(
+                  " ",
+                ),
+                "Knockout!_(#)_製 450 1.45 1 999999 1 330 0 0 +{%_Wraith_DMG_per_KO!_Target:$".split(
+                  " ",
+                ),
+                "Sacrifice_of_Harvest 300 1.04 0 999999 5 380 0 0 }x_higher_Crop_Evo_chance".split(
+                  " ",
+                ),
+                "Wraith_Defence_II 500 1.12 1 999999 1 425 0 0 +{_Base_Defence_in_Wraith_Form".split(
+                  " ",
+                ),
+                "Wraith_Damage_III 750 1.12 1 999999 15 470 0 0 +{_Base_Damage_in_Wraith_Form".split(
+                  " ",
+                ),
+                "Grey_Tome_Book 2000 1.25 1 150 1 500 0 0 }x_higher_bonuses_from_the_Tome".split(
+                  " ",
+                ),
+                "Femur_Hoarding 3500 1.15 1 999999 2 550 0 0 +{%_Wraith_DMG_per_POW_10_Femurs_owned".split(
+                  " ",
+                ),
+                "Wraith_Health_II 4000 1.07 1 999999 2 650 0 0 +{_Base_HP_in_Wraith_Form".split(
+                  " ",
+                ),
+                "Wraith_Strikeforce 5800 1.15 1 999999 2 770 0 0 +{%_Crit_DMG_in_Wraith_Form".split(
+                  " ",
+                ),
+                "Elimination!_(#)_製 6250 1.45 1 999999 1 900 0 0 +{%_Wraith_DMG_per_elim!_Target:$".split(
+                  " ",
+                ),
+                "Superior_Crop_Research 7500 1.25 0 200 1 1050 0 0 }x_higher_bonuses_from_the_Crop_Scientist".split(
+                  " ",
+                ),
+                "Bones_o'_Plenty 8000 1.20 1 999999 2 1250 0 0 +{%_Extra_Bones".split(
+                  " ",
+                ),
+                "Skull_of_Major_Experience_製 8500 1.03 1 999999 8 1475 0 0 +{%_Class_EXP_bonus_for_all_characters,_always!".split(
+                  " ",
+                ),
+                "Wraith_Accuracy_III 10500 1.07 2 999999 5 1700 0 0 +{_Base_Accuracy_in_Wraith_Form".split(
+                  " ",
+                ),
+                "Supreme_Head_Chef_Status 11000 1.40 1 20 1 1900 0 0 +{_Max_LV_for_all_Meals._Go_max_them!".split(
+                  " ",
+                ),
+                "Ribcage_Hoarding 12000 1.20 0 999999 1 2150 0 0 +{%_Wraith_DEF_per_POW_10_Ribcages_owned".split(
+                  " ",
+                ),
+                "Wraith_Destruction_II 13900 1.17 1 999999 3 2300 0 0 +{%_Total_Damage_in_Wraith_Form".split(
+                  " ",
+                ),
+                "Villager_Extraciricular 15000 1.15 2 999999 1 2500 0 0 }x_Villager_EXP_gain_in_World_5".split(
+                  " ",
+                ),
+                "Wraith_Defence_III 14500 1.11 2 999999 2 2800 0 0 +{_Base_Defence_in_Wraith_Form".split(
+                  " ",
+                ),
+                "Annihilation!_(#)_製 16500 1.55 2 999999 1 2900 0 0 +{%_Wraith_DMG_per_stack!_Target:$".split(
+                  " ",
+                ),
+                "Talents_for_Me,_not_for_Thee 18000 1.10 2 200 1 3150 0 0 +{_Talent_PTS_for_the_Death_Bringer_class_only".split(
+                  " ",
+                ),
+                "Wraith_Damage_IV 19750 1.13 2 999999 50 3300 0 0 +{_Base_Damage_in_Wraith_Form".split(
+                  " ",
+                ),
+                "Wraith_Health_III 21500 1.07 2 999999 3 3500 0 0 +{_Base_HP_in_Wraith_Form".split(
+                  " ",
+                ),
+                "Skull_of_Major_Damage_製 23000 1.04 2 999999 3 3750 0 0 +{%_Total_DMG_bonus_for_all_characters,_always!".split(
+                  " ",
+                ),
+                "Writhing_Grimoire 27000 1.20 1 50 1 4100 0 0 }x_higher_bonuses_from_most_Grimoire_upgrades".split(
+                  " ",
+                ),
+                "Wraith_Accuracy_IV 34000 1.08 2 999999 5 4200 0 0 +{_Base_Accuracy_in_Wraith_Form".split(
+                  " ",
+                ),
+                "Wraith_of_all_Trades_II 42000 1.06 3 999999 1 4500 0 0 +{%_Accuracy,_Defence,_and_HP_in_Wraith_Form".split(
+                  " ",
+                ),
+                "Skull_of_Major_Talent_製 50000 1.65 3 30 1 4600 0 0 +{_Talent_LVs_for_all_characters,_always!".split(
+                  " ",
+                ),
+                "Wraith_Defence_IV 57000 1.13 3 999999 3 4800 0 0 +{_Base_Defence_in_Wraith_Form".split(
+                  " ",
+                ),
+                "Cranium_Hoarding 63000 1.07 3 999999 1 5000 0 0 +{%_Wraith_Accuracy_per_POW_10_Craniums_owned".split(
+                  " ",
+                ),
+                "Wraith_Health_IV 75000 1.09 3 999999 5 5200 0 0 +{_Base_HP_in_Wraith_Form".split(
+                  " ",
+                ),
+                "Wraith_Destruction_III 85000 1.17 3 999999 5 5400 0 0 +{%_Total_Damage_in_Wraith_form".split(
+                  " ",
+                ),
+                "Skull_of_Major_Droprate_製 100000 1.08 3 999999 1 5600 0 0 +{%_Drop_Rate_bonus_for_all_characters,_always!".split(
+                  " ",
+                ),
+                "Ok_fine,_Talents_for_Thee_too 120000 1.15 3 999999 1 5850 0 0 +{_Talent_PTS_for_all_other_Master_Classes".split(
+                  " ",
+                ),
+                "Wraith_Damage_V 150000 1.15 2 999999 80 6200 0 0 +{_Base_Damage_in_Wraith_Form".split(
+                  " ",
+                ),
+                "Wraith_Accuracy_V 200000 1.10 2 999999 8 6500 0 0 +{_Base_Accuracy_in_Wraith_Form".split(
+                  " ",
+                ),
+                "Bovinae_Hoarding 300000 1.35 2 999999 1 6800 0 0 +{%_Extra_Bones_per_POW_10_Bovinae_owned".split(
+                  " ",
+                ),
+                "Wraith_Defence_V 500000 1.15 3 999999 5 7100 0 0 +{_Base_Defence_in_Wraith_Form".split(
+                  " ",
+                ),
+                "Wraith_Destruction_IV 600000 1.18 3 999999 8 7200 0 0 +{%_Total_Damage_in_Wraith_Form".split(
+                  " ",
+                ),
+                "Death_of_the_Atom_Price 750000 1.15 3 999999 1 7500 0 0 All_Atoms_are_+{%_cheaper_to_upgrade".split(
+                  " ",
+                ),
+                "Ripped_Page 1999999999 99999 1 1 1 7600 0 0 These_pages_are_missing...".split(
+                  " ",
+                ),
+                "Ripped_Page 1999999999 99999 1 1 1 7700 0 0 These_pages_are_missing...".split(
+                  " ",
+                ),
+                "Ripped_Page 1999999999 99999 1 1 1 7800 0 0 These_pages_are_missing...".split(
+                  " ",
+                ),
+              ];
+
+window.GodsInfo = [
+                "Snehebatu +30%_AFK_Gains_for_all_activities! +{%_accuracy_and_+{%_defence 70 10 1.75 +{%_Divinity_PTS_Gain The_green_snake_expects_a_gift... 241 85 12 18 0 0 2".split(
+                  " ",
+                ),
+                "Arctis Whenever_you_level_up_a_skill_thats_over_Lv_50,_a_Divinity_Pearl_will_drop_which_gives_+40%_exp_to_any_skill_under_Lv_50! +{%_skill_exp 150 10 1.15 +{%_Divinity_PTS_Gain The_fierce_bear_awaits_a_gesture... 502 85 694 20 85 2 3".split(
+                  " ",
+                ),
+                "Nobisect This_character_is_always_active_within_the_Lab_Mainframe._However,_they_will_not_gain_any_Lab_EXP! +{_Talent_LV_for_all_talents_above_Lv_1 15 10000 2.25 +{_All_Skill_Efficiency The_insect_requires_an_offering... 123 85 318 16 -50 7 50".split(
+                  " ",
+                ),
+                "Harriep This_character_produces_3x_more_resources_at_3d_Printer!_Works_with_the_Lab_Bonus,_but_won't_affect_the_displayed_printer_amount. +{%_coins_gained_for_ALL_characters! 100 50000000 1.30 +{%_Divinity_PTS_Gain The_hare_watches_expectantly... 653 24 454 6 220 3 3".split(
+                  " ",
+                ),
+                "Goharut When_claiming_non-candy_AFK_gains,_also_progress_one_of_the_following_by_the_AFK_time!_(Refinery,_3D_Printer,_Cooking,_Mob_Breeding,_Sailing,_or_Gaming) +{%_Class_EXP 100 1000000 2.60 +{%_Sailing_Speed The_horned_one_desires_a_sacrifice... 249 236 455 66 160 5 4".split(
+                  " ",
+                ),
+                "Omniphau Being_connected_to_the_Lab_also_counts_as_being_present_at_the_Divinity_Altar,_so_you_get_gains_for_both! +{%_AFK_Gains_for_ALL_characters! 5 5 1.12 +{%_Divinity_PTS_Gain The_wise_one_stares_beyond_you... 1 39 226 4 999 4 4".split(
+                  " ",
+                ),
+                "Purrmep All_characters_produce_2x_more_Divinity,_and_get_2x_more_Divinity_EXP!_@_Only_1_player_can_link_to_Purrmep. +{%_Boat_Sailing_speed_and_+{%_Gaming_Plant_grow_speed 50 1000000000 1.35 +{%_Sailing_Speed Fury_needs_appeasement... 519 190 694 66 -100 6 3".split(
+                  " ",
+                ),
+                "Flutterbis All_kills_count_for_2x_more_kills_for_opening_portals_and_accumulating_Deathnote_kills. +{%_Total_Damage 200 10 1.15 +{%_Total_Damage The_flutterbird_seeks_your_glory... 130 236 319 64 40 1 1".split(
+                  " ",
+                ),
+                "Kattlekruk Every_day_you_play,_you_get_+$_LV_for_these_Alchemy_Bubbles:_@_#_@___@_Only_1_player_can_link_here. +{%_chance_for_2x_Statue_Drops,_for_ALL_characters! 10 1000000000 3.00 +{%_Total_Damage A_present_for_what_was_the_past... 773 24 542 2 999 8 1".split(
+                  " ",
+                ),
+                "Bagur I_am_not_yet_prepared_to_bestow_upon_you_my_bonus,_give_me_some_time._You_may_link_with_me,_but_nothing_will_come_of_it. Nothing._Be_patient_mortal. 1 20 1.18 +{%_Sailing_Speed BAGUR_WANT_THE_STUFF... -23 185 172 66 555 9 5".split(
+                  " ",
+                ),
+              ];
+
+window.ZenithMarket =
+ [
+  "TRUE_ZEN 1 1.14 250 2 1 }x_higher_bonuses_from_Zenith_Statues".split(
+    " ",
+  ),
+  "KRUK_BUBBLES 2 6 5 1 1 Adds_a_new_bubble_for_Kattlekruk_to_boost!".split(
+    " ",
+  ),
+  "LAMP_BOOST 5 1.09 200 1 1 }x_higher_bonuses_from_The_Lamp_in_Caverns".split(
+    " ",
+  ),
+  "DOUBLE_CLUSTER 8 1.17 100 5 1 +{%_chance_for_a_Double_Zenith_Cluster_drop".split(
+    " ",
+  ),
+  "BUBBLE_BOOST 15 1.5 25 2 1 +{_daily_LVs_for_all_Kattlekruk_bubbles".split(
+    " ",
+  ),
+  "SUPER_DUPERS 50 1.7 25 1 1 Super_Talents_get_+{_more_LVs".split(
+    " ",
+  ),
+  "MOST_GRANDIOSE 250 1.25 50 4 1 }x_Grand_Discovery_Chance_in_Spelunking".split(
+    " ",
+  ),
+  "GIGA_SYMBOLS 1000 1.15 100 1 1 }x_Sneaking_Symbol_success_chance".split(
+    " ",
+  ),
+  "WOOZLE_WUZZLE 5000 1.125 30 1 1 +{%_EXP_Gain_for_the_Research_skill!".split(
+    " ",
+  ),
+  "CLASSY_GOGO 25000 1.115 100 1 1 }x_Class_EXP_gain,_for_now...".split(
+    " ",
+  ),
+];
+
+window.ClassFamilyBonuses = [
+      "NO_FAMILY_BONUS _ _ txt _ _ txt".split(" "),
+      "NO_FAMILY_BONUS 0 0 add _ _ txt".split(" "),
+      "+{_TOTAL_LUK 1 5 intervalAdd _ _ txt".split(" "),
+      "+{%_PRINTER|SAMPLE_SIZE 6 100 decay _ _ txt".split(" "),
+      "+{%_FIGHTING|AFK_GAINS 5 250 decay _ _ txt".split(" "),
+      "INFINILYTE 1 0 add _ _ txt".split(" "),
+      "NO_FAMILY_BONUS 5 250 decay _ _ txt".split(" "),
+      "+{_TOTAL_STR 1 5 intervalAdd _ _ txt".split(" "),
+      "+{_WEAPON_POWER 25 100 decay _ _ txt".split(" "),
+      "+{%_TOTAL_HP 40 100 decay _ _ txt".split(" "),
+      "+{%_TOTAL_DAMAGE 20 180 decay _ _ txt".split(" "),
+      "NOPE _ _ txt _ _ txt".split(" "),
+      "+{%_Refinery_Speed 50 150 decay _ _ txt".split(" "),
+      "NOPE _ _ txt _ _ txt".split(" "),
+      "+{%_KILL_PER_KILL 60 800 decay _ _ txt".split(" "),
+      "FILLER _ _ txt _ _ txt".split(" "),
+      "ROYAL_GUARDIAN _ _ txt _ _ txt".split(" "),
+      "FILLER _ _ txt _ _ txt".split(" "),
+      "NO_FAMILY_BONUS 0 0 add _ _ txt".split(" "),
+      "+{_TOTAL_AGI 1 5 intervalAdd _ _ txt".split(" "),
+      "+{%_EXP_WHEN_FIGHT|MONSTERS_ACTIVELY 38 100 decay _ _ txt".split(
+        " ",
+      ),
+      "+{%_EFFICIENCY|FOR_ALL_SKILLS 30 100 decay _ _ txt".split(" "),
+      "+{%_FASTER_MINIMUM|BOAT_TRAVEL_TIME 20 170 decay _ _ txt".split(
+        " ",
+      ),
+      "MAYHEIM 25 100 decay _ _ txt".split(" "),
+      "WIND_WALKER 25 100 decay _ _ txt".split(" "),
+      "+{%_ALL_SKILL|AFK_GAINS 5 180 decay _ _ txt".split(" "),
+      "FILLER _ _ txt _ _ txt".split(" "),
+      "FILLER _ _ txt _ _ txt".split(" "),
+      "FILLER _ _ txt _ _ txt".split(" "),
+      "{千_COINS|FROM_MOBS 1.4 800 decayMulti _ _ txt".split(" "),
+      "NO_FAMILY_BONUS 0 0 add _ _ txt".split(" "),
+      "+{_TOTAL_WIS 1 5 intervalAdd _ _ txt".split(" "),
+      "+{_STAR_TAB|TALENT_POINTS 1 6 intervalAdd _ _ txt".split(" "),
+      "{千@HIGHER_BONUSES|FROM_GOLDEN_FOODS 0.4 100 decayMulti _ _ txt".split(
+        " ",
+      ),
+      "+{_LV_FOR_ALL|TALENTS_ABOVE_LV_1 20 350 decay _ _ txt".split(
+        " ",
+      ),
+      "SPIRITUAL_MONK 25 100 decay _ _ txt".split(" "),
+      "+{%_ALL_STAT.|STR,_AGI,_WIS,_LUK. 5 180 decay _ _ txt".split(
+        " ",
+      ),
+      "FILLER 25 100 decay _ _ txt".split(" "),
+      "FILLER _ _ txt _ _ txt".split(" "),
+      "FILLER _ _ txt _ _ txt".split(" "),
+      "+{%_TOTAL_DMG|MULTIPLIER 12 800 decay _ _ txt".split(" "),
+      "FILLER _ _ txt _ _ txt".split(" "),
+];
+
+window.ArcaneUpg =  [
+                "Arcanist_Damage_製_(Tap_for_more_info) 8 1.08 0 999999 1 0 0 0 +{_Base_Damage_in_Arcanist_Form".split(
+                  " ",
+                ),
+                "Arcanist_Accuracy 8 1.10 0 999999 1 1 0 0 +{_Base_Accuracy_in_Arcanist_Form".split(
+                  " ",
+                ),
+                "Arcanist_Defence 9 1.12 0 999999 1 5 0 0 +{_Base_Defence_in_Arcanist_Form".split(
+                  " ",
+                ),
+                "The_Prisma_Bubble_is_Real_製 10 1.07 0 1 1 10 0 0 While_in_Arcanist_Form,_1_in_$_mobs_drop_Prisma_Bubbles".split(
+                  " ",
+                ),
+                "Arcanist_Cataclysm 1000 1.15 0 999999 1 25 0 0 +{%_Total_Damage_in_Arcanist_Form".split(
+                  " ",
+                ),
+                "Wand_Drops_製 50 1.20 0 999999 5 40 0 0 Mobs_can_drop_Arcanist_Weapons_up_to_{%_Quality".split(
+                  " ",
+                ),
+                "Arcanist_Damage_II 25 1.11 0 999999 3 70 0 0 +{_Base_Damage_in_Arcanist_Form".split(
+                  " ",
+                ),
+                "Tenteyecle_Nostalgia 50 1.27 0 50 2 75 0 0 Tenteyecle_now_works_again,_but_only_has_a_$%_chance".split(
+                  " ",
+                ),
+                "Arcanist_Crits 70 1.40 0 70 1 105 0 0 +{%_Critical_Hit_chance_in_Arcanist_Form".split(
+                  " ",
+                ),
+                "Arcanist_Accuracy_II 100 1.12 0 999999 2 120 0 0 +{_Base_Accuracy_in_Arcanist_Form".split(
+                  " ",
+                ),
+                "World_Ender 1000 1.25 0 1 1 130 0 0 Defeating_the_World_Boss_now_unlocks_the_next_world".split(
+                  " ",
+                ),
+                "Arcanist_Defence_II 150 1.15 1 999999 2 160 0 0 +{_Base_Defence_in_Arcanist_Form".split(
+                  " ",
+                ),
+                "Singulon_Hoarding 200 1.16 1 999999 2 190 0 0 +{%_Arcanist_Damage_per_POW_10_Purple_Tachyon_owned".split(
+                  " ",
+                ),
+                "Arcane_Charging 350 1.35 1 100 1 220 0 0 Arcane_Crystals_take_$_kills_to_charge_instead_of_200".split(
+                  " ",
+                ),
+                "Arcanist_Supercharge 500 1.25 1 999999 1 250 0 0 +{%_Critical_Damage_in_Arcanist_Form".split(
+                  " ",
+                ),
+                "Arcanist_Damage_III 800 1.11 2 999999 4 290 0 0 +{_Base_Damage_in_Arcanist_Form".split(
+                  " ",
+                ),
+                "Spheres_of_Gold 1200 5 1 999999 2 330 0 0 +{%_extra_Gold_Balls_earned_in_the_Arcade".split(
+                  " ",
+                ),
+                "Ripple_in_Spacetime 1550 1.23 1 999999 2 375 0 0 +{%_Extra_Tachyons".split(
+                  " ",
+                ),
+                "Parallel_Statues_製 2000 1.55 2 40 1 415 0 0 {%_chance_for_Statues_to_drop_with_2x_Quantity".split(
+                  " ",
+                ),
+                "Arcanist_Accuracy_III 3500 1.13 2 999999 5 460 0 0 +{_Base_Accuracy_in_Arcanist_Form".split(
+                  " ",
+                ),
+                "Arcane_Basics 10000 1.07 2 1 2 510 0 0 Basic_attacks_now_do_Arcane_damage".split(
+                  " ",
+                ),
+                "Fastcasting 5800 1.15 2 999999 1 560 0 0 +{%_faster_Attack_Speed_while_in_Arcanist_Form".split(
+                  " ",
+                ),
+                "Arcanist_of_All_Trades 6250 1.18 1 999999 3 610 0 0 +{%_Defence_and_Accuracy_in_Arcanist_Form".split(
+                  " ",
+                ),
+                "Ring_Drops_製 7500 1.20 3 999999 5 670 0 0 Mobs_can_drop_Arcanist_Rings_up_to_{%_Quality".split(
+                  " ",
+                ),
+                "Arcanist_Cataclysm_II 8000 1.21 1 999999 3 735 0 0 +{%_Total_Damage_in_Arcanist_Form".split(
+                  " ",
+                ),
+                "Ethereal_Opals 8500 1.8 2 25 1 800 0 0 +{_Opals_to_give_to_villagers".split(
+                  " ",
+                ),
+                "Inviting_a_Plus_One 5000 1.15 3 300 1 890 0 0 +{%_chance_for_crystals_to_spawn_+1_more_Arcane_Mob".split(
+                  " ",
+                ),
+                "Doubulon_Hoarding 11000 1.28 0 999999 2 990 0 0 +{%_Arcanist_Accuracy_per_POW_10_Brown_Tachyons_owned".split(
+                  " ",
+                ),
+                "Jewel_of_Deadly_Wrath 50000 1.20 3 1 1 1050 0 0 Permanently_unlocks_a_new_Jewel_in_the_Lab".split(
+                  " ",
+                ),
+                "Arcanist_Defence_III 13900 1.16 2 999999 3 1150 0 0 +{_Base_Defence_in_Arcanist_Form".split(
+                  " ",
+                ),
+                "Parallel_Golden_Food_製 7000 1.55 3 40 1 1250 0 0 {%_chance_for_Golden_Food_to_drop_with_2x_Quantity".split(
+                  " ",
+                ),
+                "Arcanist_Cataclysm_III 14500 1.15 2 999999 4 1350 0 0 +{%_Total_Damage_in_Arcanist_Form".split(
+                  " ",
+                ),
+                "Villager_Indoctrination 16500 1.16 3 999999 1 1500 0 0 }x_Villager_EXP_gain_in_World_5".split(
+                  " ",
+                ),
+                "My_Talents,_and_Mine_Alone 9000 1.11 3 200 1 1650 0 0 +{_Talent_PTS_for_the_Arcane_Cultist_class_only".split(
+                  " ",
+                ),
+                "Verdon_Hoarding 19750 1.26 1 999999 1 1800 0 0 +{%_Extra_Tachyon_per_POW_10_Green_Tachyons_owned".split(
+                  " ",
+                ),
+                "Jewel_of_the_North_Winds 200000 1.07 3 1 3 2000 0 0 Permanently_unlocks_a_new_Jewel_in_the_Lab".split(
+                  " ",
+                ),
+                "Arcanist_Damage_IV 14000 1.04 3 999999 6 2050 0 0 +{_Base_Damage_in_Arcanist_Form".split(
+                  " ",
+                ),
+                "Eternal_Stream 20000 1.35 4 999999 1 2350 0 0 }x_higher_Equinox_Bar_Fill_Rate".split(
+                  " ",
+                ),
+                "Arcanist_Accuracy_IV 30000 1.08 3 999999 8 2600 0 0 +{_Base_Accuracy_in_Arcanist_Form".split(
+                  " ",
+                ),
+                "Fractal_Tesseract 40000 2.35 4 50 1 2750 0 0 }x_higher_bonuses_from_most_Tesseract_upgrades".split(
+                  " ",
+                ),
+                "Astrology_Cultism 50000 150 4 10 1 2850 0 0 Seraph_Cosmos's_multiplier_is_now_$x_instead_of_1.10x".split(
+                  " ",
+                ),
+                "Bludon_Hoarding 57000 1.25 2 999999 3 3000 0 0 +{%_Arcanist_DEF_per_POW_10_Red_Tachyons_owned".split(
+                  " ",
+                ),
+                "Arcanist_Cataclysm_IV 63000 1.17 3 999999 6 3350 0 0 +{%_Total_Damage_in_Arcanist_Form".split(
+                  " ",
+                ),
+                "Jewel_of_Eternal_Energy 1500000 1.09 4 1 5 3700 0 0 Permanently_unlocks_a_new_Jewel_in_the_Lab".split(
+                  " ",
+                ),
+                "Arcanist_of_All_Trades_II 85000 1.22 3 999999 6 3850 0 0 +{%_Defence_and_Accuracy_in_Arcanist_Form".split(
+                  " ",
+                ),
+                "Pinnacle_of_Prisma 10000 40 5 20 1 4000 0 0 Prisma_Bubbles_give_$x_higher_bonuses_instead_of_2.00x".split(
+                  " ",
+                ),
+                "Arcanist_Defence_IV 120000 1.15 4 999999 8 4300 0 0 +{_Base_Defence_in_Arcanist_Form".split(
+                  " ",
+                ),
+                "Gambit_Grandmaster 150000 1.25 4 200 1 4600 0 0 }x_higher_total_PTS_in_the_Gambit_Cavern".split(
+                  " ",
+                ),
+                "Vicar_of_the_Emperor 50000 4.5 5 50 1 4900 0 0 All_bonuses_from_defeating_The_Emperor_are_}x_higher".split(
+                  " ",
+                ),
+                "Massivon_Hoarding_製 300000 1.35 3 999999 1 5100 0 0 +{%_cheaper_upgrades_per_POW_10_Silver_Tachyons_owned".split(
+                  " ",
+                ),
+                "Arcanist_Damage_V 500000 1.14 4 999999 10 5400 0 0 +{_Base_Damage_in_Arcanist_Form".split(
+                  " ",
+                ),
+                "Drop_Rate_Crossfire_製 600000 1.50 4 100 1 5700 0 0 {%_of_your_Drop_Rate_affects_Prisma_Bubble_drop_chance".split(
+                  " ",
+                ),
+                "Arcanist_Accuracy_V 750000 1.15 4 999999 12 5900 0 0 +{_Base_Accuracy_in_Arcanist_Form".split(
+                  " ",
+                ),
+                "Arcanist_Cataclysm_V 950000 1.17 5 999999 10 6200 0 0 +{%_Total_Damage_in_Arcanist_Form".split(
+                  " ",
+                ),
+                "Endless_Reductions_製 1200000 1.80 5 999999 1 6500 0 0 +{%_cheaper_Summoning_upgrades_per_Endless_Mode_Victory".split(
+                  " ",
+                ),
+                "Arcanist_of_All_Trades_III 1500000 1.35 5 999999 8 6750 0 0 +{%_Defence_and_Accuracy_in_Arcanist_Form".split(
+                  " ",
+                ),
+                "Aurion_Hoarding 2000000 1.80 4 999999 2 7000 0 0 +{%_Extra_Tachyons_per_POW_10_Gold_Tachyons_owned".split(
+                  " ",
+                ),
+                "Universe_Talent 3000000 500 5 5 1 7300 0 0 +{_Talent_LVs_for_all_characters,_always!".split(
+                  " ",
+                ),
+                "Beyond_All_Limits_製 5000000 200 5 10 1 7600 0 0 The_max_Arcane_Crystal_bonus_is_+$x_higher".split(
+                  " ",
+                ),
+                "Boundless_Energy 1999999999 99999 1 1 1 7800 0 0 These_pages_are_missing...".split(
+                  " ",
+                ),
+                "Boundless_Energy 1999999999 99999 1 1 1 8200 0 0 These_pages_are_missing...".split(
+                  " ",
+                ),
+                "Boundless_Energy 1999999999 99999 1 1 1 8500 0 0 These_pages_are_missing...".split(
+                  " ",
+                ),
+                "Boundless_Energy 1999999999 99999 1 1 1 8800 0 0 These_pages_are_missing...".split(
+                  " ",
+                ),
+              ];
+
+window.GamingPalette =  [
+                "128 150 0 Olive_Green 10 0 5000 1.35 2100000 9 Nothing_yet...".split(
+                  " ",
+                ),
+                "147 200 0 Mossy_Green 1 0 2000 1.35 650000 9 Nothing_yet...".split(
+                  " ",
+                ),
+                "145 255 65 Lime_Green 25 0 700 1.25 110000 9 }x_New_Collectible_Chance_from_Jars_in_Cavern_11".split(
+                  " ",
+                ),
+                "46 255 85 Neon_Tree 80 1 600 1.30 60000 9 +{%_Palette_Luck".split(
+                  " ",
+                ),
+                "0 227 156 Bold_Teal 3 0 2000 1.35 600000 9 +{%_Extra_Dust_for_Windwalkers".split(
+                  " ",
+                ),
+                "0 248 255 Bright_Cyan 300 1 5000 1.30 1000000 9 }x_Artifact_Find_chance".split(
+                  " ",
+                ),
+                "29 189 255 Sky_Blue 1 0 5000 1.35 2500000 9 Nothing_yet...".split(
+                  " ",
+                ),
+                "190 190 0 DJ_Musto 10 0 5000 1.20 1100000 9 }x_extra_Bits_gained_from_all_Sprouts".split(
+                  " ",
+                ),
+                "213 227 0 Chartreuse 10 0 700 1.18 100000 9 }x_Sprout_Growth_speed".split(
+                  " ",
+                ),
+                "203 255 72 Zesty_Green 30 1 250 1.30 3500 9 +{%_higher_chance_for_a_Free_Log_Game".split(
+                  " ",
+                ),
+                "177 255 131 Pair_Green 5 0 50 1.25 200 9 +{%_All_Skill_Efficiency".split(
+                  " ",
+                ),
+                "153 255 196 Minty_Blue 8 0 30 1.15 500 9 }x_Sprout_Growth_speed".split(
+                  " ",
+                ),
+                "127 246 255 Babby_Blue 2 0 120 1.35 6000 9 +{%_Critters_when_collecting_from_Trapping_Drone".split(
+                  " ",
+                ),
+                "102 203 255 Ocean_Blue 200 1 600 1.32 150000 9 }x_Total_Spelunking_POW".split(
+                  " ",
+                ),
+                "65 108 255 Bleu_Royale 1 0 5000 1.35 800000 9 Nothing_yet...".split(
+                  " ",
+                ),
+                "255 202 24 Golden_Yellow 40 1 900 1.35 400000 9 +#%_Gold_Ball_gain_from_Arcade".split(
+                  " ",
+                ),
+                "255 232 56 Lemon_Yellow 25 1 500 1.30 35000 9 Gold_Sprinkler_has_+#%_chance_to_not_use_up_charge".split(
+                  " ",
+                ),
+                "252 255 171 Pastel_Yellow 100 1 40 1.23 1 9 +{%_chance_for_Double_Snail_Mail".split(
+                  " ",
+                ),
+                "234 234 234 Offwhite 6 0 30 1.15 1 9 }x_extra_Bits_gained_from_all_Sprouts".split(
+                  " ",
+                ),
+                "212 245 255 Light_Cyan 25 1 40 1.25 1 9 +#%_chance_for_monsters_to_drop_double_Statues".split(
+                  " ",
+                ),
+                "167 184 255 Periwinkle 150 1 200 1.35 20000 9 }x_Sigil_EXP_gain".split(
+                  " ",
+                ),
+                "155 132 255 Lavendar 1 0 2000 1.35 500000 9 Nothing_yet...".split(
+                  " ",
+                ),
+                "227 140 0 Toasty_Orange 3 0 900 1.35 300000 9 +{%_extra_Bones_for_Deathbringers".split(
+                  " ",
+                ),
+                "255 202 77 Honey_Yellow 8 1 500 1.30 80000 9 +#%_higher_Exalted_Stamp_bonus".split(
+                  " ",
+                ),
+                "255 210 146 Creamy_Orange 25 1 175 1.30 15000 9 +#%_chance_for_monsters_to_drop_double_Gold_Food".split(
+                  " ",
+                ),
+                "255 219 216 Peachy_Pink 1 0 80 1.35 850 9 }x_higher_Construction_Build_Rate".split(
+                  " ",
+                ),
+                "236 220 255 Lilac_Purple 5 0 100 1.35 1500 9 }x_Mob_Damage_in_Breeding_fights".split(
+                  " ",
+                ),
+                "217 178 255 Heather_Purple 2 0 140 1.35 10000 9 +{%_Laboratory_EXP_gain".split(
+                  " ",
+                ),
+                "214 122 255 Violet 6 1 2000 1.30 420069 9 +#%_higher_Prisma_Bubble_bonus".split(
+                  " ",
+                ),
+                "210 71 255 Fuchsia 3 0 5000 1.35 1000000 9 +{%_extra_Tachyons_for_Arcane_Cultists".split(
+                  " ",
+                ),
+                "232 93 0 Burnt_Sienna 1 0 5000 1.35 1500000 9 +{_Max_Charm_LV_in_Sneaking".split(
+                  " ",
+                ),
+                "255 118 50 Red_Orange 15 1 2000 1.30 750000 9 +#%_chance_for_a_Mega_Nut_from_Squirrel_worth_50x".split(
+                  " ",
+                ),
+                "255 156 135 Orange_Red 10 1 900 1.30 400000 9 +#%_Bonus_Ballot_multiplier".split(
+                  " ",
+                ),
+                "255 117 104 Balmy_Red 100 1 5000 1.30 1200000 9 +{%_chance_to_get_an_extra_Ribbon_each_day".split(
+                  " ",
+                ),
+                "255 32 63 Maroon_Four 50 1 900 1.30 300000 9 }x_total_Damage_for_all_players".split(
+                  " ",
+                ),
+                "255 32 173 Hot_Pink 80 1 5000 1.30 900000 9 {%_cheaper_Atom_costs_at_the_Atom_Collider".split(
+                  " ",
+                ),
+                "203 0 192 Magenta 40 1 5000 1.35 3500000 9 }x_extra_King_Tokens_per_hour".split(
+                  " ",
+                ),
+              ];
+
+window.CompassUpg = [
+                "Pathfinder 2 1.10 0 1 1 0 693 540 0 0 You_can_open_portals_using_dust_dropped_by_mobs,_simply_hold_down_on_a_portal_for_2_seconds!".split(
+                  " ",
+                ),
+                "Elemental_Path 30 3.10 0 24 1 0 581 470 0 0 Unlocks_a_new_Elemental_upgrade,_right_here_in_The_Compass!".split(
+                  " ",
+                ),
+                "Elemental_Vision 8 1.10 0 1 1 0 525 377 0 0 You_can_now_see_the_elemental_weakness_of_abominations,_as_well_as_mobs_in_AFK_Info._Your_current_element_is_$".split(
+                  " ",
+                ),
+                "Weapon_Drop 14 1.10 0 1 1 0 443 444 0 0 Certain_mobs_can_now_drop_Tempest_Weapons_at_a_1_in_$_chance._Check_AFK_Info_to_see_what_Tempest_Items_can_be_found!".split(
+                  " ",
+                ),
+                "Stone_Drop 20 1.10 0 1 1 0 406 347 0 0 All_mobs_can_now_drop_Tempest_Upgrade_Stones,_at_a_1_in_$_chance".split(
+                  " ",
+                ),
+                "Medallion_Collection 50 1.10 0 1 1 0 297 385 0 0 All_mobs_can_now_drop_their_very_own_commemorative_Medallion!_They_have_a_1_in_$_chance_of_dropping,_and_only_while_in_Tempest_Form!".split(
+                  " ",
+                ),
+                "Medallion_Magnate 8 28.0 1 999999 2 0 205 438 0 0 Medallions_now_show_up_visually_next_to_the_monster's_name_in_its_Card_Info._@_Also,_+{%_Tempest_Damage_AND_Accuracy_per_Medallion_collected.".split(
+                  " ",
+                ),
+                "The_Luck_Factor 8 9.60 1 25 1 0 127 349 0 0 Boosts_the_drop_chance_of_ALL_Tempest_items,_including_medallions,_by_{%_of_your_normal_Drop_Rate._@_Total_Bonus:_+$%_Tempest_Drop_Rate".split(
+                  " ",
+                ),
+                "Elemental_Destruction 8 1.60 0 50 2 0 268 265 0 0 All_elemental_damage_is_+{%_higher._In_other_words,_this_is_a_damage_multi,_but_it_only_works_when_using_the_right_element!".split(
+                  " ",
+                ),
+                "Top_of_the_Mornin' 8 1.10 2 999999 10 0 163 205 0 0 The_first_{_kills_at_the_start_of_each_day_have_a_200x_chance_to_drop_Tempest_items!".split(
+                  " ",
+                ),
+                "Weapon_Improvement 8 1.08 1 999999 2 0 377 205 0 0 Tempest_Weapons_dropped_by_mobs_now_have_higher_weapon_power_the_more_HP_the_mob_has!_@_Also,_+{%_Tempest_DMG!".split(
+                  " ",
+                ),
+                "Stone_Failsafe 8 1.90 2 25 2 0 495 275 0 1 All_Tempest_stones_now_have_a_{%_chance_to_not_use_up_a_slot_when_they_fail!".split(
+                  " ",
+                ),
+                "Ring_Drop 40 1.10 1 1 1 0 481 147 0 0 Certain_mobs_can_now_drop_Tempest_Rings_at_a_1_in_$_chance._Check_AFK_Info_to_see_what_Tempest_Items_can_be_found!".split(
+                  " ",
+                ),
+                "Fighter_Path 2 2.90 0 31 1 0 761 443 0 1 Unlocks_a_new_Fighter_upgrade,_right_here_in_The_Compass!".split(
+                  " ",
+                ),
+                "Tempest_Damage 4 1.12 0 999999 1 0 843 379 0 1 Boosts_your_Base_Damage_in_Tempest_Form_by_+{".split(
+                  " ",
+                ),
+                "Tempest_Mega_Damage 8 1.15 1 999999 4 0 753 239 0 1 Boosts_your_Base_Damage_in_Tempest_Form_by_+{".split(
+                  " ",
+                ),
+                "Tempest_Crits 8 1.70 0 25 3 0 845 265 0 1 +{%_Critical_Hit_chance_in_Tempest_Form".split(
+                  " ",
+                ),
+                "Tempest_Accuracy 5 1.07 0 999999 1 0 941 324 0 1 +{_Base_Accuracy_in_Tempest_Form".split(
+                  " ",
+                ),
+                "Multishot 8 1.25 0 999999 5 0 1046 369 0 1 +{%_chance_to_shoot_multiple_arrows_while_in_Tempest_Form".split(
+                  " ",
+                ),
+                "Tempest_Bullseye 8 1.085 1 999999 4 0 1189 351 0 1 +{_Base_Accuracy_in_Tempest_Form".split(
+                  " ",
+                ),
+                "Tempest_Maxhit 8 1.35 1 999999 1 0 1108 262 0 1 +{%_Crit_DMG_in_Tempest_Form".split(
+                  " ",
+                ),
+                "Tempest_Rapidshot 8 1.75 1 999999 2 0 986 205 0 1 +{%_Basic_Attack_speed_in_Tempest_Form".split(
+                  " ",
+                ),
+                "Stardust_Hoarding 8 1.10 2 999999 1 0 888 135 0 1 +{%_Tempest_Accuracy_per_POW_10_Stardust_owned_@_Total_Bonus:_$%".split(
+                  " ",
+                ),
+                "Cooldust_Hoarding 8 1.10 3 999999 1 0 1038 56 0 1 +{%_Tempest_DMG_per_POW_10_Cooldust_owned".split(
+                  " ",
+                ),
+                "Tempest_Ultra_Damage 8 1.15 3 999999 10 0 1123 135 0 1 Boosts_your_damage_in_Tempest_Mode_by_+{".split(
+                  " ",
+                ),
+                "Tempest_One_Huuuundred_and_Eighty 8 1.13 3 999999 10 0 1281 182 0 1 +{_Base_Accuracy_in_Tempest_Form".split(
+                  " ",
+                ),
+                "Mastery_Destruction 8 1.35 4 999999 2 0 1239 70 0 1 }x_Tempest_DMG_per_Mastery_completed_in_Sneaking_@_Total_Bonus:_$".split(
+                  " ",
+                ),
+                "Survival_Path 4 3.00 0 26 1 0 610 603 0 2 Unlocks_a_new_Survival_upgrade,_right_here_in_The_Compass!".split(
+                  " ",
+                ),
+                "Tempest_Heartbeat 8 1.08 0 999999 3 0 508 636 0 2 +{_Base_HP_in_Tempest_Form".split(
+                  " ",
+                ),
+                "Tempest_Defence 8 1.10 0 999999 3 0 528 723 0 2 +{_Base_Defence_in_Tempest_Form".split(
+                  " ",
+                ),
+                "Moondust_Hoarding 8 1.10 0 999999 1 0 304 669 0 2 +{%_Tempest_Defence_per_POW_10_Moondust_owned_@_Total_Bonus:_$%".split(
+                  " ",
+                ),
+                "Mountains_of_Dust 8 1.25 0 999999 1 0 510 937 0 2 +{%_Extra_Dust".split(
+                  " ",
+                ),
+                "Tempest_Reach 8 1.30 1 100 3 0 106 665 0 2 +{_Pixels_of_Reach_in_Tempest_Mode".split(
+                  " ",
+                ),
+                "Novadust_Discovery 8 1.20 2 999999 10 0 254 779 0 2 You_can_now_find_Novadust_from_any_monster,_at_a_1_in_10,000_chance._This_upgrade_boosts_this_chance_by_+{%".split(
+                  " ",
+                ),
+                "Solardust_Hoarding 8 1.42 1 999999 1 0 382 852 0 2 +{%_Extra_Dust_per_POW_10_Solardust_owned_@_Total_Bonus:_$%".split(
+                  " ",
+                ),
+                "5_Minute_Mile 8 1.15 0 999999 1 0 562 822 0 2 +{%_Movement_Speed_in_Tempest_Mode._@_Have_you_ever_run_a_5_minute_mile?_I_haven't,_but_I'll_edit_this_if_I_ever_do!".split(
+                  " ",
+                ),
+                "Knockoff_Compass 8 1.75 3 999999 1 0 44 795 0 2 All_compass_upgrades_are_+$%_Cheaper!".split(
+                  " ",
+                ),
+                "Can't_Touch_This 8 1.60 2 30 .1 0 152 883 0 2 Increases_invulnerability_time_in_Tempest_Form_by_+{_sec".split(
+                  " ",
+                ),
+                "Spire_of_Dust 8 1.40 1 999999 1 0 304 935 0 2 }x_Extra_Dust._@_Yea,_this_bonus_is_a_whole_new_Multiplier,_kinda_baller...".split(
+                  " ",
+                ),
+                "Circle_Supremacy 8 1.90 4 999999 1 0 84 1005 0 2 All_Circle_shaped_Compass_bonuses_give_}x_higher_bonuses!".split(
+                  " ",
+                ),
+                "Nomadic_Path 8 2.80 0 38 1 0 757 641 0 3 Unlocks_a_new_Nomadic_upgrade,_right_here_in_The_Compass!".split(
+                  " ",
+                ),
+                "Jade_Coinage 8 1.07 0 999999 3 0 905 688 0 3 }x_Jade_Coin_gain_in_Sneaking".split(
+                  " ",
+                ),
+                "Critter_Culture 8 1.40 0 999999 1 0 825 746 0 3 +{_base_Critter_per_Trap,_and_+{%_higher_Trap-O-Vision_collection_rate!".split(
+                  " ",
+                ),
+                "Moon_of_Print 8 1.10 0 200 .02 0 1021 634 0 3 3d_Printer_Samples_grow_by_+{%_every_day_for_100_days".split(
+                  " ",
+                ),
+                "Exalted_Stamps 95 20.0 0 999999 1 0 917 810 0 3 +{_Exalted_Stamp_uses._Apply_them_to_a_stamp_to_PERMANENTLY_double_its_bonus!_Other_sources_can_push_Exalted_Stamps_beyond_2x!".split(
+                  " ",
+                ),
+                "Moon_of_Sneak 8 1.10 1 999999 1 0 785 858 0 3 }x_higher_Stealth_for_all_ninja_twins._You_know_what,_I'll_DOUBLE_this_bonus_every_50_levels,_trust_me_bro!".split(
+                  " ",
+                ),
+                "Talented_Masters 8 1.22 1 999999 1 0 1181 676 0 3 +{_Talent_PTS_for_all_other_Master_Classes".split(
+                  " ",
+                ),
+                "Magnesium_Atom 80 1.10 1 1 1 0 1085 756 0 3 Unlocks_a_new_atom_in_the_Atom_Collider_in_World_3".split(
+                  " ",
+                ),
+                "Moon_of_Damage 8 1.06 2 999999 1 0 1063 882 0 3 +{%_higher_damage_for_all_characters._Not_tempest_damage,_just_good_ol'_classic_IdleOn_damage.".split(
+                  " ",
+                ),
+                "All_Knowing_Eye 8 1.05 1 999999 1 0 903 966 0 3 }x_higher_Sneaking_EXP_Gain_for_all_ninja_twins".split(
+                  " ",
+                ),
+                "Atomic_Cost_Crash 8 1.18 1 999999 1 0 1309 632 0 3 All_Atoms_are_+{%_cheaper_to_upgrade".split(
+                  " ",
+                ),
+                "Moon_of_Experience 8 1.04 3 999999 15 0 1261 790 0 3 +{%_Class_EXP_for_all_characters".split(
+                  " ",
+                ),
+                "Opa_Opa_Opa! 8 2.1 2 25 1 0 1187 930 0 3 +{_Opals_to_give_to_Villagers".split(
+                  " ",
+                ),
+                "Atomic_Potential 8 1.95 2 20 1 0 1051 1028 0 3 +{_Max_LV_for_all_atoms_in_the_Atom_Collider".split(
+                  " ",
+                ),
+                "Pristine_Collector 8 1.65 3 999999 2 0 1425 726 0 3 +{%_higher_chance_to_find_Pristine_Charms_in_Sneaking".split(
+                  " ",
+                ),
+                "Monument_Homage 8 1.30 2 999999 1 0 1367 862 0 3 +{%_Monument_AFK_rate_for_all_monuments_in_the_Hole".split(
+                  " ",
+                ),
+                "My_Talent_is_Best_Talent 8 1.16 2 200 1 0 1319 968 0 3 +{_Talent_PTS_for_the_Wind_Walker_class_only".split(
+                  " ",
+                ),
+                "Moon_of_Sleep 8 1.40 4 999999 0.2 0 1209 1078 0 3 +{%_AFK_Gains_for_all_characters".split(
+                  " ",
+                ),
+                "Aluminium_Atom 2800 1.10 3 1 1 0 1493 890 0 3 Unlocks_a_new_atom_in_the_Atom_Collider_in_World_3".split(
+                  " ",
+                ),
+                "Villagerz_Learnz 8 1.32 4 999999 1 0 1437 1000 0 3 }x_Villager_EXP_Gain,_not_that_you_need_it_though...".split(
+                  " ",
+                ),
+                "Abomination_Slayer_I 8 1.10 0 999999 1 0 846 537 0 4 You_have_slain_the_green_mushroom_abomination!_@_+{_Base_Tempest_Damage".split(
+                  " ",
+                ),
+                "Abomination_Slayer_II 8 1.10 0 999999 1 0 945 508 0 4 You_have_slain_the_bored_bean_abomination!_@_+{_Base_Tempest_Accuracy".split(
+                  " ",
+                ),
+                "Abomination_Slayer_III 8 1.21 0 999999 1 0 1022 472 0 4 You_have_slain_the_carrot_abomination!_@_+{%_Tempest_Move_Speed".split(
+                  " ",
+                ),
+                "Abomination_Slayer_IV 8 1.10 0 999999 1 0 1093 523 0 4 You_have_slain_the_gigafrog_abomination!_@_+{_Base_Tempest_Defence".split(
+                  " ",
+                ),
+                "Abomination_Slayer_V 8 1.10 0 999999 1 0 1156 453 0 4 You_have_slain_the_acorn_abomination!_@_+{%_Tempest_Damage".split(
+                  " ",
+                ),
+                "Abomination_Slayer_VI 8 1.10 0 999999 1 0 1235 476 0 4 You_have_slain_the_rat_abomination!_@_+{_Pixels_of_Reach_in_Tempest_Mode".split(
+                  " ",
+                ),
+                "Abomination_Slayer_VII 8 3.50 1 999999 1 0 1314 510 0 4 You_have_slain_the_sandypot_abomination!_@_+{%_Tempest_Crit_Chance".split(
+                  " ",
+                ),
+                "Abomination_Slayer_VIII 8 2.10 1 999999 1 0 1355 441 0 4 You_have_slain_the_crabcake_abomination!_@_+{_Windwalker_Talent_PTS".split(
+                  " ",
+                ),
+                "Abomination_Slayer_IX 8 1.10 1 999999 1 0 1372 362 0 4 You_have_slain_the_sandcastle_abomination!_@_+{%_Extra_Dust".split(
+                  " ",
+                ),
+                "Abomination_Slayer_X 8 1.50 0 999999 1 0 1446 327 0 4 You_have_slain_the_mashed_potato_abomination!_@_+{%_Tempest_Attack_Speed".split(
+                  " ",
+                ),
+                "Abomination_Slayer_XI 8 5.10 1 999999 1 0 1516 347 0 4 You_have_slain_the_moonmoon_abomination!_@_+{%_Tempest_Minimum_DMG".split(
+                  " ",
+                ),
+                "Abomination_Slayer_XII 8 1.10 0 999999 1 0 1533 419 0 4 You_have_slain_the_fishcrate_abomination!_@_+{_extra_kills_for_Top_of_the_Mornin'".split(
+                  " ",
+                ),
+                "Abomination_Slayer_XIII 8 1.10 1 999999 1 0 1551 494 0 4 You_have_slain_the_snelbie_abomination!_@_+{%_Medallion_Drop_Chance".split(
+                  " ",
+                ),
+                "Abomination_Slayer_XIV 8 1.30 1 999999 1 0 1578 565 0 4 You_have_slain_the_flake_abomination!_@_+{%_Multishot_Chance_in_Tempest_Mode".split(
+                  " ",
+                ),
+                "Abomination_Slayer_XV 8 1.20 0 999999 1 0 1653 582 0 4 You_have_slain_the_bloque_abomination!_@_+{%_Elemental_Damage".split(
+                  " ",
+                ),
+                "Abomination_Slayer_XVI 8 1.25 1 999999 1 0 1726 546 0 4 You_have_slain_the_snowman_abomination!_@_+{%_Tempest_Critical_Damage".split(
+                  " ",
+                ),
+                "Abomination_Slayer_XVII 8 37.0 1 999999 1 0 1749 474 0 4 You_have_slain_the_quenchie_abomination!_@_+{%_higher_Exalted_Stamp_bonuses".split(
+                  " ",
+                ),
+                "Abomination_Slayer_XVIII 8 1.45 0 999999 1 0 1748 398 0 4 You_have_slain_the_neyeptune_abomination!_@_+{%_cheaper_Compass_upgrade_costs".split(
+                  " ",
+                ),
+                "Abomination_Slayer_XIX 8 1.25 0 999999 1 0 1707 318 0 4 You_have_slain_the_bloodbone_abomination!_@_+{%_Tempest_DMG_per_POW_10_HP".split(
+                  " ",
+                ),
+                "Abomination_Slayer_XX 8 1.10 2 999999 1 0 1669 242 0 4 You_have_slain_the_purple_mushroom_abomination!_@_+{%_Tempest_Accuracy".split(
+                  " ",
+                ),
+                "Abomination_Slayer_XXI 8 4.65 1 999999 1 0 1631 173 0 4 You_have_slain_the_donut_abomination!_@_+{%_bonus_from_ALL_circle_shaped_compass_upgrades".split(
+                  " ",
+                ),
+                "Abomination_Slayer_XXII 8 1.10 2 999999 1 0 1680 105 0 4 You_have_slain_the_soda_abomination!_@_+{_Base_Tempest_Damage".split(
+                  " ",
+                ),
+                "Abomination_Slayer_XXIII 8 1.12 2 999999 3 0 1760 115 0 4 You_have_slain_the_gelatinous_cuboid_abomination!_@_+{%_Tempest_Stone_drop_chance".split(
+                  " ",
+                ),
+                "Abomination_Slayer_XXIV 8 1.10 1 999999 1 0 1832 155 0 4 You_have_slain_the_worm_abomination!_@_+{%_Tempest_Defence".split(
+                  " ",
+                ),
+                "Abomination_Slayer_XXV 8 1.25 2 999999 1 0 1876 225 0 4 You_have_slain_the_squid_abomination!_@_+{%_Tempest_Accuracy_per_POW_10_HP".split(
+                  " ",
+                ),
+                "Abomination_Slayer_XXVI 8 1.10 2 999999 1 0 1896 300 0 4 You_have_slain_the_grilled_cheese_abomination!_@_+{%_Tempest_Damage".split(
+                  " ",
+                ),
+                "Abomination_Slayer_XXVII 8 1.10 2 999999 1 0 1914 378 0 4 You_have_slain_the_stiltmole_abomination!_@_+{%_Novadust_drop_chance".split(
+                  " ",
+                ),
+                "Abomination_Slayer_XXVIII 8 1.10 0 999999 1 0 1926 454 0 4 You_have_slain_the_purgatory_twins_abomination!_@_+{_Base_Tempest_HP".split(
+                  " ",
+                ),
+                "Abomination_Slayer_XXIX 8 1.50 1 999999 .1 0 1918 529 0 4 You_have_slain_the_lampar_abomination!_@_+{_sec_invulnerability_time_in_Tempest_Form".split(
+                  " ",
+                ),
+                "Abomination_Slayer_XXX 8 1.10 3 999999 1 0 1885 601 0 4 You_have_slain_the_tremor_wurm_abomination!_@_+{%_Extra_Dust".split(
+                  " ",
+                ),
+                "Abomination_Slayer_XXXI 8 1.10 1 999999 1 0 1847 674 0 4 You_have_slain_the_sprout_abomination!_@_+{%_Tempest_Accuracy".split(
+                  " ",
+                ),
+                "Abomination_Slayer_XXXII 8 1.10 3 999999 1 0 1808 743 0 4 You_have_slain_the_woodlin_abomination!_@_+{%_Tempest_Defence".split(
+                  " ",
+                ),
+                "Abomination_Slayer_XXXIII 8 1.10 0 999999 1 0 1777 815 0 4 You_have_slain_the_lantern_abomination!_@_+{%_Tempest_HP".split(
+                  " ",
+                ),
+                "Abomination_Slayer_XXXIV 8 1.10 2 999999 1 0 1760 887 0 4 You_have_slain_the_ceramic_abomination!_@_+{%_Extra_Dust".split(
+                  " ",
+                ),
+                "Abomination_Slayer_XXXV 8 1.10 3 999999 1 0 1751 959 0 4 You_have_slain_the_egg_abomination!_@_+{%_Tempest_Damage".split(
+                  " ",
+                ),
+                "Abomination_Slayer_XXXVI 8 1.10 3 999999 1 0 1784 1029 0 4 Titan_doesnt_exist".split(
+                  " ",
+                ),
+                "Abomination_Slayer_XXXVII 8 1.10 1 999999 1 0 1855 1059 0 4 Titan_doesnt_exist".split(
+                  " ",
+                ),
+                "Abomination_Slayer_XXXVIII 8 1.10 0 999999 1 0 1931 1037 0 4 Titan_doesnt_exist".split(
+                  " ",
+                ),
+                "Abomination_Slayer_XXXIX 8 1.10 2 999999 1 0 1973 971 0 4 Titan_doesnt_exist".split(
+                  " ",
+                ),
+                "Abomination_Slayer_XL 8 1.10 3 999999 1 0 2002 904 0 4 Titan_doesnt_exist".split(
+                  " ",
+                ),
+                "Abomination_Slayer_XLI 8 1.10 4 999999 1 0 2017 834 0 4 Titan_doesnt_exist".split(
+                  " ",
+                ),
+                "Abomination_Slayer_XLII 8 1.10 4 999999 1 0 2004 763 0 4 Titan_doesnt_exist".split(
+                  " ",
+                ),
+                "Abomination_Slayer_XLIII 8 1.10 4 999999 1 0 2019 691 0 4 Titan_doesnt_exist".split(
+                  " ",
+                ),
+                "Abomination_Slayer_XLIV 8 1.10 4 999999 1 0 2045 622 0 4 Titan_doesnt_exist".split(
+                  " ",
+                ),
+                "Abomination_Slayer_XLV 8 1.10 4 999999 1 0 2081 553 0 4 Titan_doesnt_exist".split(
+                  " ",
+                ),
+                "Abomination_Slayer_XLVI 8 1.10 4 999999 1 0 2122 486 0 4 Titan_doesnt_exist".split(
+                  " ",
+                ),
+                "Weapon_Drops 8 1.10 0 999999 1 0 336 458 1 0 +{%_drop_chance_for_all_Tempest_Weapons".split(
+                  " ",
+                ),
+                "Medallion_Drops 8 1.10 1 999999 1 0 110 440 1 0 +{%_drop_chance_for_all_monster_Medallions".split(
+                  " ",
+                ),
+                "Grass_Weapon_Drops 8 1.10 3 999999 1 0 216 360 1 0 +{%_chance_for_Grass_Tempest_Weapon_that_drop_to_be_more_powerful".split(
+                  " ",
+                ),
+                "Fire_Weapon_Drops 8 1.10 3 999999 1 0 186 286 1 0 +{%_chance_for_Fire_Tempest_Weapons_that_drop_to_be_more_powerful".split(
+                  " ",
+                ),
+                "Stone_Drops_I 8 1.10 2 999999 2 0 80 256 1 0 +{%_drop_chance_for_all_Tempest_Stones".split(
+                  " ",
+                ),
+                "Lucky_Drops_I 8 1.10 4 999999 1 0 102 120 1 0 +{%_drop_chance_for_ALL_Tempest_items._Weapons,_stones,_rings,_all_of_them!".split(
+                  " ",
+                ),
+                "Ring_Drops_I 8 1.10 4 999999 1 0 218 108 1 0 +{%_drop_chance_for_Tempest_Rings_that_give_weird_stats_unrelated_to_element_damage".split(
+                  " ",
+                ),
+                "Stone_Drops_II 8 1.10 2 999999 3 0 292 166 1 0 +{%_drop_chance_for_Tempest_Rings_that_give_element_damage".split(
+                  " ",
+                ),
+                "Wind_Weapon_Drops 8 1.10 2 999999 1 0 378 106 1 0 +{%_chance_for_Wind_Tempest_Weapons_that_drop_to_be_more_powerful".split(
+                  " ",
+                ),
+                "Lucky_Drops_II 8 1.10 3 999999 1 0 542 70 1 0 +{%_drop_chance_for_ALL_Tempest_items!".split(
+                  " ",
+                ),
+                "Lucky_Drops_III 8 1.10 2 999999 1 0 552 192 1 0 +{%_drop_chance_for_ALL_Tempest_items!".split(
+                  " ",
+                ),
+                "Ice_Weapon_Drops 8 1.10 3 999999 1 0 408 270 1 0 +{%_chance_for_Ice_Tempest_Weapons_that_drop_to_be_more_powerful".split(
+                  " ",
+                ),
+                "Ring_Drops_II 8 1.10 1 999999 1 0 566 305 1 1 +{%_drop_chance_for_all_Tempest_Rings".split(
+                  " ",
+                ),
+                "Tempest_Damage_I 8 1.04 0 999999 1 0 771 325 1 1 +{%_damage_in_Tempest_Form".split(
+                  " ",
+                ),
+                "Tempest_Accuracy_I 8 1.03 0 999999 1 0 953 393 1 1 +{%_accuracy_in_Tempest_Form".split(
+                  " ",
+                ),
+                "Tempest_Damage_IV 8 1.06 1 999999 2 0 786 151 1 1 +{%_damage_in_Tempest_Form_@_Also,_Weapon_Power_from_your_Tempest_Equipment_is_giving_you_$_DMG!".split(
+                  " ",
+                ),
+                "Tempest_Damage_II 8 1.04 0 999999 1 0 918 243 1 1 +{%_damage_in_Tempest_Form".split(
+                  " ",
+                ),
+                "Tempest_Damage_III 8 1.05 0 999999 2 0 1018 298 1 1 +{%_damage_in_Tempest_Form_@_+{%_Critical_DMG_in_Tempest_Form".split(
+                  " ",
+                ),
+                "Tempest_Accuracy_II 8 1.04 0 999999 2 0 1120 339 1 1 +{%_accuracy_in_Tempest_Form".split(
+                  " ",
+                ),
+                "Tempest_Accuracy_III 8 1.05 1 999999 1 0 827 70 1 1 +{%_accuracy_in_Tempest_Form_@_+{%_Multishot_chance_in_Tempest_Form".split(
+                  " ",
+                ),
+                "Tempest_Damage_X 1 1.04 4 999999 6 0 895 25 1 1 +{%_damage_in_Tempest_Form".split(
+                  " ",
+                ),
+                "Tempest_Damage_VII 8 1.09 2 999999 4 0 959 67 1 1 +{%_damage_in_Tempest_Form".split(
+                  " ",
+                ),
+                "Tempest_Accuracy_V 8 1.07 2 999999 4 0 1024 133 1 1 +{%_accuracy_in_Tempest_Form".split(
+                  " ",
+                ),
+                "Tempest_Damage_V 8 1.07 1 999999 3 0 1075 199 1 1 +{%_damage_in_Tempest_Form".split(
+                  " ",
+                ),
+                "Tempest_Damage_VI 8 1.08 2 999999 3 0 1194 287 1 1 +{%_damage_in_Tempest_Form".split(
+                  " ",
+                ),
+                "Tempest_Accuracy_VII 8 1.09 3 999999 6 0 1107 66 1 1 +{%_accuracy_in_Tempest_Form".split(
+                  " ",
+                ),
+                "Tempest_Damage_VIII 8 1.10 3 999999 4 0 1213 136 1 1 +{%_damage_in_Tempest_Form".split(
+                  " ",
+                ),
+                "Tempest_Accuracy_VI 8 1.08 2 999999 5 0 1187 202 1 1 +{%_accuracy_in_Tempest_Form".split(
+                  " ",
+                ),
+                "Tempest_Accuracy_IV 8 1.06 1 999999 3 0 1276 255 1 1 +{%_accuracy_in_Tempest_Form".split(
+                  " ",
+                ),
+                "Tempest_Damage_IX 8 1.10 3 999999 5 0 1171 9 1 1 +{%_damage_in_Tempest_Form".split(
+                  " ",
+                ),
+                "Tempest_Accuracy_VIII 8 1.10 4 999999 7 0 1333 104 1 1 +{%_accuracy_in_Tempest_Form".split(
+                  " ",
+                ),
+                "Tempest_Defence_I 8 1.05 0 999999 1 0 456 697 1 2 +{%_defence_in_Tempest_Form".split(
+                  " ",
+                ),
+                "Tempest_Defence_III 8 1.08 1 999999 3 0 302 592 1 2 +{%_defence_in_Tempest_Form".split(
+                  " ",
+                ),
+                "De_Dust_I 8 1.10 0 999999 1 0 414 759 1 2 +{%_Extra_Dust".split(
+                  " ",
+                ),
+                "Tempest_Health_I 8 1.10 1 999999 1 0 192 696 1 2 +{%_total_health_in_Tempest_Form".split(
+                  " ",
+                ),
+                "Tempest_Defence_II 8 1.06 0 999999 2 0 332 770 1 2 +{%_defence_in_Tempest_Form_@_+{%_Movement_Speed_in_Tempest_Form".split(
+                  " ",
+                ),
+                "De_Dust_II 8 1.10 1 999999 1 0 480 806 1 2 +{%_Extra_Dust".split(
+                  " ",
+                ),
+                "Tempest_Defence_VI 8 1.10 4 999999 6 0 590 952 1 2 +{%_defence_in_Tempest_Form".split(
+                  " ",
+                ),
+                "Tempest_Defence_IV 8 1.09 2 999999 4 0 6 722 1 2 +{%_defence_in_Tempest_Form".split(
+                  " ",
+                ),
+                "De_Dust_III 8 1.10 1 999999 2 0 134 792 1 2 +{%_Extra_Dust".split(
+                  " ",
+                ),
+                "Tempest_Health_II 8 1.10 2 999999 2 0 236 856 1 2 +{%_total_health_in_Tempest_Form".split(
+                  " ",
+                ),
+                "Tempest_Accuracy..? 8 1.10 3 999999 3 0 416 946 1 2 +{%_accur.._wait,_accuracy?_What_are_you_doing_in_this_section?".split(
+                  " ",
+                ),
+                "De_Dust_IV 8 1.10 3 999999 2 0 68 870 1 2 +{%_Extra_Dust".split(
+                  " ",
+                ),
+                "Tempest_Defence_V 8 1.10 3 999999 5 0 198 966 1 2 +{%_defence_in_Tempest_Form".split(
+                  " ",
+                ),
+                "De_Dust_V 8 1.10 3 999999 3 0 354 1008 1 2 +{%_Extra_Dust".split(
+                  " ",
+                ),
+                "Sneaky_Sale_I 8 1.10 1 999999 5 0 745 792 1 2 +{%_reduction_in_cost_for_the_Moon_of_Sneak_upgrade".split(
+                  " ",
+                ),
+                "Sneaky_Sale_II 8 1.10 1 999999 10 0 879 881 1 3 +{%_reduction_in_cost_for_the_Moon_of_Sneak_upgrade".split(
+                  " ",
+                ),
+                "Sneaky_Sale_III 8 1.10 2 999999 20 0 798 927 1 3 +{%_reduction_in_cost_for_the_Moon_of_Sneak_upgrade".split(
+                  " ",
+                ),
+                "Printer_Sale_I 8 1.10 1 999999 5 0 993 711 1 3 +{%_reduction_in_cost_for_the_Moon_of_Print_upgrade".split(
+                  " ",
+                ),
+                "Damage_Sale_I 8 1.10 1 999999 5 0 1007 805 1 3 +{%_reduction_in_cost_for_the_Moon_of_Damage_upgrade".split(
+                  " ",
+                ),
+                "Printer_Sale_II 8 1.10 2 999999 10 0 1101 637 1 3 +{%_reduction_in_cost_for_the_Moon_of_Print_upgrade".split(
+                  " ",
+                ),
+                "Damage_Sale_II 8 1.10 2 999999 10 0 988 946 1 3 +{%_reduction_in_cost_for_the_Moon_of_Damage_upgrade".split(
+                  " ",
+                ),
+                "Damage_Sale_III 8 1.10 2 999999 15 0 1091 949 1 3 +{%_reduction_in_cost_for_the_Moon_of_Damage_upgrade".split(
+                  " ",
+                ),
+                "Snoozer_Sale_I 8 1.10 3 999999 5 0 1142 1015 1 3 +{%_reduction_in_cost_for_the_Moon_of_Sleep_upgrade".split(
+                  " ",
+                ),
+                "Snoozer_Sale_II 8 1.10 3 999999 10 0 1124 1110 1 3 +{%_reduction_in_cost_for_the_Moon_of_Sleep_upgrade".split(
+                  " ",
+                ),
+                "Snoozer_Sale_III 8 1.10 3 999999 15 0 1232 998 1 3 +{%_reduction_in_cost_for_the_Moon_of_Sleep_upgrade".split(
+                  " ",
+                ),
+                "Experience_Sale_I 8 1.10 3 999999 5 0 1157 827 1 3 +{%_reduction_in_cost_for_the_Moon_of_Experience_upgrade".split(
+                  " ",
+                ),
+                "Experience_Sale_II 8 1.10 2 999999 10 0 1187 749 1 3 +{%_reduction_in_cost_for_the_Moon_of_Experience_upgrade".split(
+                  " ",
+                ),
+                "Experience_Sale_III 8 1.10 2 999999 15 0 1269 707 1 3 +{%_reduction_in_cost_for_the_Moon_of_Experience_upgrade".split(
+                  " ",
+                ),
+                "Pristine_Sale_I 8 1.10 3 999999 5 0 1415 648 1 3 +{%_reduction_in_cost_for_the_Pristine_Collector_upgrade".split(
+                  " ",
+                ),
+                "Experience_Sale_IV 8 1.10 3 999999 20 0 1377 783 1 3 +{%_reduction_in_cost_for_the_Moon_of_Experience_upgrade".split(
+                  " ",
+                ),
+                "Experience_Sale_V 8 1.10 3 999999 25 0 1267 875 1 3 +{%_reduction_in_cost_for_the_Moon_of_Experience_upgrade".split(
+                  " ",
+                ),
+                "Snoozer_Sale_IV 8 1.10 4 999999 20 0 1335 1068 1 3 +{%_reduction_in_cost_for_the_Moon_of_Sleep_upgrade".split(
+                  " ",
+                ),
+                "Pristine_Sale_II 8 1.10 4 999999 10 0 1504 726 1 3 +{%_reduction_in_cost_for_the_Pristine_Collector_upgrade".split(
+                  " ",
+                ),
+                "Worldfinder 2 1.10 0 1 1 0 670 450 0 0 You_can_open_portals_to_the_next_world_by_defeating_enough_Abominations._The_amount_is_shown_above_each_town_portal!".split(
+                  " ",
+                ),
+                "Stop_Drop_and_Roll 5000 1.10 0 1 1 0 637 368 0 0 You_can_now_toggle_Tempest_drops._Just_click_off_the_TOGGLE_button_found_in_the_description_of_the_'tempest_drop'_upgrades!".split(
+                  " ",
+                ),
+                "Grumblo's_Guarantee 20000 1.10 0 1 1 0 666 286 0 0 You_can_now_GUARANTEE_a_Tempest_stone_to_succeed_by_dragging_a_stack_of_500_at_once._This_will_use_up_500_stones.".split(
+                  " ",
+                ),
+              ];
+window.AtomInfo = [
+                "Hydrogen_-_Stamp_Decreaser 1 1.35 2 1 Every_day_you_log_in,_the_resource_cost_to_upgrade_a_stamp's_max_lv_decreases_by_{%_up_to_a_max_of_90%._This_reduction_resets_back_to_0%_when_upgrading_any_stamp_max_lv.".split(
+                  " ",
+                ),
+                "Helium_-_Talent_Power_Stacker 0 10 10 1 All_talents_that_give_more_bonus_per_'Power_of_10_resources_you_own'_will_count_+{_more_powers_of_10_than_you_actually_own_when_giving_the_bonus.".split(
+                  " ",
+                ),
+                "Lithium_-_Bubble_Insta_Expander 10 1.25 25 1 No_Bubble_Left_Behind_bonus_now_has_a_15%_chance_to_level_up_the_lowest_bubble_out_of_ALL_bubbles,_not_just_the_first_15_of_each_colour._Also,_+{%_chance_to_give_+1_additional_Lv.".split(
+                  " ",
+                ),
+                "Beryllium_-_Post_Office_Penner 20 1.26 75 7 Every_day,_1_silver_pen_from_your_Post_Office_will_instantly_convert_into_1_PO_Box_for_all_characters._This_conversion_happens_{_times_per_day.".split(
+                  " ",
+                ),
+                "Boron_-_Particle_Upgrader 70 1.37 175 2 When_a_bubble_has_a_cost_of_100M_or_more_to_upgrade,_you_can_instead_spend_particles._However,_you_can_only_do_this_{_times_a_day,_after_which_the_cost_will_return_to_resources.".split(
+                  " ",
+                ),
+                "Carbon_-_Wizard_Maximizer 250 1.27 500 2 All_wizard_towers_in_construction_get_+{_max_levels._Also,_all_wizards_get_a_+2%_damage_bonus_for_each_wizard_tower_level_above_50_in_construction._Total_bonus:_}%_wizard_dmg.".split(
+                  " ",
+                ),
+                "Nitrogen_-_Construction_Trimmer 500 1.25 1000 15 Gold_trimmed_construction_slots_give_+{%_more_build_rate_than_before._Also,_you_now_have_1_additional_trimmed_slot.".split(
+                  " ",
+                ),
+                "Oxygen_-_Library_Booker 1000 1.24 3250 2 Increases_the_Checkout_Refresh_Speed_of_the_Talent_Library_by_+{%._Also,_the_Minimum_Talent_LV_is_increased_by_+<,_and_the_Maximum_Talent_LV_is_increased_by_+10.".split(
+                  " ",
+                ),
+                "Fluoride_-_Void_Plate_Chef 2500 1.23 2500 1 Multiplies_your_cooking_speed_by_+{%_for_every_meal_at_Lv_30+._In_other_words,_every_plate_with_a_studded_black_void_plate._Total_bonus:_>%_cooking_speed".split(
+                  " ",
+                ),
+                "Neon_-_Damage_N'_Cheapener 5000 1.22 5000 1 Increases_your_total_damage_by_+{%._Also,_reduces_the_cost_of_all_atom_upgrades_by_{%_too.".split(
+                  " ",
+                ),
+                "Sodium_-_Snail_Kryptonite 12000 2 12000 5 When_you_fail_a_snail_upgrade,_it's_LV_gets_reset_to_the_nearest_5_(Up_to_Lv_{)_instead_of_back_to_0,_like_failing_at_Lv_7_will_reset_to_Lv_5.".split(
+                  " ",
+                ),
+                "Magnesium_-_Trap_Compounder 30000 1.6 30000 1 Every_day,_critters_gained_from_traps_increases_by_+{%._This_bonus_is_capped_at_60_days,_and_resets_back_to_+0%_when_a_new_trap_is_placed.".split(
+                  " ",
+                ),
+                "Aluminium_-_Stamp_Supercharger 200000 1.45 200000 1 Stamp_Doublers_give_an_extra_+{%_MORE_bonus_than_the_normal_+100%_they_give!".split(
+                  " ",
+                ),
+                "Silicon_-_Minehead_Currency_Printer 50000 1.30 250000 1 Boosts_your_Minehead_Currency_gain_by_+{%!_This_is_a_new_multiplier,_so_it's_always_relevant!".split(
+                  " ",
+                ),
+                "Phosphorus_-_Sushi_Bucks_Generator 100000 1.45 400000 1 Boosts_your_Sushi_Station_Bucks_gain_by_+{%!_This_is_a_new_multiplier,_so_it's_always_relevant!".split(
+                  " ",
+                ),
+              ];
+window.StarSigns = [
+                ["The_Buff_Guy", "+1%_Total_Damage", "+3_STR", "_"],
+                ["Flexo_Bendo", "+2%_Movement_Speed", "+3_AGI", "_"],
+                ["The_Book_Worm", "+1%_Class_EXP_Gain", "+3_WIS", "_"],
+                ["The_Fuzzy_Dice", "+3_Talent_Points", "+3_LUK", "_"],
+                [
+                  "Dwarfo_Beardus",
+                  "+5%_Mining_Efficency",
+                  "+20%_Multi-Ore_Chance",
+                  "_",
+                ],
+                [
+                  "Hipster_Logger",
+                  "+5%_Chop_Efficiency",
+                  "+20%_Multi-Log_Chance",
+                  "_",
+                ],
+                [
+                  "Pie_Seas",
+                  "+5%_Fishin_Efficency",
+                  "+20%_Multi-Fish_Odds",
+                  "_",
+                ],
+                [
+                  "Shoe_Fly",
+                  "+5%_Catch_Efficiency",
+                  "+20%_Multi-Bug_Chance",
+                  "_",
+                ],
+                [
+                  "Blue_Hedgehog",
+                  "+4%_Movement_Speed",
+                  "+0.0001%_Ring_Drop",
+                  "_",
+                ],
+                [
+                  "Gum_Drop",
+                  "+15%_to_get_a_Time",
+                  "Candy_when_claiming",
+                  "8+_Hour_AFK_gains",
+                ],
+                ["Activelius", "+15%_Class_EXP_when", "fighting_actively", "_"],
+                ["Pack_Mule", "+10%_Carry_Cap", "_", "_"],
+                ["Ned_Kelly", "+6%_Defence", "+2_Weapon_Power", "_"],
+                [
+                  "Robinhood",
+                  "+4%_Accuracy",
+                  "+2%_Movement_Speed",
+                  "+1_Cant_Trade_GME",
+                ],
+                ["Pirate_Booty", "+5%_Drop_Rate", "_", "_"],
+                ["Muscle_Man", "+8_STR", "_", "_"],
+                ["Fast_Frog", "+8_AGI", "_", "_"],
+                ["Smart_Stooge", "+8_WIS", "_", "_"],
+                ["Lucky_Larry", "+8_LUK", "_", "_"],
+                ["Silly_Snoozer", "+2%_Fight_AFK_Gain", "_", "_"],
+                ["The_Big_Comatose", "+2%_Skill_AFK_Gain", "_", "_"],
+                ["Miniature_Game", "+30%_minigame_reward", "_", "_"],
+                [
+                  "Mount_Eaterest",
+                  "+10%_chance_to_not",
+                  "consume_food",
+                  "+15%_All_Food_Effect",
+                ],
+                ["Bob_Build_Guy", "+10%_Speed_in_Town", "Skills", "_"],
+                ["The_Big_Brain", "+3%_Class_EXP_gain", "_", "_"],
+                [
+                  "The_OG_Skiller",
+                  "+5%_Carry_Cap",
+                  "+1%_Skill_AFK_gain",
+                  "+2%_All_Skill_Prowess",
+                ],
+                ["Grim_Reaper", "+2%_Mob_Respawn_rate", "_", "_"],
+                ["The_Fallen_Titan", "+3%_Boss_Damage", "+4%_Crit_Chance", "_"],
+                [
+                  "The_Forsaken",
+                  "-80%_Total_HP",
+                  "-50%_Defence",
+                  "+6%_Fight_AFK_Gain",
+                ],
+                ["Mr_No_Sleep", "-6%_AFK_Gain", "+30%_Carry_Cap", "_"],
+                ["Sir_Savvy", "+3%_Skill_EXP_gain", "_", "_"],
+                ["All_Rounder", "+4_All_Stats", "_", "_"],
+                [
+                  "Fatty_Doodoo",
+                  "-3%_Movement_Speed",
+                  "+5%_Defence",
+                  "+2%_Total_Damage",
+                ],
+                [
+                  "Chronus_Cosmos",
+                  "All_characters_can",
+                  "now_align_with_2",
+                  "Star_Signs_at_once",
+                ],
+                ["All_Rounderi", "+1%_All_Stat", "i.e._STR/AGI/WIS/LUK", "_"],
+                ["Centaurii", "+10%_Accuracy", "_", "_"],
+                ["Murmollio", "+10%_Defence", "_", "_"],
+                ["Strandissi", "+3%_STR", "_", "_"],
+                ["Agitagi", "+3%_AGI", "_", "_"],
+                ["Wispommo", "+3%_WIS", "_", "_"],
+                ["Lukiris", "+3%_LUK", "_", "_"],
+                ["Pokaminni", "+15%_Card_Drop", "(Outside_of_Dungeons)", "_"],
+                ["Gor_Bowzor", "+12%_Boss_Damage", "_", "_"],
+                [
+                  "Hydron_Cosmos",
+                  "All_characters_can",
+                  "now_align_with_3",
+                  "Star_Signs_at_once",
+                ],
+                [
+                  "Trapezoidburg",
+                  "+20%_Critters/Trap",
+                  "+10%_Trap_Efficiency",
+                  "_",
+                ],
+                ["Sawsaw_Salala", "+25%_Construct_Exp", "_", "_"],
+                [
+                  "Preys_Bea",
+                  "+15%_Worship_Efficiency",
+                  "+15%_Worship_EXP",
+                  "_",
+                ],
+                ["Cullingo", "+15%_Total_Multikill", "_", "_"],
+                [
+                  "Gum_Drop_Major",
+                  "+40%_to_get_a_Time",
+                  "Candy_when_claiming",
+                  "40+_Hour_AFK_gains",
+                ],
+                [
+                  "Grim_Reaper_Major",
+                  "+4%_Mob_Respawn_rate",
+                  "(If_Lv&60)",
+                  "_",
+                ],
+                ["Sir_Savvy_Major", "+6%_Skill_EXP_gain", "(If_Lv&70)", "_"],
+                [
+                  "The_Bulwark",
+                  "+20%_Total_Damage",
+                  "-12%_Movement_Speed",
+                  "_",
+                ],
+                ["Big_Brain_Major", "+6%_Class_EXP_gain", "(If_Lv&80)", "_"],
+                ["The_Fiesty", "+6%_Total_Damage", "_", "_"],
+                [
+                  "The_Overachiever",
+                  "+15%_Total_Damage",
+                  "-7%_Fight_AFK_Gain",
+                  "_",
+                ],
+                ["Comatose_Major", "+4%_Skill_AFK_Gain", "(If_Lv&90)", "_"],
+                ["S._Snoozer_Major", "+4%_Fight_AFK_Gain", "(If_Lv&100)", "_"],
+                [
+                  "Breedabilli",
+                  "+35%_Breedable_Spd",
+                  "+15%_Shiny_Mob_LV_spd",
+                  "_",
+                ],
+                [
+                  "Gordonius_Major",
+                  "+15%_Cooking_SPD",
+                  "(Multiplicative!)",
+                  "_",
+                ],
+                ["Power_Bowower", "+30%_Mob_DMG_for", "Breeding_Skill", "_"],
+                ["Scienscion", "+20%_Lab_EXP_Gain", "_", "_"],
+                [
+                  "Artifosho",
+                  "+15%_Artifact_Find",
+                  "Chance",
+                  "(Multiplicative)",
+                ],
+                ["Divividov", "+30%_Divinity_EXP", "_", "_"],
+                ["C._Shanti_Minor", "+20%_Sailing_SPD", "_", "_"],
+                ["Muscle_Magnus", "+50_STR", "_", "_"],
+                [
+                  "Cropiovo_Minor",
+                  "+3%_Crop_Evo",
+                  "chance_per_Farming_LV",
+                  "_",
+                ],
+                ["Fabarmi", "+20%_Farming_EXP", "_", "_"],
+                ["O.G._Signalais", "+15%_OG_Chance", "_", "_"],
+                ["Lightspeed_Frog", "+50_AGI", "_", "_"],
+                ["Beanbie_Major", "+20%_Golden_Food", "bonuses", "_"],
+                ["Damarian_Major", "+25%_Total_Damage", "_", "_"],
+                ["Lotto_Larrinald", "+50_LUK", "_", "_"],
+                ["Intellostooge", "+50_WIS", "_", "_"],
+                ["S._Tealio", "+12%_Ninja_Twin", "Stealth", "_"],
+                ["Sneekee_E._X.", "+15%_Sneaking_EXP", "_", "_"],
+                ["Jadaciussi", "+10%_Jade_Gain", "(Multiplicative!)", "_"],
+                ["Druipi_Major", "+12%_Drop_Rate", "_", "_"],
+                ["Sumo_Magno", "+20%_Summoning_EXP", "_", "_"],
+                ["Killian_Maximus", "+3%_Multikill_Per_Tier", "_", "_"],
+                [
+                  "Seraph_Cosmos",
+                  "All_characters_now_get",
+                  "1.10x_Star_Sign_bonuses",
+                  "per_20_Summoning_LV",
+                ],
+                [
+                  "Glimmer_of_Beyond",
+                  "This_star_sign_is",
+                  "unreachable_for_now...",
+                  "_",
+                ],
+                ["Fillerz48", "_", "_", "_"],
+                ["Fillerz49", "_", "_", "_"],
+                ["Fillerz50", "_", "_", "_"],
+                ["Fillerz51", "_", "_", "_"],
+                ["Fillerz52", "_", "_", "_"],
+                ["Fillerz53", "_", "_", "_"],
+                ["Fillerz54", "_", "_", "_"],
+                ["Fillerz55", "_", "_", "_"],
+                ["Fillerz56", "_", "_", "_"],
+                ["Fillerz57", "_", "_", "_"],
+                ["Fillerz58", "_", "_", "_"],
+                ["Fillerz59", "_", "_", "_"],
+                ["Fillerz32", "_", "_", "_"],
+              ];
+window.ChipDesc =  [
+                "Grounded_Nanochip +{%_Total_Defence Boosts_total_defence Copper 20000 Meal0 100 Spice0 100 0 def 10".split(
+                  " ",
+                ),
+                "Grounded_Motherboard +{%_Move_Speed_if_total_is_less_than_170% Boosts_total_movement_speed OakTree 30000 Meal1 100 Spice0 100 0 move 30".split(
+                  " ",
+                ),
+                "Grounded_Software +{%_Total_Accuracy Boosts_total_accuracy Fish1 20000 Meal3 100 Spice1 100 0 acc 10".split(
+                  " ",
+                ),
+                "Grounded_Processor +{%_Drop_Rate_if_total_is_less_than_5.00x Boosts_total_drop_rate DesertA1 10000 Meal4 100 Spice1 100 0 dr 60".split(
+                  " ",
+                ),
+                "Potato_Chip +{%_Basic_Attack_spd._*Can_Only_Equip_1_per_player* Boosts_attack_speed Bug1 20000 Meal6 100 Spice2 100 1 atkspd 20".split(
+                  " ",
+                ),
+                "Conductive_Nanochip +{%_Lab_EXP_Gain Boosts_lab_exp_gain StumpTree 100000 Meal9 100 Spice3 100 0 labexp 30".split(
+                  " ",
+                ),
+                "Conductive_Motherboard +{%_Line_Width_within_Mainframe Boosts_mainframe_line_width Gold 100000 Meal12 100 Spice4 100 0 linewidth 12".split(
+                  " ",
+                ),
+                "Conductive_Software +{%_Fighting_AFK_Gain_Rate_*Can_Only_Equip_1_per_player* Boosts_Fighting_AFK_gain_rate Critter2 10000 Meal15 100 Spice4 100 1 fafk 15".split(
+                  " ",
+                ),
+                "Conductive_Processor +{%_Skilling_AFK_Gain_Rate_*Can_Only_Equip_1_per_player* Boosts_Skilling_AFK_gain_Rate Bug5 100000 Meal18 100 Spice5 100 1 safk 15".split(
+                  " ",
+                ),
+                "Chocolatey_Chip {%_chance_to_spawn_a_crystal_mob_when_one_dies._*Can_Only_Equip_1_per_player* Chance_for_Crystal_Mob_revival CraftMat8 200000 Meal21 100 Spice6 100 1 crys 75".split(
+                  " ",
+                ),
+                "Galvanic_Nanochip +{%_Monster_Respawn_Rate Boosts_Mob_respawn_rate SnowC1 100000 Meal24 100 Spice7 100 0 resp 10".split(
+                  " ",
+                ),
+                "Galvanic_Motherboard +{%_Total_Skilling_Efficiency_for_all_skills Boosts_skilling_efficiency Fish5 250000 Meal27 100 Spice8 100 0 toteff 20".split(
+                  " ",
+                ),
+                "Galvanic_Software +{%_Total_Damage Boosts_total_damage Dementia 300000 Meal29 100 Spice9 100 0 dmg 10".split(
+                  " ",
+                ),
+                "Galvanic_Processor +{_Base_Efficiency_for_all_skills Boosts_base_skilling_efficiency GalaxyB2 100000 Meal31 100 Spice10 100 0 eff 250".split(
+                  " ",
+                ),
+                "Wood_Chip +{%_Multikill_per_Damage_Tier_for_all_worlds Boosts_multikill Tree8 250000 Meal33 100 Spice11 100 0 mkill 15".split(
+                  " ",
+                ),
+                "Silkrode_Nanochip Doubles_the_bonuses_of_all_active_Star_Signs._*Can_Only_Equip_1_per_player* Bolsters_active_star_signs CraftMat10 2000000 Meal35 100 Spice12 100 1 star 1".split(
+                  " ",
+                ),
+                "Silkrode_Motherboard Doubles_MISC_bonuses_of_currently_equipped_Trophy._*Can_Only_Equip_1_per_player* Bolsters_equipped_trophy Soul5 2000000 Meal37 100 Spice13 100 1 troph 1".split(
+                  " ",
+                ),
+                "Silkrode_Software Doubles_MISC_bonuses_of_keychain_equipped_in_the_upper_keychain_slot._*Can_Only_Equip_1_per_player* Bolsters_equipped_keychain Bug8 2000000 Meal39 100 Spice13 100 1 key1 1".split(
+                  " ",
+                ),
+                "Silkrode_Processor Doubles_MISC_bonuses_of_currently_equipped_Pendant._*Can_Only_Equip_1_per_player* Bolsters_equipped_pendant Critter10 2000000 Meal41 100 Spice14 100 1 pend 1".split(
+                  " ",
+                ),
+                "Poker_Chip Your_weapon_gives_1.{x_more_Weapon_Power._*Can_Only_Equip_1_per_player* Bolsters_equipped_Weapon CraftMat14 2000000 Meal43 100 Spice14 100 1 weppow 25".split(
+                  " ",
+                ),
+                "Omega_Nanochip Doubles_bonus_of_card_equipped_in_top_left_slot._*Can_Only_Equip_1_per_player* Bolsters_an_equipped_card Bug8 10000000 Meal45 100 Spice15 100 1 card1 1".split(
+                  " ",
+                ),
+                "Omega_Motherboard Doubles_bonus_of_card_equipped_in_bottom_right_slot._*Can_Only_Equip_1_per_player* Bolsters_an_equipped_card Fish8 10000000 Meal47 100 Spice16 100 1 card2 1".split(
+                  " ",
+                ),
               ];

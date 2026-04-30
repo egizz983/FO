@@ -35,7 +35,7 @@ window.parseMiscBonusesData = function(data, state = window.farmingState) {
     let taskZZ2      = parseJsonField("TaskZZ2");
     let holes        = parseJsonField("Holes");
     let research     = parseJsonField("Research");
-    let lab          = parseJsonField("LAB");
+    let lab          = parseJsonField("Lab");
     let sailing      = parseJsonField("Sailing");
     let ninja        = parseJsonField("Ninja");
     let optLacc      = parseJsonField("OptLacc");
@@ -49,23 +49,31 @@ window.parseMiscBonusesData = function(data, state = window.farmingState) {
     let sushi        = parseJsonField("Sushi");
     let rift         = parseJsonField("Rift");
     let cards0       = parseJsonField("Cards0");
+    let cards1       = parseJsonField("Cards1");
     let weeklyBoss   = parseJsonField("WeeklyBoss");
     let Ribbon       = parseJsonField("Ribbon");
     let compass       = parseJsonField("Compass");
+    let dream        = parseJsonField("Dream");
 
     // ======================
     //  PARSE  ARRAY
     // ======================
     state.research = research;
     state.spelunk = spelunk;
-    state.compass = compass[4];
+    state.compass = compass;
     state.pristineCharms = ninja[107];
     state.vaultupg = upgVault;
     state.ArcadeUpg = ArcadeUpg;
-    // ======================
-    // PARSE SKILL LEVELS (SL_0-9) - Get max across all characters
-    // ======================
-    state.skillLevels = parseSkillLevels(state.playerData);
+    state.grimoire = parseJsonField("Grimoire");
+    state.optionsListAccount = optLacc;
+    state.GemItemsPurchased = gemPurchased;
+    state.divinity = parseJsonField("Divinity");
+    state.CauldronInfo = parseJsonField("CauldronInfo");
+    state.arcane = Arcane;
+    state.atoms = parseJsonField("Atoms");
+    state.meals = meals;
+    state.towerinfo = parseJsonField("Tower");
+    state.lab = lab;
 
     // ======================
     // PARSE HIGHEST CHARACTER LEVEL (Lv0_0 to Lv0_9 at index [0])
@@ -78,11 +86,14 @@ window.parseMiscBonusesData = function(data, state = window.farmingState) {
     state.holes.hole15[24]                   = safeGet(holes, 15, 24); // Parse Holes[15][24]
     state.holes.hole15[29]                   = safeGet(holes, 15, 29); // Parse Holes[15][29]
     state.holes.hole4[0]                     = safeGet(holes, 4, 0); // Parse Holes[4][0]
+    state.holes.hole6[0]                     = safeGet(holes, 6, 0); // Parse Holes[6][0]
     state.holes.hole21[8]                    = safeGet(holes, 21, 8); // Parse Holes[21][8]
+    state.holes.hole11[29]                   = safeGet(holes, 11, 29); // Parse Holes[11][29]
+    state.holes.hole11[30]                   = safeGet(holes, 11, 30); // Parse Holes[11][30]
     state.miscBonuses.evoCropEvoStamp        = safeGet(state.playerData.StampLv, 1, 47); // evo stamp
     state.miscBonuses.evoSacrificeHarvest    = safeGet(state.playerData.Grimoire, 14); //Sacrifice Harvest grimoire upgrade level
     state.miscBonuses.Writhing_Grimoire      = safeGet(state.playerData.Grimoire, 36); // Writhing Grimoire level
-    
+    state.miscBonuses.EquinoxSymbol         = safeGet(state.playerData.Dream, 12); // Equinox Symbol level Dream[12]
     // Skill Mastery 200
     let thisCharFarming = safeGet(state.playerData.Lv0_1, 16);
     let totalFarmingLevels = thisCharFarming * 10; 
@@ -123,7 +134,7 @@ window.parseMiscBonusesData = function(data, state = window.farmingState) {
 
     state.miscBonuses.godshardSetBonus       = String(optLacc[379] || "").includes("GODSHARD_SET") ? 15 : 0; //Godshard SetBonus (15% if set equipped, 0% otherwise) -  OptLacc[379]
     state.miscBonuses.emperorSetBonus        = String(optLacc[379] || "").includes("EMPEROR_SET") ? 20 : 0; //Emperor SetBonus (20% if set equipped, 0% otherwise) -  OptLacc[379]
-    state.miscBonuses.kattlekrukSetBonus     = String(optLacc[379] || "").includes("KATTLEKRUK_SET") ? 5 : 0; //Kattlekruk SetBonus (25% if set equipped, 0% otherwise) -  OptLacc[379]
+    state.miscBonuses.kattlekrukSetBonus     = String(optLacc[379] || "").includes("KATTLEKRUK_SET") ? 5 : 0; //Kattlekruk SetBonus +5 max lvl -  OptLacc[379]
     state.miscBonuses.evoButtonPressCount              = safeGet(optLacc, 594); //Evolution Button (raw hold press count)
     state.miscBonuses.meritocracybonusid     = safeGet(optLacc, 453); //Meritocracy Bonus ID - OptLacc[453]
     state.miscBonuses.meritocracycanvote     = safeGet(optLacc, 472); //Meritocracy Can Vote flag - OptLacc[472]
@@ -161,6 +172,7 @@ window.parseMiscBonusesData = function(data, state = window.farmingState) {
     // ======================
     // CARDS
     // ======================
+    state.cards = [cards0, cards1]; // Store both Cards0 and Cards1 arrays
     state.miscBonuses.jellofishcard = safeGet(cards0, "w7b5"); // Jello Fish Card quantity/level Cards0[w7b5]
     
     // ======================
@@ -187,66 +199,6 @@ window.parseMiscBonusesData = function(data, state = window.farmingState) {
     return true;
 };
 
-// ======================
-// SKILL LEVELS PARSER
-// ======================
-/**
- * Parses skill levels from all 10 character arrays (SL_0 through SL_9)
- * Returns a single array with the maximum value for each index
- * Only includes indexes that exist in at least one character's skill level object
- * 
- * Note: SL_0-9 are stored as stringified JSON objects with string keys (not arrays)
- */
-function parseSkillLevels(playerData) {
-    const skillLevelMap = {}; // Use object to track indices and max values
-
-    // Loop through all 10 characters (SL_0 to SL_9)
-    for (let char = 0; char < 10; char++) {
-        const fieldName = `SL_${char}`;
-        let charSkillLevels = playerData[fieldName];
-
-        // Parse if stringified
-        if (typeof charSkillLevels === "string") {
-            try {
-                charSkillLevels = JSON.parse(charSkillLevels);
-            } catch (e) {
-                console.warn(`⚠️ Failed to parse ${fieldName} as JSON`);
-                charSkillLevels = {};
-            }
-        }
-
-        // If not an object, skip
-        if (typeof charSkillLevels !== "object" || charSkillLevels === null) {
-            continue;
-        }
-
-        // For each property in this character's skill levels object
-        for (const keyStr in charSkillLevels) {
-            const index = Number(keyStr);
-            const value = Number(charSkillLevels[keyStr]) || 0;
-
-            // Only track if value is greater than 0
-            if (value > 0) {
-                // Keep the maximum value for this index
-                if (skillLevelMap[index] === undefined) {
-                    skillLevelMap[index] = value;
-                } else {
-                    skillLevelMap[index] = Math.max(skillLevelMap[index], value);
-                }
-            }
-        }
-    }
-
-    // Convert object to sparse array
-    const resultArray = [];
-    for (const indexStr in skillLevelMap) {
-        const index = Number(indexStr);
-        resultArray[index] = skillLevelMap[index];
-    }
-
-    console.log(`✅ Parsed Skill Levels - found ${Object.keys(skillLevelMap).length} unique indices`);
-    return resultArray;
-}
 
 // ======================
 // HIGHEST CHARACTER LEVEL PARSER

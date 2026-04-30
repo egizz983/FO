@@ -79,7 +79,7 @@ window.parseShinyPetsData = function(data, state = window.farmingState) {
         totalStars += level * 2;          // +2 stars per level
     });
 
-    state.shinyPets.infiniteStars = totalStars;
+    state.shinyPets.infiniteStars = totalStars+5; //5 default base value
 
     // === Shiny Meal Bonus Pets ===
     const redMushroomExp = safeGet(breeding, 22, 4);
