@@ -1380,34 +1380,10 @@ function calculateCropsBonusValue(plotIndex, mode) {
 //Talent level calculation ==============================================
 //===========================================================================
 function getHighesttalentlevelperID(talentId) {
-    const playerDatabase = window.farmingState?.playerDatabase;
     
-    // Safety check
-    if (!playerDatabase || !playerDatabase.TalentPoints) {
-        return 0;
-    }
-    
-    let maxLevel = 0;
-    
-    // Loop through all 10 characters (0-9)
-    for (let charIndex = 0; charIndex < 10; charIndex++) {
-        const characterLevels = playerDatabase.TalentPoints[charIndex];
-        
-        // Skip if character array doesn't exist
-        if (!characterLevels) {
-            continue;
-        }
-        
-        // Get the skill level for this talent ID
-        const talentLevel = c.asNumber(characterLevels[talentId]) || 0;
-        
-        // Track the maximum
-        if (talentLevel > maxLevel) {
-            maxLevel = talentLevel;
-        }
-    }
-    
-    return maxLevel;
+    const idx = getCharacterIndexWithHighestTalent(talentId);
+    if (idx === -1) return 0;
+    return window.farmingState.playerDatabase.TalentPoints[idx][talentId] || 0;
 }
 
 // Get the character index (0-9) with the highest talent level for a given talent ID
@@ -1443,6 +1419,24 @@ function getCharacterIndexWithHighestTalent(talentId) {
     }
     
     return maxCharacterIndex;
+}
+
+/**
+ * Updates talent level in playerDatabase.TalentPoints
+ * Called by StateManager when user edits talent value in State Inspector
+ * Finds character with highest talent level and updates it
+ * 
+ * @param {number} talentId - Talent ID (205, 206, or 207)
+ * @param {number} newLevel - New talent level
+ */
+function setTalentLevel(talentId, newLevel) {
+    const idx = getCharacterIndexWithHighestTalent(talentId);
+    if (idx !== -1 && window.farmingState && window.farmingState.playerDatabase && window.farmingState.playerDatabase.TalentPoints) {
+        window.farmingState.playerDatabase.TalentPoints[idx][talentId] = newLevel;
+        console.log(`[TalentLevel] Updated talent ${talentId} to level ${newLevel} (character ${idx})`);
+    } else {
+        console.warn(`[TalentLevel] Could not update talent ${talentId}: character not found`);
+    }
 }
 
 

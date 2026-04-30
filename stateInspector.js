@@ -18,7 +18,18 @@ window.StateInspector = (function() {
             'gmoCropCounts.10000',
             'gmoCropCounts.100000'
         ],
-        'Talents': 'talents.*'
+        'Talents ': [
+            'talents.talent205',
+            'talents.talent206',
+            'talents.talent207'
+        ]
+    };
+
+    // Custom labels for specific paths (overrides dynamic path label generation)
+    const CUSTOM_LABELS = {
+        'talents.talent205': 'Mass Irrigation',
+        'talents.talent206': 'Agricultural Appreciation',
+        'talents.talent207': 'Dank Ranks'
     };
 
     // Track rendered fields for syncing
@@ -140,7 +151,7 @@ window.StateInspector = (function() {
             paths.forEach(path => {
                 const value = window.StateManager.getState(path);
                 const inputType = getInputType(value);
-                const label = getPathLabel(path);
+                const label = CUSTOM_LABELS[path] || getPathLabel(path);
 
                 const fieldDiv = document.createElement('div');
                 fieldDiv.className = 'inspector-field';
@@ -170,6 +181,7 @@ window.StateInspector = (function() {
                 // Wire to state
                 input.addEventListener('change', () => {
                     const newValue = getFieldValue(input, inputType);
+                    console.log(`[StateInspector] Changed ${path} to ${newValue}`);
                     window.StateManager.updateState(path, newValue);
                 });
 
@@ -179,6 +191,9 @@ window.StateInspector = (function() {
                         const newValue = getFieldValue(input, inputType);
                         const valueSpan = fieldDiv.querySelector('.inspector-value');
                         valueSpan.textContent = newValue;
+                        // Also update state in real-time so recalculation happens as user types
+                        console.log(`[StateInspector] Input ${path} to ${newValue}`);
+                        window.StateManager.updateState(path, newValue);
                     });
                 }
             });

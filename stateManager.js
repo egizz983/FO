@@ -97,6 +97,20 @@ window.StateManager = (function() {
             return false;
         }
 
+        // Special handling for talent updates (read-only getters)
+        // talents.talent205, talents.talent206, talents.talent207 are getter functions
+        // They read from playerDatabase.TalentPoints, so we update that instead
+        if (path.startsWith('talents.talent') && (path === 'talents.talent205' || path === 'talents.talent206' || path === 'talents.talent207')) {
+            const talentId = parseInt(path.split('.talent')[1]);
+            if (window.setTalentLevel) {
+                window.setTalentLevel(talentId, value);
+                console.log(`[StateManager] Called setTalentLevel for ${path} = ${value}`);
+                // Still trigger listeners so recalculation happens
+                triggerStateChange(path, undefined, value, options.debounce || 0);
+                return true;
+            }
+        }
+
         // Get old value
         const oldValue = getNestedValue(window.farmingState, path);
 
@@ -267,10 +281,10 @@ window.StateManager = (function() {
             'companion.w6b2b_162',
             'companion.w7b7_147',
             'companion.reindeer_27',
-            // Talents
-            'talents.dankRanks',
-            'talents.massIrrigation',
-            'talents.agriculturalAppreciation',
+            // Talents (getter functions - handled specially in updateState)
+            'talents.talent205',
+            'talents.talent206',
+            'talents.talent207',
             // Lab
             'lab.my1stChemistrySet',
             'lab.certifiedStampBook',

@@ -26,11 +26,6 @@ window.StatePersistence = (function() {
         'companion.w7b7_147': true,
         'companion.reindeer_27': true,
 
-        // Talent levels (manual inputs)
-        'talents.dankRanks': true,
-        'talents.massIrrigation': true,
-        'talents.agriculturalAppreciation': true,
-
         // Lab item toggles (manual selections)
         'lab.my1stChemistrySet': true,
         'lab.certifiedStampBook': true,

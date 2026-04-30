@@ -129,8 +129,7 @@ window.parseMiscBonusesData = function(data, state = window.farmingState) {
     
     state.miscBonuses.evoStickers            = safeGet(research, 9, 4); // Farming Stickers count
 
-    // Black Diamond Rhinestone (Lab)
-    state.miscBonuses.mealBlackDiamondRhinestone = safeGet(lab, 14, 16);
+
 
     state.miscBonuses.godshardSetBonus       = String(optLacc[379] || "").includes("GODSHARD_SET") ? 15 : 0; //Godshard SetBonus (15% if set equipped, 0% otherwise) -  OptLacc[379]
     state.miscBonuses.emperorSetBonus        = String(optLacc[379] || "").includes("EMPEROR_SET") ? 20 : 0; //Emperor SetBonus (20% if set equipped, 0% otherwise) -  OptLacc[379]

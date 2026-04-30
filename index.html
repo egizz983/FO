@@ -68,6 +68,14 @@
                                         <input type="checkbox" id="lab-stamp-book" class="w-5 h-5 accent-emerald-500">
                                         <span class="text-base text-slate-700">Certified Stamp Book</span>
                                     </label>
+                                    <label class="flex items-center gap-3 cursor-pointer">
+                                        <input type="checkbox" id="lab-spelunker-obol" class="w-5 h-5 accent-emerald-500">
+                                        <span class="text-base text-slate-700">Spelunker Obol</span>
+                                    </label>
+                                    <label class="flex items-center gap-3 cursor-pointer">
+                                        <input type="checkbox" id="lab-meal-black-diamond" class="w-5 h-5 accent-emerald-500">
+                                        <span class="text-base text-slate-700">Meal Black Diamond Rhinestone</span>
+                                    </label>
                                 </div>
                             </div>
                         </div>
@@ -203,23 +211,34 @@
                 window.StateInspector.renderInspector();
             }
             
-            // Render UI
+            // Render UI and sync inputs with state
             renderCompanions();
+            syncManualInputs();
         });
 
         // Render companions list
         function renderCompanions() {
             const companionsContainer = document.getElementById('companions-list');
             if (!companionsContainer) return;
+            
+            // Clear existing companions
+            companionsContainer.innerHTML = '';
 
             companionsList.forEach(companion => {
                 const imageUrl = window.getImageUrl('companions', companion.imageKey);
                 
                 const companionItem = document.createElement('div');
                 companionItem.className = 'companion-item';
+                
+                // Check if companion is selected in state
+                const isSelected = window.farmingState.companion[companion.id] === 1;
+                if (isSelected) {
+                    companionItem.classList.add('selected');
+                }
+                
                 companionItem.innerHTML = `
                     <div class="companion-checkbox-wrapper">
-                        <input type="checkbox" id="companion-${companion.id}" class="companion-checkbox">
+                        <input type="checkbox" id="companion-${companion.id}" class="companion-checkbox" ${isSelected ? 'checked' : ''}>
                     </div>
                     <div class="companion-checkmark">✓</div>
                     <div class="companion-image">
@@ -468,24 +487,7 @@
 
 
         function setupManualInputs() {
-            // Talents
-            const dankInput = document.getElementById('talent-dank-ranks');
-            if (dankInput) dankInput.addEventListener('input', () => {
-                const value = parseFloat(dankInput.value) || 0;
-                window.StateManager.updateState('talents.dankRanks', value);
-            });
-
-            const massInput = document.getElementById('talent-mass-irrigation');
-            if (massInput) massInput.addEventListener('input', () => {
-                const value = parseFloat(massInput.value) || 0;
-                window.StateManager.updateState('talents.massIrrigation', value);
-            });
-
-            const appInput = document.getElementById('talent-agri-appreciation');
-            if (appInput) appInput.addEventListener('input', () => {
-                const value = parseFloat(appInput.value) || 0;
-                window.StateManager.updateState('talents.agriculturalAppreciation', value);
-            });
+            // Talents are now handled by State Inspector auto-wiring via data-state-path attributes
 
             // Lab checkboxes
             const chemCheck = document.getElementById('lab-chemistry-set');
@@ -500,6 +502,18 @@
                 window.StateManager.updateState('lab.certifiedStampBook', value);
             });
 
+            const spelunkerCheck = document.getElementById('lab-spelunker-obol');
+            if (spelunkerCheck) spelunkerCheck.addEventListener('change', () => {
+                const value = spelunkerCheck.checked ? 1 : 0;
+                window.StateManager.updateState('lab.spelunkerObol', value);
+            });
+
+            const mealDiamondCheck = document.getElementById('lab-meal-black-diamond');
+            if (mealDiamondCheck) mealDiamondCheck.addEventListener('change', () => {
+                const value = mealDiamondCheck.checked ? 1 : 0;
+                window.StateManager.updateState('lab.mealBlackDiamondRhinestone', value);
+            });
+
             // Other inputs
             const votingInput = document.getElementById('voting-bonus-29');
             if (votingInput) votingInput.addEventListener('input', () => {
@@ -512,6 +526,43 @@
                 const value = parseFloat(tomeInput.value) || 0;
                 window.StateManager.updateState('miscBonuses.tometotalpoints', value);
             });
+        }
+
+        // Sync all manual inputs with current state values
+        function syncManualInputs() {
+            // Lab checkboxes
+            const chemCheck = document.getElementById('lab-chemistry-set');
+            if (chemCheck) {
+                chemCheck.checked = window.farmingState.lab.my1stChemistrySet === 1;
+            }
+
+            const stampCheck = document.getElementById('lab-stamp-book');
+            if (stampCheck) {
+                stampCheck.checked = window.farmingState.lab.certifiedStampBook === 1;
+            }
+
+            const spelunkerCheck = document.getElementById('lab-spelunker-obol');
+            if (spelunkerCheck) {
+                spelunkerCheck.checked = window.farmingState.lab.spelunkerObol === 1;
+            }
+
+            const mealDiamondCheck = document.getElementById('lab-meal-black-diamond');
+            if (mealDiamondCheck) {
+                mealDiamondCheck.checked = window.farmingState.lab.mealBlackDiamondRhinestone === 1;
+            }
+
+            // Other inputs
+            const votingInput = document.getElementById('voting-bonus-29');
+            if (votingInput) {
+                votingInput.value = window.farmingState.miscBonuses.votingBonus29 || 0;
+            }
+
+            const tomeInput = document.getElementById('tome-total-points');
+            if (tomeInput) {
+                tomeInput.value = window.farmingState.miscBonuses.tometotalpoints || 0;
+            }
+
+            console.log('[UI] Manual inputs synced with state');
         }
 
         // Initialize

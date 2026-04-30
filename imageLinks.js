@@ -19,8 +19,13 @@ window.imageLinks = {
         mashedPotato: "https://idleontoolbox.com/afk_targets/Mashed_Potato.png",
         riftSlug: "https://idleontoolbox.com/afk_targets/Rift_Slug.png",
         kingDoot: "https://idleontoolbox.com/afk_targets/King_Doot.png"
-    }
-
+    },
+    lab: {
+        my1stChemistrySet: "https://idleontoolbox.com/data/LabBonus10.png", 
+        certifiedStampBook: "https://idleontoolbox.com/data/LabBonus7.png", 
+        spelunkerObol: "https://idleontoolbox.com/data/LabBonus8.png",
+        mealBlackDiamondRhinestone: "https://idleontoolbox.com/data/ConsoleJwl16.png",   
+    },
 };
 
 // =====================================================================

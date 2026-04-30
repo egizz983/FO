@@ -57,6 +57,13 @@ window.getFarmingBreakdowns = function() {
                     ]
                 },
                 {
+                     name: "Alchemy C",
+                    total: "Total:" + "×" + getVialBonus(66,window.farmingState.alchemy.flavorgilBonus).toMulti().toFixed(2),
+                    items: [
+                        { label: "Flavorgil Bonus", value: "×" + getVialBonus(66,window.farmingState.alchemy.flavorgilBonus).toMulti().toFixed(2) }
+                    ]
+                },
+                {
                     name: "Cards",
                     total: "Total:" + "×" + getCardBonus(window.farmingState.miscBonuses.jellofishcard).toMulti().toFixed(2),
                     items: [
@@ -279,7 +286,9 @@ window.getFarmingBreakdowns = function() {
                         {
                             label: "Production Megaboost",
                             value: "x" + (window.farmingState.landRank.upgrades[1]?.getBonus() * window.farmingState.landRank.stats.first + window.farmingState.miscBonuses.votingBonus29).toMulti().toFixed(2)
-                        }
+                        },
+                        { label: "Voting Ballot", value: "+" + window.farmingState.miscBonuses.votingBonus29.toFixed(2) + "%" }
+
 
                     ]
                 },

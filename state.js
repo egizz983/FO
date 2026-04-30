@@ -10,10 +10,15 @@ window.farmingState = {
     // Talents
     // ======================
     talents: {
-        //Talents level manual input 
-        dankRanks: 0,      // × ALL Land Rank Database bonuses (multiplicative to Evo, Overgrowth, Production, Soil EXP, etc.)
-        massIrrigation: 0,      // × Crop Evo chance (scales with talent points, multiplicative)
-        agriculturalAppreciation: 0 // +% Land Rank EXP (account-wide, additive, scales with talent points)
+        get talent205() {
+            return getHighesttalentlevelperID(205);
+        },
+        get talent206() {
+            return getHighesttalentlevelperID(206);
+        },
+        get talent207() {
+            return getHighesttalentlevelperID(207);
+        }
     },
 
     // ======================

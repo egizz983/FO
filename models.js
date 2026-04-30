@@ -21,6 +21,11 @@ class FarmingOptimizer {
             this.recalculateAll();
             this.renderAll();
             
+            // Sync all manual input values with restored state
+            if (window.syncManualInputs) {
+                window.syncManualInputs();
+            }
+            
             // Mark JSON as successfully loaded - enables recalculations and input interactions
             if (window.StateManager && window.StateManager.markJsonLoaded) {
                 window.StateManager.markJsonLoaded();
@@ -100,6 +105,7 @@ class FarmingOptimizer {
     }
 
     renderAll() {
+        renderCompanions();
         renderFarmingBonuses();
         updateFarmingLevelDisplay();
     }
