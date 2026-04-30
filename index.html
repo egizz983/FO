@@ -56,27 +56,9 @@
 
                         <!-- Lab Section -->
                         <div class="section lab-section mb-8">
-                            <h3 class="text-xl font-bold text-slate-900 mb-4 pb-2 border-b-2 border-slate-200">Lab</h3>
-                            <div class="lab-items-group">
-                                <h5 class="text-base font-semibold text-slate-700 mb-3">Lab Items (Active?)</h5>
-                                <div class="lab-checkboxes space-y-3">
-                                    <label class="flex items-center gap-3 cursor-pointer">
-                                        <input type="checkbox" id="lab-chemistry-set" class="w-5 h-5 accent-emerald-500">
-                                        <span class="text-base text-slate-700">My 1st Chemistry Set</span>
-                                    </label>
-                                    <label class="flex items-center gap-3 cursor-pointer">
-                                        <input type="checkbox" id="lab-stamp-book" class="w-5 h-5 accent-emerald-500">
-                                        <span class="text-base text-slate-700">Certified Stamp Book</span>
-                                    </label>
-                                    <label class="flex items-center gap-3 cursor-pointer">
-                                        <input type="checkbox" id="lab-spelunker-obol" class="w-5 h-5 accent-emerald-500">
-                                        <span class="text-base text-slate-700">Spelunker Obol</span>
-                                    </label>
-                                    <label class="flex items-center gap-3 cursor-pointer">
-                                        <input type="checkbox" id="lab-meal-black-diamond" class="w-5 h-5 accent-emerald-500">
-                                        <span class="text-base text-slate-700">Meal Black Diamond Rhinestone</span>
-                                    </label>
-                                </div>
+                            <h3 class="text-xl font-bold text-slate-900 mb-4 pb-2 border-b-2 border-slate-200">Lab Items (Active?)</h3>
+                            <div class="lab-items-grid" id="lab-items-grid">
+                                <!-- Lab items populated by JS -->
                             </div>
                         </div>
 
@@ -212,9 +194,67 @@
             }
             
             // Render UI and sync inputs with state
+            renderLabItems();
             renderCompanions();
             syncManualInputs();
         });
+
+        // Lab Items Data
+        const labItemsList = [
+            { id: 'lab-chemistry-set', name: 'My 1st Chemistry Set', statePath: 'lab.my1stChemistrySet', imageKey: 'my1stChemistrySet' },
+            { id: 'lab-stamp-book', name: 'Certified Stamp Book', statePath: 'lab.certifiedStampBook', imageKey: 'certifiedStampBook' },
+            { id: 'lab-spelunker-obol', name: 'Spelunker Obol', statePath: 'lab.spelunkerObol', imageKey: 'spelunkerObol' },
+            { id: 'lab-meal-black-diamond', name: 'Meal Black Diamond Rhinestone', statePath: 'lab.mealBlackDiamondRhinestone', imageKey: 'mealBlackDiamondRhinestone' }
+        ];
+
+        // Render lab items list
+        function renderLabItems() {
+            const labContainer = document.getElementById('lab-items-grid');
+            if (!labContainer) return;
+            
+            // Clear existing items
+            labContainer.innerHTML = '';
+
+            labItemsList.forEach(item => {
+                const imageUrl = window.getImageUrl('lab', item.imageKey);
+                const labItem = document.createElement('div');
+                labItem.className = 'lab-item';
+                
+                // Check if lab item is selected in state
+                const isSelected = window.farmingState[item.statePath.split('.')[0]][item.statePath.split('.')[1]] === 1;
+                if (isSelected) {
+                    labItem.classList.add('selected');
+                }
+                
+                labItem.innerHTML = `
+                    <div class="lab-checkbox-wrapper">
+                        <input type="checkbox" id="${item.id}" class="lab-checkbox" ${isSelected ? 'checked' : ''}>
+                    </div>
+                    <div class="lab-checkmark">✓</div>
+                    <div class="lab-image">
+                        <img src="${imageUrl}" alt="${item.name}" onerror="this.style.opacity='0.5'">
+                    </div>
+                    <div class="lab-name">${item.name}</div>
+                `;
+
+                // Add click handler to entire card
+                labItem.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const checkbox = labItem.querySelector(`#${item.id}`);
+                    checkbox.checked = !checkbox.checked;
+                    
+                    // Toggle selected class
+                    labItem.classList.toggle('selected');
+                    
+                    // Update state through StateManager
+                    const newValue = checkbox.checked ? 1 : 0;
+                    window.StateManager.updateState(item.statePath, newValue);
+                    console.log(`Lab item ${item.name} toggled: ${checkbox.checked}`);
+                });
+
+                labContainer.appendChild(labItem);
+            });
+        }
 
         // Render companions list
         function renderCompanions() {
@@ -489,30 +529,7 @@
         function setupManualInputs() {
             // Talents are now handled by State Inspector auto-wiring via data-state-path attributes
 
-            // Lab checkboxes
-            const chemCheck = document.getElementById('lab-chemistry-set');
-            if (chemCheck) chemCheck.addEventListener('change', () => {
-                const value = chemCheck.checked ? 1 : 0;
-                window.StateManager.updateState('lab.my1stChemistrySet', value);
-            });
-
-            const stampCheck = document.getElementById('lab-stamp-book');
-            if (stampCheck) stampCheck.addEventListener('change', () => {
-                const value = stampCheck.checked ? 1 : 0;
-                window.StateManager.updateState('lab.certifiedStampBook', value);
-            });
-
-            const spelunkerCheck = document.getElementById('lab-spelunker-obol');
-            if (spelunkerCheck) spelunkerCheck.addEventListener('change', () => {
-                const value = spelunkerCheck.checked ? 1 : 0;
-                window.StateManager.updateState('lab.spelunkerObol', value);
-            });
-
-            const mealDiamondCheck = document.getElementById('lab-meal-black-diamond');
-            if (mealDiamondCheck) mealDiamondCheck.addEventListener('change', () => {
-                const value = mealDiamondCheck.checked ? 1 : 0;
-                window.StateManager.updateState('lab.mealBlackDiamondRhinestone', value);
-            });
+            // Lab items are now handled by renderLabItems() click handlers
 
             // Other inputs
             const votingInput = document.getElementById('voting-bonus-29');
@@ -530,26 +547,9 @@
 
         // Sync all manual inputs with current state values
         function syncManualInputs() {
-            // Lab checkboxes
-            const chemCheck = document.getElementById('lab-chemistry-set');
-            if (chemCheck) {
-                chemCheck.checked = window.farmingState.lab.my1stChemistrySet === 1;
-            }
-
-            const stampCheck = document.getElementById('lab-stamp-book');
-            if (stampCheck) {
-                stampCheck.checked = window.farmingState.lab.certifiedStampBook === 1;
-            }
-
-            const spelunkerCheck = document.getElementById('lab-spelunker-obol');
-            if (spelunkerCheck) {
-                spelunkerCheck.checked = window.farmingState.lab.spelunkerObol === 1;
-            }
-
-            const mealDiamondCheck = document.getElementById('lab-meal-black-diamond');
-            if (mealDiamondCheck) {
-                mealDiamondCheck.checked = window.farmingState.lab.mealBlackDiamondRhinestone === 1;
-            }
+            // Lab items are already rendered with correct state in renderLabItems()
+            // Re-render to ensure UI is in sync after state changes
+            renderLabItems();
 
             // Other inputs
             const votingInput = document.getElementById('voting-bonus-29');
