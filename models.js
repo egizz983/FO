@@ -129,6 +129,13 @@ class LandRankUpgrade {
 
         return bonus;
     }
+    getBonusPercentOfMax() {
+        return getLandRankUpgBonusPercentOfMax(this.id, this.currentLevel || 0);
+    }
+    getLevelAtThreshold(threshold) {
+        return getLandRankUpgBonusLevelAtThreshold(this.id, threshold);
+    }
+
     getRawLevel() { return this.currentLevel || 0; }
     getName()     { return this.name; }
 }
@@ -170,9 +177,53 @@ class ExoticMarketUpgrade {
             bonus *= levelsAboveThreshold;   
         }
 
-
-
         return bonus;
+    }
+
+
+    getBonusPercentOfMax() {
+        const level = this.currentLevel || 0;
+        
+        if (this.calcType === "linear") {
+            return 0; // Linear growth, no asymptotic max
+        }
+        
+        if (this.calcType === "diminishing") {
+            // Formula: base * (level / (1000 + level))
+            // Asymptotic max = base (as level → ∞)
+            // Percentage = (level / (1000 + level)) * 100
+            const percentOfMax = (level / (1000 + level)) * 100;
+            return Math.min(100, percentOfMax);
+        }
+        
+        return 0;
+    }
+
+    getLevelAtBonusThreshold(threshold) {
+        threshold = Math.max(0, Number(threshold) || 0);
+        
+        if (this.calcType === "linear") {
+            // bonus = base * level
+            // threshold = base * level
+            // level = threshold / base
+            if (this.base <= 0) return Infinity;
+            return Math.round(threshold / this.base);
+        }
+        
+        if (this.calcType === "diminishing") {
+
+            if (this.base <= 0) return Infinity;
+            
+            const ratio = threshold / this.base;
+            
+            if (ratio <= 0) return 0;
+            if (ratio >= 1) return Infinity; // Can't reach base (asymptotic)
+            
+            const level = (1000 * ratio) / (1 - ratio);
+            return Math.round(level);
+        }
+        
+        return 0;
     }
 
     getRawLevel() { return this.currentLevel || 0; }

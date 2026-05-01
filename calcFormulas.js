@@ -29,6 +29,54 @@ function LankRankUpgBonus(t, base, level) { // engine formula
 }
 
 
+/**
+ * @param {number} t - Type parameter
+ * @param {number} level - Current level
+ * @returns {number} Percentage of max bonus (0-100), or 0 for linear growth cases
+ */
+function getLandRankUpgBonusPercentOfMax(t, level) {
+    level = Math.max(0, c.asNumber(level));
+    
+    // Special cases with linear growth (no asymptotic maximum)
+    if (t === 4 || t === 9 || t === 14 || t === 19) {
+        // Linear growth has no completion percentage, return 0 or undefined
+        return 0;
+    }
+    const percentOfMax = (level / (level + 80)) * 100;
+    
+    return Math.min(100, percentOfMax); // Cap at 100% for safety
+}
+
+/**
+
+ * @param {number} t - Type parameter
+ * @param {number} threshold - Target percentage threshold (0-100)
+ * @returns {number} Level needed to reach threshold, -1 for special cases, or Infinity if threshold >= 100
+ */
+function getLandRankUpgBonusLevelAtThreshold(t, threshold) {
+    threshold = Math.max(0, Math.min(100, c.asNumber(threshold)));
+    
+    // Special cases with linear growth (no threshold applicable)
+    if (t === 4 || t === 9 || t === 14 || t === 19) {
+        return -1; // Not applicable for linear growth
+    }
+    
+    // Handle edge cases
+    if (threshold <= 0) {
+        return 0;
+    }
+    
+    if (threshold >= 100) {
+        return Infinity; // Asymptotic limit, never truly reaches 100%
+    }
+
+    const p = threshold / 100;
+    const level = (80 * p) / (1 - p);
+    
+    return Math.round(level);
+}
+
+
 function getLandRankUpgBonusTOTAL(t) {
 
     const bonus = (id) => window.farmingState.landRank.upgrades[id]?.getBonus() || 0;
@@ -92,7 +140,7 @@ function getEmperorSummonerMultiplier(isMulti = false) {
     }
 }
 
- // ====================== Vial Multi formula ======================
+ // ====================== Vial Multi formula ================= =====
 function getVialMultiplier() {
 
     const base = 1 + (0.02 * vial_CountLevel13) + (0.10 * farming_vaultOvertuneLevel);
@@ -140,6 +188,111 @@ function getBubbleBonus(t, i) {
 
   return baseResult;
 }
+
+window.getBubbleBonusPercentOfMax = function(t, i) {
+    const Clist = window.AlchemyDescription?.[Math.floor(t)]?.[Math.floor(i)];
+    
+    if (!Clist) return 0;
+    
+    const formula = String(Clist[3]);
+    const paramA = c.asNumber(Clist[1]);
+    const paramB = c.asNumber(Clist[2]);
+    const currentLevel = c.asNumber(window.farmingState?.CauldronInfo?.[t]?.[i]) || 0;
+    
+    // For decay: bonus = (paramA * level) / (level + paramB), max (asymptote) = paramA
+    if (formula === "decay") {
+        if (paramA <= 0) return 0;
+        const currentBonus = (paramA * currentLevel) / (currentLevel + paramB);
+        const percentOfMax = (currentBonus / paramA) * 100;
+        return Math.min(100, percentOfMax);
+    }
+    
+    // For decayMulti: bonus = 1 + (paramA * level) / (level + paramB), max (asymptote) = 1 + paramA
+    if (formula === "decayMulti") {
+        if (paramA <= 0) return 0;
+        const currentBonus = 1 + (paramA * currentLevel) / (currentLevel + paramB);
+        const maxBonus = 1 + paramA;
+        const percentOfMax = ((currentBonus - 1) / paramA) * 100;
+        return Math.min(100, percentOfMax);
+    }
+    
+    // For bigBase: bonus = paramA + paramB * level, unbounded growth
+    if (formula === "bigBase") {
+        return 0; // No fixed maximum for linear growth
+    }
+    
+    // For intervalAdd: bonus = paramA + floor(level / paramB), unbounded growth
+    if (formula === "intervalAdd") {
+        return 0; // No fixed maximum
+    }
+    
+    // For add: complex formula with no clear maximum
+    if (formula === "add") {
+        return 0;
+    }
+    
+    // Other formulas not clearly invertible
+    return 0;
+};
+
+
+window.getBubbleBonusLevelAtThreshold = function(t, i, targetBonus) {
+    targetBonus = Math.max(0, Number(targetBonus) || 0);
+    
+    const Clist = window.AlchemyDescription?.[Math.floor(t)]?.[Math.floor(i)];
+    
+    if (!Clist) {
+        console.warn(`[getBubbleBonusLevelAtThreshold] No Clist found for cauldron ${t}, bubble ${i}`);
+        return -1;
+    }
+    
+    const formula = String(Clist[3]);
+    const paramA = c.asNumber(Clist[1]);
+    const paramB = c.asNumber(Clist[2]);
+    
+    // For decay: bonus = (paramA * level) / (level + paramB)
+    if (formula === "decay") {
+        if (paramA <= 0) return Infinity;
+        if (targetBonus <= 0) return 0;
+        if (targetBonus >= paramA) return Infinity; // Asymptotic limit
+        
+        const level = (targetBonus * paramB) / (paramA - targetBonus);
+        return Math.round(level);
+    }
+    
+    // For decayMulti: bonus = 1 + (paramA * level) / (level + paramB)
+    if (formula === "decayMulti") {
+        if (paramA <= 0) return Infinity;
+        if (targetBonus <= 1) return 0;
+        if (targetBonus >= 1 + paramA) return Infinity;
+        
+        const adjustedThreshold = targetBonus - 1;
+        const level = (adjustedThreshold * paramB) / (paramA - adjustedThreshold);
+        return Math.round(level);
+    }
+    
+    // For bigBase: bonus = paramA + paramB * level
+    if (formula === "bigBase") {
+        if (paramB <= 0) return Infinity;
+        if (targetBonus <= paramA) return 0;
+        
+        const level = (targetBonus - paramA) / paramB;
+        return Math.round(level);
+    }
+    
+    // For intervalAdd: bonus = paramA + floor(level / paramB)
+    if (formula === "intervalAdd") {
+        if (paramB <= 0) return Infinity;
+        if (targetBonus <= paramA) return 0;
+        
+        // level = (targetBonus - paramA - 1) * paramB + 1 (first level that reaches threshold)
+        const level = (targetBonus - paramA - 1) * paramB + 1;
+        return Math.max(0, Math.round(level));
+    }
+    
+    // Other formulas not directly invertible
+    return -1;
+};
 
 function getPrismaBonusMult() {
   const arcaneUpg = getArcaneUpgBonus(45, 0);
@@ -639,8 +792,6 @@ window.getVialBonus = function(i, level) {
         c.asNumber(level)
     );
 
-
-
     if (window.farmingState.lab.my1stChemistrySet) {
         const result = 2 * (1 + dnzz) * (1 + merit) * arbitraryResult;
 
@@ -649,6 +800,69 @@ window.getVialBonus = function(i, level) {
         const result = (1 + dnzz) * (1 + merit) * arbitraryResult;
         return result;
     }
+};
+
+window.getVialBonusPercentOfMax = function(level) {
+    level = Math.max(0, c.asNumber(level));
+    
+    if (level <= 0) return 0;
+    
+    // Max level is 13, percentage = (level / 13) * 100
+    const percentOfMax = (level / 13) * 100;
+    return Math.min(100, percentOfMax);
+};
+
+
+window.getVialBonusLevelAtThreshold = function(i, targetBonus) {
+    targetBonus = Math.max(0, Number(targetBonus) || 0);
+    
+    let customlist = window.AlchemyDescription?.[4]?.[0 | i];
+    
+    if (!customlist) {
+        console.warn(`[getVialBonusLevelAtThreshold] No customlist found for vial index ${i}`);
+        return -1;
+    }
+    
+    const formula = String(customlist[3]);
+    const paramA = c.asNumber(customlist[1]);
+    const paramB = c.asNumber(customlist[2]);
+    
+
+    if (formula === "decay") {
+
+        
+        if (paramA <= 0) return Infinity;
+        if (targetBonus <= 0) return 0;
+        if (targetBonus >= paramA) return Infinity; // Asymptotic limit
+        
+        const level = (targetBonus * paramB) / (paramA - targetBonus);
+        return Math.round(level);
+    }
+    
+
+    if (formula === "decayMulti") {
+
+        
+        if (paramA <= 0) return Infinity;
+        if (targetBonus <= 1) return 0;
+        if (targetBonus >= 1 + paramA) return Infinity;
+        
+        const adjustedThreshold = targetBonus - 1;
+        const level = (adjustedThreshold * paramB) / (paramA - adjustedThreshold);
+        return Math.round(level);
+    }
+
+    if (formula === "bigBase") {
+
+        
+        if (paramB <= 0) return Infinity;
+        if (targetBonus <= paramA) return 0;
+        
+        const level = (targetBonus - paramA) / paramB;
+        return Math.round(level);
+    }
+
+    return -1;
 };
 
 // VaultUpgbonus
@@ -736,9 +950,37 @@ function getCardBonus(cardQuantity = 0) {
     // Calculate bonus: +50% per level
     const bonusPercent = level * 50;
     
-
     return bonusPercent; // Flat: return % value
+}
 
+function getCardBonusPercentOfMax(cardQuantity = 0) {
+    const thresholds = [1, 1500000, 4500000, 7500000, 24000000, 688500000, 21967500000];
+    let level = 0;
+    
+    // Determine card level based on quantity
+    for (let i = 0; i < thresholds.length; i++) {
+        if (cardQuantity >= thresholds[i]) {
+            level = i + 1;
+        } else {
+            break;
+        }
+    }
+    
+    // Max level is 7, percentage = (level / 7) * 100
+    const percentOfMax = (level / 7) * 100;
+    return Math.min(100, percentOfMax);
+}
+
+
+function getCardQuantityAtLevel(targetLevel) {
+    const thresholds = [1, 1500000, 4500000, 7500000, 24000000, 688500000, 21967500000];
+    targetLevel = Math.max(0, Math.min(7, Math.round(Number(targetLevel) || 0)));
+    
+    if (targetLevel <= 0) return 0;
+    if (targetLevel > thresholds.length) return Infinity;
+    
+    // Return the threshold for the target level (index is level - 1)
+    return thresholds[targetLevel - 1];
 }
 
 
@@ -1121,6 +1363,32 @@ function getKillroyBonus() {
     return 1 + (window.farmingState.miscBonuses.evoSkullShop  / (300 + window.farmingState.miscBonuses.evoSkullShop )) * 9;
 }
 
+function getKillroyBonusPercentOfMax() {
+    const level = window.farmingState?.miscBonuses?.evoSkullShop || 0;
+    
+    if (level <= 0) return 0;
+    
+    // Percentage toward asymptotic max (10):
+    // (9 * level) / (300 + level) is the bonus portion
+    // Percentage = (level / (level + 300)) * 100
+    const percentOfMax = (level / (level + 300)) * 100;
+    return Math.min(100, percentOfMax);
+}
+
+
+function getKillroyBonusLevelAtThreshold(threshold) {
+    threshold = Math.max(1, Math.min(10, Number(threshold) || 1));
+
+    
+    const adjustedThreshold = threshold - 1;
+    
+    if (adjustedThreshold <= 0) return 0;
+    if (adjustedThreshold >= 9) return Infinity; // Can't reach bonus of 10 (asymptotic)
+    
+    const level = (adjustedThreshold * 300) / (9 - adjustedThreshold);
+    return Math.round(level);
+}
+
 
 //=====================rift skill mastery formula=========================================
 // 1.15× (multiplicative at 200 total Farming levels) Lv0_1[16] > 200 ? 1.15 : 1
@@ -1444,7 +1712,160 @@ function setTalentLevel(talentId, newLevel) {
 
 
 /**
+ * Get talent bonus percentage of maximum (0-100)
+ * Handles different formula types from ArbitraryCode5Inputs
+ * 
+ * @param {number} mode     - 1 = primary effect, other = secondary effect
+ * @param {number} talentId - Talent ID
+ * @returns {number} Percentage of max bonus (0-100), or 0 for linear/unbounded formulas
+ */
+function getTalentNumberPercentOfMax(mode, talentId) {
+    const calcLevel = getHighesttalentlevelperID(talentId);
+    
+    if (calcLevel <= 0) return 0;
 
+    const talentData = window.TalentDescriptions[Math.floor(talentId)][1];
+
+    // Choose which formula + parameters to use
+    let formula, paramA, paramB;
+    if (mode === 1) {
+        formula = String(talentData[2]);
+        paramA = c.asNumber(talentData[0]);
+        paramB = c.asNumber(talentData[1]);
+    } else {
+        formula = String(talentData[5]);
+        paramA = c.asNumber(talentData[3]);
+        paramB = c.asNumber(talentData[4]);
+    }
+
+    // For decay formulas: bonus asymptotically approaches paramA
+    // Percentage = (calcLevel / (calcLevel + paramB)) * 100
+    if (formula === "decay" || formula === "decayLower") {
+        const percentOfMax = (calcLevel / (calcLevel + paramB)) * 100;
+        return Math.min(100, percentOfMax);
+    }
+
+    // For decayMulti: bonus = 1 + (paramA * level) / (level + paramB)
+    // Asymptotic max = 1 + paramA, so percentage based on level/(level+paramB)
+    if (formula === "decayMulti" || formula === "decayMultiLower") {
+        const percentOfMax = (calcLevel / (calcLevel + paramB)) * 100;
+        return Math.min(100, percentOfMax);
+    }
+
+    // Linear formulas (add, bigBase, intervalAdd, reduce) have unbounded growth
+    if (["add", "addLower", "bigBase", "bigBaseLower", "intervalAdd", "intervalAddLower", "reduce", "reduceLower", "PtsSpentOnGuildBonus"].includes(formula)) {
+        return 0; // No asymptotic max
+    }
+
+    // addDECAY has decay after level 50000
+    if (formula === "addDECAY") {
+        if (calcLevel < 50001) {
+            return 0; // Linear up to 50000, no asymptotic max
+        } else {
+            // After 50000: decays, approaches max
+            const excessLevel = calcLevel - 50000;
+            const decayPercent = (excessLevel / (excessLevel + 150000)) * 100;
+            return Math.min(100, decayPercent);
+        }
+    }
+
+    return 0; // Default for unknown formulas
+}
+
+/**
+ * Get talent level needed to reach a specific bonus threshold
+ * Handles different formula types from ArbitraryCode5Inputs
+ * 
+ * @param {number} mode      - 1 = primary effect, other = secondary effect
+ * @param {number} talentId  - Talent ID
+ * @param {number} threshold - Target bonus value
+ * @returns {number} Level needed, Infinity if unreachable, -1 if not applicable
+ */
+function getTalentNumberLevelAtThreshold(mode, talentId, threshold) {
+    threshold = Math.max(0, Number(threshold) || 0);
+
+    const talentData = window.TalentDescriptions[Math.floor(talentId)][1];
+
+    // Choose which formula + parameters to use
+    let formula, paramA, paramB;
+    if (mode === 1) {
+        formula = String(talentData[2]);
+        paramA = c.asNumber(talentData[0]);
+        paramB = c.asNumber(talentData[1]);
+    } else {
+        formula = String(talentData[5]);
+        paramA = c.asNumber(talentData[3]);
+        paramB = c.asNumber(talentData[4]);
+    }
+
+    // ═══════════════════════════════════════════════════════════
+    // DECAY FORMULAS: bonus = (paramA * level) / (level + paramB)
+    // ═══════════════════════════════════════════════════════════
+    if (formula === "decay") {
+        // threshold = (paramA * level) / (level + paramB)
+        // Solve: level = (threshold * paramB) / (paramA - threshold)
+        
+        if (paramA <= 0) return Infinity;
+        if (threshold <= 0) return 0;
+        if (threshold >= paramA) return Infinity; // Asymptotic limit
+        
+        const level = (threshold * paramB) / (paramA - threshold);
+        return Math.round(level);
+    }
+
+    // ═══════════════════════════════════════════════════════════
+    // DECAY MULTI FORMULAS: bonus = 1 + (paramA * level) / (level + paramB)
+    // ═══════════════════════════════════════════════════════════
+    if (formula === "decayMulti") {
+        // threshold = 1 + (paramA * level) / (level + paramB)
+        // threshold - 1 = (paramA * level) / (level + paramB)
+        // Solve: level = ((threshold - 1) * paramB) / (paramA - (threshold - 1))
+        
+        if (paramA <= 0) return Infinity;
+        if (threshold <= 1) return 0;
+        if (threshold >= 1 + paramA) return Infinity; // Asymptotic limit
+        
+        const adjustedThreshold = threshold - 1;
+        const level = (adjustedThreshold * paramB) / (paramA - adjustedThreshold);
+        return Math.round(level);
+    }
+
+    // ═══════════════════════════════════════════════════════════
+    // BIG BASE FORMULAS: bonus = paramA + paramB * level
+    // ═══════════════════════════════════════════════════════════
+    if (formula === "bigBase") {
+        // threshold = paramA + paramB * level
+        // Solve: level = (threshold - paramA) / paramB
+        
+        if (paramB <= 0) return Infinity;
+        if (threshold <= paramA) return 0;
+        
+        const level = (threshold - paramA) / paramB;
+        return Math.round(level);
+    }
+
+    // ═══════════════════════════════════════════════════════════
+    // LINEAR FORMULAS: unbounded growth, level = threshold / paramB or similar
+    // ═══════════════════════════════════════════════════════════
+    if (formula === "intervalAdd") {
+        // bonus = paramA + Math.floor(level / paramB)
+        // Solve: level = (threshold - paramA) * paramB
+        
+        if (paramB <= 0) return Infinity;
+        if (threshold <= paramA) return 0;
+        
+        const level = (threshold - paramA) * paramB;
+        return Math.round(level);
+    }
+
+    if (["add", "addLower", "addDECAY", "reduce", "reduceLower", "decayLower", "decayMultiLower", "bigBaseLower", "intervalAddLower", "PtsSpentOnGuildBonus"].includes(formula)) {
+        return -1; // Complex inversion or not applicable
+    }
+
+    return -1; // Unknown formula
+}
+
+/**
  * @param {number} mode     - 1 = primary effect (usually the one shown in-game)
  *                          - any other value = secondary effect (often the "per level" description)
  * @param {number} talentId - Talent ID (e.g. 625 for "Toilet Paper Postage")
