@@ -2298,11 +2298,9 @@ function DNSMInit(){
 }
 
 function calculateNextOGChance(t) {
-
-
     return (
-        Math.pow( 0.4, 1 ) * // current og count // c.asNumber(farmPlot[plotIndex][5]) + 1
-        Math.max(  1, window.farmingState.market.night?.find(u => u.index === 13)?.getBonus()  ) //*m._customBlock_FarmingStuffs("BasketUpgQTY", 1, 3)
+        Math.pow( 0.4, t+ 1 ) * // current og count // c.asNumber(farmPlot[plotIndex][5]) + 1
+        Math.max(  1, window.farmingState.market.night?.find(u => u.index === 13)?.getBonus()  ) 
         (1 + (50 *(window.farmingState?.pristineCharms?.[11] || 0)) / 100) *   // 
         (1 + c.asNumber(getStarSigns(67)) / 100) *
         (1 + (2 * c.asNumber(window.farmingState.miscBonuses.ogMeritShop)) / 100) *

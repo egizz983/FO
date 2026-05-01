@@ -450,7 +450,7 @@
              const exotic47 = farmingState.market.exotic.find(u => u.index === 47)?.getBonus().toMulti();
              let result = 
                 Math.pow( 0.4, 1 ) * nightmarket* pristinecharm* starsignsOG* meritshop* achievement* landranktotal* exotic46* exotic47;
-             return result.toFixed(1);
+             return (1000 * result).toFixed(1);
         }
 
         function renderFarmingBonuses() {
