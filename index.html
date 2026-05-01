@@ -351,11 +351,51 @@
 
         function calculateEvolutionTotal() {
             const state = window.farmingState;
-            
-            // 1. Land Ranks Total - multiply all Evolution upgrades
-            const landRanksTotal = getLandRankUpgBonusTOTAL(0) || 1;
+
             const marketDay = farmingState.market.day.find(u => u.index === 6)?.getBonus() || 1;
+
+            const summonerWinBonusTotal = window.getWinBonus(10).toMulti();
+
+            const holeLampBonusTotal = window.getLampBonus().toMulti();
+
+            const monumentTotal = getmonumentROGbonuses(2, 4).toMulti();
+
+            const sushiBonusTotal = getRoGBonusQTY(35).toMulti();
+
+            const cropChapterBubbleTotal = (window.calculateBubbleBonus(state.alchemy.cropChapterBubblebonus, 12, 50) * window.calculateTomeScorePer2000()).toMulti();
+
+            const croppiusMapperTotal = (window.calculateBubbleBonus(state.alchemy.croppiusMapperBubblebonus, 5, 70) * window.calculateKillsLeftToAdvance()).toMulti();
+
+            const flavorgilVial = getVialBonus(66,window.farmingState.alchemy.flavorgilBonus).toMulti();
+
+            const cardBonusTotal = getCardBonus(window.farmingState.miscBonuses.jellofishcard).toMulti();
+
+            const billJackPepperTotal = window.getMealBonus(62, state.meals.evoBillJackPepperRibbonLevel, state.meals.evoBillJackPepper).toMulti();
+            
+            const nyanborgirTotal = (window.getMealBonus(66, state.meals.evoNyanborgirRibbonLevel, state.meals.evoNyanborgir) * Math.ceil((c.asNumber(state.levels.summoning) + 1) / 50)).toMulti();
+
+            const vaultUpgradeTotal = window.getVaultUpgBonus(78).toMulti();
+
+            const evoStamp = getStampBonusOfType(1,47,window.farmingState.miscBonuses.evoCropEvoStamp).toMulti();
+
+            const grimoireTotal = grimoireUpgBonus().toMulti();
+            
+            const achievementTotal = (5 * (state.achievements.farmingEvoLilOvergrowth === -1 ? 1 : 0)).toMulti();
+
+            const killroybonus = getKillroyBonus();
+
             const marketNight = farmingState.market.night.find(u => u.index === 11)?.getBonus() || 1;
+
+            const skillMasteryBonus = getSkillMasteryBonus();
+
+            const starsign = (getStarSigns(65) * window.farmingState.levels.farming).toMulti();
+
+            const landRanksTotal = getLandRankUpgBonusTOTAL(0) || 1;
+            
+            const landrankUpg0 = (farmingState.landRank.upgrades[0].getBonus() * farmingState.landRank.stats.first + window.farmingState.miscBonuses.votingBonus29).toMulti();
+            
+            const massIrrigationBonus = getTalentNumber(1,205);
+            
             const exoticMultipliers = state.market.exotic
                 .filter(u => u.group === "Evolution" && u.isMultiplier)
                 .reduce((prod, u) => prod * u.getBonus().toMulti(), 1);
@@ -364,68 +404,39 @@
                 .filter(u => u.group === "Evolution" && !u.isMultiplier)
                 .reduce((sum, u) => sum + u.getBonus(), 0).toMulti();
 
-            const marketTotal = marketDay * marketNight * exoticMultipliers * exoticAdditives;
-            
-            // 3. SummonerWinBonus
-            const summonerWinBonusTotal = window.getWinBonus(10).toMulti();
-
-            // 4. Hole Lamp Bonus
-            const holeLampBonusTotal = window.getLampBonus().toMulti();
-            
-            // 5. Sushi Bonus
-            const sushiBonusTotal = getRoGBonusQTY(35).toMulti();
-            
-            // 6. Card Bonus (Jello Fish Card)
-            const cardBonusTotal = getCardBonus(window.farmingState.miscBonuses.jellofishcard).toMulti();
-            
-            // 7. Croppius Mapper Bubble (with KLA multiplier)
-            const croppiusMapperTotal = (window.calculateBubbleBonus(state.alchemy.croppiusMapperBubblebonus, 5, 70) * window.calculateKillsLeftToAdvance()).toMulti();
-            // 8. Crop Chapter Bubble (with Tome Score multiplier)
-            const cropChapterBubbleTotal = (window.calculateBubbleBonus(state.alchemy.cropChapterBubblebonus, 12, 50) * window.calculateTomeScorePer2000()).toMulti();
-            // 9. Bill Jack Pepper Meal Bonus
-            const billJackPepperTotal = window.getMealBonus(62, state.meals.evoBillJackPepperRibbonLevel, state.meals.evoBillJackPepper).toMulti();
-            // 10. Nyanborgir Meal Bonus
-            const nyanborgirTotal = (window.getMealBonus(66, state.meals.evoNyanborgirRibbonLevel, state.meals.evoNyanborgir) * Math.ceil((c.asNumber(state.levels.summoning) + 1) / 50)).toMulti();
-            // 11. Monument Bonus
-            const monumentTotal = getmonumentROGbonuses(2, 4).toMulti();
-            
-            // 12. Vault Upgrade Bonus
-            const vaultUpgradeTotal = window.getVaultUpgBonus(78).toMulti();
-            
-            // 13. Achievement Bonus
-            const achievementTotal = (5 * (state.achievements.farmingEvoLilOvergrowth === -1 ? 1 : 0)).toMulti();
-            const grimoireTotal = grimoireUpgBonus().toMulti();
-            const killroybonus = getKillroyBonus();
-            const skillMasteryBonus = getSkillMasteryBonus();
-            const massIrrigationBonus = getTalentNumber(1,205);
-            const stickerBonus = getStickerBonus(4).toMulti();
             const buttonBonus = getButtonBonuses(5,window.farmingState.miscBonuses.evoButtonPressCount).toMulti();
-            const flavorgilVial = getVialBonus(66,window.farmingState.alchemy.flavorgilBonus).toMulti();
+            
+            const stickerBonus = getStickerBonus(4).toMulti();
 
             // Multiply all with full precision, then format for display
-            const total = 
-            landRanksTotal * 
-            marketTotal * 
-            summonerWinBonusTotal * 
-            holeLampBonusTotal * 
-            sushiBonusTotal * 
-            cardBonusTotal * 
-            croppiusMapperTotal * 
-            cropChapterBubbleTotal * 
-            billJackPepperTotal * 
-            nyanborgirTotal * 
-            monumentTotal * 
-            vaultUpgradeTotal * 
-            achievementTotal * 
-            grimoireTotal * 
-            killroybonus * 
-            skillMasteryBonus * 
-            stickerBonus *
-            buttonBonus *
-            massIrrigationBonus *
-            flavorgilVial;
+            let result = marketDay;
+            result *= summonerWinBonusTotal;
+            result *= holeLampBonusTotal;
+            result *= monumentTotal;
+            result *= sushiBonusTotal;
+            result *= cropChapterBubbleTotal;
+            result *= croppiusMapperTotal;
+            result *= flavorgilVial;
+            result *= cardBonusTotal;
+            result *= billJackPepperTotal;
+            result *= nyanborgirTotal;
+            result *= vaultUpgradeTotal;
+            result *= evoStamp;
+            result *= grimoireTotal;
+            result *= achievementTotal;
+            result *= killroybonus;
+            result *= marketNight;
+            result *= skillMasteryBonus;
+            result *= starsign;
+            result *= landRanksTotal;
+            result *= landrankUpg0;
+            result *= massIrrigationBonus;
+            result *= exoticMultipliers;
+            result *= exoticAdditives;
+            result *= buttonBonus;
+            result *= stickerBonus;
 
-            return total.toExponential(4);
+            return result.toExponential(4);
         }
 
         function renderFarmingBonuses() {
