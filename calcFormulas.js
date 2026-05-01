@@ -2300,16 +2300,13 @@ function DNSMInit(){
 function calculateNextOGChance(t) {
 
 
-    const farmPlot = a.engine.getGameAttribute("FarmPlot"); 
-    const plotIndex = 0 | t; // keep original fast integer conversion
-
     return (
-        Math.pow( 0.4, c.asNumber(farmPlot[plotIndex][5]) + 1  ) * // current og count
+        Math.pow( 0.4, 1 ) * // current og count // c.asNumber(farmPlot[plotIndex][5]) + 1
         Math.max(  1, window.farmingState.market.night?.find(u => u.index === 13)?.getBonus()  ) //*m._customBlock_FarmingStuffs("BasketUpgQTY", 1, 3)
         (1 + (50 *(window.farmingState?.pristineCharms?.[11] || 0)) / 100) *   // 
         (1 + c.asNumber(getStarSigns(67)) / 100) *
         (1 + (2 * c.asNumber(window.farmingState.miscBonuses.ogMeritShop)) / 100) *
-        (1 + (15 * (window.farmingState.achievements.farmingOgBigTimeLandOwner == -1 ? 1 : 0))) / 100) *
+        (1 + (15 * (window.farmingState.achievements.farmingOgBigTimeLandOwner == -1 ? 1 : 0) / 100)) *
         (1 + getLandRankUpgBonusTOTAL(3) / 100) *
         (1 + window.farmingState.market.exotic.find(u => u.index === 46)?.getBonus() / 100) * 
         (1 + window.farmingState.market.exotic.find(u => u.index === 47)?.getBonus() / 100)
@@ -2317,8 +2314,7 @@ function calculateNextOGChance(t) {
 }
 
 function calculateOGMulti(t) {
-    // t is used as the FarmPlot index (original uses `0 | t` for fast flooring to int)
-    // i is NOT present in this code block, so it is not included as a parameter
+
 
     const farmPlot = a.engine.getGameAttribute("FarmPlot");
     const plotIndex = 0 | t; // keep original fast integer conversion

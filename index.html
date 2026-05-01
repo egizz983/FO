@@ -438,6 +438,20 @@
 
             return result.toExponential(4);
         }
+        function calculateOverGrowthTotal(){
+             const state = window.farmingState;
+             const nightmarket = Math.max(  1, window.farmingState.market.night?.find(u => u.index === 13)?.getBonus()  ).toMulti();
+             const pristinecharm = (50 *(window.farmingState?.pristineCharms?.[11] || 0)).toMulti();
+             const starsignsOG = getStarSigns(67).toMulti();
+             const meritshop = (2 * window.farmingState.miscBonuses.ogMeritShop).toMulti();
+             const achievement = (15 * (window.farmingState.achievements.farmingOgBigTimeLandOwner == -1 ? 1 : 0) ).toMulti();
+             const landranktotal = getLandRankUpgBonusTOTAL(3).toMulti();
+             const exotic46 = farmingState.market.exotic.find(u => u.index === 46)?.getBonus().toMulti();
+             const exotic47 = farmingState.market.exotic.find(u => u.index === 47)?.getBonus().toMulti();
+             let result = 
+                Math.pow( 0.4, 1 ) * nightmarket* pristinecharm* starsignsOG* meritshop* achievement* landranktotal* exotic46* exotic47;
+             return result.toFixed(1);
+        }
 
         function renderFarmingBonuses() {
             const buttonsContainer = document.getElementById('bonus-buttons-container');
@@ -446,12 +460,17 @@
             // Calculate Evolution total dynamically
             const evolutionTotal = calculateEvolutionTotal();
             
+            // Calculate Overgrowth total dynamically
+            const overgrowthTotal = calculateOverGrowthTotal() + "×";
+            
             // Calculate Crop Value Cap dynamically
             const cropValueCap = window.getCropValueCap().toFixed(0);
             
             const bonusesWithCalculated = farmingBonuses.map(bonus => 
                 bonus.name === "Evolution" 
                     ? { ...bonus, totalValue: evolutionTotal }
+                    : bonus.name === "Overgrowth"
+                    ? { ...bonus, totalValue: overgrowthTotal }
                     : bonus.name === "Crop Value"
                     ? { ...bonus, totalValue: cropValueCap }
                     : bonus

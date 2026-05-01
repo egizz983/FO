@@ -11,7 +11,7 @@ window.getFarmingBreakdowns = function() {
                     name: "Day Market",
                     total: "Total:" + "×" + ((farmingState.market.day.find(u => u.index === 6)?.getBonus() || 0) ).toFixed(2),
                     items: [
-                        { label: "Biology Boost", value: "×" + (farmingState.market.day.find(u => u.index === 6)?.getBonus() || 0).toFixed(2),threshold: "Linear" }
+                        { label: "Biology Boost", value: "×" + (farmingState.market.day.find(u => u.index === 6)?.getBonus() || 0).toFixed(2),threshold: getLevelPercentage(window.farmingState.market.day?.find(u => u.index === 6)?.getRawLevel(),500+getGridBonus(171)).toFixed(2) + "%" }
                     ]
                 },
                 {
@@ -74,21 +74,22 @@ window.getFarmingBreakdowns = function() {
                     name: "Meals A",
                     total: "Total:" + "×" + window.getMealBonus(62, farmingState.meals.evoBillJackPepperRibbonLevel, farmingState.meals.evoBillJackPepper).toMulti().toFixed(2),
                     items: [
-                        { label: "Bill Jack Pepper", value: "×" + window.getMealBonus(62, farmingState.meals.evoBillJackPepperRibbonLevel, farmingState.meals.evoBillJackPepper).toMulti().toFixed(2), threshold: "Linear"  }
+                        { label: "Bill Jack Pepper", value: "×" + window.getMealBonus(62, farmingState.meals.evoBillJackPepperRibbonLevel, farmingState.meals.evoBillJackPepper).toMulti().toFixed(2), threshold: getLevelPercentage(farmingState.meals.evoBillJackPepper ,150).toFixed(2) + "%" }
                     ]
                 },
                 {
                     name: "Meal B",
                     total: "Total:" + "×" + (window.getMealBonus(66, farmingState.meals.evoNyanborgirRibbonLevel, farmingState.meals.evoNyanborgir) * Math.ceil((c.asNumber(farmingState.levels.summoning) + 1) / 50)).toMulti().toFixed(2),
                     items: [
-                        { label: "Nyanborgir", value: "×" + (window.getMealBonus(66, farmingState.meals.evoNyanborgirRibbonLevel, farmingState.meals.evoNyanborgir) * Math.ceil((c.asNumber(farmingState.levels.summoning) + 1) / 50)).toMulti().toFixed(2), threshold: "Linear" }
+                        { label: "Nyanborgir", value: "×" + (window.getMealBonus(66, farmingState.meals.evoNyanborgirRibbonLevel, farmingState.meals.evoNyanborgir) * Math.ceil((c.asNumber(farmingState.levels.summoning) + 1) / 50)).toMulti().toFixed(2),
+                             threshold: getLevelPercentage(farmingState.meals.evoNyanborgir ,150).toFixed(2) + "%" }
                     ]
                 },
                 {
                     name: "Vault",
                     total: "Total:" + "×" + window.getVaultUpgBonus(78).toMulti().toFixed(2),
                     items: [
-                        { label: "Croppius Evolvius", value: "×" + window.getVaultUpgBonus(78).toMulti().toFixed(2), threshold: "Linear" }
+                        { label: "Croppius Evolvius", value: "×" + window.getVaultUpgBonus(78).toMulti().toFixed(2), threshold: getLevelPercentage(window.farmingState.vaultupg[78] ,250).toFixed(2) + "%" }
                     ]
                 },
                 {
@@ -123,7 +124,7 @@ window.getFarmingBreakdowns = function() {
                     name: "Night Market",
                     total: "Total:" + "×" + (farmingState.market.night.find(u => u.index === 11)?.getBonus() || 0).toExponential(4),
                     items: [
-                        { label: "Evo GMO", value: "×" + (farmingState.market.night.find(u => u.index === 11)?.getBonus() || 0).toExponential(4), threshold: "Linear" }
+                        { label: "Evo GMO", value: "×" + (farmingState.market.night.find(u => u.index === 11)?.getBonus() || 0).toExponential(4),threshold: getLevelPercentage(window.farmingState.market.night?.find(u => u.index === 11)?.getRawLevel(),500+getGridBonus(171)).toFixed(2) + "%" }
                     ]
                 },
                 {
@@ -230,19 +231,63 @@ window.getFarmingBreakdowns = function() {
         "Overgrowth": {
             groups: [
                 {
-                    name: "Land Ranks",
-                    items: farmingState.landRank.upgrades
-                        .filter(u => u.group === "Overgrowth")
-                        .map(u => ({
-                            label: u.name,
-                            value: "+" + u.getBonus().toFixed(2) + "%"
-                        }))
+                    name: "Night Market",
+                    total: "Total:" + "x" + Math.max(  1, window.farmingState.market.night?.find(u => u.index === 13)?.getBonus()  ).toMulti().toFixed(2),
+                    items: [
+                        { label: "OG Fertilizer", 
+                        value: "×" + Math.max(  1, window.farmingState.market.night?.find(u => u.index === 13)?.getBonus()  ).toMulti().toFixed(2),
+                        threshold: getLevelPercentage(window.farmingState.market.night?.find(u => u.index === 13)?.getRawLevel(),500+getGridBonus(171)).toFixed(2) + "%" } // update threshold with max level 
+                    ]
                 },
                 {
-                    name: "Market",
+                    name: "Pristine Charm",
+                    total: "Total:" + "×" + (50 *(window.farmingState?.pristineCharms?.[11] || 0)).toMulti().toFixed(2),
                     items: [
-                        { label: "Placeholder 1", value: "×PLACEHOLDER" },
-                        { label: "Placeholder 2", value: "×PLACEHOLDER" }
+                        { label: "Placeholder", value: "x" + (50 *(window.farmingState?.pristineCharms?.[11] || 0)).toMulti().toFixed(2), threshold: window.farmingState?.pristineCharms?.[11] ? "100%" : "0%" }
+                    ]
+                },
+                {
+                    name: "Star Sign",
+                    total: "Total:" + "×" + getStarSigns(67).toMulti().toFixed(2),
+                    items: [
+                        { label: "O.G. Signalais", value: "×"+ getStarSigns(67).toMulti().toFixed(2), threshold: getStarSigns(67).toMulti().toFixed(2) > 1 ? "100%" : "0%" }
+                    ]
+                },
+                {
+                    name: "Merit Shop",
+                    total: "Total:" + "×" + (2 * window.farmingState.miscBonuses.ogMeritShop).toMulti().toFixed(2),
+                    items: [
+                        { label: "W6 MeritShop", value: "×" + (2 * window.farmingState.miscBonuses.ogMeritShop).toMulti().toFixed(2), threshold: getLevelPercentage(window.farmingState.miscBonuses.ogMeritShop,15).toFixed(2) + "%" }
+                    ]
+                },
+                {
+                    name: "Achievement",
+                    total: "Total:" + "×" + (15 * (window.farmingState.achievements.farmingOgBigTimeLandOwner == -1 ? 1 : 0) ).toMulti().toFixed(2),
+                    items: [
+                        { label: "Big Time Land Owner", value: "×" + (15 * (window.farmingState.achievements.farmingOgBigTimeLandOwner == -1 ? 1 : 0) ).toMulti().toFixed(2), threshold: window.farmingState.achievements.farmingOgBigTimeLandOwner == -1 ? "100%" : "0s%" }
+                    ]
+                },
+                {
+                    name: "Landrank",
+                    total: "Total:" + "×" + getLandRankUpgBonusTOTAL(3).toMulti().toFixed(2),
+                    items: [
+                        { label: "Overgrowth Boost ", value: "+"+ farmingState.landRank.upgrades[7].getBonus().toMulti().toFixed(2), threshold: farmingState.landRank.upgrades[7].getBonusPercentOfMax().toFixed(2) + "%" },
+                        { label: "Overgrowth Megaboost ", value: "+"+ farmingState.landRank.upgrades[11].getBonus().toMulti().toFixed(2), threshold: farmingState.landRank.upgrades[11].getBonusPercentOfMax().toFixed(2) + "%" },
+                        { label: "Overgrowth Superboost ", value: "+"+ farmingState.landRank.upgrades[18].getBonus().toMulti().toFixed(2), threshold: farmingState.landRank.upgrades[18].getBonusPercentOfMax().toFixed(2) + "%" }
+                    ]
+                },
+                {
+                    name: "Exotic A",
+                    total: "Total:" + "x"+ farmingState.market.exotic.find(u => u.index === 46)?.getBonus().toMulti().toFixed(2),
+                    items: [
+                        { label: "Evergrow I ", value: "x" + farmingState.market.exotic.find(u => u.index === 46)?.getBonus().toFixed(2) + "%", threshold: farmingState.market.exotic.find(u => u.index === 46)?.getBonusPercentOfMax().toFixed(2) + "%" },
+                    ]
+                },
+                {
+                    name: "Exotic B",
+                    total: "Total:" + "x"+ farmingState.market.exotic.find(u => u.index === 47)?.getBonus().toMulti().toFixed(2),
+                    items: [
+                        { label: "Evergrow II", value: "x" + farmingState.market.exotic.find(u => u.index === 47)?.getBonus().toFixed(2) + "%", threshold: farmingState.market.exotic.find(u => u.index === 47)?.getBonusPercentOfMax().toFixed(2) + "%" }
                     ]
                 }
             ]
@@ -299,7 +344,7 @@ window.getFarmingBreakdowns = function() {
 
                         {
                             label: "Value GMO",
-                            value: "x" + farmingState.market.night.find(u => u.index === 16)?.getBonus().toFixed(2), threshold: "Linear"
+                            value: "x" + farmingState.market.night.find(u => u.index === 16)?.getBonus().toFixed(2), threshold: getLevelPercentage(window.farmingState.market.night?.find(u => u.index === 16)?.getRawLevel(),500+getGridBonus(171)).toFixed(2) + "%"
                         }
 
                     ]
@@ -310,7 +355,7 @@ window.getFarmingBreakdowns = function() {
                     items: [
                         {
                             label: "Product Doubler",
-                            value: "+" + (farmingState.market.day.find(u => u.index === 5+2)?.getBonus() || 0).toFixed(2) + "%" , threshold: "Linear"
+                            value: "+" + (farmingState.market.day.find(u => u.index === 5+2)?.getBonus() || 0).toFixed(2) + "%" , threshold: getLevelPercentage(window.farmingState.market.day?.find(u => u.index === 5+2)?.getRawLevel(),500+getGridBonus(171)).toFixed(2) + "%"
                         },
                         {
                             label: "Double Petal I",
