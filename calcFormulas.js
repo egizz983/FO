@@ -2293,6 +2293,7 @@ function recalcChipBonuses() {
     }
   }
 }
+
 function DNSMInit(){
     recalcChipBonuses();
 }
@@ -2327,4 +2328,20 @@ function calculateOGMulti(t) {
             )
         )
     );
+}
+
+//==========================Growth Speed =============================
+
+function calculateGrowthRate() {
+  const speedGMO   = window.farmingState?.market?.night?.find(u => u.index === 12)?.getBonus() || 0;
+  const Daymarket  = window.farmingState?.market?.day?.find(u => u.index === 4)?.getBonus()  || 0;
+  const alchBonus    = getVialBonus(64,window.farmingState?.alchemy?.ricecakoradeBonus); // vial 64
+  const exoticBonus  = window.farmingState?.market?.exalted?.find(u => u.index === 50)?.getBonus() || 0;
+  const winBonus     = getWinBonus(2);
+
+  return (
+    Math.max(1, speedGMO) *
+    (1 + (Daymarket + alchBonus + exoticBonus) / 100) *
+    (1 + winBonus / 100)
+  );
 }

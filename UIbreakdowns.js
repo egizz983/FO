@@ -390,15 +390,26 @@ window.getFarmingBreakdowns = function() {
         "Growth Speed": {
             groups: [
                 {
-                    name: "Market",
+                    name: "Night Market",
+                    total: "Total:" + "x" + (window.farmingState?.market?.night?.find(u => u.index === 12)?.getBonus() || 0).toFixed(2),
                     items: [
-                        { label: "Placeholder", value: "PLACEHOLDER%" }
+                        { label: "SpeedGMO", value: "x" + (window.farmingState?.market?.night?.find(u => u.index === 12)?.getBonus() || 0).toFixed(2), threshold:  getLevelPercentage(window.farmingState?.market?.night?.find(u => u.index === 12)?.getRawLevel(),500+getGridBonus(171)).toFixed(2) + "%" }
                     ]
                 },
                 {
-                    name: "Summoning",
+                    name: "Mix",
+                    total: "Total:" + "x" + ((window.farmingState?.market?.day?.find(u => u.index === 4)?.getBonus() || 0) + getVialBonus(64,window.farmingState?.alchemy?.ricecakoradeBonus) + (window.farmingState?.market?.exotic?.find(u => u.index === 50)?.getBonus() || 0)).toMulti().toFixed(2),
                     items: [
-                        { label: "Placeholder", value: "PLACEHOLDER%" }
+                        { label: "Nutritious Soil (Day Market)", value: "+" + (window.farmingState?.market?.day?.find(u => u.index === 4)?.getBonus() || 0).toFixed(2) + "%", threshold: getLevelPercentage(window.farmingState?.market?.day?.find(u => u.index === 4)?.getRawLevel() || 0, 500 + getGridBonus(171)).toFixed(2) + "%" },
+                        { label: "Ricecakorade (Vial)", value: "+" + getVialBonus(64,window.farmingState?.alchemy?.ricecakoradeBonus).toFixed(2) + "%", threshold: getVialBonusPercentOfMax(64,window.farmingState.alchemy.ricecakoradeBonus).toFixed(2) + "%" },
+                        { label: "Gogogrow (Exotic)", value: "+" + (window.farmingState?.market?.exotic?.find(u => u.index === 50)?.getBonus() || 0).toFixed(2) + "%", threshold: window.farmingState?.market?.exotic?.find(u => u.index === 50)?.getBonusPercentOfMax().toFixed(2) + "%" }
+                    ]
+                },
+                {
+                    name: "Summoning Win Bonus",
+                    total: "Total:" + "x" + getWinBonus(2).toMulti().toFixed(2),
+                    items: [
+                        { label: "Farming SPD", value: "x" + getWinBonus(2).toMulti().toFixed(2), threshold: "PLACEHOLDER%" }
                     ]
                 }
             ]

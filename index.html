@@ -461,10 +461,16 @@
             const evolutionTotal = calculateEvolutionTotal();
             
             // Calculate Overgrowth total dynamically
-            const overgrowthTotal = calculateOverGrowthTotal() + "×";
+            const overgrowthTotal = "×" + calculateOverGrowthTotal();
             
             // Calculate Crop Value Cap dynamically
             const cropValueCap = window.getCropValueCap().toFixed(0);
+            
+            // Calculate Growth Speed total dynamically
+            const growthSpeedTotal = "×" + window.calculateGrowthRate().toFixed(2);
+            
+            // Soil EXP total (placeholder for now)
+            const soilExpTotal = 0;
             
             const bonusesWithCalculated = farmingBonuses.map(bonus => 
                 bonus.name === "Evolution" 
@@ -473,6 +479,10 @@
                     ? { ...bonus, totalValue: overgrowthTotal }
                     : bonus.name === "Crop Value"
                     ? { ...bonus, totalValue: cropValueCap }
+                    : bonus.name === "Growth Speed"
+                    ? { ...bonus, totalValue: growthSpeedTotal }
+                    : bonus.name === "Soil EXP"
+                    ? { ...bonus, totalValue: soilExpTotal }
                     : bonus
             );
             
