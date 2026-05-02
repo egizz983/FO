@@ -428,7 +428,7 @@ window.getFarmingBreakdowns = function() {
                     name: "Landrank A",
                     total: "Total:" + "x" + (window.farmingState.landRank.upgrades[2].getBonus() * window.farmingState.landRank.stats.first).toMulti().toFixed(2),
                     items: [
-                        { label: "Soil Exp Boost", value: "x" + (window.farmingState.landRank.upgrades[2].getBonus() * window.farmingState.landRank.stats.first).toMulti().toFixed(2), threshold: window.farmingState.landRank.upgrades[6].getBonusPercentOfMax().toFixed(2) + "%" }
+                        { label: "Soil Exp Boost", value: "x" + (window.farmingState.landRank.upgrades[2].getBonus() * window.farmingState.landRank.stats.first).toMulti().toFixed(2), threshold: window.farmingState.landRank.upgrades[2].getBonusPercentOfMax().toFixed(2) + "%" }
                     ]
                 },
                 {
