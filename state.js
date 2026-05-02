@@ -100,7 +100,7 @@ window.farmingState = {
             new MarketUpgrade({ index: 6,  name: "Biology Boost",       calcType: "linear",     param: 0.15,  isMultiplier: true, unit: "%",       currentLevel: 0, perLevel: false, description: "+(15%/Lvl) chance of crop evolution, or 'next crop' chance.", group: "Evolution" }),
             new MarketUpgrade({ index: 7,  name: "Product Doubler",     calcType: "linear",     param: 3,  isMultiplier: false, unit: "%",       currentLevel: 0, perLevel: false, description: "+(3%/Lvl) chance for crops to be worth 2x when collected.", group: "Production" }),
             new MarketUpgrade({ index: 8,  name: "More Beenz",          calcType: "linear",     param: 0.02,  isMultiplier: false, unit: "%",       currentLevel: 0, perLevel: false, description: "+(2%/Lvl) magic beans gained when trading in crops.", group: "Misc" }),
-            new MarketUpgrade({ index: 9,  name: "Rank Boost",          calcType: "linear",     param: 0.03,  isMultiplier: false, unit: "%",       currentLevel: 0, perLevel: false, description: "Plots earn +(3%/Lvl) more Rank XP when a crop is collected.", group: "SoilExp" })
+            new MarketUpgrade({ index: 9,  name: "Rank Boost",          calcType: "linear",     param: 3,  isMultiplier: false, unit: "%",       currentLevel: 0, perLevel: false, description: "Plots earn +(3%/Lvl) more Rank XP when a crop is collected.", group: "SoilExp" })
         ],
 
         // ======================

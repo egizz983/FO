@@ -2345,3 +2345,18 @@ function calculateGrowthRate() {
     (1 + winBonus / 100)
   );
 }
+
+
+function processSoilRank(plotindex,seedType,OGcount) { 
+
+    const OGmulti = Math.min( 1e9, Math.max( 1, Math.pow( 2, c.asNumber(OGcount))));  // original code uses  c.asNumber(farmPlot[plotIndex][5]) 
+    const basketBonus      = window.farmingState?.market?.day?.find(u => u.index === 9)?.getBonus().toMulti(); // Day market
+    const prevPlotRank     = c.asNumber(window.farmingState.landRank.stats.first ); // we will simplify and use rank[0][0] , engine uses used plotindex -1 
+    const chainBonus       = 1 + (window.farmingState.landRank.upgrades[2].getBonus() * prevPlotRank) / 100; 
+    const plotTier         = seedType + 1; // seed type  original code "c.asNumber(FarmPlot[0 | plotindex][0]) + 1"
+    const landRankBonus    = getLandRankUpgBonusTOTAL(2).toMulti(); // sum of landrank 7 and 13 bonuses / 100 + 1
+    
+    const expGain = basketBonus * chainBonus * plotTier * OGmulti * landRankBonus;
+
+    
+}

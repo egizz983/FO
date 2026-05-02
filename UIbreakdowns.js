@@ -418,15 +418,38 @@ window.getFarmingBreakdowns = function() {
         "Soil EXP": {
             groups: [
                 {
-                    name: "Land Ranks",
+                    name: "Day Market",
+                    total: "Total:" + "x" + (window.farmingState?.market?.day?.find(u => u.index === 9)?.getBonus().toMulti() || 1).toFixed(2),
                     items: [
-                        { label: "Placeholder", value: "PLACEHOLDER%" }
+                        { label: "Rank Boost", value: "x"+ (window.farmingState?.market?.day?.find(u => u.index === 9)?.getBonus().toMulti() || 1).toFixed(2), threshold: getLevelPercentage(window.farmingState?.market?.day?.find(u => u.index === 9)?.getRawLevel() || 0, 500 + getGridBonus(171)).toFixed(2) + "%" }
                     ]
                 },
                 {
-                    name: "Market",
+                    name: "Landrank A",
+                    total: "Total:" + "x" + (window.farmingState.landRank.upgrades[2].getBonus() * window.farmingState.landRank.stats.first).toMulti().toFixed(2),
                     items: [
-                        { label: "Placeholder", value: "PLACEHOLDER%" }
+                        { label: "Soil Exp Boost", value: "x" + (window.farmingState.landRank.upgrades[2].getBonus() * window.farmingState.landRank.stats.first).toMulti().toFixed(2), threshold: window.farmingState.landRank.upgrades[6].getBonusPercentOfMax().toFixed(2) + "%" }
+                    ]
+                },
+                {
+                    name: "LandRank B",
+                    total: "Total:" + "x" + getLandRankUpgBonusTOTAL(2).toMulti().toFixed(2),
+                    items: [
+                        { label: "Soil Exp Megaboost", value: "+" + window.farmingState.landRank.upgrades[6].getBonus().toFixed(2) + "%", threshold: window.farmingState.landRank.upgrades[6].getBonusPercentOfMax().toFixed(2) + "%" },
+                        { label: "Soil Exp Superboost", value: "+" + window.farmingState.landRank.upgrades[13].getBonus().toFixed(2) + "%", threshold: window.farmingState.landRank.upgrades[13].getBonusPercentOfMax().toFixed(2) + "%" }
+                    ]
+                },
+                {
+                    name: "Engine Uses these only for Display , they do not give you any extra exp boost",
+                    total: "Total:" + "PLACEHOLDER%",
+                    items: [
+                        { label: "Agricultural Appreciation", value: "+" + getTalentNumber(1,206).toFixed(2) + "%", threshold: getTalentNumberPercentOfMax(1,206).toFixed(2) + "%" },
+                        { label: "Rank Boost", value: "+" + (window.farmingState?.market?.day?.find(u => u.index === 9)?.getBonus() || 0).toFixed(2) + "%", threshold: getLevelPercentage(window.farmingState?.market?.day?.find(u => u.index === 9)?.getRawLevel() || 0, 500 + getGridBonus(171)).toFixed(2) + "%" },
+                        { label: "Stableroot I", value: "+" + (window.farmingState?.market?.exotic?.find(u => u.index === 29)?.getBonus() || 0).toFixed(2) + "%", threshold: window.farmingState?.market?.exotic?.find(u => u.index === 29)?.getBonusPercentOfMax().toFixed(2) + "%" },
+                        { label: "Stableroot II", value: "+" + (window.farmingState?.market?.exotic?.find(u => u.index === 30)?.getBonus() || 0).toFixed(2) + "%", threshold: window.farmingState?.market?.exotic?.find(u => u.index === 30)?.getBonusPercentOfMax().toFixed(2) + "%" },
+                        { label: "Stableroot III", value: "+" + (window.farmingState?.market?.exotic?.find(u => u.index === 31)?.getBonus() || 0).toFixed(2) + "%", threshold: window.farmingState?.market?.exotic?.find(u => u.index === 31)?.getBonusPercentOfMax().toFixed(2) + "%" },
+                        { label: "Vigouroot I", value: "x" + (window.farmingState?.market?.exotic?.find(u => u.index === 32)?.getBonus().toMulti() || 1).toFixed(2), threshold: window.farmingState?.market?.exotic?.find(u => u.index === 32)?.getBonusPercentOfMax().toFixed(2) + "%" },
+                        { label: "Vigouroot II", value: "x" + (window.farmingState?.market?.exotic?.find(u => u.index === 33)?.getBonus().toMulti() || 1).toFixed(2), threshold: window.farmingState?.market?.exotic?.find(u => u.index === 33)?.getBonusPercentOfMax().toFixed(2) + "%" }
                     ]
                 }
             ]

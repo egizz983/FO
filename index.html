@@ -453,6 +453,19 @@
              return (1000 * result).toFixed(1);
         }
 
+        function calculateSoilExpTotal(){
+            const basketBonus      = window.farmingState?.market?.day?.find(u => u.index === 9)?.getBonus().toMulti(); // Day market
+            const prevPlotRank     = c.asNumber(window.farmingState.landRank.stats.first ); // we will simplify and use rank[0][0] , engine uses used plotindex -1 
+            const chainBonus       = 1 + (window.farmingState.landRank.upgrades[2].getBonus() * prevPlotRank) / 100; 
+            const landRankBonus    = getLandRankUpgBonusTOTAL(2).toMulti(); // sum of landrank 7 and 13 bonuses / 100 + 1
+            
+            return basketBonus * chainBonus * landRankBonus;
+
+        }
+
+    
+
+
         function renderFarmingBonuses() {
             const buttonsContainer = document.getElementById('bonus-buttons-container');
             const viewport = document.getElementById('bonus-viewport');
@@ -470,7 +483,7 @@
             const growthSpeedTotal = "×" + window.calculateGrowthRate().toFixed(2);
             
             // Soil EXP total (placeholder for now)
-            const soilExpTotal = 0;
+            const soilExpTotal = "×" + calculateSoilExpTotal().toFixed(2); // Replace with actual Soil EXP calculation when available
             
             const bonusesWithCalculated = farmingBonuses.map(bonus => 
                 bonus.name === "Evolution" 
