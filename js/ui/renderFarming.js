@@ -196,3 +196,5 @@ function updateFarmingLevelDisplay() {
     if (farmingEl)   farmingEl.textContent   = window.farmingState.levels.farming   || 0;
     if (summoningEl) summoningEl.textContent = window.farmingState.levels.summoning || 0;
 }
+
+

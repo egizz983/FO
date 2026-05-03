@@ -561,4 +561,177 @@
     text-align: right;
 }
 
+/* ==================== LAND RANK DATABASE PANEL ==================== */
+.landrank-layout {
+    display: flex;
+    gap: 24px;
+    align-items: flex-start;
+}
+
+.landrank-db-panel {
+    background: #3b1c07;
+    border: 4px solid #7a3f18;
+    border-radius: 16px;
+    padding: 14px 16px 16px;
+    display: inline-flex;
+    flex-direction: column;
+    gap: 12px;
+    box-shadow: inset 0 3px 10px rgba(0,0,0,0.55), 0 6px 20px rgba(0,0,0,0.45);
+    flex-shrink: 0;
+}
+
+.landrank-db-title {
+    font-family: Georgia, 'Times New Roman', serif;
+    font-size: 1.35rem;
+    font-weight: 700;
+    color: #f0c060;
+    text-align: center;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.9), 0 0 12px rgba(200,120,0,0.4);
+    margin: 0;
+    letter-spacing: 1px;
+    border-bottom: 2px solid #7a3f18;
+    padding-bottom: 10px;
+}
+
+.landrank-grid {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 6px;
+}
+
+.landrank-slot {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 3px;
+    cursor: pointer;
+    transition: transform 0.12s ease;
+    padding: 4px;
+    border-radius: 8px;
+    border: 2px solid transparent;
+}
+
+.landrank-slot:hover {
+    transform: scale(1.1);
+    background: rgba(255,255,255,0.05);
+}
+
+.landrank-slot.selected {
+    border-color: #f0c060;
+    background: rgba(240,192,96,0.12);
+}
+
+.landrank-slot-icon {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    background: radial-gradient(circle at 38% 38%, #3d1a08, #1a0803);
+    border: 2px solid #5a2a0c;
+    box-shadow: inset 0 2px 8px rgba(0,0,0,0.7), 0 1px 3px rgba(0,0,0,0.5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+}
+
+.landrank-slot-icon img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 50%;
+}
+
+.landrank-slot-level {
+    font-size: 0.7rem;
+    font-weight: 700;
+    color: #e8a030;
+    text-shadow: 1px 1px 2px rgba(0,0,0,0.9);
+    letter-spacing: 0.5px;
+    font-family: Arial, sans-serif;
+    line-height: 1;
+}
+
+/* ==================== LAND RANK STATS PANEL ==================== */
+.landrank-stats-panel {
+    background: #3b1c07;
+    border: 4px solid #7a3f18;
+    border-radius: 16px;
+    padding: 14px 12px 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    width: 200px;
+    flex-shrink: 0;
+    box-shadow: inset 0 3px 10px rgba(0,0,0,0.55), 0 6px 20px rgba(0,0,0,0.45);
+    align-self: flex-start;
+}
+
+.landrank-stats-list {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    overflow-y: auto;
+    flex: 1;
+}
+
+.landrank-stat-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 6px;
+    padding: 5px 6px;
+    border-bottom: 1px solid #5a2a0c;
+    font-family: Arial, sans-serif;
+}
+
+.landrank-stat-row:last-child {
+    border-bottom: none;
+}
+
+.landrank-stat-name {
+    font-size: 0.72rem;
+    color: #d4bfa0;
+    line-height: 1.3;
+    flex: 1;
+}
+
+.landrank-stat-val {
+    font-size: 0.75rem;
+    font-weight: 700;
+    color: #f0c060;
+    text-align: right;
+    white-space: nowrap;
+    text-shadow: 1px 1px 2px rgba(0,0,0,0.8);
+}
+
+/* ==================== LAND RANK INFO BAR ==================== */
+.landrank-info-bar {
+    background: #2a1204;
+    border: 2px solid #5a2a0c;
+    border-radius: 8px;
+    padding: 10px 14px;
+    text-align: center;
+    min-height: 58px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 3px;
+}
+
+.landrank-info-name {
+    font-family: Arial Black, Arial, sans-serif;
+    font-size: 0.82rem;
+    font-weight: 900;
+    color: #ffffff;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    line-height: 1.2;
+}
+
+.landrank-info-desc {
+    font-size: 0.78rem;
+    color: #d4bfa0;
+    line-height: 1.35;
+}
+
 

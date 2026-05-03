@@ -43,6 +43,9 @@ window.parseLandRankData = function(data, state = window.farmingState) {
             state.landRank.upgrades[i].currentLevel = allocated[i] || 0;
         }
 
+        state.landRank.stats.pointsAllocated = state.landRank.upgrades.reduce((sum, u) => sum + (u.currentLevel || 0), 0);
+        state.landRank.stats.pointsAvailable = state.landRank.stats.totalSum - state.landRank.stats.pointsAllocated;
+
         console.log(`✅ parseLandRankData completed `);
         return true;
     }

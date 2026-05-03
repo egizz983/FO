@@ -63,9 +63,11 @@ window.farmingState = {
     // ======================
     landRank: {
         stats: {
-            totalSum:  0,     // landRank_totalLandRankSum
-            average:   0,      // landRank_averageLandRank
-            first:     0      // FarmRank[0][0] → rank of first plot (used for evolution boost calculations per rank
+            totalSum:       0,  // sum of all plot ranks
+            average:        0,  // average rank across unlocked plots
+            first:          0,  // rank of first plot (LandRank LV)
+            pointsAllocated: 0, // sum of all upgrade levels spent
+            pointsAvailable: 0  // totalSum - pointsAllocated
         },
         upgrades: [
             new LandRankUpgrade({ id: 0,  unlock: 1,    group: "Evolution",  name: "Evolution Boost",       base: 250,   perRank: true,  multi: false, currentLevel: 0, desc: "Increases next crop chance by +% per rank of the land plot" }),

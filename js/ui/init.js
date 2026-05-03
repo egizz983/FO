@@ -59,6 +59,7 @@ window.initAfterUI = function() {
     window.syncManualInputs();
     renderFarmingBonuses();
     setupManualInputs();
+    renderLandrankGrid();
 
     console.log('[UI] Ready');
 };

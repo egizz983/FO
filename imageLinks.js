@@ -27,6 +27,29 @@ window.imageLinks = {
         mealBlackDiamondRhinestone: "https://idleontoolbox.com/data/ConsoleJwl16.png",   
         Pure_Opal_Navette: "https://idleontoolbox.com/data/ConsoleJwl19.png",   // Pure Opal Navette 
     },
+    landrank: {
+        // Keys match LandRankUpgrade id (0–19). Fill in URLs when available.
+        0:  "https://idleontoolbox.com/data/RankUpg0.png",  // Evolution Boost
+        1:  "https://idleontoolbox.com/data/RankUpg1.png",  // Production Boost
+        2:  "https://idleontoolbox.com/data/RankUpg2.png",  // Soil Exp Boost
+        3:  "https://idleontoolbox.com/data/RankUpg3.png",  // Evolution Megaboost
+        4:  "https://idleontoolbox.com/data/RankUpg4.png",  // Seed of Stealth
+        5:  "https://idleontoolbox.com/data/RankUpg5.png",  // Farmtastic Boost
+        6:  "https://idleontoolbox.com/data/RankUpg6.png",  // Soil Exp Megaboost
+        7:  "https://idleontoolbox.com/data/RankUpg7.png",  // Overgrowth Boost
+        8:  "https://idleontoolbox.com/data/RankUpg8.png",  // Production Megaboost
+        9:  "https://idleontoolbox.com/data/RankUpg9.png",  // Seed of Loot
+        10: "https://idleontoolbox.com/data/RankUpg10.png",  // Evolution Superboost
+        11: "https://idleontoolbox.com/data/RankUpg11.png",  // Overgrowth Megaboost
+        12: "https://idleontoolbox.com/data/RankUpg12.png",  // Farmtastic Megaboost
+        13: "https://idleontoolbox.com/data/RankUpg13.png",  // Soil Exp Superboost
+        14: "https://idleontoolbox.com/data/RankUpg14.png",  // Seed of Damage
+        15: "https://idleontoolbox.com/data/RankUpg15.png",  // Evolution Ultraboost
+        16: "https://idleontoolbox.com/data/RankUpg16.png",  // Farmtastic Superboost
+        17: "https://idleontoolbox.com/data/RankUpg17.png",  // Production Superboost
+        18: "https://idleontoolbox.com/data/RankUpg18.png",  // Overgrowth Superboost
+        19: "https://idleontoolbox.com/data/RankUpg19.png",  // Seed of Stats
+    }
 };
 
 // =====================================================================

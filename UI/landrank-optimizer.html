@@ -1,4 +1,28 @@
-<div class="bg-white border border-slate-200 rounded-xl p-8">
+<div class="bg-white border border-slate-200 rounded-xl p-6">
     <h2 class="text-2xl font-bold text-emerald-500 mb-6 pb-4 border-b-2 border-slate-200">Land Rank Optimizer</h2>
-    <p class="text-slate-600 text-base">Coming soon — land rank optimization tools will appear here.</p>
+
+    <div class="landrank-layout">
+
+        <!-- Land Rank Database Grid -->
+        <div class="landrank-db-panel">
+            <h3 class="landrank-db-title">Land Rank Database</h3>
+            <div class="landrank-grid" id="landrank-grid"></div>
+            <div class="landrank-info-bar">
+                <div class="landrank-info-name" id="landrank-info-name">— Select a Bonus —</div>
+                <div class="landrank-info-desc" id="landrank-info-desc"></div>
+            </div>
+        </div>
+
+        <!-- Stats Panel (right of grid) -->
+        <div class="landrank-stats-panel">
+            <h3 class="landrank-db-title" style="font-size:1.05rem;">Stats</h3>
+            <div class="landrank-stats-list" id="landrank-stats-list">
+                <div class="landrank-stat-row">
+                    <span class="landrank-stat-name">No data loaded</span>
+                    <span class="landrank-stat-val">—</span>
+                </div>
+            </div>
+        </div>
+
+    </div>
 </div>
