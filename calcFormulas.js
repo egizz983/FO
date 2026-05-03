@@ -2312,7 +2312,7 @@ function calculateNextOGChance(t) {
     );
 }
 
-function calculateOGMulti(t) {
+function calculateOGMulti(t) { // used in soilexp  and possible value calculations "current += calculateOGMulti * ....."
 
 
     const farmPlot = a.engine.getGameAttribute("FarmPlot");
@@ -2347,7 +2347,7 @@ function calculateGrowthRate() {
 }
 
 
-function processSoilRank(plotindex,seedType,OGcount) { 
+function processSoilRank(plotindex,seedType,OGcount) {  // max og 30 1e9
 
     const OGmulti = Math.min( 1e9, Math.max( 1, Math.pow( 2, c.asNumber(OGcount))));  // original code uses  c.asNumber(farmPlot[plotIndex][5]) 
     const basketBonus      = window.farmingState?.market?.day?.find(u => u.index === 9)?.getBonus().toMulti(); // Day market
