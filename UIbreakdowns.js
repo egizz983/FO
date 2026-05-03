@@ -243,7 +243,7 @@ window.getFarmingBreakdowns = function() {
                     name: "Pristine Charm",
                     total: "Total:" + "×" + (50 *(window.farmingState?.pristineCharms?.[11] || 0)).toMulti().toFixed(2),
                     items: [
-                        { label: "Placeholder", value: "x" + (50 *(window.farmingState?.pristineCharms?.[11] || 0)).toMulti().toFixed(2), threshold: window.farmingState?.pristineCharms?.[11] ? "100%" : "0%" }
+                        { label: "Taffy Disc", value: "x" + (50 *(window.farmingState?.pristineCharms?.[11] || 0)).toMulti().toFixed(2), threshold: window.farmingState?.pristineCharms?.[11] ? "100%" : "0%" }
                     ]
                 },
                 {
