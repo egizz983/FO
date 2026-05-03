@@ -1,4 +1,22 @@
 
+/* ==================== NAVIGATION BUTTONS ==================== */
+.nav-btn-active {
+    background: #10b981;
+    color: #ffffff;
+    border: 2px solid #10b981;
+}
+.nav-btn-active:hover {
+    background: #059669;
+    border-color: #059669;
+}
+.nav-btn-inactive {
+    background: #f1f5f9;
+    color: #334155;
+}
+.nav-btn-inactive:hover {
+    background: #e2e8f0;
+}
+
 /* ==================== BONUS TAB BUTTONS ==================== */
 .bonus-tab-button {
     padding: 0.625rem 1.25rem;

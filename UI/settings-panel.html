@@ -1,0 +1,43 @@
+<div class="flex gap-8">
+    <!-- Companions (left, wider) -->
+    <div class="flex-1">
+        <section class="bg-white border border-slate-200 rounded-xl p-8">
+            <h2 class="text-2xl font-bold text-emerald-500 mb-6 pb-4 border-b-2 border-slate-200">Companions</h2>
+            <div class="companions-list" id="companions-list">
+                <!-- Populated by JS -->
+            </div>
+        </section>
+    </div>
+
+    <!-- Manual Inputs (right) -->
+    <div class="w-[30%]">
+        <section class="bg-white border border-slate-200 rounded-xl p-8">
+            <div class="manual-inputs">
+                <h2 class="text-2xl font-bold text-emerald-500 mb-6 pb-4 border-b-2 border-slate-200">Settings & Configuration</h2>
+
+                <!-- Lab Section -->
+                <div class="section lab-section mb-8">
+                    <h3 class="text-xl font-bold text-slate-900 mb-4 pb-2 border-b-2 border-slate-200">Lab Items (Active?)</h3>
+                    <div class="lab-items-grid" id="lab-items-grid">
+                        <!-- Lab items populated by JS -->
+                    </div>
+                </div>
+
+                <!-- Other Section -->
+                <div class="section other-section mb-8">
+                    <h3 class="text-xl font-bold text-slate-900 mb-4 pb-2 border-b-2 border-slate-200">Other</h3>
+                    <div class="space-y-4">
+                        <div class="input-group flex items-center gap-4">
+                            <label for="voting-bonus-29" class="w-32 text-base font-semibold text-slate-700">Vote Bonus</label>
+                            <input type="number" id="voting-bonus-29" value="0" min="0" class="w-32 h-10 px-3 text-base border-2 border-slate-300 rounded-lg focus:outline-none focus:border-emerald-500 focus:ring-2 focus:ring-emerald-100">
+                        </div>
+                        <div class="input-group flex items-center gap-4">
+                            <label for="tome-total-points" class="w-32 text-base font-semibold text-slate-700">Tome Score</label>
+                            <input type="number" id="tome-total-points" value="0" min="0" class="w-32 h-10 px-3 text-base border-2 border-slate-300 rounded-lg focus:outline-none focus:border-emerald-500 focus:ring-2 focus:ring-emerald-100">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+</div>

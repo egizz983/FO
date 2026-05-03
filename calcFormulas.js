@@ -2324,6 +2324,7 @@ function OGMulti(){
 
     return nightGMO * pristineCharm11 * starSign67 * ogMeritShop * ogAchievement * landRankUpg3 * exotic46 * exotic47;
 }
+
 function calculateOGMulti(t) { // used in soilexp  and possible value calculations "current += calculateOGMulti * ....."
 
 

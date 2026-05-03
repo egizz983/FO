@@ -28,6 +28,20 @@
                 </div>
             </div>
             <div class="h-1 bg-emerald-500 mt-6"></div>
+
+            <!-- Navigation -->
+            <div class="flex items-center gap-3 mt-5">
+                <button id="btn-toggle-settings" class="nav-btn-inactive px-4 py-2 font-semibold rounded-lg border-2 border-slate-300 transition text-sm">
+                    ⚙ Settings
+                </button>
+                <div class="w-px h-6 bg-slate-300 mx-1"></div>
+                <button data-view="farming" class="nav-view-btn nav-btn-active px-4 py-2 font-semibold rounded-lg transition text-sm">
+                    🌾 Farming Bonuses
+                </button>
+                <button data-view="landrank" class="nav-view-btn nav-btn-inactive px-4 py-2 font-semibold rounded-lg border-2 border-slate-300 transition text-sm">
+                    🏆 Land Rank Optimizer
+                </button>
+            </div>
         </div>
     </header>
 
@@ -37,91 +51,14 @@
             ⚠️ <strong>Load JSON data first</strong> to enable manual inputs and trigger calculations
         </div>
 
-        <!-- COMPANIONS SECTION (Full Width) -->
-        <section class="bg-white border border-slate-200 rounded-xl p-8 mb-8">
-            <h2 class="text-2xl font-bold text-emerald-500 mb-6 pb-4 border-b-2 border-slate-200">Companions</h2>
-            <div class="companions-list" id="companions-list">
-                <!-- Populated by JS -->
-            </div>
-        </section>
+        <!-- SETTINGS PANEL (collapsible) -->
+        <div id="settings-panel" class="mb-8"></div>
 
-        <!-- TWO COLUMN LAYOUT: Settings (30%) + Farming Bonuses (70%) -->
-        <div class="flex gap-8">
-            <!-- LEFT COLUMN: Settings & Configuration (30%) -->
-            <div class="w-[30%]">
-                <!-- MANUAL INPUTS PANEL -->
-                <section class="bg-white border border-slate-200 rounded-xl p-8 mb-8">
-                    <div class="manual-inputs">
-                        <h2 class="text-2xl font-bold text-emerald-500 mb-6 pb-4 border-b-2 border-slate-200">Settings & Configuration</h2>
+        <!-- FARMING BONUSES VIEW -->
+        <div id="view-farming" class="view-content"></div>
 
-                        <!-- Lab Section -->
-                        <div class="section lab-section mb-8">
-                            <h3 class="text-xl font-bold text-slate-900 mb-4 pb-2 border-b-2 border-slate-200">Lab Items (Active?)</h3>
-                            <div class="lab-items-grid" id="lab-items-grid">
-                                <!-- Lab items populated by JS -->
-                            </div>
-                        </div>
-
-                        <!-- Other Section -->
-                        <div class="section other-section mb-8">
-                            <h3 class="text-xl font-bold text-slate-900 mb-4 pb-2 border-b-2 border-slate-200">Other</h3>
-                            <div class="space-y-4">
-                                <div class="input-group flex items-center gap-4">
-                                    <label for="voting-bonus-29" class="w-32 text-base font-semibold text-slate-700">Vote Bonus</label>
-                                    <input type="number" id="voting-bonus-29" value="0" min="0" class="w-32 h-10 px-3 text-base border-2 border-slate-300 rounded-lg focus:outline-none focus:border-emerald-500 focus:ring-2 focus:ring-emerald-100">
-                                </div>
-                                <div class="input-group flex items-center gap-4">
-                                    <label for="tome-total-points" class="w-32 text-base font-semibold text-slate-700">Tome Score</label>
-                                    <input type="number" id="tome-total-points" value="0" min="0" class="w-32 h-10 px-3 text-base border-2 border-slate-300 rounded-lg focus:outline-none focus:border-emerald-500 focus:ring-2 focus:ring-emerald-100">
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </section>
-
-                <!-- STATE INSPECTOR PANEL -->
-                <section class="bg-white border border-slate-200 rounded-xl p-8">
-                    <div class="section state-inspector-wrapper">
-                        <h2 class="text-2xl font-bold text-emerald-500 mb-6 pb-4 border-b-2 border-slate-200">State Inspector</h2>
-                        <p class="text-sm text-gray-600 mb-4">Edit any variable to test and see real-time recalculation.</p>
-                        <div id="state-inspector-container"></div>
-                    </div>
-                </section>
-            </div>
-
-            <!-- RIGHT COLUMN: Farming Bonuses (70%) -->
-            <div class="w-[70%]">
-                <!-- FARMING BONUSES PANEL -->
-                <div class="farming-bonuses-panel bg-white border border-slate-200 rounded-xl p-8">
-                    <!-- Header: Title + Levels -->
-                    <div class="flex justify-between items-center mb-6">
-                        <h2 class="text-2xl font-bold text-emerald-500">Farming Bonuses</h2>
-                        <div class="farming-level-top text-lg font-bold text-emerald-500 text-right">
-                            <div>Farming Level <span id="farming-level-value" class="level-value text-slate-900">0</span></div>
-                            <div>Summonings Level <span id="summoning-level-value" class="level-value text-slate-900">0</span></div>
-                        </div>
-                    </div>
-
-                    <div class="h-1 bg-emerald-500 mb-6"></div>
-
-                    <!-- Bonus Type Buttons -->
-                    <div class="flex gap-2 mb-6 flex-wrap" id="bonus-buttons-container">
-                        <!-- Populated by JS -->
-                    </div>
-
-                    <!-- Bonus Viewport: Shows only selected bonus -->
-                    <div id="bonus-viewport" class="bg-slate-50 border border-slate-200 rounded-lg p-6 min-h-96">
-                        <!-- Populated by JS -->
-                    </div>
-                </div>
-
-                <!-- OTHER BONUSES AFFECTING FARMING SECTION -->
-                <div class="bg-white border border-slate-200 rounded-xl p-8 mt-8" style="min-height: 500px;">
-                    <h2 class="text-2xl font-bold text-emerald-500 mb-6 pb-4 border-b-2 border-slate-200">Other Bonuses Affecting Farming</h2>
-                    <!-- Content to be added -->
-                </div>
-            </div>
-        </div>
+        <!-- LAND RANK OPTIMIZER VIEW -->
+        <div id="view-landrank" class="view-content" style="display:none"></div>
     </main>
 
     <footer class="text-center py-8 px-8 border-t border-slate-200 text-slate-600 text-sm bg-white">
@@ -176,28 +113,7 @@
             { id: "reindeer_27", name: "Spirit Reindeer", bonus: "2.00x Gold Ball Shop Bonuses", imageKey: "spiritReindeer" }
         ];
 
-        // Initialize companions UI on page load
-        window.addEventListener('DOMContentLoaded', function() {
-            // Initialize state management systems
-            window.StateManager.registerRecalculationTriggers();
-            window.StatePersistence.setupAutoSave();
-            window.StatePersistence.loadUserSelections(); // Restore saved user selections
-            window.StateAutoWire.wireAllInputs();
-            
-            // Disable all manual input fields until JSON is loaded
-            // This prevents state updates before JSON data is parsed
-            window.StateAutoWire.setInputsDisabled(true);
-            
-            // Initialize State Inspector (will be populated after JSON loads)
-            if (window.StateInspector && window.StateInspector.renderInspector) {
-                window.StateInspector.renderInspector();
-            }
-            
-            // Render UI and sync inputs with state
-            renderLabItems();
-            renderCompanions();
-            syncManualInputs();
-        });
+
 
         // Lab Items Data
         const labItemsList = [
@@ -627,10 +543,35 @@
             }
         };
 
-        window.onload = function() {
+        window.initAfterUI = function() {
+            // Initialize state management systems
+            window.StateManager.registerRecalculationTriggers();
+            window.StatePersistence.setupAutoSave();
+            window.StatePersistence.loadUserSelections(); // Restore saved user selections
+            window.StateAutoWire.wireAllInputs();
+
+            // Disable all manual input fields until JSON is loaded
+            window.StateAutoWire.setInputsDisabled(true);
+
+            // Initialize State Inspector
+            if (window.StateInspector && window.StateInspector.renderInspector) {
+                window.StateInspector.renderInspector();
+            }
+
+            // Render UI and sync inputs with state
+            renderLabItems();
+            renderCompanions();
+            syncManualInputs();
             renderFarmingBonuses();
             setupManualInputs();
+
+            console.log('[UI] Ready');
         };
+    </script>
+    <script src="js/ui/navigation.js"></script>
+    <script src="js/ui/uiLoader.js"></script>
+    <script>
+        window.addEventListener('load', loadUIpartials);
     </script>
 </body>
 </html>
