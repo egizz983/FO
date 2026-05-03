@@ -28,8 +28,8 @@ const companionsList = [
 ];
 
 const labItemsList = [
-    { id: 'lab-chemistry-set',    name: 'My 1st Chemistry Set',          statePath: 'lab.my1stChemistrySet',          imageKey: 'my1stChemistrySet' },
-    { id: 'lab-stamp-book',       name: 'Certified Stamp Book',          statePath: 'lab.certifiedStampBook',          imageKey: 'certifiedStampBook' },
-    { id: 'lab-spelunker-obol',   name: 'Spelunker Obol',               statePath: 'lab.spelunkerObol',               imageKey: 'spelunkerObol' },
-    { id: 'lab-meal-black-diamond', name: 'Meal Black Diamond Rhinestone', statePath: 'lab.mealBlackDiamondRhinestone', imageKey: 'mealBlackDiamondRhinestone' }
+    { id: 'lab-chemistry-set',    name: 'My 1st Chemistry Set',          statePath: 'labM.my1stChemistrySet',          imageKey: 'my1stChemistrySet' },
+    { id: 'lab-stamp-book',       name: 'Certified Stamp Book',          statePath: 'labM.certifiedStampBook',          imageKey: 'certifiedStampBook' },
+    { id: 'lab-spelunker-obol',   name: 'Spelunker Obol',               statePath: 'labM.spelunkerObol',               imageKey: 'spelunkerObol' },
+    { id: 'lab-meal-black-diamond', name: 'Meal Black Diamond Rhinestone', statePath: 'labM.mealBlackDiamondRhinestone', imageKey: 'mealBlackDiamondRhinestone' }
 ];

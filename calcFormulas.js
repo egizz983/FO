@@ -792,7 +792,7 @@ window.getVialBonus = function(i, level) {
         c.asNumber(level)
     );
 
-    if (window.farmingState.lab.my1stChemistrySet) {
+    if (window.farmingState.labM.my1stChemistrySet) {
         const result = 2 * (1 + dnzz) * (1 + merit) * arbitraryResult;
 
         return result;
@@ -1035,7 +1035,7 @@ function getMainframeBonus(e) {
     }
     if (e === 8) {
 
-      if (!window.farmingState.lab.spelunkerObol) {
+      if (!window.farmingState.labM.spelunkerObol) {
         return 0;
       }
       return baseValue5 + getMainframeBonus(119) / 100;
@@ -1059,7 +1059,7 @@ function getMainframeBonus(e) {
     // if (!isUnlocked) {
     //   return 0;
     // }
-    const multi = (window.farmingState.lab.spelunkerObol && e !== 119) ? getMainframeBonus(8) : 1; // Don't apply multiplier to ID 119 to avoid circular dependency
+    const multi = (window.farmingState.labM.spelunkerObol && e !== 119) ? getMainframeBonus(8) : 1; // Don't apply multiplier to ID 119 to avoid circular dependency
     const jewelBase = c.asNumber(window.JewelDesc[jewelIndex][12]);
     // Special doubled jewel cases (only when certain prerequisite Mainframe bonuses are active)
     if (e === 100) {
@@ -1088,7 +1088,7 @@ function getMainframeBonus(e) {
         : jewelBase * multi;
     }
     if (e === 119) {
-        if(window.farmingState.lab.Pure_Opal_Navette){
+        if(window.farmingState.labM.Pure_Opal_Navette){
             return jewelBase; // no multiplier for this one
         } else {
             return 0; // locked if Pure Opal Navette is not unlocked
@@ -1110,7 +1110,7 @@ function getMealBonus(index,ribbonLevel,meallevel) {
 
 function getCookingMealBonusMultiplier() {
   // Part 1: Mainframe bonus (ID 116) + special Shiny Breeding bonus
-  const mainframeAndBreeding = window.farmingState.lab.mealBlackDiamondRhinestone
+  const mainframeAndBreeding = window.farmingState.labM.mealBlackDiamondRhinestone
     ? (getMainframeBonus(116) + window.farmingState.shinyPets.mealBonus)
     : window.farmingState.shinyPets.mealBonus;
   // Part 2: Summoning WinBonus (ID 26)

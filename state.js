@@ -21,10 +21,13 @@ window.farmingState = {
         }
     },
 
+
+    
+
     // ======================
-    // Lab manual input
+    // Lab manual input (user toggles)
     // ======================
-    lab: {
+    labM: {
         my1stChemistrySet: 0, // check if active  , doubles vial bonus 
         certifiedStampBook: 0, // check if active doubles stamp bonus
         spelunkerObol: 0, // check if active 1.5x jewel bonus

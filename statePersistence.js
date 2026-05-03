@@ -27,10 +27,10 @@ window.StatePersistence = (function() {
         'companion.reindeer_27': true,
 
         // Lab item toggles (manual selections)
-        'lab.my1stChemistrySet': true,
-        'lab.certifiedStampBook': true,
-        'lab.spelunkerObol': true,
-        'lab.mealBlackDiamondRhinestone': true,
+        'labM.my1stChemistrySet': true,
+        'labM.certifiedStampBook': true,
+        'labM.spelunkerObol': true,
+        'labM.mealBlackDiamondRhinestone': true,
 
         // Misc bonuses (only manual ones)
         'miscBonuses.votingBonus29': true,
