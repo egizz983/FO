@@ -329,7 +329,7 @@ window.getFarmingBreakdowns = function() {
                     items: [
 
                         {
-                            label: "Production Megaboost",
+                            label: "Production Boost",
                             value: "x" + (window.farmingState.landRank.upgrades[1]?.getBonus() * window.farmingState.landRank.stats.first + window.farmingState.miscBonuses.votingBonus29).toMulti().toFixed(2) , threshold: window.farmingState.landRank.upgrades[1]?.getBonusPercentOfMax().toFixed(2) + "%"
                         },
                         { label: "Voting Ballot", value: "+" + window.farmingState.miscBonuses.votingBonus29.toFixed(2) + "%", threshold: window.farmingState.miscBonuses.votingBonus29 != 0 ? "100%" : "0%" }
