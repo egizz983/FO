@@ -74,22 +74,22 @@ window.farmingState = {
             new LandRankUpgrade({ id: 1,  unlock: 5,    group: "Production", name: "Production Boost",      base: 5,     perRank: true,  multi: false, currentLevel: 0, desc: "Boosts value of crops harvested by +% per rank of the land plot" }),
             new LandRankUpgrade({ id: 2,  unlock: 20,   group: "SoilExp",    name: "Soil Exp Boost",        base: 25,    perRank: true,  multi: false, currentLevel: 0, desc: "Each land gains +% extra Rank EXP per rank of the previous land" }),
             new LandRankUpgrade({ id: 3,  unlock: 30,   group: "Evolution",  name: "Evolution Megaboost",   base: 600,   perRank: false, multi: true,  currentLevel: 0, desc: "Increases next crop chance by +% multiplicatively!" }),
-            new LandRankUpgrade({ id: 4,  unlock: 60,   group: "Seed",       name: "Seed of Stealth",       base: 2,     perRank: false, multi: false, currentLevel: 0, desc: "Increases the Stealth of all Ninja Twins by +% per Farming Level" }),
+            new LandRankUpgrade({ id: 4,  unlock: 60,   group: "Utility",       name: "Seed of Stealth",       base: 2,     perRank: false, multi: false, currentLevel: 0, desc: "Increases the Stealth of all Ninja Twins by +% per Farming Level" }),
             new LandRankUpgrade({ id: 5,  unlock: 80,   group: "FarmExp",    name: "Farmtastic Boost",      base: 90,    perRank: false, multi: false, currentLevel: 0, desc: "Increases Farming Skill EXP gained by +%" }),
             new LandRankUpgrade({ id: 6,  unlock: 125,  group: "SoilExp",    name: "Soil Exp Megaboost",    base: 200,   perRank: false, multi: false, currentLevel: 0, desc: "All plots of land gain +% more Rank EXP" }),
             new LandRankUpgrade({ id: 7,  unlock: 180,  group: "Overgrowth", name: "Overgrowth Boost",       base: 120,   perRank: false, multi: false, currentLevel: 0, desc: "Increases chance for Overgrowth by +%" }),
             new LandRankUpgrade({ id: 8,  unlock: 250,  group: "Production", name: "Production Megaboost",  base: 100,   perRank: false, multi: false, currentLevel: 0, desc: "Increases the amount of crops harvested by +%" }),
-            new LandRankUpgrade({ id: 9,  unlock: 400,  group: "Seed",       name: "Seed of Loot",          base: 10,    perRank: false, multi: false, currentLevel: 0, desc: "Increases the Drop Rarity of all characters by +%" }),
+            new LandRankUpgrade({ id: 9,  unlock: 400,  group: "Utility",       name: "Seed of Loot",          base: 10,    perRank: false, multi: false, currentLevel: 0, desc: "Increases the Drop Rarity of all characters by +%" }),
             new LandRankUpgrade({ id: 10, unlock: 500,  group: "Evolution",  name: "Evolution Superboost",  base: 3000,  perRank: false, multi: true,  currentLevel: 0, desc: "Increases next crop chance by +% multiplicatively!" }),
             new LandRankUpgrade({ id: 11, unlock: 600,  group: "Overgrowth", name: "Overgrowth Megaboost",  base: 340,   perRank: false, multi: false, currentLevel: 0, desc: "Increases chance for Overgrowth by +%" }),
             new LandRankUpgrade({ id: 12, unlock: 700,  group: "FarmExp",    name: "Farmtastic Megaboost",  base: 110,   perRank: false, multi: false, currentLevel: 0, desc: "Increases Farming Skill EXP gained by +%" }),
             new LandRankUpgrade({ id: 13, unlock: 900,  group: "SoilExp",    name: "Soil Exp Superboost",   base: 520,   perRank: false, multi: false, currentLevel: 0, desc: "All plots of land gain +% more Rank EXP" }),
-            new LandRankUpgrade({ id: 14, unlock: 1200, group: "Seed",       name: "Seed of Damage",        base: 20,    perRank: false, multi: false, currentLevel: 0, desc: "Gives a +% Total Damage bonus to all characters" }),
+            new LandRankUpgrade({ id: 14, unlock: 1200, group: "Utility",       name: "Seed of Damage",        base: 20,    perRank: false, multi: false, currentLevel: 0, desc: "Gives a +% Total Damage bonus to all characters" }),
             new LandRankUpgrade({ id: 15, unlock: 1300, group: "Evolution",  name: "Evolution Ultraboost",  base: 40000, perRank: false, multi: true,  currentLevel: 0, desc: "Increases next crop chance by +% multiplicatively!" }),
             new LandRankUpgrade({ id: 16, unlock: 1500, group: "FarmExp",    name: "Farmtastic Superboost", base: 220,   perRank: false, multi: false, currentLevel: 0, desc: "Increases Farming Skill EXP gained by +%" }),
             new LandRankUpgrade({ id: 17, unlock: 1750, group: "Production", name: "Production Superboost", base: 600,   perRank: false, multi: false, currentLevel: 0, desc: "Increases the amount of crops harvested by +%" }),
             new LandRankUpgrade({ id: 18, unlock: 2000, group: "Overgrowth", name: "Overgrowth Superboost", base: 1500,  perRank: false, multi: false, currentLevel: 0, desc: "Increases chance for Overgrowth by +%" }),
-            new LandRankUpgrade({ id: 19, unlock: 3500, group: "Seed",       name: "Seed of Stats",         base: 5,     perRank: false, multi: false, currentLevel: 0, desc: "Gives a +% All Stat bonus to your characters" })
+            new LandRankUpgrade({ id: 19, unlock: 3500, group: "Utility",       name: "Seed of Stats",         base: 5,     perRank: false, multi: false, currentLevel: 0, desc: "Gives a +% All Stat bonus to your characters" })
         ]
     },
 

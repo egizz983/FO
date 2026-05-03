@@ -24,5 +24,75 @@
             </div>
         </div>
 
+        <!-- Rule Set Panel -->
+        <div class="landrank-ruleset-panel">
+            <h3 class="landrank-db-title" style="font-size:1.05rem;">Rule Set</h3>
+            <div class="landrank-ruleset-list">
+                <label class="landrank-rule-row">
+                    <input type="checkbox" id="rule-utility-upgrades" class="landrank-rule-check">
+                    <span class="landrank-rule-label">Utility Upgrades Max<br><span class="landrank-rule-sub">(5th column)</span></span>
+                    <span class="landrank-tooltip-wrap">
+                        <span class="landrank-tooltip-icon">?</span>
+                        <span class="landrank-tooltip-box">When enabled, Utility upgrades will be set to max. When disabled, they will be set to 0.</span>
+                    </span>
+                </label>
+                <!-- Allocation mode — mutually exclusive via radio group -->
+                <div class="landrank-rule-divider"></div>
+                <label class="landrank-rule-row">
+                    <input type="radio" name="alloc-mode" id="rule-alloc-none" class="landrank-rule-check" value="none" checked onchange="toggleAllocMode()">
+                    <span class="landrank-rule-label">IDK what am doing just optimize </span>
+                </label>
+                <label class="landrank-rule-row">
+                    <input type="radio" name="alloc-mode" id="rule-manual-alloc" class="landrank-rule-check" value="manual" onchange="toggleAllocMode()">
+                    <span class="landrank-rule-label">Manual Point Allocation</span>
+                    <span class="landrank-tooltip-wrap">
+                        <span class="landrank-tooltip-icon">?</span>
+                        <span class="landrank-tooltip-box">When enabled, you can assign how many points you want to allocate to each category and it will optimize them per the points you allocate.</span>
+                    </span>
+                </label>
+                <!-- Per-group cap inputs (shown when Manual is selected) -->
+                <div class="landrank-manual-alloc" id="manual-alloc-section" style="display:none;">
+                    <div class="landrank-manual-divider"></div>
+                    <div id="manual-alloc-inputs"></div>
+                </div>
+                <label class="landrank-rule-row">
+                    <input type="radio" name="alloc-mode" id="rule-threshold" class="landrank-rule-check" value="threshold" onchange="toggleAllocMode()">
+                    <span class="landrank-rule-label">Threshold</span>
+                    <span class="landrank-tooltip-wrap">
+                        <span class="landrank-tooltip-icon">?</span>
+                        <span class="landrank-tooltip-box">Set a priority and point threshold per upgrade group. The optimizer will respect these limits when allocating points.</span>
+                    </span>
+                </label>
+                <!-- Per-group threshold inputs (shown when Threshold is checked) -->
+                <div class="landrank-manual-alloc" id="threshold-section" style="display:none;">
+                    <div class="landrank-manual-divider"></div>
+                    <div class="landrank-threshold-header">
+                        <span class="landrank-manual-label">Group</span>
+                        <span class="landrank-threshold-col-lbl">Priority
+                            <span class="landrank-tooltip-wrap">
+                                <span class="landrank-tooltip-icon">?</span>
+                                <span class="landrank-tooltip-box">1–6, where 1 is the highest priority and 6 is the lowest.</span>
+                            </span>
+                        </span>
+                        <span class="landrank-threshold-col-lbl">Threshold
+                            <span class="landrank-tooltip-wrap">
+                                <span class="landrank-tooltip-icon">?</span>
+                                <span class="landrank-tooltip-box">0–100%. Maximum percentage of available points to spend on this group eg 50(50%).</span>
+                            </span>
+                        </span>
+                    </div>
+                    <div id="threshold-inputs"></div>
+                </div>
+            </div>
+        </div>
+
     </div>
+
+    <!-- Action Buttons (below panels) -->
+    <div class="landrank-action-bar">
+        <button class="landrank-optimize-btn" id="landrank-optimize-btn" onclick="runLandrankOptimizer()">Optimize</button>
+        <button class="landrank-optimize-btn landrank-btn-reset" onclick="resetLandrankUpgrades()">Reset Upgrades</button>
+        <button class="landrank-optimize-btn landrank-btn-default" onclick="defaultLandrankUpgrades()">Default To SaveData</button>
+    </div>
+
 </div>
