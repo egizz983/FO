@@ -2301,7 +2301,7 @@ function DNSMInit(){
 function calculateNextOGChance(t) {
     return (
         Math.pow( 0.4, t+ 1 ) * // current og count // c.asNumber(farmPlot[plotIndex][5]) + 1
-        Math.max(  1, window.farmingState.market.night?.find(u => u.index === 13)?.getBonus()  ) 
+        Math.max(  1, window.farmingState.market.night?.find(u => u.index === 13)?.getBonus().toMulti()  ) *
         (1 + (50 *(window.farmingState?.pristineCharms?.[11] || 0)) / 100) *   // 
         (1 + c.asNumber(getStarSigns(67)) / 100) *
         (1 + (2 * c.asNumber(window.farmingState.miscBonuses.ogMeritShop)) / 100) *
@@ -2312,6 +2312,18 @@ function calculateNextOGChance(t) {
     );
 }
 
+function OGMulti(){
+    const nightGMO        = Math.max(1, window.farmingState.market.night?.find(u => u.index === 13)?.getBonus().toMulti());
+    const pristineCharm11 = 1 + (50 * (window.farmingState?.pristineCharms?.[11] || 0)) / 100;
+    const starSign67      = 1 + c.asNumber(getStarSigns(67)) / 100;
+    const ogMeritShop     = 1 + (2 * c.asNumber(window.farmingState.miscBonuses.ogMeritShop)) / 100;
+    const ogAchievement   = 1 + (15 * (window.farmingState.achievements.farmingOgBigTimeLandOwner == -1 ? 1 : 0)) / 100;
+    const landRankUpg3    = 1 + getLandRankUpgBonusTOTAL(3) / 100;
+    const exotic46        = 1 + (window.farmingState.market.exotic.find(u => u.index === 46)?.getBonus() || 0) / 100;
+    const exotic47        = 1 + (window.farmingState.market.exotic.find(u => u.index === 47)?.getBonus() || 0) / 100;
+
+    return nightGMO * pristineCharm11 * starSign67 * ogMeritShop * ogAchievement * landRankUpg3 * exotic46 * exotic47;
+}
 function calculateOGMulti(t) { // used in soilexp  and possible value calculations "current += calculateOGMulti * ....."
 
 
@@ -2358,5 +2370,4 @@ function processSoilRank(plotindex,seedType,OGcount) {  // max og 30 1e9
     
     const expGain = basketBonus * chainBonus * plotTier * OGmulti * landRankBonus;
 
-    
 }
