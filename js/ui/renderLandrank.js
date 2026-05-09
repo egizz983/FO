@@ -65,6 +65,7 @@ function renderLandrankGrid() {
             { name: 'Points Available', val: stats.pointsAvailable },
             { name: 'OG Cap',           val: '30/' + (typeof getMaxOGCount === 'function' ? getMaxOGCount() : 0) },
             { name: 'Evo Chance Multi', val: (typeof calculateNextCropChance === 'function' ? calculateNextCropChance(999).toExponential(3) : '—') },
+            { name: 'Crop Value Cap',   val: (typeof getCropValueCap === 'function' ? getCropValueCap().toFixed(0) : '—') },
         ];
         statsList.innerHTML = rows.map(r =>
             `<div class="landrank-stat-row">
