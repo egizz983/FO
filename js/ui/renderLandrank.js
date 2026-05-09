@@ -63,7 +63,7 @@ function renderLandrankGrid() {
             { name: 'Total Ranks',      val: stats.totalSum        },
             { name: 'Points Allocated', val: stats.pointsAllocated },
             { name: 'Points Available', val: stats.pointsAvailable },
-            { name: 'OG Cap',           val: '30/' + 0             },
+            { name: 'OG Cap',           val: '30/' + (typeof getMaxOGCount === 'function' ? getMaxOGCount() : 0) },
             { name: 'Evo Chance Multi', val: (typeof calculateNextCropChance === 'function' ? calculateNextCropChance(999).toExponential(3) : '—') },
         ];
         statsList.innerHTML = rows.map(r =>

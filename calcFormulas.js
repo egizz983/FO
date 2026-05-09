@@ -2312,6 +2312,23 @@ function calculateNextOGChance(t) {
     );
 }
 
+// Returns the max OG count achievable with current bonuses.
+// t is the current OG count; calculateNextOGChance(t) is the chance to gain one more OG per growth cycle.
+// The 1000×/50× engine branches are offline catch-up mechanics (only fire when banked growth
+// exceeds 1000×/50× GrowthReq). During active play the plain branch always applies: random < raw.
+// Threshold: chance where ~1 OG is expected per day at typical cycle rates (not just display rounding).
+// Hard-capped at 30.
+function getMaxOGCount() {
+    const OG_GAME_MAX = 30;
+    const THRESHOLD = 8e-6; // tuned to match ~21 OG cap at typical late-game bonus levels
+    for (let t = 0; t < OG_GAME_MAX; t++) {
+        if (calculateNextOGChance(t) < THRESHOLD) {
+            return t;
+        }
+    }
+    return OG_GAME_MAX;
+}
+
 function OGMulti(){
     const nightGMO        = Math.max(1, window.farmingState.market.night?.find(u => u.index === 13)?.getBonus().toMulti());
     const pristineCharm11 = 1 + (50 * (window.farmingState?.pristineCharms?.[11] || 0)) / 100;
@@ -2357,6 +2374,26 @@ function calculateGrowthRate() {
     (1 + (Daymarket + alchBonus + exoticBonus) / 100) *
     (1 + winBonus / 100)
   );
+}
+
+// Engine formula: FarmPlot[n][0]==6 → 25200 × GrowthRate (medal crop scales with speed to keep fixed time)
+//                else → 14400 × 1.5^cropType (fixed per seed tier)
+// t = cropType (0–6), passed directly since we treat the optimizer as a single-plot tool.
+function getGrowthReq(cropType) {
+    if (cropType === 6) {
+        return 25200 * calculateGrowthRate();
+    }
+    return 14400 * Math.pow(1.5, cropType);
+}
+
+// Returns seconds of active play needed to bank 1e4 × GrowthReq (the hard cap).
+// At the cap the engine stops processing OG rolls entirely.
+// Normal crops: time = 1e4 × 14400 × 1.5^cropType / GrowthRate  (speed reduces time)
+// Medal crop:   time = 1e4 × 25200  (speed cancels out — always ~2916 days)
+function getTimeToHardCap(cropType) {
+    const growthRate = calculateGrowthRate();
+    const growthReq  = getGrowthReq(cropType);
+    return (1e4 * growthReq) / growthRate;
 }
 
 
