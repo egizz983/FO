@@ -67,26 +67,33 @@
                 </label>
                 <div id="evolution-cap-section" style="display:none;">
                     <div class="landrank-manual-divider"></div>
+                    <!-- Crop Type row -->
                     <div class="landrank-manual-row">
                         <span class="landrank-manual-label">Crop Type</span>
-                        <select class="landrank-manual-input" id="evolution-cap-crop-type" onchange="onEvolutionCropTypeChange()">
-                            <option value="">— placeholder —</option>
-                        </select>
+                        <button class="evo-pick-btn" id="evo-type-btn" onclick="openCropTypePicker()">— select —</button>
                     </div>
+                    <!-- Crop row (disabled until type chosen) -->
                     <div class="landrank-manual-row">
                         <span class="landrank-manual-label">Crop</span>
-                        <select class="landrank-manual-input" id="evolution-cap-crop">
-                            <option value="">— placeholder —</option>
-                        </select>
+                        <button class="evo-pick-btn" id="evo-crop-btn" onclick="openCropPicker()" disabled>— select —</button>
+                    </div>
+                    <!-- Chance % -->
+                    <div class="landrank-manual-row">
+                        <span class="landrank-manual-label">Chance %</span>
+                        <input type="number" class="landrank-manual-input" id="evolution-cap-chance" min="0.000001" max="100" step="any" value="50">
                     </div>
                 </div>
 
             </div>
         </div>
 
-    </div>
+        <!-- Crop Picker Panel (shown on demand, hidden by default) -->
+        <div class="landrank-crop-picker-panel" id="crop-picker-panel" style="display:none;">
+            <div class="landrank-db-title" style="font-size:0.9rem;" id="crop-picker-title">Select Crop Type</div>
+            <div class="crop-picker-grid" id="crop-picker-grid"></div>
+        </div>
 
-    <!-- Action Buttons (below panels) -->
+    </div>
     <div class="landrank-action-bar">
         <button class="landrank-optimize-btn" id="landrank-optimize-btn" onclick="runLandrankOptimizer()">Optimize</button>
         <button class="landrank-optimize-btn landrank-btn-reset" onclick="resetLandrankUpgrades()">Reset Upgrades</button>

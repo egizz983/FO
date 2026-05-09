@@ -1824,3 +1824,6 @@ const cropTypes = [
     { image: "https://idleontoolbox.com/etc/Seed_5.png" },
     { image: "https://idleontoolbox.com/data/FarmCrop230.png" },
 ];
+
+window.cropArray = cropArray;
+window.cropTypes  = cropTypes;
