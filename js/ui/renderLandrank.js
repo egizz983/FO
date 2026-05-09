@@ -35,7 +35,7 @@ function renderLandrankGrid() {
             const slot = document.createElement('div');
             slot.className = 'landrank-slot';
             slot.dataset.index = i;
-            slot.innerHTML = '<div class="landrank-slot-icon"></div><div class="landrank-slot-level">LV 0</div>';
+            slot.innerHTML = '<div class="landrank-slot-icon"></div><div class="landrank-slot-level">LV 0</div><div class="landrank-slot-threshold"></div>';
             slot.addEventListener('click', () => selectLandrankSlot(slot));
             grid.appendChild(slot);
         }
@@ -49,6 +49,9 @@ function renderLandrankGrid() {
         const icon = slot.querySelector('.landrank-slot-icon');
         const imgUrl = window.imageLinks?.landrank?.[i];
         icon.innerHTML = (level >= 1 && imgUrl) ? `<img src="${imgUrl}" alt="">` : '';
+        const pct = upgrades?.[i]?.getBonusPercentOfMax?.() ?? null;
+        const threshEl = slot.querySelector('.landrank-slot-threshold');
+        if (threshEl) threshEl.textContent = pct !== null ? pct.toFixed(0) + '%' : '';
     });
 
     // Update stats panel
