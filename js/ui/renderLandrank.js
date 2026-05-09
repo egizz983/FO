@@ -63,6 +63,8 @@ function renderLandrankGrid() {
             { name: 'Total Ranks',      val: stats.totalSum        },
             { name: 'Points Allocated', val: stats.pointsAllocated },
             { name: 'Points Available', val: stats.pointsAvailable },
+            { name: 'OG Cap',           val: '30/' + 0             },
+            { name: 'Evo Chance Multi', val: (typeof calculateNextCropChance === 'function' ? calculateNextCropChance(999).toExponential(3) : '—') },
         ];
         statsList.innerHTML = rows.map(r =>
             `<div class="landrank-stat-row">
@@ -179,7 +181,12 @@ function toggleEvolutionCap() {
     const enabled = document.getElementById('rule-evolution-cap')?.checked;
     const section = document.getElementById('evolution-cap-section');
     if (section) section.style.display = enabled ? 'block' : 'none';
-    if (!enabled) closeCropPickerPanel();
+    if (!enabled) {
+        closeCropPickerPanel();
+        removeEvolutionCapStat();
+    } else {
+        updateEvolutionCapStat();
+    }
 }
 
 function closeCropPickerPanel() {
@@ -239,6 +246,7 @@ function selectCropType(typeIndex, typeName, imgSrc) {
     cropBtn.disabled = false;
 
     closeCropPickerPanel();
+    updateEvolutionCapStat();
 }
 
 // Opens the side panel and populates it with crops for the selected type
@@ -288,6 +296,7 @@ function selectCrop(cropId, cropName, imgSrc) {
     btn.appendChild(document.createTextNode(cropName));
 
     closeCropPickerPanel();
+    updateEvolutionCapStat();
 }
 
 // Returns { cropType, cropId, chance, multiplierNeeded } or null if rule is disabled
@@ -298,6 +307,29 @@ function getEvolutionCap() {
     if (cropType === null || cropId === null || isNaN(chance) || chance <= 0) return null;
     const multiplierNeeded = getMultiplierNeededForChance(chance, cropType, cropId);
     return { cropType, cropId, chance, multiplierNeeded };
+}
+
+function updateEvolutionCapStat() {
+    const statsList = document.getElementById('landrank-stats-list');
+    if (!statsList) return;
+
+    // Remove existing cap row if present
+    removeEvolutionCapStat();
+
+    const cap = getEvolutionCap();
+    if (!cap) return;
+
+    const row = document.createElement('div');
+    row.className = 'landrank-stat-row';
+    row.id = 'evo-cap-stat-row';
+    row.innerHTML =
+        `<span class="landrank-stat-name">Evolution Cap</span>` +
+        `<span class="landrank-stat-val" style="font-size:0.7rem;">${cap.multiplierNeeded.toExponential(3)}</span>`;
+    statsList.appendChild(row);
+}
+
+function removeEvolutionCapStat() {
+    document.getElementById('evo-cap-stat-row')?.remove();
 }
 
 // ======================

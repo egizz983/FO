@@ -2373,12 +2373,12 @@ function processSoilRank(plotindex,seedType,OGcount) {  // max og 30 1e9
 
 }
 
-function calculateNextCropChance(cropid,seedid) {
+function calculateNextCropChance(cropid,seedid = 0) {
 
-
+    const state = window.farmingState || {};
   // === CLEARLY NAMED MULTIPLIERS (each bonus extracted for readability) ===
   // These match the exact original calculations
-  const basketUpgBase      = farmingState.market.day.find(u => u.index === 6)?.getBonus();
+  const basketUpgBase      = state.market.day.find(u => u.index === 6)?.getBonus();
   const winBonus           = window.getWinBonus(10).toMulti()
   const lampBonus          = window.getLampBonus().toMulti();
   const rogBonus           = getRoGBonusQTY(35).toMulti();
@@ -2399,17 +2399,17 @@ function calculateNextCropChance(cropid,seedid) {
 
   // Max(1, ...) bonuses
   const killroyBonus       = getKillroyBonus();
-  const basketSpecial      = farmingState.market.night.find(u => u.index === 11)?.getBonus();
+  const basketSpecial      = state.market.night.find(u => u.index === 11)?.getBonus();
   const landRankTotal      = getLandRankUpgBonusTOTAL(0);
   const bonus205           = getTalentNumber(1, 205);
 
   // Rift + Star Sign
   const riftBonus          =  getSkillMasteryBonus();
-  const starSignBonus      = (getStarSigns(65) * window.farmingState.levels.farming).toMulti();
+  const starSignBonus      = (getStarSigns(65) * state.levels.farming).toMulti();
 
   // Rank + Voting bonus (differs by t)
-  const rankBonus          = (farmingState.landRank.upgrades[0].getBonus() * farmingState.landRank.stats.first + window.farmingState.miscBonuses.votingBonus29).toMulti();
-  const buttonBonus        = getButtonBonuses(5, window.farmingState.miscBonuses.evoButtonPressCount).toMulti();
+  const rankBonus          = (state.landRank.upgrades[0].getBonus() * state.landRank.stats.first + state.miscBonuses.votingBonus29).toMulti();
+  const buttonBonus        = getButtonBonuses(5, state.miscBonuses.evoButtonPressCount).toMulti();
   const stickerBonus       = getStickerBonus(4).toMulti();
 
   const exoticMultipliers = state.market.exotic
