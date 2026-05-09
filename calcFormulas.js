@@ -2372,3 +2372,131 @@ function processSoilRank(plotindex,seedType,OGcount) {  // max og 30 1e9
     const expGain = basketBonus * chainBonus * plotTier * OGmulti * landRankBonus;
 
 }
+
+function calculateNextCropChance(cropid,seedid) {
+
+
+  // === CLEARLY NAMED MULTIPLIERS (each bonus extracted for readability) ===
+  // These match the exact original calculations
+  const basketUpgBase      = farmingState.market.day.find(u => u.index === 6)?.getBonus();
+  const winBonus           = window.getWinBonus(10).toMulti()
+  const lampBonus          = window.getLampBonus().toMulti();
+  const rogBonus           = getRoGBonusQTY(35).toMulti();
+  const alchW10AllCharz    = (window.calculateBubbleBonus(state.alchemy.cropChapterBubblebonus, 12, 50) * window.calculateTomeScorePer2000()).toMulti();
+  const alchY6             = (window.calculateBubbleBonus(state.alchemy.croppiusMapperBubblebonus, 5, 70) * window.calculateKillsLeftToAdvance()).toMulti();
+  const alchVialFarmEvo    = getVialBonus(66, window.farmingState.alchemy.flavorgilBonus).toMulti();
+  const cardBonus          = getCardBonus(window.farmingState.miscBonuses.jellofishcard).toMulti();
+  const mealCropEvo        = window.getMealBonus(62, state.meals.evoBillJackPepperRibbonLevel, state.meals.evoBillJackPepper).toMulti();
+  const vaultUpgBonus      = window.getVaultUpgBonus(78, 0).toMulti();
+  const monumentROG        = getmonumentROGbonuses(2, 4).toMulti();
+  const stampCropEvo       = getStampBonusOfType(1, 47, window.farmingState.miscBonuses.evoCropEvoStamp).toMulti();
+  const grimoireUpg        = grimoireUpgBonus().toMulti();
+
+
+  const mealCropEvoSumm    = (window.getMealBonus(66, state.meals.evoNyanborgirRibbonLevel, state.meals.evoNyanborgir) * Math.ceil((c.asNumber(state.levels.summoning) + 1) / 50)).toMulti();
+
+  const achieveBonus       = (5 * (state.achievements.farmingEvoLilOvergrowth === -1 ? 1 : 0)).toMulti();
+
+  // Max(1, ...) bonuses
+  const killroyBonus       = getKillroyBonus();
+  const basketSpecial      = farmingState.market.night.find(u => u.index === 11)?.getBonus();
+  const landRankTotal      = getLandRankUpgBonusTOTAL(0);
+  const bonus205           = getTalentNumber(1, 205);
+
+  // Rift + Star Sign
+  const riftBonus          =  getSkillMasteryBonus();
+  const starSignBonus      = (getStarSigns(65) * window.farmingState.levels.farming).toMulti();
+
+  // Rank + Voting bonus (differs by t)
+  const rankBonus          = (farmingState.landRank.upgrades[0].getBonus() * farmingState.landRank.stats.first + window.farmingState.miscBonuses.votingBonus29).toMulti();
+  const buttonBonus        = getButtonBonuses(5, window.farmingState.miscBonuses.evoButtonPressCount).toMulti();
+  const stickerBonus       = getStickerBonus(4).toMulti();
+
+  const exoticMultipliers = state.market.exotic
+        .filter(u => u.group === "Evolution" && u.isMultiplier)
+        .reduce((prod, u) => prod * u.getBonus().toMulti(), 1);
+    const exoticAdditives = state.market.exotic
+        .filter(u => u.group === "Evolution" && !u.isMultiplier)
+        .reduce((sum, u) => sum + u.getBonus(), 0).toMulti();
+
+
+
+
+  // === COMMON MULTIPLIER (all shared bonuses) ===
+  let multiplier =
+    basketUpgBase *
+    winBonus *
+    lampBonus *
+    rogBonus *
+    alchW10AllCharz *
+    alchY6 *
+    alchVialFarmEvo *
+    cardBonus *
+    mealCropEvo *
+    vaultUpgBonus *
+    monumentROG *
+    stampCropEvo *
+    grimoireUpg *
+    mealCropEvoSumm *
+    achieveBonus *
+    killroyBonus *
+    basketSpecial *
+    riftBonus *
+    starSignBonus *
+    landRankTotal *
+    bonus205 *
+    rankBonus *
+    buttonBonus *
+    stickerBonus *
+    exoticMultipliers *
+    exoticAdditives;
+
+  // === SPECIAL CASE: cropid === 999 ===
+  if (cropid === 999) {
+    return multiplier;
+  }
+
+
+
+  const genInfoValue = c.asNumber(window.SeedInfo[0][5] ); // engine bug should be using SeedInfo[x][5] but initialized and never updated with [0][5]
+
+  const denomBase = c.asNumber(
+    window.SeedInfo[0 | seedid][6]
+  );
+  const nextCropDenom = getNextCropChanceDENOM(denomBase);
+
+
+  return multiplier * genInfoValue * Math.pow(nextCropDenom, cropid);
+}
+
+
+
+function getNextCropChanceDENOM(t) {
+
+  const SPECIAL_SENTINEL = 6942e-8; 
+  if (t === SPECIAL_SENTINEL) {
+
+    return 1 / Math.pow(10, 110);
+  }
+  return t;
+}
+
+function getBaseEvoChance(seedType, cropId) { // chance needed 
+    // SeedInfo[0][5] = 0.30 — game always uses index 0 (engine bug)
+    const baseRate = parseFloat(window.SeedInfo[0][5]);
+
+    // SeedInfo[seedType][6] = denominator base for this crop tier
+    const denomRaw = parseFloat(window.SeedInfo[0 | seedType][6]);
+    const denom = getNextCropChanceDENOM(denomRaw);
+
+    // cropId = FarmPlot[plot][2] = crops accumulated on this plot
+    return baseRate * Math.pow(denom, cropId);
+}
+
+
+function getMultiplierNeededForChance(chance, croptype, cropid) {
+    const target = chance / 100;
+    const base   = getBaseEvoChance(croptype, cropid);
+    return target / base;
+}
+

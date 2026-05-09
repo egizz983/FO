@@ -7,6 +7,7 @@
 
 // Position fixed tooltips near their icon on mouseenter
 document.addEventListener('mouseenter', function(e) {
+    if (!(e.target instanceof Element)) return;
     const icon = e.target.closest('.landrank-tooltip-icon');
     if (!icon) return;
     const box = icon.parentElement?.querySelector('.landrank-tooltip-box');
@@ -130,53 +131,13 @@ function getManualCaps() {
 // ======================
 function toggleAllocMode() {
     const mode = document.querySelector('input[name="alloc-mode"]:checked')?.value ?? 'none';
-    const manualSection    = document.getElementById('manual-alloc-section');
-    const thresholdSection = document.getElementById('threshold-section');
-    if (manualSection)    manualSection.style.display    = mode === 'manual'    ? 'block' : 'none';
-    if (thresholdSection) thresholdSection.style.display = mode === 'threshold' ? 'block' : 'none';
-    if (mode === 'manual')    renderManualAllocationInputs();
-    if (mode === 'threshold') renderThresholdInputs();
+    const manualSection = document.getElementById('manual-alloc-section');
+    if (manualSection) manualSection.style.display = mode === 'manual' ? 'block' : 'none';
+    if (mode === 'manual') renderManualAllocationInputs();
 }
 
-// Legacy aliases so any existing calls still work
+// Legacy alias so any existing calls still work
 function toggleManualAllocation() { toggleAllocMode(); }
-function toggleThreshold()         { toggleAllocMode(); }
-
-function renderThresholdInputs() {
-    const container = document.getElementById('threshold-inputs');
-    if (!container) return;
-    const upgrades = window.farmingState?.landRank?.upgrades;
-    if (!upgrades) {
-        container.innerHTML = '<span class="landrank-rule-sub" style="padding:4px 0;">Load data first</span>';
-        return;
-    }
-    const groups = [...new Set(upgrades.map(u => u.group))];
-    container.innerHTML = groups.map(g =>
-        `<div class="landrank-threshold-row">
-            <span class="landrank-manual-label">${g}</span>
-            <input type="number" class="landrank-manual-input" id="threshold-priority-${g}" min="1" max="6" placeholder="—">
-            <input type="number" class="landrank-manual-input" id="threshold-cap-${g}"      min="0" max="100" placeholder="—">
-        </div>`
-    ).join('');
-}
-
-// Helper to read threshold settings; returns null if unchecked
-function getThresholds() {
-    const mode = document.querySelector('input[name="alloc-mode"]:checked')?.value;
-    if (mode !== 'threshold') return null;
-    const upgrades = window.farmingState?.landRank?.upgrades ?? [];
-    const groups = [...new Set(upgrades.map(u => u.group))];
-    const thresholds = {};
-    groups.forEach(g => {
-        const pVal = document.getElementById(`threshold-priority-${g}`)?.value;
-        const tVal = document.getElementById(`threshold-cap-${g}`)?.value;
-        thresholds[g] = {
-            priority:  pVal !== '' && pVal != null ? parseInt(pVal, 10)  : null,
-            threshold: tVal !== '' && tVal != null ? parseInt(tVal, 10)  : Infinity,
-        };
-    });
-    return thresholds;
-}
 
 // ======================
 // RESET / DEFAULT BUTTONS
@@ -202,6 +163,42 @@ function defaultLandrankUpgrades() {
     if (typeof fn === 'function') fn(playerData);
 
     renderLandrankGrid();
+}
+
+// ======================
+// EVOLUTION CAP
+// ======================
+function toggleEvolutionCap() {
+    const enabled = document.getElementById('rule-evolution-cap')?.checked;
+    const section = document.getElementById('evolution-cap-section');
+    if (section) section.style.display = enabled ? 'block' : 'none';
+}
+
+// Called when crop type changes — repopulates the crop dropdown
+// TODO: populate from Crops[type] array once available
+function onEvolutionCropTypeChange() {
+    const typeSelect = document.getElementById('evolution-cap-crop-type');
+    const cropSelect = document.getElementById('evolution-cap-crop');
+    if (!typeSelect || !cropSelect) return;
+    cropSelect.innerHTML = '<option value="">— placeholder —</option>';
+    // const type = typeSelect.value;
+    // const crops = window.Crops?.[type] ?? [];
+    // crops.forEach((crop, id) => {
+    //     const opt = document.createElement('option');
+    //     opt.value = id;
+    //     opt.textContent = crop.name ?? `Crop ${id}`;
+    //     cropSelect.appendChild(opt);
+    // });
+}
+
+// Returns { cropType, cropId, evoCap } or null if rule is disabled
+// TODO: call evolution calculation function once available
+function getEvolutionCap() {
+    if (!document.getElementById('rule-evolution-cap')?.checked) return null;
+    const cropType = document.getElementById('evolution-cap-crop-type')?.value;
+    const cropId   = document.getElementById('evolution-cap-crop')?.value;
+    // const evoCap = calcEvolutionRequired(cropType, cropId); // TODO
+    return { cropType, cropId, evoCap: null };
 }
 
 // ======================

@@ -55,34 +55,32 @@
                     <div class="landrank-manual-divider"></div>
                     <div id="manual-alloc-inputs"></div>
                 </div>
+                <!-- Evolution Cap -->
+                <div class="landrank-rule-divider"></div>
                 <label class="landrank-rule-row">
-                    <input type="radio" name="alloc-mode" id="rule-threshold" class="landrank-rule-check" value="threshold" onchange="toggleAllocMode()">
-                    <span class="landrank-rule-label">Threshold</span>
+                    <input type="checkbox" id="rule-evolution-cap" class="landrank-rule-check" onchange="toggleEvolutionCap()">
+                    <span class="landrank-rule-label">Evolution Cap</span>
                     <span class="landrank-tooltip-wrap">
                         <span class="landrank-tooltip-icon">?</span>
-                        <span class="landrank-tooltip-box">Set a priority and point threshold per upgrade group. The optimizer will respect these limits when allocating points.</span>
+                        <span class="landrank-tooltip-box">When enabled, the optimizer caps points based on the Evolution requirement for the selected crop.</span>
                     </span>
                 </label>
-                <!-- Per-group threshold inputs (shown when Threshold is checked) -->
-                <div class="landrank-manual-alloc" id="threshold-section" style="display:none;">
+                <div id="evolution-cap-section" style="display:none;">
                     <div class="landrank-manual-divider"></div>
-                    <div class="landrank-threshold-header">
-                        <span class="landrank-manual-label">Group</span>
-                        <span class="landrank-threshold-col-lbl">Priority
-                            <span class="landrank-tooltip-wrap">
-                                <span class="landrank-tooltip-icon">?</span>
-                                <span class="landrank-tooltip-box">1–6, where 1 is the highest priority and 6 is the lowest.</span>
-                            </span>
-                        </span>
-                        <span class="landrank-threshold-col-lbl">Threshold
-                            <span class="landrank-tooltip-wrap">
-                                <span class="landrank-tooltip-icon">?</span>
-                                <span class="landrank-tooltip-box">0–100%. Maximum percentage of available points to spend on this group eg 50(50%).</span>
-                            </span>
-                        </span>
+                    <div class="landrank-manual-row">
+                        <span class="landrank-manual-label">Crop Type</span>
+                        <select class="landrank-manual-input" id="evolution-cap-crop-type" onchange="onEvolutionCropTypeChange()">
+                            <option value="">— placeholder —</option>
+                        </select>
                     </div>
-                    <div id="threshold-inputs"></div>
+                    <div class="landrank-manual-row">
+                        <span class="landrank-manual-label">Crop</span>
+                        <select class="landrank-manual-input" id="evolution-cap-crop">
+                            <option value="">— placeholder —</option>
+                        </select>
+                    </div>
                 </div>
+
             </div>
         </div>
 
