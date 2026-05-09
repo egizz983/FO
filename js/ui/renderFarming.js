@@ -184,6 +184,63 @@ function renderBonusViewport(bonus) {
         <div class="breakdown" id="breakdown-${bonus.name.toLowerCase().replace(/[^a-z0-9]/g, '-')}"></div>
     `;
 
+    if (bonus.name === 'Overgrowth') {
+        const section = document.createElement('div');
+        section.style.cssText = 'margin-bottom:20px;';
+
+        const sectionLabel = document.createElement('div');
+        sectionLabel.style.cssText = 'font-size:0.75rem; font-weight:700; letter-spacing:0.1em; text-transform:uppercase; color:#7ec8a0; text-align:center; margin-bottom:10px;';
+        sectionLabel.textContent = 'AFK OG Hard Caps';
+        section.appendChild(sectionLabel);
+
+        const cardsRow = document.createElement('div');
+        cardsRow.style.cssText = 'display:flex; gap:10px; flex-wrap:nowrap; width:100%;';
+
+        const cropTypes = window.cropTypes || [];
+        const cropNames = ['Tier 1', 'Tier 2', 'Tier 3', 'Tier 4', 'Tier 5', 'Tier 6', 'Medal'];
+
+        function fmtSecs(secs) {
+            const days   = Math.floor(secs / 86400);
+            const hours  = Math.floor((secs % 86400) / 3600);
+            const mins   = Math.floor((secs % 3600) / 60);
+            const remSec = Math.floor(secs % 60);
+            if (days >= 1)       return `${days.toLocaleString()}d ${hours}h`;
+            if (hours >= 1)      return `${hours}h ${mins}m`;
+            if (mins >= 1)       return `${mins}m ${remSec}s`;
+            return `${remSec}s`;
+        }
+
+        const capTiers = [
+            { mult: 50,   label: '×50',    color: '#6eb5c8' },
+            { mult: 1000, label: '×1000',  color: '#c8a96e' },
+            { mult: 1e4,  label: '×10000', color: '#c86e6e' },
+        ];
+
+        for (let i = 0; i < cropTypes.length; i++) {
+            const card = document.createElement('div');
+            card.style.cssText = 'display:flex; flex-direction:column; align-items:center; gap:5px; background:var(--bg-secondary,#1a1a2e); border:1px solid var(--border-color,#333); border-radius:10px; padding:10px 8px; flex:1 1 0; min-width:0;';
+
+            const tierRows = capTiers.map(tier => {
+                const secs = typeof getTimeToHardCap === 'function' ? getTimeToHardCap(i, tier.mult) : 0;
+                return `<div style="display:flex; justify-content:space-between; gap:10px; width:100%;">
+                    <span style="font-size:0.65rem; color:var(--text-muted,#888);">${tier.label}</span>
+                    <span style="font-size:0.7rem; font-weight:700; color:${tier.color}; white-space:nowrap;">${fmtSecs(secs)}</span>
+                </div>`;
+            }).join('');
+
+            card.innerHTML = `
+                <img src="${cropTypes[i].image}" referrerpolicy="no-referrer" style="width:40px;height:40px;image-rendering:pixelated;" title="${cropNames[i]}">
+                <div style="font-size:0.7rem; font-weight:600; color:var(--text-muted,#aaa); margin-bottom:4px;">${cropNames[i]}</div>
+                <div style="width:100%; display:flex; flex-direction:column; gap:3px;">${tierRows}</div>
+            `;
+            cardsRow.appendChild(card);
+        }
+
+        section.appendChild(cardsRow);
+        const totalRowEl = viewport.querySelector('.total-row');
+        viewport.insertBefore(section, totalRowEl);
+    }
+
     const breakdownContainer = document.getElementById(`breakdown-${bonus.name.toLowerCase().replace(/[^a-z0-9]/g, '-')}`);
     const breakdowns = window.getFarmingBreakdowns();
     const groupedData = breakdowns[bonus.name] || {};

@@ -34,17 +34,31 @@ function LankRankUpgBonus(t, base, level) { // engine formula
  * @param {number} level - Current level
  * @returns {number} Percentage of max bonus (0-100), or 0 for linear growth cases
  */
+// Engine: LandRank5thColumnMaxLV =
+//   Math.round(1 + (GrimoireUpgBonus(9) + Math.ceil(ExoticBonusQTY(15))) + LegendPTS_bonus(3))
+// ExoticBonusQTY(15) = exotic market item at array index 15 (not tracked in state -> 0 if absent)
+function getLandRank5thColumnMaxLV() {
+    // Guard: required data may not be loaded yet at initial render
+    if (!window.LegendTalents || !window.farmingState?.spelunk?.[18] || !window.GrimoireUpg) return 1;
+    const grimoireBonus = getGrimoireUpgBonus(9);
+    // ExoticBonusQTY(15) in engine = array position 15 → FarmUpg[20+15] = FarmUpg[35] → exotic item index 35
+    const exoticBonus15 = Math.ceil(window.farmingState.market.exotic.find(u => u.index === 35)?.getBonus() || 0);
+    const legendBonus   = getLegendPTS_bonus(3);
+    return Math.round(1 + (grimoireBonus + exoticBonus15) + legendBonus);
+}
+
 function getLandRankUpgBonusPercentOfMax(t, level) {
     level = Math.max(0, c.asNumber(level));
     
-    // Special cases with linear growth (no asymptotic maximum)
+    // Column 5 upgrades (IDs 4, 9, 14, 19): linear with engine-defined max level
     if (t === 4 || t === 9 || t === 14 || t === 19) {
-        // Linear growth has no completion percentage, return 0 or undefined
-        return 0;
+        const maxLV = getLandRank5thColumnMaxLV();
+        if (maxLV <= 0) return 0;
+        return Math.min(100, (level / maxLV) * 100);
     }
     const percentOfMax = (level / (level + 80)) * 100;
     
-    return Math.min(100, percentOfMax); // Cap at 100% for safety
+    return Math.min(100, percentOfMax);
 }
 
 /**
@@ -56,9 +70,11 @@ function getLandRankUpgBonusPercentOfMax(t, level) {
 function getLandRankUpgBonusLevelAtThreshold(t, threshold) {
     threshold = Math.max(0, Math.min(100, c.asNumber(threshold)));
     
-    // Special cases with linear growth (no threshold applicable)
+    // Column 5 upgrades: linear with a hard max level
+    // % = level / maxLV * 100  →  level = threshold% * maxLV / 100
     if (t === 4 || t === 9 || t === 14 || t === 19) {
-        return -1; // Not applicable for linear growth
+        const maxLV = getLandRank5thColumnMaxLV();
+        return Math.round((threshold / 100) * maxLV);
     }
     
     // Handle edge cases
@@ -2386,14 +2402,17 @@ function getGrowthReq(cropType) {
     return 14400 * Math.pow(1.5, cropType);
 }
 
-// Returns seconds of active play needed to bank 1e4 × GrowthReq (the hard cap).
-// At the cap the engine stops processing OG rolls entirely.
-// Normal crops: time = 1e4 × 14400 × 1.5^cropType / GrowthRate  (speed reduces time)
-// Medal crop:   time = 1e4 × 25200  (speed cancels out — always ~2916 days)
-function getTimeToHardCap(cropType) {
+// Returns seconds of active play needed to bank capMultiplier × GrowthReq.
+// Engine thresholds:
+//   50   → offline ×50 catch-up rolls fire  (banked > 50×GrowthReq  AND raw < 0.02)
+//   1000 → offline ×1000 catch-up rolls fire (banked > 1e3×GrowthReq AND raw < 0.001)
+//   10000 (default) → hard cap, engine stops all OG rolls entirely
+// Normal crops: time = capMultiplier × 14400 × 1.5^cropType / GrowthRate
+// Medal crop:   speed cancels out — time = capMultiplier × 25200
+function getTimeToHardCap(cropType, capMultiplier = 1e4) {
     const growthRate = calculateGrowthRate();
     const growthReq  = getGrowthReq(cropType);
-    return (1e4 * growthReq) / growthRate;
+    return (capMultiplier * growthReq) / growthRate;
 }
 
 
