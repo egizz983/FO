@@ -9,7 +9,11 @@ class FarmingOptimizer {
     // Main entry point called from index
     loadPlayerData(jsonString) {
         try {
-            const data = JSON.parse(jsonString);   
+            let data = JSON.parse(jsonString);
+            // Normalize SavedataSupport.json format: game data is nested under .data
+            if (data.data && (data.data.FarmRank !== undefined || data.data.FarmPlot !== undefined)) {
+                data = data.data;
+            }
             this.parseAll(data);
             
             // Restore user selections after parsing JSON
