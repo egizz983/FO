@@ -286,10 +286,10 @@ window.StateManager = (function() {
             'talents.talent206',
             'talents.talent207',
             // Lab
-            'lab.my1stChemistrySet',
-            'lab.certifiedStampBook',
-            'lab.spelunkerObol',
-            'lab.mealBlackDiamondRhinestone',
+            'labM.my1stChemistrySet',
+            'labM.certifiedStampBook',
+            'labM.spelunkerObol',
+            'labM.mealBlackDiamondRhinestone',
             // Parsed crop counts (user can override for debugging)
             'gmoCropCounts.200',
             'gmoCropCounts.1000',

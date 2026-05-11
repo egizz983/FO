@@ -34,17 +34,31 @@ function LankRankUpgBonus(t, base, level) { // engine formula
  * @param {number} level - Current level
  * @returns {number} Percentage of max bonus (0-100), or 0 for linear growth cases
  */
+// Engine: LandRank5thColumnMaxLV =
+//   Math.round(1 + (GrimoireUpgBonus(9) + Math.ceil(ExoticBonusQTY(15))) + LegendPTS_bonus(3))
+// ExoticBonusQTY(15) = exotic market item at array index 15 (not tracked in state -> 0 if absent)
+function getLandRank5thColumnMaxLV() {
+    // Guard: required data may not be loaded yet at initial render
+    if (!window.LegendTalents || !window.farmingState?.spelunk?.[18] || !window.GrimoireUpg) return 1;
+    const grimoireBonus = getGrimoireUpgBonus(9);
+    // ExoticBonusQTY(15) in engine = array position 15 → FarmUpg[20+15] = FarmUpg[35] → exotic item index 35
+    const exoticBonus15 = Math.ceil(window.farmingState.market.exotic.find(u => u.index === 35)?.getBonus() || 0);
+    const legendBonus   = getLegendPTS_bonus(3);
+    return Math.round(1 + (grimoireBonus + exoticBonus15) + legendBonus);
+}
+
 function getLandRankUpgBonusPercentOfMax(t, level) {
     level = Math.max(0, c.asNumber(level));
     
-    // Special cases with linear growth (no asymptotic maximum)
+    // Column 5 upgrades (IDs 4, 9, 14, 19): linear with engine-defined max level
     if (t === 4 || t === 9 || t === 14 || t === 19) {
-        // Linear growth has no completion percentage, return 0 or undefined
-        return 0;
+        const maxLV = getLandRank5thColumnMaxLV();
+        if (maxLV <= 0) return 0;
+        return Math.min(100, (level / maxLV) * 100);
     }
     const percentOfMax = (level / (level + 80)) * 100;
     
-    return Math.min(100, percentOfMax); // Cap at 100% for safety
+    return Math.min(100, percentOfMax);
 }
 
 /**
@@ -56,9 +70,11 @@ function getLandRankUpgBonusPercentOfMax(t, level) {
 function getLandRankUpgBonusLevelAtThreshold(t, threshold) {
     threshold = Math.max(0, Math.min(100, c.asNumber(threshold)));
     
-    // Special cases with linear growth (no threshold applicable)
+    // Column 5 upgrades: linear with a hard max level
+    // % = level / maxLV * 100  →  level = threshold% * maxLV / 100
     if (t === 4 || t === 9 || t === 14 || t === 19) {
-        return -1; // Not applicable for linear growth
+        const maxLV = getLandRank5thColumnMaxLV();
+        return Math.round((threshold / 100) * maxLV);
     }
     
     // Handle edge cases
@@ -792,7 +808,7 @@ window.getVialBonus = function(i, level) {
         c.asNumber(level)
     );
 
-    if (window.farmingState.lab.my1stChemistrySet) {
+    if (window.farmingState.labM.my1stChemistrySet) {
         const result = 2 * (1 + dnzz) * (1 + merit) * arbitraryResult;
 
         return result;
@@ -1035,7 +1051,7 @@ function getMainframeBonus(e) {
     }
     if (e === 8) {
 
-      if (!window.farmingState.lab.spelunkerObol) {
+      if (!window.farmingState.labM.spelunkerObol) {
         return 0;
       }
       return baseValue5 + getMainframeBonus(119) / 100;
@@ -1059,7 +1075,7 @@ function getMainframeBonus(e) {
     // if (!isUnlocked) {
     //   return 0;
     // }
-    const multi = (window.farmingState.lab.spelunkerObol && e !== 119) ? getMainframeBonus(8) : 1; // Don't apply multiplier to ID 119 to avoid circular dependency
+    const multi = (window.farmingState.labM.spelunkerObol && e !== 119) ? getMainframeBonus(8) : 1; // Don't apply multiplier to ID 119 to avoid circular dependency
     const jewelBase = c.asNumber(window.JewelDesc[jewelIndex][12]);
     // Special doubled jewel cases (only when certain prerequisite Mainframe bonuses are active)
     if (e === 100) {
@@ -1088,7 +1104,7 @@ function getMainframeBonus(e) {
         : jewelBase * multi;
     }
     if (e === 119) {
-        if(window.farmingState.lab.Pure_Opal_Navette){
+        if(window.farmingState.labM.Pure_Opal_Navette){
             return jewelBase; // no multiplier for this one
         } else {
             return 0; // locked if Pure Opal Navette is not unlocked
@@ -1110,7 +1126,7 @@ function getMealBonus(index,ribbonLevel,meallevel) {
 
 function getCookingMealBonusMultiplier() {
   // Part 1: Mainframe bonus (ID 116) + special Shiny Breeding bonus
-  const mainframeAndBreeding = window.farmingState.lab.mealBlackDiamondRhinestone
+  const mainframeAndBreeding = window.farmingState.labM.mealBlackDiamondRhinestone
     ? (getMainframeBonus(116) + window.farmingState.shinyPets.mealBonus)
     : window.farmingState.shinyPets.mealBonus;
   // Part 2: Summoning WinBonus (ID 26)
@@ -2312,6 +2328,23 @@ function calculateNextOGChance(t) {
     );
 }
 
+// Returns the max OG count achievable with current bonuses.
+// t is the current OG count; calculateNextOGChance(t) is the chance to gain one more OG per growth cycle.
+// The 1000×/50× engine branches are offline catch-up mechanics (only fire when banked growth
+// exceeds 1000×/50× GrowthReq). During active play the plain branch always applies: random < raw.
+// Threshold: chance where ~1 OG is expected per day at typical cycle rates (not just display rounding).
+// Hard-capped at 30.
+function getMaxOGCount() {
+    const OG_GAME_MAX = 30;
+    const THRESHOLD = 8e-6; // tuned to match ~21 OG cap at typical late-game bonus levels
+    for (let t = 0; t < OG_GAME_MAX; t++) {
+        if (calculateNextOGChance(t) < THRESHOLD) {
+            return t;
+        }
+    }
+    return OG_GAME_MAX;
+}
+
 function OGMulti(){
     const nightGMO        = Math.max(1, window.farmingState.market.night?.find(u => u.index === 13)?.getBonus().toMulti());
     const pristineCharm11 = 1 + (50 * (window.farmingState?.pristineCharms?.[11] || 0)) / 100;
@@ -2324,6 +2357,7 @@ function OGMulti(){
 
     return nightGMO * pristineCharm11 * starSign67 * ogMeritShop * ogAchievement * landRankUpg3 * exotic46 * exotic47;
 }
+
 function calculateOGMulti(t) { // used in soilexp  and possible value calculations "current += calculateOGMulti * ....."
 
 
@@ -2358,6 +2392,29 @@ function calculateGrowthRate() {
   );
 }
 
+// Engine formula: FarmPlot[n][0]==6 → 25200 × GrowthRate (medal crop scales with speed to keep fixed time)
+//                else → 14400 × 1.5^cropType (fixed per seed tier)
+// t = cropType (0–6), passed directly since we treat the optimizer as a single-plot tool.
+function getGrowthReq(cropType) {
+    if (cropType === 6) {
+        return 25200 * calculateGrowthRate();
+    }
+    return 14400 * Math.pow(1.5, cropType);
+}
+
+// Returns seconds of active play needed to bank capMultiplier × GrowthReq.
+// Engine thresholds:
+//   50   → offline ×50 catch-up rolls fire  (banked > 50×GrowthReq  AND raw < 0.02)
+//   1000 → offline ×1000 catch-up rolls fire (banked > 1e3×GrowthReq AND raw < 0.001)
+//   10000 (default) → hard cap, engine stops all OG rolls entirely
+// Normal crops: time = capMultiplier × 14400 × 1.5^cropType / GrowthRate
+// Medal crop:   speed cancels out — time = capMultiplier × 25200
+function getTimeToHardCap(cropType, capMultiplier = 1e4) {
+    const growthRate = calculateGrowthRate();
+    const growthReq  = getGrowthReq(cropType);
+    return (capMultiplier * growthReq) / growthRate;
+}
+
 
 function processSoilRank(plotindex,seedType,OGcount) {  // max og 30 1e9
 
@@ -2371,3 +2428,163 @@ function processSoilRank(plotindex,seedType,OGcount) {  // max og 30 1e9
     const expGain = basketBonus * chainBonus * plotTier * OGmulti * landRankBonus;
 
 }
+
+function calculateNextCropChance(cropid,seedid = 0) {
+
+    const state = window.farmingState || {};
+  // === CLEARLY NAMED MULTIPLIERS (each bonus extracted for readability) ===
+  // These match the exact original calculations
+  const basketUpgBase      = state.market.day.find(u => u.index === 6)?.getBonus();
+  const winBonus           = window.getWinBonus(10).toMulti()
+  const lampBonus          = window.getLampBonus().toMulti();
+  const rogBonus           = getRoGBonusQTY(35).toMulti();
+  const alchW10AllCharz    = (window.calculateBubbleBonus(state.alchemy.cropChapterBubblebonus, 12, 50) * window.calculateTomeScorePer2000()).toMulti();
+  const alchY6             = (window.calculateBubbleBonus(state.alchemy.croppiusMapperBubblebonus, 5, 70) * window.calculateKillsLeftToAdvance()).toMulti();
+  const alchVialFarmEvo    = getVialBonus(66, window.farmingState.alchemy.flavorgilBonus).toMulti();
+  const cardBonus          = getCardBonus(window.farmingState.miscBonuses.jellofishcard).toMulti();
+  const mealCropEvo        = window.getMealBonus(62, state.meals.evoBillJackPepperRibbonLevel, state.meals.evoBillJackPepper).toMulti();
+  const vaultUpgBonus      = window.getVaultUpgBonus(78, 0).toMulti();
+  const monumentROG        = getmonumentROGbonuses(2, 4).toMulti();
+  const stampCropEvo       = getStampBonusOfType(1, 47, window.farmingState.miscBonuses.evoCropEvoStamp).toMulti();
+  const grimoireUpg        = grimoireUpgBonus().toMulti();
+
+
+  const mealCropEvoSumm    = (window.getMealBonus(66, state.meals.evoNyanborgirRibbonLevel, state.meals.evoNyanborgir) * Math.ceil((c.asNumber(state.levels.summoning) + 1) / 50)).toMulti();
+
+  const achieveBonus       = (5 * (state.achievements.farmingEvoLilOvergrowth === -1 ? 1 : 0)).toMulti();
+
+  // Max(1, ...) bonuses
+  const killroyBonus       = getKillroyBonus();
+  const basketSpecial      = state.market.night.find(u => u.index === 11)?.getBonus();
+  const landRankTotal      = getLandRankUpgBonusTOTAL(0);
+  const bonus205           = getTalentNumber(1, 205);
+
+  // Rift + Star Sign
+  const riftBonus          =  getSkillMasteryBonus();
+  const starSignBonus      = (getStarSigns(65) * state.levels.farming).toMulti();
+
+  // Rank + Voting bonus (differs by t)
+  const rankBonus          = (state.landRank.upgrades[0].getBonus() * state.landRank.stats.first + state.miscBonuses.votingBonus29).toMulti();
+  const buttonBonus        = getButtonBonuses(5, state.miscBonuses.evoButtonPressCount).toMulti();
+  const stickerBonus       = getStickerBonus(4).toMulti();
+
+  const exoticMultipliers = state.market.exotic
+        .filter(u => u.group === "Evolution" && u.isMultiplier)
+        .reduce((prod, u) => prod * u.getBonus().toMulti(), 1);
+    const exoticAdditives = state.market.exotic
+        .filter(u => u.group === "Evolution" && !u.isMultiplier)
+        .reduce((sum, u) => sum + u.getBonus(), 0).toMulti();
+
+
+
+
+  // === COMMON MULTIPLIER (all shared bonuses) ===
+  let multiplier =
+    basketUpgBase *
+    winBonus *
+    lampBonus *
+    rogBonus *
+    alchW10AllCharz *
+    alchY6 *
+    alchVialFarmEvo *
+    cardBonus *
+    mealCropEvo *
+    vaultUpgBonus *
+    monumentROG *
+    stampCropEvo *
+    grimoireUpg *
+    mealCropEvoSumm *
+    achieveBonus *
+    killroyBonus *
+    basketSpecial *
+    riftBonus *
+    starSignBonus *
+    landRankTotal *
+    bonus205 *
+    rankBonus *
+    buttonBonus *
+    stickerBonus *
+    exoticMultipliers *
+    exoticAdditives;
+
+  // === SPECIAL CASE: cropid === 999 ===
+  if (cropid === 999) {
+    return multiplier;
+  }
+
+
+
+  const genInfoValue = c.asNumber(window.SeedInfo[0][5] ); // engine bug should be using SeedInfo[x][5] but initialized and never updated with [0][5]
+
+  const denomBase = c.asNumber(
+    window.SeedInfo[0 | seedid][6]
+  );
+  const nextCropDenom = getNextCropChanceDENOM(denomBase);
+
+
+  return multiplier * genInfoValue * Math.pow(nextCropDenom, cropid);
+}
+
+
+
+function getNextCropChanceDENOM(t) {
+
+  const SPECIAL_SENTINEL = 6942e-8; 
+  if (t === SPECIAL_SENTINEL) {
+
+    return 1 / Math.pow(10, 110);
+  }
+  return t;
+}
+
+function getBaseEvoChance(seedType, cropId) { // chance needed 
+    // SeedInfo[0][5] = 0.30 — game always uses index 0 (engine bug)
+    const baseRate = parseFloat(window.SeedInfo[0][5]);
+
+    // SeedInfo[seedType][6] = denominator base for this crop tier
+    const denomRaw = parseFloat(window.SeedInfo[0 | seedType][6]);
+    const denom = getNextCropChanceDENOM(denomRaw);
+
+    // cropId = FarmPlot[plot][2] = crops accumulated on this plot
+    return baseRate * Math.pow(denom, cropId);
+}
+
+
+function getMultiplierNeededForChance(chance, croptype, cropid) {
+    const target = chance / 100;
+    const base   = getBaseEvoChance(croptype, cropid);
+    return target / base;
+}
+
+// Returns the total number of individual crops (across all seed types) the player
+// can realistically evolve to, using a 10% chance threshold.
+//
+// Uses SeedInfo[s][2]=minID, [3]=maxID to know how many crops exist per type.
+// Local cropId within each type = 0 … (maxID - minID).
+// Since denom < 1, base chance decreases as cropId rises → needed multiplier rises
+// monotonically → we break early on first failure per type.
+function getTotalUnlockableCrops(threshold = 0.10) {
+    if (!window.SeedInfo || typeof calculateNextCropChance !== 'function' || typeof getMultiplierNeededForChance !== 'function') return 0;
+
+    // Player's current evo multiplier (cropid=999 is the special "multiplier only" path)
+    const currentMultiplier = calculateNextCropChance(999);
+
+    let total = 0;
+    // Exclude Medal crops (type 6, global IDs 230–329)
+    for (let s = 0; s < window.SeedInfo.length - 1; s++) {
+        const minID    = parseInt(window.SeedInfo[s][2], 10);
+        const maxID    = parseInt(window.SeedInfo[s][3], 10);
+        const cropCount = maxID - minID + 1;
+
+        for (let localId = 0; localId < cropCount; localId++) {
+            const neededMultiplier = getMultiplierNeededForChance(threshold * 100, s, localId);
+            if (currentMultiplier >= neededMultiplier) {
+                total++;
+            } else {
+                break; // needed multiplier only increases from here
+            }
+        }
+    }
+    return total;
+}
+

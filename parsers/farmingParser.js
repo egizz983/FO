@@ -43,6 +43,16 @@ window.parseLandRankData = function(data, state = window.farmingState) {
             state.landRank.upgrades[i].currentLevel = allocated[i] || 0;
         }
 
+        state.landRank.stats.pointsAllocated = state.landRank.upgrades.reduce((sum, u) => sum + (u.currentLevel || 0), 0);
+        state.landRank.stats.pointsAvailable = state.landRank.stats.totalSum - state.landRank.stats.pointsAllocated;
+
+        // PlotCount from FarmPlot length
+        let farmPlot = data.FarmPlot;
+        if (typeof farmPlot === "string") { try { farmPlot = JSON.parse(farmPlot); } catch (e) { farmPlot = null; } }
+        if (Array.isArray(farmPlot)) {
+            state.landRank.stats.PlotCount = farmPlot.length;
+        }
+
         console.log(`✅ parseLandRankData completed `);
         return true;
     }

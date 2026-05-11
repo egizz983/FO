@@ -108,6 +108,7 @@ class FarmingOptimizer {
         renderCompanions();
         renderFarmingBonuses();
         updateFarmingLevelDisplay();
+        if (typeof renderLandrankGrid === 'function') renderLandrankGrid();
     }
 }
 

@@ -21,10 +21,13 @@ window.farmingState = {
         }
     },
 
+
+    
+
     // ======================
-    // Lab manual input
+    // Lab manual input (user toggles)
     // ======================
-    lab: {
+    labM: {
         my1stChemistrySet: 0, // check if active  , doubles vial bonus 
         certifiedStampBook: 0, // check if active doubles stamp bonus
         spelunkerObol: 0, // check if active 1.5x jewel bonus
@@ -60,31 +63,34 @@ window.farmingState = {
     // ======================
     landRank: {
         stats: {
-            totalSum:  0,     // landRank_totalLandRankSum
-            average:   0,      // landRank_averageLandRank
-            first:     0      // FarmRank[0][0] → rank of first plot (used for evolution boost calculations per rank
+            totalSum:       0,  // sum of all plot ranks
+            average:        0,  // average rank across unlocked plots
+            first:          0,  // rank of first plot (LandRank LV)
+            pointsAllocated: 0, // sum of all upgrade levels spent
+            pointsAvailable: 0, // totalSum - pointsAllocated
+            PlotCount:       0  // number of unlocked plots (FarmPlot length)
         },
         upgrades: [
             new LandRankUpgrade({ id: 0,  unlock: 1,    group: "Evolution",  name: "Evolution Boost",       base: 250,   perRank: true,  multi: false, currentLevel: 0, desc: "Increases next crop chance by +% per rank of the land plot" }),
             new LandRankUpgrade({ id: 1,  unlock: 5,    group: "Production", name: "Production Boost",      base: 5,     perRank: true,  multi: false, currentLevel: 0, desc: "Boosts value of crops harvested by +% per rank of the land plot" }),
             new LandRankUpgrade({ id: 2,  unlock: 20,   group: "SoilExp",    name: "Soil Exp Boost",        base: 25,    perRank: true,  multi: false, currentLevel: 0, desc: "Each land gains +% extra Rank EXP per rank of the previous land" }),
             new LandRankUpgrade({ id: 3,  unlock: 30,   group: "Evolution",  name: "Evolution Megaboost",   base: 600,   perRank: false, multi: true,  currentLevel: 0, desc: "Increases next crop chance by +% multiplicatively!" }),
-            new LandRankUpgrade({ id: 4,  unlock: 60,   group: "Seed",       name: "Seed of Stealth",       base: 2,     perRank: false, multi: false, currentLevel: 0, desc: "Increases the Stealth of all Ninja Twins by +% per Farming Level" }),
+            new LandRankUpgrade({ id: 4,  unlock: 60,   group: "Utility",       name: "Seed of Stealth",       base: 2,     perRank: false, multi: false, currentLevel: 0, desc: "Increases the Stealth of all Ninja Twins by +% per Farming Level" }),
             new LandRankUpgrade({ id: 5,  unlock: 80,   group: "FarmExp",    name: "Farmtastic Boost",      base: 90,    perRank: false, multi: false, currentLevel: 0, desc: "Increases Farming Skill EXP gained by +%" }),
             new LandRankUpgrade({ id: 6,  unlock: 125,  group: "SoilExp",    name: "Soil Exp Megaboost",    base: 200,   perRank: false, multi: false, currentLevel: 0, desc: "All plots of land gain +% more Rank EXP" }),
             new LandRankUpgrade({ id: 7,  unlock: 180,  group: "Overgrowth", name: "Overgrowth Boost",       base: 120,   perRank: false, multi: false, currentLevel: 0, desc: "Increases chance for Overgrowth by +%" }),
             new LandRankUpgrade({ id: 8,  unlock: 250,  group: "Production", name: "Production Megaboost",  base: 100,   perRank: false, multi: false, currentLevel: 0, desc: "Increases the amount of crops harvested by +%" }),
-            new LandRankUpgrade({ id: 9,  unlock: 400,  group: "Seed",       name: "Seed of Loot",          base: 10,    perRank: false, multi: false, currentLevel: 0, desc: "Increases the Drop Rarity of all characters by +%" }),
+            new LandRankUpgrade({ id: 9,  unlock: 400,  group: "Utility",       name: "Seed of Loot",          base: 10,    perRank: false, multi: false, currentLevel: 0, desc: "Increases the Drop Rarity of all characters by +%" }),
             new LandRankUpgrade({ id: 10, unlock: 500,  group: "Evolution",  name: "Evolution Superboost",  base: 3000,  perRank: false, multi: true,  currentLevel: 0, desc: "Increases next crop chance by +% multiplicatively!" }),
             new LandRankUpgrade({ id: 11, unlock: 600,  group: "Overgrowth", name: "Overgrowth Megaboost",  base: 340,   perRank: false, multi: false, currentLevel: 0, desc: "Increases chance for Overgrowth by +%" }),
             new LandRankUpgrade({ id: 12, unlock: 700,  group: "FarmExp",    name: "Farmtastic Megaboost",  base: 110,   perRank: false, multi: false, currentLevel: 0, desc: "Increases Farming Skill EXP gained by +%" }),
             new LandRankUpgrade({ id: 13, unlock: 900,  group: "SoilExp",    name: "Soil Exp Superboost",   base: 520,   perRank: false, multi: false, currentLevel: 0, desc: "All plots of land gain +% more Rank EXP" }),
-            new LandRankUpgrade({ id: 14, unlock: 1200, group: "Seed",       name: "Seed of Damage",        base: 20,    perRank: false, multi: false, currentLevel: 0, desc: "Gives a +% Total Damage bonus to all characters" }),
+            new LandRankUpgrade({ id: 14, unlock: 1200, group: "Utility",       name: "Seed of Damage",        base: 20,    perRank: false, multi: false, currentLevel: 0, desc: "Gives a +% Total Damage bonus to all characters" }),
             new LandRankUpgrade({ id: 15, unlock: 1300, group: "Evolution",  name: "Evolution Ultraboost",  base: 40000, perRank: false, multi: true,  currentLevel: 0, desc: "Increases next crop chance by +% multiplicatively!" }),
             new LandRankUpgrade({ id: 16, unlock: 1500, group: "FarmExp",    name: "Farmtastic Superboost", base: 220,   perRank: false, multi: false, currentLevel: 0, desc: "Increases Farming Skill EXP gained by +%" }),
             new LandRankUpgrade({ id: 17, unlock: 1750, group: "Production", name: "Production Superboost", base: 600,   perRank: false, multi: false, currentLevel: 0, desc: "Increases the amount of crops harvested by +%" }),
             new LandRankUpgrade({ id: 18, unlock: 2000, group: "Overgrowth", name: "Overgrowth Superboost", base: 1500,  perRank: false, multi: false, currentLevel: 0, desc: "Increases chance for Overgrowth by +%" }),
-            new LandRankUpgrade({ id: 19, unlock: 3500, group: "Seed",       name: "Seed of Stats",         base: 5,     perRank: false, multi: false, currentLevel: 0, desc: "Gives a +% All Stat bonus to your characters" })
+            new LandRankUpgrade({ id: 19, unlock: 3500, group: "Utility",       name: "Seed of Stats",         base: 5,     perRank: false, multi: false, currentLevel: 0, desc: "Gives a +% All Stat bonus to your characters" })
         ]
     },
 
@@ -136,6 +142,7 @@ window.farmingState = {
             new ExoticMarketUpgrade({ index: 32, name: "Vigouroot I",         calcType: "diminishing", base: 100,  isMultiplier: true,  unit: "x",  currentLevel: 0, perLevel: false, description: "x Land Rank EXP gain for all plots", group: "SoilExp" }),
             new ExoticMarketUpgrade({ index: 33, name: "Vigouroot II",        calcType: "diminishing", base: 130,  isMultiplier: true,  unit: "x",  currentLevel: 0, perLevel: false, description: "x Land Rank EXP gain for all plots", group: "SoilExp" }),
             new ExoticMarketUpgrade({ index: 34, name: "Plump Database",      calcType: "diminishing", base: 60,   isMultiplier: false, unit: "%",  currentLevel: 0, perLevel: false, description: "% higher bonuses from the Land Rank Database", group: "LandRank" }),
+            new ExoticMarketUpgrade({ index: 35, name: "Datadigging",          calcType: "diminishing", base: 5,    isMultiplier: false, unit: "",   currentLevel: 0, perLevel: false, description: "higher max LV for 5th column of Land Rank Database", group: "LandRank" }),
             new ExoticMarketUpgrade({ index: 43, name: "Stalk Value I",       calcType: "diminishing", base: 50,   isMultiplier: false, unit: "%",  currentLevel: 0, perLevel: false, description: "% higher Crop Value max cap", group: "Production Cap" }),
             new ExoticMarketUpgrade({ index: 44, name: "Stalk Value II",      calcType: "diminishing", base: 70,   isMultiplier: false, unit: "%",  currentLevel: 0, perLevel: false, description: "% higher Crop Value max cap", group: "Production Cap" }),
             new ExoticMarketUpgrade({ index: 45, name: "Stalk Value III",     calcType: "diminishing", base: 120,  isMultiplier: false, unit: "%",  currentLevel: 0, perLevel: false, description: "% higher Crop Value max cap", group: "Production Cap" }),

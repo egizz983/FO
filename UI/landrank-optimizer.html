@@ -1,0 +1,113 @@
+<div class="bg-white border border-slate-200 rounded-xl p-6">
+    <h2 class="text-2xl font-bold text-emerald-500 mb-6 pb-4 border-b-2 border-slate-200">Land Rank Optimizer</h2>
+
+    <div class="landrank-layout">
+
+        <!-- Land Rank Database Grid -->
+        <div class="landrank-db-panel">
+            <h3 class="landrank-db-title">Land Rank Database</h3>
+            <div class="landrank-grid" id="landrank-grid"></div>
+            <div class="landrank-info-bar">
+                <div class="landrank-info-name" id="landrank-info-name">— Select a Bonus —</div>
+                <div class="landrank-info-desc" id="landrank-info-desc"></div>
+            </div>
+        </div>
+
+        <!-- Stats Panel (right of grid) -->
+        <div class="landrank-stats-panel">
+            <h3 class="landrank-db-title" style="font-size:1.05rem;">Stats</h3>
+            <div class="landrank-stats-list" id="landrank-stats-list">
+                <div class="landrank-stat-row">
+                    <span class="landrank-stat-name">No data loaded</span>
+                    <span class="landrank-stat-val">—</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Rule Set Panel -->
+        <div class="landrank-ruleset-panel">
+            <h3 class="landrank-db-title" style="font-size:1.05rem;">Rule Set</h3>
+            <div class="landrank-ruleset-list">
+                <label class="landrank-rule-row">
+                    <input type="checkbox" id="rule-utility-upgrades" class="landrank-rule-check" checked>
+                    <span class="landrank-rule-label">Utility Upgrades Max<br><span class="landrank-rule-sub">(5th column)</span></span>
+                    <span class="landrank-tooltip-wrap">
+                        <span class="landrank-tooltip-icon">?</span>
+                        <span class="landrank-tooltip-box">When enabled, Utility upgrades will be set to max. When disabled, they will be set to 0.</span>
+                    </span>
+                </label>
+                <!-- Allocation mode — mutually exclusive via radio group -->
+                <div class="landrank-rule-divider"></div>
+                <label class="landrank-rule-row">
+                    <input type="radio" name="alloc-mode" id="rule-alloc-none" class="landrank-rule-check" value="none" checked onchange="toggleAllocMode()">
+                    <span class="landrank-rule-label">IDK what am doing just optimize </span>
+                </label>
+                <label class="landrank-rule-row">
+                    <input type="radio" name="alloc-mode" id="rule-manual-alloc" class="landrank-rule-check" value="manual" onchange="toggleAllocMode()">
+                    <span class="landrank-rule-label">Manual Point Allocation</span>
+                    <span class="landrank-tooltip-wrap">
+                        <span class="landrank-tooltip-icon">?</span>
+                        <span class="landrank-tooltip-box">When enabled, you can assign how many points you want to allocate to each category and it will optimize them per the points you allocate.</span>
+                    </span>
+                </label>
+                <!-- Per-group cap inputs (shown when Manual is selected) -->
+                <div class="landrank-manual-alloc" id="manual-alloc-section" style="display:none;">
+                    <div class="landrank-manual-divider"></div>
+                    <div id="manual-alloc-inputs"></div>
+                </div>
+                <!-- Farm Exp Points -->
+                <div class="landrank-rule-divider"></div>
+                <div class="landrank-rule-row">
+                    <span class="landrank-rule-label">Farm Exp Points<br><span class="landrank-rule-sub"></span></span>
+                    <span class="landrank-tooltip-wrap">
+                        <span class="landrank-tooltip-icon">?</span>
+                        <span class="landrank-tooltip-box">Points reserved for Farming Exp upgrades (IDs 5, 12, 16). Carved off before the Evo/OG/Soil split. Default 0 = no Farm Exp allocation.</span>
+                    </span>
+                    <input type="number" class="landrank-manual-input" id="rule-farmexp-points" min="0" value="0" style="width:70px;">
+                </div>
+                <!-- Evolution Cap -->
+                <div class="landrank-rule-divider"></div>
+                <label class="landrank-rule-row">
+                    <input type="checkbox" id="rule-evolution-cap" class="landrank-rule-check" onchange="toggleEvolutionCap()">
+                    <span class="landrank-rule-label">Evolution Cap</span>
+                    <span class="landrank-tooltip-wrap">
+                        <span class="landrank-tooltip-icon">?</span>
+                        <span class="landrank-tooltip-box">When enabled, the optimizer caps points based on the Evolution requirement for the selected crop.</span>
+                    </span>
+                </label>
+                <div id="evolution-cap-section" style="display:none;">
+                    <div class="landrank-manual-divider"></div>
+                    <!-- Crop Type row -->
+                    <div class="landrank-manual-row">
+                        <span class="landrank-manual-label">Crop Type</span>
+                        <button class="evo-pick-btn" id="evo-type-btn" onclick="openCropTypePicker()">— select —</button>
+                    </div>
+                    <!-- Crop row (disabled until type chosen) -->
+                    <div class="landrank-manual-row">
+                        <span class="landrank-manual-label">Crop</span>
+                        <button class="evo-pick-btn" id="evo-crop-btn" onclick="openCropPicker()" disabled>— select —</button>
+                    </div>
+                    <!-- Chance % -->
+                    <div class="landrank-manual-row">
+                        <span class="landrank-manual-label">Chance %</span>
+                        <input type="number" class="landrank-manual-input" id="evolution-cap-chance" min="0.000001" max="100" step="any" value="50" oninput="updateEvolutionCapStat()">
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <!-- Crop Picker Panel (shown on demand, hidden by default) -->
+        <div class="landrank-crop-picker-panel" id="crop-picker-panel" style="display:none;">
+            <div class="landrank-db-title" style="font-size:0.9rem;" id="crop-picker-title">Select Crop Type</div>
+            <div class="crop-picker-grid" id="crop-picker-grid"></div>
+        </div>
+
+    </div>
+    <div class="landrank-action-bar">
+        <button class="landrank-optimize-btn" id="landrank-optimize-btn" onclick="runLandrankOptimizer()">Optimize</button>
+        <button class="landrank-optimize-btn landrank-btn-reset" onclick="resetLandrankUpgrades()">Reset Upgrades</button>
+        <button class="landrank-optimize-btn landrank-btn-default" onclick="defaultLandrankUpgrades()">Default To SaveData</button>
+    </div>
+
+</div>
