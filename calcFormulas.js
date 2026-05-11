@@ -2556,3 +2556,35 @@ function getMultiplierNeededForChance(chance, croptype, cropid) {
     return target / base;
 }
 
+// Returns the total number of individual crops (across all seed types) the player
+// can realistically evolve to, using a 10% chance threshold.
+//
+// Uses SeedInfo[s][2]=minID, [3]=maxID to know how many crops exist per type.
+// Local cropId within each type = 0 … (maxID - minID).
+// Since denom < 1, base chance decreases as cropId rises → needed multiplier rises
+// monotonically → we break early on first failure per type.
+function getTotalUnlockableCrops(threshold = 0.10) {
+    if (!window.SeedInfo || typeof calculateNextCropChance !== 'function' || typeof getMultiplierNeededForChance !== 'function') return 0;
+
+    // Player's current evo multiplier (cropid=999 is the special "multiplier only" path)
+    const currentMultiplier = calculateNextCropChance(999);
+
+    let total = 0;
+    // Exclude Medal crops (type 6, global IDs 230–329)
+    for (let s = 0; s < window.SeedInfo.length - 1; s++) {
+        const minID    = parseInt(window.SeedInfo[s][2], 10);
+        const maxID    = parseInt(window.SeedInfo[s][3], 10);
+        const cropCount = maxID - minID + 1;
+
+        for (let localId = 0; localId < cropCount; localId++) {
+            const neededMultiplier = getMultiplierNeededForChance(threshold * 100, s, localId);
+            if (currentMultiplier >= neededMultiplier) {
+                total++;
+            } else {
+                break; // needed multiplier only increases from here
+            }
+        }
+    }
+    return total;
+}
+

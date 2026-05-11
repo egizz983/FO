@@ -29,7 +29,7 @@
             <h3 class="landrank-db-title" style="font-size:1.05rem;">Rule Set</h3>
             <div class="landrank-ruleset-list">
                 <label class="landrank-rule-row">
-                    <input type="checkbox" id="rule-utility-upgrades" class="landrank-rule-check">
+                    <input type="checkbox" id="rule-utility-upgrades" class="landrank-rule-check" checked>
                     <span class="landrank-rule-label">Utility Upgrades Max<br><span class="landrank-rule-sub">(5th column)</span></span>
                     <span class="landrank-tooltip-wrap">
                         <span class="landrank-tooltip-icon">?</span>
@@ -54,6 +54,16 @@
                 <div class="landrank-manual-alloc" id="manual-alloc-section" style="display:none;">
                     <div class="landrank-manual-divider"></div>
                     <div id="manual-alloc-inputs"></div>
+                </div>
+                <!-- Farm Exp Points -->
+                <div class="landrank-rule-divider"></div>
+                <div class="landrank-rule-row">
+                    <span class="landrank-rule-label">Farm Exp Points<br><span class="landrank-rule-sub"></span></span>
+                    <span class="landrank-tooltip-wrap">
+                        <span class="landrank-tooltip-icon">?</span>
+                        <span class="landrank-tooltip-box">Points reserved for Farming Exp upgrades (IDs 5, 12, 16). Carved off before the Evo/OG/Soil split. Default 0 = no Farm Exp allocation.</span>
+                    </span>
+                    <input type="number" class="landrank-manual-input" id="rule-farmexp-points" min="0" value="0" style="width:70px;">
                 </div>
                 <!-- Evolution Cap -->
                 <div class="landrank-rule-divider"></div>
